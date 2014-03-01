@@ -1,0 +1,519 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BE2B925F18C2281E003EC6D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B925E18C2281E003EC6D7 /* Foundation.framework */; };
+		BE2B926118C2281E003EC6D7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B926018C2281E003EC6D7 /* CoreGraphics.framework */; };
+		BE2B926318C2281E003EC6D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B926218C2281E003EC6D7 /* UIKit.framework */; };
+		BE2B926518C2281E003EC6D7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B926418C2281E003EC6D7 /* CoreData.framework */; };
+		BE2B926B18C2281E003EC6D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE2B926918C2281E003EC6D7 /* InfoPlist.strings */; };
+		BE2B926D18C2281E003EC6D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2B926C18C2281E003EC6D7 /* main.m */; };
+		BE2B927118C2281E003EC6D7 /* MangaBoxAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2B927018C2281E003EC6D7 /* MangaBoxAppDelegate.m */; };
+		BE2B927418C2281E003EC6D7 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE2B927218C2281E003EC6D7 /* Main_iPhone.storyboard */; };
+		BE2B927718C2281E003EC6D7 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE2B927518C2281E003EC6D7 /* Main_iPad.storyboard */; };
+		BE2B927A18C2281E003EC6D7 /* MangaBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE2B927818C2281E003EC6D7 /* MangaBox.xcdatamodeld */; };
+		BE2B927D18C2281E003EC6D7 /* MangaBoxMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2B927C18C2281E003EC6D7 /* MangaBoxMasterViewController.m */; };
+		BE2B928018C2281E003EC6D7 /* MangaBoxDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2B927F18C2281E003EC6D7 /* MangaBoxDetailViewController.m */; };
+		BE2B928218C2281E003EC6D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE2B928118C2281E003EC6D7 /* Images.xcassets */; };
+		BE2B928918C2281E003EC6D7 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B928818C2281E003EC6D7 /* XCTest.framework */; };
+		BE2B928A18C2281E003EC6D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B925E18C2281E003EC6D7 /* Foundation.framework */; };
+		BE2B928B18C2281E003EC6D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B926218C2281E003EC6D7 /* UIKit.framework */; };
+		BE2B928C18C2281E003EC6D7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B926418C2281E003EC6D7 /* CoreData.framework */; };
+		BE2B929418C2281E003EC6D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE2B929218C2281E003EC6D7 /* InfoPlist.strings */; };
+		BE2B929618C2281E003EC6D7 /* MangaBoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2B929518C2281E003EC6D7 /* MangaBoxTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BE2B928D18C2281E003EC6D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE2B925318C2281E003EC6D7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE2B925A18C2281E003EC6D7;
+			remoteInfo = MangaBox;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BE2B925B18C2281E003EC6D7 /* MangaBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangaBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE2B925E18C2281E003EC6D7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BE2B926018C2281E003EC6D7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BE2B926218C2281E003EC6D7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BE2B926418C2281E003EC6D7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BE2B926818C2281E003EC6D7 /* MangaBox-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MangaBox-Info.plist"; sourceTree = "<group>"; };
+		BE2B926A18C2281E003EC6D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BE2B926C18C2281E003EC6D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BE2B926E18C2281E003EC6D7 /* MangaBox-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MangaBox-Prefix.pch"; sourceTree = "<group>"; };
+		BE2B926F18C2281E003EC6D7 /* MangaBoxAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MangaBoxAppDelegate.h; sourceTree = "<group>"; };
+		BE2B927018C2281E003EC6D7 /* MangaBoxAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MangaBoxAppDelegate.m; sourceTree = "<group>"; };
+		BE2B927318C2281E003EC6D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		BE2B927618C2281E003EC6D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		BE2B927918C2281E003EC6D7 /* MangaBox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MangaBox.xcdatamodel; sourceTree = "<group>"; };
+		BE2B927B18C2281E003EC6D7 /* MangaBoxMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MangaBoxMasterViewController.h; sourceTree = "<group>"; };
+		BE2B927C18C2281E003EC6D7 /* MangaBoxMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MangaBoxMasterViewController.m; sourceTree = "<group>"; };
+		BE2B927E18C2281E003EC6D7 /* MangaBoxDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MangaBoxDetailViewController.h; sourceTree = "<group>"; };
+		BE2B927F18C2281E003EC6D7 /* MangaBoxDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MangaBoxDetailViewController.m; sourceTree = "<group>"; };
+		BE2B928118C2281E003EC6D7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		BE2B928718C2281E003EC6D7 /* MangaBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MangaBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE2B928818C2281E003EC6D7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		BE2B929118C2281E003EC6D7 /* MangaBoxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MangaBoxTests-Info.plist"; sourceTree = "<group>"; };
+		BE2B929318C2281E003EC6D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BE2B929518C2281E003EC6D7 /* MangaBoxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MangaBoxTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BE2B925818C2281E003EC6D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE2B926118C2281E003EC6D7 /* CoreGraphics.framework in Frameworks */,
+				BE2B926518C2281E003EC6D7 /* CoreData.framework in Frameworks */,
+				BE2B926318C2281E003EC6D7 /* UIKit.framework in Frameworks */,
+				BE2B925F18C2281E003EC6D7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE2B928418C2281E003EC6D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE2B928918C2281E003EC6D7 /* XCTest.framework in Frameworks */,
+				BE2B928C18C2281E003EC6D7 /* CoreData.framework in Frameworks */,
+				BE2B928B18C2281E003EC6D7 /* UIKit.framework in Frameworks */,
+				BE2B928A18C2281E003EC6D7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BE2B925218C2281E003EC6D7 = {
+			isa = PBXGroup;
+			children = (
+				BE2B926618C2281E003EC6D7 /* MangaBox */,
+				BE2B928F18C2281E003EC6D7 /* MangaBoxTests */,
+				BE2B925D18C2281E003EC6D7 /* Frameworks */,
+				BE2B925C18C2281E003EC6D7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BE2B925C18C2281E003EC6D7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BE2B925B18C2281E003EC6D7 /* MangaBox.app */,
+				BE2B928718C2281E003EC6D7 /* MangaBoxTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BE2B925D18C2281E003EC6D7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BE2B925E18C2281E003EC6D7 /* Foundation.framework */,
+				BE2B926018C2281E003EC6D7 /* CoreGraphics.framework */,
+				BE2B926218C2281E003EC6D7 /* UIKit.framework */,
+				BE2B926418C2281E003EC6D7 /* CoreData.framework */,
+				BE2B928818C2281E003EC6D7 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE2B926618C2281E003EC6D7 /* MangaBox */ = {
+			isa = PBXGroup;
+			children = (
+				BE2B926F18C2281E003EC6D7 /* MangaBoxAppDelegate.h */,
+				BE2B927018C2281E003EC6D7 /* MangaBoxAppDelegate.m */,
+				BE2B927218C2281E003EC6D7 /* Main_iPhone.storyboard */,
+				BE2B927518C2281E003EC6D7 /* Main_iPad.storyboard */,
+				BE2B927B18C2281E003EC6D7 /* MangaBoxMasterViewController.h */,
+				BE2B927C18C2281E003EC6D7 /* MangaBoxMasterViewController.m */,
+				BE2B927E18C2281E003EC6D7 /* MangaBoxDetailViewController.h */,
+				BE2B927F18C2281E003EC6D7 /* MangaBoxDetailViewController.m */,
+				BE2B928118C2281E003EC6D7 /* Images.xcassets */,
+				BE2B927818C2281E003EC6D7 /* MangaBox.xcdatamodeld */,
+				BE2B926718C2281E003EC6D7 /* Supporting Files */,
+			);
+			path = MangaBox;
+			sourceTree = "<group>";
+		};
+		BE2B926718C2281E003EC6D7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BE2B926818C2281E003EC6D7 /* MangaBox-Info.plist */,
+				BE2B926918C2281E003EC6D7 /* InfoPlist.strings */,
+				BE2B926C18C2281E003EC6D7 /* main.m */,
+				BE2B926E18C2281E003EC6D7 /* MangaBox-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BE2B928F18C2281E003EC6D7 /* MangaBoxTests */ = {
+			isa = PBXGroup;
+			children = (
+				BE2B929518C2281E003EC6D7 /* MangaBoxTests.m */,
+				BE2B929018C2281E003EC6D7 /* Supporting Files */,
+			);
+			path = MangaBoxTests;
+			sourceTree = "<group>";
+		};
+		BE2B929018C2281E003EC6D7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BE2B929118C2281E003EC6D7 /* MangaBoxTests-Info.plist */,
+				BE2B929218C2281E003EC6D7 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BE2B925A18C2281E003EC6D7 /* MangaBox */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE2B929918C2281E003EC6D7 /* Build configuration list for PBXNativeTarget "MangaBox" */;
+			buildPhases = (
+				BE2B925718C2281E003EC6D7 /* Sources */,
+				BE2B925818C2281E003EC6D7 /* Frameworks */,
+				BE2B925918C2281E003EC6D7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MangaBox;
+			productName = MangaBox;
+			productReference = BE2B925B18C2281E003EC6D7 /* MangaBox.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BE2B928618C2281E003EC6D7 /* MangaBoxTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE2B929C18C2281E003EC6D7 /* Build configuration list for PBXNativeTarget "MangaBoxTests" */;
+			buildPhases = (
+				BE2B928318C2281E003EC6D7 /* Sources */,
+				BE2B928418C2281E003EC6D7 /* Frameworks */,
+				BE2B928518C2281E003EC6D7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BE2B928E18C2281E003EC6D7 /* PBXTargetDependency */,
+			);
+			name = MangaBoxTests;
+			productName = MangaBoxTests;
+			productReference = BE2B928718C2281E003EC6D7 /* MangaBoxTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BE2B925318C2281E003EC6D7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = MangaBox;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "Ken Tran";
+				TargetAttributes = {
+					BE2B928618C2281E003EC6D7 = {
+						TestTargetID = BE2B925A18C2281E003EC6D7;
+					};
+				};
+			};
+			buildConfigurationList = BE2B925618C2281E003EC6D7 /* Build configuration list for PBXProject "MangaBox" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BE2B925218C2281E003EC6D7;
+			productRefGroup = BE2B925C18C2281E003EC6D7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BE2B925A18C2281E003EC6D7 /* MangaBox */,
+				BE2B928618C2281E003EC6D7 /* MangaBoxTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BE2B925918C2281E003EC6D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE2B927718C2281E003EC6D7 /* Main_iPad.storyboard in Resources */,
+				BE2B928218C2281E003EC6D7 /* Images.xcassets in Resources */,
+				BE2B927418C2281E003EC6D7 /* Main_iPhone.storyboard in Resources */,
+				BE2B926B18C2281E003EC6D7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE2B928518C2281E003EC6D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE2B929418C2281E003EC6D7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BE2B925718C2281E003EC6D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE2B927A18C2281E003EC6D7 /* MangaBox.xcdatamodeld in Sources */,
+				BE2B928018C2281E003EC6D7 /* MangaBoxDetailViewController.m in Sources */,
+				BE2B927D18C2281E003EC6D7 /* MangaBoxMasterViewController.m in Sources */,
+				BE2B926D18C2281E003EC6D7 /* main.m in Sources */,
+				BE2B927118C2281E003EC6D7 /* MangaBoxAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE2B928318C2281E003EC6D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE2B929618C2281E003EC6D7 /* MangaBoxTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BE2B928E18C2281E003EC6D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE2B925A18C2281E003EC6D7 /* MangaBox */;
+			targetProxy = BE2B928D18C2281E003EC6D7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BE2B926918C2281E003EC6D7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE2B926A18C2281E003EC6D7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BE2B927218C2281E003EC6D7 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE2B927318C2281E003EC6D7 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		BE2B927518C2281E003EC6D7 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE2B927618C2281E003EC6D7 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		BE2B929218C2281E003EC6D7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE2B929318C2281E003EC6D7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BE2B929718C2281E003EC6D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BE2B929818C2281E003EC6D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BE2B929A18C2281E003EC6D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MangaBox/MangaBox-Prefix.pch";
+				INFOPLIST_FILE = "MangaBox/MangaBox-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BE2B929B18C2281E003EC6D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MangaBox/MangaBox-Prefix.pch";
+				INFOPLIST_FILE = "MangaBox/MangaBox-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		BE2B929D18C2281E003EC6D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MangaBox.app/MangaBox";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MangaBox/MangaBox-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "MangaBoxTests/MangaBoxTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		BE2B929E18C2281E003EC6D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MangaBox.app/MangaBox";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MangaBox/MangaBox-Prefix.pch";
+				INFOPLIST_FILE = "MangaBoxTests/MangaBoxTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BE2B925618C2281E003EC6D7 /* Build configuration list for PBXProject "MangaBox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE2B929718C2281E003EC6D7 /* Debug */,
+				BE2B929818C2281E003EC6D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE2B929918C2281E003EC6D7 /* Build configuration list for PBXNativeTarget "MangaBox" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE2B929A18C2281E003EC6D7 /* Debug */,
+				BE2B929B18C2281E003EC6D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		BE2B929C18C2281E003EC6D7 /* Build configuration list for PBXNativeTarget "MangaBoxTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE2B929D18C2281E003EC6D7 /* Debug */,
+				BE2B929E18C2281E003EC6D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BE2B927818C2281E003EC6D7 /* MangaBox.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BE2B927918C2281E003EC6D7 /* MangaBox.xcdatamodel */,
+			);
+			currentVersion = BE2B927918C2281E003EC6D7 /* MangaBox.xcdatamodel */;
+			path = MangaBox.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = BE2B925318C2281E003EC6D7 /* Project object */;
+}
