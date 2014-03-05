@@ -26,6 +26,16 @@
 		BE2B928C18C2281E003EC6D7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B926418C2281E003EC6D7 /* CoreData.framework */; };
 		BE2B929418C2281E003EC6D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE2B929218C2281E003EC6D7 /* InfoPlist.strings */; };
 		BE2B929618C2281E003EC6D7 /* MangaBoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2B929518C2281E003EC6D7 /* MangaBoxTests.m */; };
+		BE2B92A118C228CB003EC6D7 /* MangafoxFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2B92A018C228CB003EC6D7 /* MangafoxFetcher.m */; };
+		BE2B92BD18C243EB003EC6D7 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B92BC18C243EB003EC6D7 /* libxml2.dylib */; };
+		BE2B92C018C24ABF003EC6D7 /* SearchedMangaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2B92BF18C24ABF003EC6D7 /* SearchedMangaViewController.m */; };
+		BE2B92C618C31DFA003EC6D7 /* MangaListTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2B92C518C31DFA003EC6D7 /* MangaListTVC.m */; };
+		BEA8394518C3766700184150 /* MangaDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8394418C3766700184150 /* MangaDetailsViewController.m */; };
+		BEA8394D18C4759900184150 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8394818C4759900184150 /* TFHpple.m */; };
+		BEA8394E18C4759900184150 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8394A18C4759900184150 /* TFHppleElement.m */; };
+		BEA8394F18C4759900184150 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8394C18C4759900184150 /* XPathQuery.m */; };
+		BEA8395218C4D35800184150 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8395118C4D35800184150 /* NSString+Helper.m */; };
+		BEA8397618C787F700184150 /* AdvancedSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8397518C787F700184150 /* AdvancedSearchVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +73,25 @@
 		BE2B929118C2281E003EC6D7 /* MangaBoxTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MangaBoxTests-Info.plist"; sourceTree = "<group>"; };
 		BE2B929318C2281E003EC6D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BE2B929518C2281E003EC6D7 /* MangaBoxTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MangaBoxTests.m; sourceTree = "<group>"; };
+		BE2B929F18C228CB003EC6D7 /* MangafoxFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MangafoxFetcher.h; path = "Mangafox Fetcher/MangafoxFetcher.h"; sourceTree = "<group>"; };
+		BE2B92A018C228CB003EC6D7 /* MangafoxFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MangafoxFetcher.m; path = "Mangafox Fetcher/MangafoxFetcher.m"; sourceTree = "<group>"; };
+		BE2B92BC18C243EB003EC6D7 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		BE2B92BE18C24ABF003EC6D7 /* SearchedMangaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchedMangaViewController.h; sourceTree = "<group>"; };
+		BE2B92BF18C24ABF003EC6D7 /* SearchedMangaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchedMangaViewController.m; sourceTree = "<group>"; };
+		BE2B92C418C31DFA003EC6D7 /* MangaListTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MangaListTVC.h; sourceTree = "<group>"; };
+		BE2B92C518C31DFA003EC6D7 /* MangaListTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MangaListTVC.m; sourceTree = "<group>"; };
+		BEA8394318C3766700184150 /* MangaDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MangaDetailsViewController.h; sourceTree = "<group>"; };
+		BEA8394418C3766700184150 /* MangaDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MangaDetailsViewController.m; sourceTree = "<group>"; };
+		BEA8394718C4759900184150 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TFHpple.h; path = "HTML Parser/TFHpple.h"; sourceTree = "<group>"; };
+		BEA8394818C4759900184150 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TFHpple.m; path = "HTML Parser/TFHpple.m"; sourceTree = "<group>"; };
+		BEA8394918C4759900184150 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TFHppleElement.h; path = "HTML Parser/TFHppleElement.h"; sourceTree = "<group>"; };
+		BEA8394A18C4759900184150 /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TFHppleElement.m; path = "HTML Parser/TFHppleElement.m"; sourceTree = "<group>"; };
+		BEA8394B18C4759900184150 /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XPathQuery.h; path = "HTML Parser/XPathQuery.h"; sourceTree = "<group>"; };
+		BEA8394C18C4759900184150 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XPathQuery.m; path = "HTML Parser/XPathQuery.m"; sourceTree = "<group>"; };
+		BEA8395018C4D35800184150 /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
+		BEA8395118C4D35800184150 /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
+		BEA8397418C787F700184150 /* AdvancedSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedSearchVC.h; sourceTree = "<group>"; };
+		BEA8397518C787F700184150 /* AdvancedSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedSearchVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE2B92BD18C243EB003EC6D7 /* libxml2.dylib in Frameworks */,
 				BE2B926118C2281E003EC6D7 /* CoreGraphics.framework in Frameworks */,
 				BE2B926518C2281E003EC6D7 /* CoreData.framework in Frameworks */,
 				BE2B926318C2281E003EC6D7 /* UIKit.framework in Frameworks */,
@@ -113,6 +143,7 @@
 		BE2B925D18C2281E003EC6D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BE2B92BC18C243EB003EC6D7 /* libxml2.dylib */,
 				BE2B925E18C2281E003EC6D7 /* Foundation.framework */,
 				BE2B926018C2281E003EC6D7 /* CoreGraphics.framework */,
 				BE2B926218C2281E003EC6D7 /* UIKit.framework */,
@@ -125,6 +156,14 @@
 		BE2B926618C2281E003EC6D7 /* MangaBox */ = {
 			isa = PBXGroup;
 			children = (
+				BEA8397418C787F700184150 /* AdvancedSearchVC.h */,
+				BEA8397518C787F700184150 /* AdvancedSearchVC.m */,
+				BE2B92BE18C24ABF003EC6D7 /* SearchedMangaViewController.h */,
+				BE2B92BF18C24ABF003EC6D7 /* SearchedMangaViewController.m */,
+				BE2B92C418C31DFA003EC6D7 /* MangaListTVC.h */,
+				BE2B92C518C31DFA003EC6D7 /* MangaListTVC.m */,
+				BEA8394318C3766700184150 /* MangaDetailsViewController.h */,
+				BEA8394418C3766700184150 /* MangaDetailsViewController.m */,
 				BE2B926F18C2281E003EC6D7 /* MangaBoxAppDelegate.h */,
 				BE2B927018C2281E003EC6D7 /* MangaBoxAppDelegate.m */,
 				BE2B927218C2281E003EC6D7 /* Main_iPhone.storyboard */,
@@ -135,6 +174,9 @@
 				BE2B927F18C2281E003EC6D7 /* MangaBoxDetailViewController.m */,
 				BE2B928118C2281E003EC6D7 /* Images.xcassets */,
 				BE2B927818C2281E003EC6D7 /* MangaBox.xcdatamodeld */,
+				BE2B92A218C228D3003EC6D7 /* Mangafox Fetcher */,
+				BEA8395318C5BE1100184150 /* Helpers */,
+				BEA8394618C4758800184150 /* HTML Parser */,
 				BE2B926718C2281E003EC6D7 /* Supporting Files */,
 			);
 			path = MangaBox;
@@ -167,6 +209,37 @@
 				BE2B929218C2281E003EC6D7 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BE2B92A218C228D3003EC6D7 /* Mangafox Fetcher */ = {
+			isa = PBXGroup;
+			children = (
+				BE2B929F18C228CB003EC6D7 /* MangafoxFetcher.h */,
+				BE2B92A018C228CB003EC6D7 /* MangafoxFetcher.m */,
+			);
+			name = "Mangafox Fetcher";
+			sourceTree = "<group>";
+		};
+		BEA8394618C4758800184150 /* HTML Parser */ = {
+			isa = PBXGroup;
+			children = (
+				BEA8394718C4759900184150 /* TFHpple.h */,
+				BEA8394818C4759900184150 /* TFHpple.m */,
+				BEA8394918C4759900184150 /* TFHppleElement.h */,
+				BEA8394A18C4759900184150 /* TFHppleElement.m */,
+				BEA8394B18C4759900184150 /* XPathQuery.h */,
+				BEA8394C18C4759900184150 /* XPathQuery.m */,
+			);
+			name = "HTML Parser";
+			sourceTree = "<group>";
+		};
+		BEA8395318C5BE1100184150 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BEA8395018C4D35800184150 /* NSString+Helper.h */,
+				BEA8395118C4D35800184150 /* NSString+Helper.m */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,10 +342,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE2B927A18C2281E003EC6D7 /* MangaBox.xcdatamodeld in Sources */,
+				BE2B92C018C24ABF003EC6D7 /* SearchedMangaViewController.m in Sources */,
+				BEA8394518C3766700184150 /* MangaDetailsViewController.m in Sources */,
 				BE2B928018C2281E003EC6D7 /* MangaBoxDetailViewController.m in Sources */,
+				BE2B92A118C228CB003EC6D7 /* MangafoxFetcher.m in Sources */,
+				BEA8394D18C4759900184150 /* TFHpple.m in Sources */,
+				BEA8397618C787F700184150 /* AdvancedSearchVC.m in Sources */,
+				BE2B92C618C31DFA003EC6D7 /* MangaListTVC.m in Sources */,
 				BE2B927D18C2281E003EC6D7 /* MangaBoxMasterViewController.m in Sources */,
 				BE2B926D18C2281E003EC6D7 /* main.m in Sources */,
 				BE2B927118C2281E003EC6D7 /* MangaBoxAppDelegate.m in Sources */,
+				BEA8394F18C4759900184150 /* XPathQuery.m in Sources */,
+				BEA8395218C4D35800184150 /* NSString+Helper.m in Sources */,
+				BEA8394E18C4759900184150 /* TFHppleElement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +445,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					$SDK_DIR/usr/include/libxml2,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -397,6 +484,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					$SDK_DIR/usr/include/libxml2,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -491,6 +583,7 @@
 				BE2B929B18C2281E003EC6D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BE2B929C18C2281E003EC6D7 /* Build configuration list for PBXNativeTarget "MangaBoxTests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +592,7 @@
 				BE2B929E18C2281E003EC6D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

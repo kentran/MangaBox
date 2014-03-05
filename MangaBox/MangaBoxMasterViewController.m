@@ -10,11 +10,18 @@
 
 #import "MangaBoxDetailViewController.h"
 
+
 @interface MangaBoxMasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
 
 @implementation MangaBoxMasterViewController
+
+- (void)setMangas:(NSArray *)mangas
+{
+    _mangas = mangas;
+    [self.tableView reloadData];
+}
 
 - (void)awakeFromNib
 {
@@ -34,6 +41,7 @@
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (MangaBoxDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,6 +87,12 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     [self configureCell:cell atIndexPath:indexPath];
+    
+    NSDictionary *manga = self.mangas[indexPath.row];
+    cell.textLabel.text = [manga valueForKey:@"title"];
+    cell.detailTextLabel.text = [manga valueForKey:@"chapters"];
+    NSLog(@"%@", cell.textLabel.text);
+    
     return cell;
 }
 
