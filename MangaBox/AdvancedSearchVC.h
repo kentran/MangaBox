@@ -7,7 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DetailViewManager.h"
 
-@interface AdvancedSearchVC : UIViewController
+@protocol AdvancedSearchVCDelegate;
+
+@interface AdvancedSearchVC : UIViewController <SubstitutableDetailViewController>
+
+/// SubstitutableDetailViewController
+@property (nonatomic, retain) UIBarButtonItem *navigationPaneBarButtonItem;
+
+@property (nonatomic, weak) id<AdvancedSearchVCDelegate> delegate;
+
+@end
+
+@protocol AdvancedSearchVCDelegate <NSObject>
+
+- (void)advancedSearchVC:(AdvancedSearchVC *)vc
+selectedParams:(NSDictionary *)params;
 
 @end

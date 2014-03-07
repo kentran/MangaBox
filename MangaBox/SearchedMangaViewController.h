@@ -9,16 +9,8 @@
 #import "MangaListTVC.h"
 
 @interface SearchedMangaViewController : MangaListTVC
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *type;
-@property (nonatomic, strong) NSString *author;
-@property (nonatomic, strong) NSString *artist;
 
-@property (nonatomic, strong) NSDictionary *genres;
-
-@property (nonatomic, strong) NSString *released;
-@property (nonatomic, strong) NSString *rating;
-@property (nonatomic, strong) NSString *isCompleted;
+@property (nonatomic, strong) NSDictionary *criteria;
 
 - (NSArray *) fetchMangas;
 @end

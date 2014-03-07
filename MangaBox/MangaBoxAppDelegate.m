@@ -8,30 +8,39 @@
 
 #import "MangaBoxAppDelegate.h"
 
-#import "MangaBoxMasterViewController.h"
-
 @implementation MangaBoxAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+- (DetailViewManager *)detailViewManager
+{
+    if (!_detailViewManager) _detailViewManager = [[DetailViewManager alloc] init];
+    return _detailViewManager;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-//        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-//        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-//        splitViewController.delegate = (id)navigationController.topViewController;
-//        
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+        //UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+        //splitViewController.delegate = (id)navigationController.topViewController;
+        
+        // Setup the detailViewManager object and UISplitViewControllerDelegate
+        self.detailViewManager.splitViewController = splitViewController;
+        splitViewController.delegate = self.detailViewManager;
+        
 //        UINavigationController *masterNavigationController = splitViewController.viewControllers[0];
 //        MangaBoxMasterViewController *controller = (MangaBoxMasterViewController *)masterNavigationController.topViewController;
 //        controller.managedObjectContext = self.managedObjectContext;
-//    } else {
+    } else {
 //        UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
 //        MangaBoxMasterViewController *controller = (MangaBoxMasterViewController *)navigationController.topViewController;
 //        controller.managedObjectContext = self.managedObjectContext;
-//    }
+    }
+
     return YES;
 }
 							

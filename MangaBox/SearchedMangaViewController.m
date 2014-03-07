@@ -10,79 +10,86 @@
 #import "MangafoxFetcher.h"
 
 @interface SearchedMangaViewController ()
-@property (strong, nonatomic) NSMutableDictionary *criteria;
+@property (strong, nonatomic) NSMutableDictionary *nextPageCriteria;  // criteria to load next page
+@property (strong, nonatomic) NSMutableArray *searchedMangas;         // keeps track of mangas of all pages before set TVC
+@property (nonatomic) double lastFetchTimestamp;
 @end
 
 @implementation SearchedMangaViewController
 
-- (NSMutableDictionary *)criteria
+- (NSMutableArray *)searchedMangas
 {
-    if (!_criteria) _criteria = [[NSMutableDictionary alloc] init];
-    return _criteria;
+    if (!_searchedMangas) _searchedMangas = [[NSMutableArray alloc] init];
+    return _searchedMangas;
 }
 
-- (void)setName:(NSString *)name
+- (NSMutableDictionary *)nextPageCriteria
 {
-    _name = name;
-    [self.criteria setObject:self.name forKey:@"name"];
+    if (!_nextPageCriteria) _nextPageCriteria = [[NSMutableDictionary alloc] init];
+    return  _nextPageCriteria;
 }
 
-- (void)setAuthor:(NSString *)author
+- (void)setCriteria:(NSDictionary *)criteria
 {
-    _author = author;
-    [self.criteria setObject:self.author forKey:@"author"];
+    _criteria = criteria;
+    self.searchedMangas = nil;
+    [self.nextPageCriteria setValuesForKeysWithDictionary:_criteria];
+    [self fetchMangas];
 }
 
-- (void)setArtist:(NSString *)artist
-{
-    _artist = artist;
-    [self.criteria setObject:self.artist forKey:@"artist"];
-}
-
-- (void)updateCriteria
-{
-    
-    
-    
-}
+#define FETCH_INTERVAL_SEC 5
 
 - (NSArray *) fetchMangas
 {
-    NSLog(@"%@", self.criteria);
-    NSURL *url = [MangafoxFetcher urlForFetchingMangas:self.criteria];
+    NSURL *url = [MangafoxFetcher urlForFetchingMangas:self.nextPageCriteria];
     dispatch_queue_t fetchQ = dispatch_queue_create("mangafox fetcher", NULL);
-    dispatch_async(fetchQ, ^{
+    
+    // Calculate the delay before starting the fetch task
+    double delayInSeconds;
+    double now = [[NSDate date] timeIntervalSince1970];
+    double requestedFetchTimestamp = [[self.nextPageCriteria objectForKey:@"fetchTimestamp"] doubleValue];
+    
+    if (requestedFetchTimestamp > now) {    // due to tap on search multiple times
+        delayInSeconds = requestedFetchTimestamp - now;
+    } else {
+        // tap search once
+        if (!self.lastFetchTimestamp) {     // very first fetch
+            delayInSeconds = 0;
+        } else {                            // fetch for load next page
+            delayInSeconds = FETCH_INTERVAL_SEC - (now - self.lastFetchTimestamp);
+            if (delayInSeconds < 0) delayInSeconds = 0;
+        }
+    }
+    
+    //NSLog(@"delay: %f", delayInSeconds);
+
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, fetchQ, ^(void){
         NSData *htmlData = [NSData dataWithContentsOfURL:url];
+        self.lastFetchTimestamp = [[NSDate date] timeIntervalSince1970];
         NSArray *result = [MangafoxFetcher parseFetchResult:htmlData];
         
+        // update criteria to next page
+        int nextPage = [[self.nextPageCriteria valueForKey:@"page"] intValue];
+        nextPage++;
+        [self.nextPageCriteria setValue:[NSString stringWithFormat:@"%d", nextPage] forKey:@"page"];
+        
+        [self.searchedMangas addObjectsFromArray:result];   // add result to current list of mangas
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.mangas = result;
+            self.mangas = self.searchedMangas;              // set and display in TVC
         });
     });
     
     return nil;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    // load more data if the last row is displayed
+    if (indexPath.row == ([self.mangas count] - 1)) {
+        [self fetchMangas]; // fetch next page, criteria is already updated
     }
-    return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    [self fetchMangas];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

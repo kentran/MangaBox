@@ -8,8 +8,9 @@
 
 #import "MangaDetailsViewController.h"
 #import "MangafoxFetcher.h"
+#import "DetailViewManager.h"
 
-@interface MangaDetailsViewController () <UISplitViewControllerDelegate>
+@interface MangaDetailsViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
@@ -28,6 +29,25 @@
 @end
 
 @implementation MangaDetailsViewController
+
+// -------------------------------------------------------------------------------
+//	setNavigationPaneBarButtonItem:
+//  Custom implementation for the navigationPaneBarButtonItem setter.
+//  In addition to updating the _navigationPaneBarButtonItem ivar, it
+//  reconfigures the toolbar to either show or hide the
+//  navigationPaneBarButtonItem.
+// -------------------------------------------------------------------------------
+- (void)setNavigationPaneBarButtonItem:(UIBarButtonItem *)navigationPaneBarButtonItem
+{
+    if (navigationPaneBarButtonItem != _navigationPaneBarButtonItem) {
+        //        if (navigationPaneBarButtonItem)
+        //            [self.toolbar setItems:[NSArray arrayWithObject:navigationPaneBarButtonItem] animated:NO];
+        //        else
+        //            [self.toolbar setItems:nil animated:NO];
+        
+        _navigationPaneBarButtonItem = navigationPaneBarButtonItem;
+    }
+}
 
 - (void)setMangaURL:(NSURL *)mangaURL
 {
@@ -153,35 +173,6 @@
             }];
         [task resume];
     }
-}
-
-#pragma mark - UISplitViewControllerDelegate
-- (void)awakeFromNib
-{
-    self.splitViewController.delegate = self;
-}
-
-- (BOOL)splitViewController:(UISplitViewController *)svc
-   shouldHideViewController:(UIViewController *)vc
-              inOrientation:(UIInterfaceOrientation)orientation
-{
-    return NO;
-}
-
-- (void)splitViewController:(UISplitViewController *)svc
-     willHideViewController:(UIViewController *)aViewController
-          withBarButtonItem:(UIBarButtonItem *)barButtonItem
-       forPopoverController:(UIPopoverController *)pc
-{
-    barButtonItem.title = aViewController.title;
-    self.navigationItem.leftBarButtonItem = barButtonItem;
-}
-
-- (void)splitViewController:(UISplitViewController *)svc
-     willShowViewController:(UIViewController *)aViewController
-  invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
-{
-    self.navigationItem.leftBarButtonItem = nil;
 }
 
 - (void)viewDidLoad

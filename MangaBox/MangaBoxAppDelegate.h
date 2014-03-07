@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DetailViewManager.h"
 
 @interface MangaBoxAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -18,5 +19,7 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+
+@property (nonatomic, retain) DetailViewManager *detailViewManager;
 
 @end

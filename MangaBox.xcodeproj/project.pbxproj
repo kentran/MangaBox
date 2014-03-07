@@ -17,8 +17,6 @@
 		BE2B927418C2281E003EC6D7 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE2B927218C2281E003EC6D7 /* Main_iPhone.storyboard */; };
 		BE2B927718C2281E003EC6D7 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE2B927518C2281E003EC6D7 /* Main_iPad.storyboard */; };
 		BE2B927A18C2281E003EC6D7 /* MangaBox.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE2B927818C2281E003EC6D7 /* MangaBox.xcdatamodeld */; };
-		BE2B927D18C2281E003EC6D7 /* MangaBoxMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2B927C18C2281E003EC6D7 /* MangaBoxMasterViewController.m */; };
-		BE2B928018C2281E003EC6D7 /* MangaBoxDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE2B927F18C2281E003EC6D7 /* MangaBoxDetailViewController.m */; };
 		BE2B928218C2281E003EC6D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE2B928118C2281E003EC6D7 /* Images.xcassets */; };
 		BE2B928918C2281E003EC6D7 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B928818C2281E003EC6D7 /* XCTest.framework */; };
 		BE2B928A18C2281E003EC6D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B925E18C2281E003EC6D7 /* Foundation.framework */; };
@@ -36,6 +34,8 @@
 		BEA8394F18C4759900184150 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8394C18C4759900184150 /* XPathQuery.m */; };
 		BEA8395218C4D35800184150 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8395118C4D35800184150 /* NSString+Helper.m */; };
 		BEA8397618C787F700184150 /* AdvancedSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8397518C787F700184150 /* AdvancedSearchVC.m */; };
+		BEB0363218C84247006591C8 /* DetailViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0363118C84247006591C8 /* DetailViewManager.m */; };
+		BEB0363518C844FA006591C8 /* MenuTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0363418C844FA006591C8 /* MenuTVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,10 +63,6 @@
 		BE2B927318C2281E003EC6D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		BE2B927618C2281E003EC6D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		BE2B927918C2281E003EC6D7 /* MangaBox.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MangaBox.xcdatamodel; sourceTree = "<group>"; };
-		BE2B927B18C2281E003EC6D7 /* MangaBoxMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MangaBoxMasterViewController.h; sourceTree = "<group>"; };
-		BE2B927C18C2281E003EC6D7 /* MangaBoxMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MangaBoxMasterViewController.m; sourceTree = "<group>"; };
-		BE2B927E18C2281E003EC6D7 /* MangaBoxDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MangaBoxDetailViewController.h; sourceTree = "<group>"; };
-		BE2B927F18C2281E003EC6D7 /* MangaBoxDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MangaBoxDetailViewController.m; sourceTree = "<group>"; };
 		BE2B928118C2281E003EC6D7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BE2B928718C2281E003EC6D7 /* MangaBoxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MangaBoxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE2B928818C2281E003EC6D7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -92,6 +88,10 @@
 		BEA8395118C4D35800184150 /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
 		BEA8397418C787F700184150 /* AdvancedSearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedSearchVC.h; sourceTree = "<group>"; };
 		BEA8397518C787F700184150 /* AdvancedSearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedSearchVC.m; sourceTree = "<group>"; };
+		BEB0363018C84246006591C8 /* DetailViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewManager.h; sourceTree = "<group>"; };
+		BEB0363118C84247006591C8 /* DetailViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewManager.m; sourceTree = "<group>"; };
+		BEB0363318C844FA006591C8 /* MenuTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuTVC.h; sourceTree = "<group>"; };
+		BEB0363418C844FA006591C8 /* MenuTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuTVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,22 +156,12 @@
 		BE2B926618C2281E003EC6D7 /* MangaBox */ = {
 			isa = PBXGroup;
 			children = (
-				BEA8397418C787F700184150 /* AdvancedSearchVC.h */,
-				BEA8397518C787F700184150 /* AdvancedSearchVC.m */,
-				BE2B92BE18C24ABF003EC6D7 /* SearchedMangaViewController.h */,
-				BE2B92BF18C24ABF003EC6D7 /* SearchedMangaViewController.m */,
-				BE2B92C418C31DFA003EC6D7 /* MangaListTVC.h */,
-				BE2B92C518C31DFA003EC6D7 /* MangaListTVC.m */,
-				BEA8394318C3766700184150 /* MangaDetailsViewController.h */,
-				BEA8394418C3766700184150 /* MangaDetailsViewController.m */,
+				BEB0363018C84246006591C8 /* DetailViewManager.h */,
+				BEB0363118C84247006591C8 /* DetailViewManager.m */,
 				BE2B926F18C2281E003EC6D7 /* MangaBoxAppDelegate.h */,
 				BE2B927018C2281E003EC6D7 /* MangaBoxAppDelegate.m */,
-				BE2B927218C2281E003EC6D7 /* Main_iPhone.storyboard */,
-				BE2B927518C2281E003EC6D7 /* Main_iPad.storyboard */,
-				BE2B927B18C2281E003EC6D7 /* MangaBoxMasterViewController.h */,
-				BE2B927C18C2281E003EC6D7 /* MangaBoxMasterViewController.m */,
-				BE2B927E18C2281E003EC6D7 /* MangaBoxDetailViewController.h */,
-				BE2B927F18C2281E003EC6D7 /* MangaBoxDetailViewController.m */,
+				BEB0363618C879A6006591C8 /* Controllers */,
+				BEB0363718C879ED006591C8 /* Views */,
 				BE2B928118C2281E003EC6D7 /* Images.xcassets */,
 				BE2B927818C2281E003EC6D7 /* MangaBox.xcdatamodeld */,
 				BE2B92A218C228D3003EC6D7 /* Mangafox Fetcher */,
@@ -240,6 +230,32 @@
 				BEA8395118C4D35800184150 /* NSString+Helper.m */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		BEB0363618C879A6006591C8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BEB0363318C844FA006591C8 /* MenuTVC.h */,
+				BEB0363418C844FA006591C8 /* MenuTVC.m */,
+				BEA8397418C787F700184150 /* AdvancedSearchVC.h */,
+				BEA8397518C787F700184150 /* AdvancedSearchVC.m */,
+				BE2B92BE18C24ABF003EC6D7 /* SearchedMangaViewController.h */,
+				BE2B92BF18C24ABF003EC6D7 /* SearchedMangaViewController.m */,
+				BE2B92C418C31DFA003EC6D7 /* MangaListTVC.h */,
+				BE2B92C518C31DFA003EC6D7 /* MangaListTVC.m */,
+				BEA8394318C3766700184150 /* MangaDetailsViewController.h */,
+				BEA8394418C3766700184150 /* MangaDetailsViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		BEB0363718C879ED006591C8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BE2B927218C2281E003EC6D7 /* Main_iPhone.storyboard */,
+				BE2B927518C2281E003EC6D7 /* Main_iPad.storyboard */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,15 +360,15 @@
 				BE2B927A18C2281E003EC6D7 /* MangaBox.xcdatamodeld in Sources */,
 				BE2B92C018C24ABF003EC6D7 /* SearchedMangaViewController.m in Sources */,
 				BEA8394518C3766700184150 /* MangaDetailsViewController.m in Sources */,
-				BE2B928018C2281E003EC6D7 /* MangaBoxDetailViewController.m in Sources */,
 				BE2B92A118C228CB003EC6D7 /* MangafoxFetcher.m in Sources */,
 				BEA8394D18C4759900184150 /* TFHpple.m in Sources */,
+				BEB0363518C844FA006591C8 /* MenuTVC.m in Sources */,
 				BEA8397618C787F700184150 /* AdvancedSearchVC.m in Sources */,
 				BE2B92C618C31DFA003EC6D7 /* MangaListTVC.m in Sources */,
-				BE2B927D18C2281E003EC6D7 /* MangaBoxMasterViewController.m in Sources */,
 				BE2B926D18C2281E003EC6D7 /* main.m in Sources */,
 				BE2B927118C2281E003EC6D7 /* MangaBoxAppDelegate.m in Sources */,
 				BEA8394F18C4759900184150 /* XPathQuery.m in Sources */,
+				BEB0363218C84247006591C8 /* DetailViewManager.m in Sources */,
 				BEA8395218C4D35800184150 /* NSString+Helper.m in Sources */,
 				BEA8394E18C4759900184150 /* TFHppleElement.m in Sources */,
 			);

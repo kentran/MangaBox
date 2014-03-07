@@ -8,6 +8,7 @@
 
 #import "MangaListTVC.h"
 #import "MangaDetailsViewController.h"
+#import "DetailViewManager.h"
 
 @interface MangaListTVC ()
 
@@ -135,6 +136,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     id detail = self.splitViewController.viewControllers[1];
+  
+    if (![detail isKindOfClass:[UINavigationController class]]
+        && ![detail isKindOfClass:[MangaDetailsViewController class]]) {
+        NSLog(@"test2");
+        // Get a reference to the DetailViewManager.
+        // DetailViewManager is the delegate of our split view.
+        DetailViewManager *detailViewManager = (DetailViewManager *)self.splitViewController.delegate;
+        
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main_iPad" bundle:[NSBundle mainBundle]];
+        detail = [sb instantiateViewControllerWithIdentifier:@"Manga Details View"];
+        
+        // DetailViewManager exposes a property, detailViewController.  Set this property
+        // to the detail view controller we want displayed.  Configuring the detail view
+        // controller to display the navigation button (if needed) and presenting it
+        // happens inside DetailViewManager.
+        detailViewManager.detailViewController = detail;
+    }
+
     if ([detail isKindOfClass:[UINavigationController class]])
     {
         detail = [((UINavigationController *)detail).viewControllers firstObject];
@@ -143,7 +162,6 @@
     {
         [self prepareMangaDetailsViewController:detail toDisplayManga:self.mangas[indexPath.row]];
     }
-
 }
 
 #pragma mark - Navigation

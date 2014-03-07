@@ -36,17 +36,50 @@
         [urlString appendString:[NSString stringWithFormat:@"&artist_method=cw&artist=%@", [value stringByReplacingOccurrencesOfString:@" " withString:@"+"]]];
     }
     
-    for (id key in criteria) {
-        id value = [criteria objectForKey:key];
-    
-        if ([value isKindOfClass:[NSString class]]) {
-            
-        } else if ([value isKindOfClass:[NSDictionary class]]) {
-            
-        }
+    // genres search
+    NSDictionary *genres = [criteria objectForKey:@"genres"];
+    for (NSString *key in genres) {
+        NSString *value = [genres objectForKey:key];
+        [urlString appendString:[NSString stringWithFormat:@"&genres%%5B%@%%5D=%@", [key stringByReplacingOccurrencesOfString:@" " withString:@"+"], [value stringByReplacingOccurrencesOfString:@" " withString:@"+"]]];
     }
     
-    NSLog(@"%@", urlString);
+    // sort by
+    if ([criteria objectForKey:@"sortBy"]) {
+        NSString *value = [criteria objectForKey:@"sortBy"];
+        NSString *sortBy;
+        if ([value isEqualToString:@"Name"]) sortBy = @"name";
+        else if ([value isEqualToString:@"Views"]) sortBy = @"views";
+        else if ([value isEqualToString:@"Chapters"]) sortBy = @"total_chapters";
+        else if ([value isEqualToString:@"Latest Chapter"]) sortBy = @"last_chapter_time";
+        [urlString appendString:[NSString stringWithFormat:@"&sort=%@", sortBy]];
+    }
+    
+    // sort order
+    if ([criteria objectForKey:@"sortOrder"]) {
+        NSString *value = [criteria objectForKey:@"sortOrder"];
+        NSString *sortOrder;
+        if ([value isEqualToString:@"ASC"]) sortOrder = @"az";
+        else if ([value isEqualToString:@"DESC"]) sortOrder = @"za";
+        [urlString appendString:[NSString stringWithFormat:@"&order=%@", sortOrder]];
+    }
+    
+    // is completed
+    if ([criteria objectForKey:@"isCompleted"]) {
+        NSString *value = [criteria objectForKey:@"isCompleted"];
+        NSString *isCompleted;
+        if ([value isEqualToString:@"Completed"]) isCompleted = @"1";
+        else if ([value isEqualToString:@"Ongoing"]) isCompleted = @"0";
+        else isCompleted = @"";
+        [urlString appendString:[NSString stringWithFormat:@"&is_completed=%@", isCompleted]];
+    }
+    
+    // page
+    if ([criteria objectForKey:@"page"]) {
+        NSString *value = [criteria objectForKey:@"page"];
+        [urlString appendString:[NSString stringWithFormat:@"&page=%@", [value stringByReplacingOccurrencesOfString:@" " withString:@"+"]]];
+    }
+    
+    //NSLog(@"%@", urlString);
     url = [NSURL URLWithString:urlString];
     //url = [NSURL URLWithString:@"http://mangafox.me/search.php?name_method=cw&name=&type=&author_method=cw&author=&artist_method=cw&artist=&genres%5BAction%5D=0&genres%5BAdult%5D=0&genres%5BAdventure%5D=0&genres%5BComedy%5D=0&genres%5BDoujinshi%5D=0&genres%5BDrama%5D=0&genres%5BEcchi%5D=0&genres%5BFantasy%5D=0&genres%5BGender+Bender%5D=0&genres%5BHarem%5D=0&genres%5BHistorical%5D=0&genres%5BHorror%5D=0&genres%5BJosei%5D=0&genres%5BMartial+Arts%5D=0&genres%5BMature%5D=0&genres%5BMecha%5D=0&genres%5BMystery%5D=0&genres%5BOne+Shot%5D=0&genres%5BPsychological%5D=0&genres%5BRomance%5D=0&genres%5BSchool+Life%5D=0&genres%5BSci-fi%5D=0&genres%5BSeinen%5D=0&genres%5BShoujo%5D=0&genres%5BShoujo+Ai%5D=0&genres%5BShounen%5D=0&genres%5BShounen+Ai%5D=0&genres%5BSlice+of+Life%5D=0&genres%5BSmut%5D=0&genres%5BSports%5D=0&genres%5BSupernatural%5D=0&genres%5BTragedy%5D=0&genres%5BWebtoons%5D=0&genres%5BYaoi%5D=0&genres%5BYuri%5D=0&released_method=eq&released=&rating_method=eq&rating=&is_completed=1&advopts=1&sort=total_chapters&order=za"];
     return url;
@@ -57,9 +90,12 @@
     TFHpple *doc = [[TFHpple alloc] initWithHTMLData:htmlData];
     
     NSArray *tableRowNodes = [doc searchWithXPathQuery:@"//table[@id='listing']/tr"];
+
+    if ([tableRowNodes count] == 0)
+        return nil;
     
     NSMutableArray *result = [[NSMutableArray alloc] init];
-    
+
     for (TFHppleElement *tableRowNode in tableRowNodes) {
         if ([tableRowNode firstChildWithTagName:@"th"])
             continue;
