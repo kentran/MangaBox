@@ -9,13 +9,13 @@
 #import "MangafoxFetcher.h"
 #import "TFHpple.h"
 #import "NSString+Helper.h"
+#import "MangaDictionaryDefinition.h"
 
 @implementation MangafoxFetcher
 
 + (NSURL *) urlForFetchingMangas:(NSDictionary *) criteria
 {
     NSURL *url = nil;
-    NSMutableArray *part = [[NSMutableArray alloc] init];
     NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@", MANGAFOX_ADVANCED_SEARCH_URL];
     
     // name search
@@ -78,10 +78,9 @@
         NSString *value = [criteria objectForKey:@"page"];
         [urlString appendString:[NSString stringWithFormat:@"&page=%@", [value stringByReplacingOccurrencesOfString:@" " withString:@"+"]]];
     }
-    
-    //NSLog(@"%@", urlString);
+
     url = [NSURL URLWithString:urlString];
-    //url = [NSURL URLWithString:@"http://mangafox.me/search.php?name_method=cw&name=&type=&author_method=cw&author=&artist_method=cw&artist=&genres%5BAction%5D=0&genres%5BAdult%5D=0&genres%5BAdventure%5D=0&genres%5BComedy%5D=0&genres%5BDoujinshi%5D=0&genres%5BDrama%5D=0&genres%5BEcchi%5D=0&genres%5BFantasy%5D=0&genres%5BGender+Bender%5D=0&genres%5BHarem%5D=0&genres%5BHistorical%5D=0&genres%5BHorror%5D=0&genres%5BJosei%5D=0&genres%5BMartial+Arts%5D=0&genres%5BMature%5D=0&genres%5BMecha%5D=0&genres%5BMystery%5D=0&genres%5BOne+Shot%5D=0&genres%5BPsychological%5D=0&genres%5BRomance%5D=0&genres%5BSchool+Life%5D=0&genres%5BSci-fi%5D=0&genres%5BSeinen%5D=0&genres%5BShoujo%5D=0&genres%5BShoujo+Ai%5D=0&genres%5BShounen%5D=0&genres%5BShounen+Ai%5D=0&genres%5BSlice+of+Life%5D=0&genres%5BSmut%5D=0&genres%5BSports%5D=0&genres%5BSupernatural%5D=0&genres%5BTragedy%5D=0&genres%5BWebtoons%5D=0&genres%5BYaoi%5D=0&genres%5BYuri%5D=0&released_method=eq&released=&rating_method=eq&rating=&is_completed=1&advopts=1&sort=total_chapters&order=za"];
+
     return url;
 }
 
@@ -104,11 +103,11 @@
         TFHppleElement *titleNode = [cellNodes[0] firstChild];
         
         if ([titleNode objectForKey:@"href"]) {
-            NSDictionary *item = @{@"title": [titleNode text],
-                                   @"url": [titleNode objectForKey:@"href"],
-                                   @"unique": [titleNode objectForKey:@"rel"],
-                                   @"views": [cellNodes[2] text],
-                                   @"chaptersCount": [cellNodes[3] text] };
+            NSDictionary *item = @{MANGA_TITLE: [titleNode text],
+                                   MANGA_URL: [titleNode objectForKey:@"href"],
+                                   MANGA_UNIQUE: [titleNode objectForKey:@"rel"],
+                                   MANGA_VIEWS: [cellNodes[2] text],
+                                   MANGA_CHAPTERS: [cellNodes[3] text] };
             [result addObject:item];
         }
     }
@@ -122,28 +121,92 @@
                                                                        options:0
                                                                          error:NULL];
     if ([propertyListResult count]) {
-        NSDictionary *result = @{@"title": propertyListResult[0],
-                                 @"genres": propertyListResult[2],
-                                 @"author": propertyListResult[3],
-                                 @"artist": propertyListResult[4],
-                                 @"rating": propertyListResult[7],
-                                 @"released": propertyListResult[8],
-                                 @"summary": [propertyListResult[9] stringByStrippingHTML],
-                                 @"cover": propertyListResult[10]
+        NSDictionary *result = @{MANGA_TITLE: propertyListResult[0],
+                                 MANGA_GENRES: propertyListResult[2],
+                                 MANGA_AUTHOR: propertyListResult[3],
+                                 MANGA_ARTIST: propertyListResult[4],
+                                 MANGA_RATING: propertyListResult[7],
+                                 MANGA_RELEASED: propertyListResult[8],
+                                 MANGA_SUMMARY: [propertyListResult[9] stringByStrippingHTML],
+                                 MANGA_COVER_URL: propertyListResult[10]
                                  };
         return result;
     }
     return nil;
 }
 
-+ (NSDictionary *)parseMangaDetail:(NSData *)htmlData
++ (NSArray *)parseChapterList:(NSData *)htmlData
 {
     TFHpple *doc = [[TFHpple alloc] initWithHTMLData:htmlData];
+    NSMutableArray *result = [[NSMutableArray alloc] init];
+    NSArray *chapterNodes = [doc searchWithXPathQuery:@"//ul[@class='chlist']/li/div"];
     
+    for (TFHppleElement *chapterNode in chapterNodes) {
+        NSArray *aTags = [chapterNode searchWithXPathQuery:@"//a[@class='tips']"];
+
+        // Sometimes the parsed URL lost the first page (1.html)
+        // we need to add it in the URL for consistency
+        NSMutableString *chapterURL = [NSMutableString stringWithFormat:@"%@", [aTags[0] objectForKey:@"href"]];
+
+        if ([chapterURL rangeOfString:@".html"].location == NSNotFound)
+            [chapterURL appendString:@"1.html"];
+        
+        NSDictionary *chapterInfo = @{CHAPTER_NAME: [aTags[0] text],
+                                     CHAPTER_URL: chapterURL
+                                     };
+        [result addObject:chapterInfo];
+    }
+    
+    return result;
+}
+
++ (NSDictionary *)parseChapterPage:(NSData *)htmlData ofURLString:(NSString *)chapterURL
+{
+    NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
+    TFHpple *doc = [[TFHpple alloc] initWithHTMLData:htmlData];
+    NSArray *aTagNodes = [doc searchWithXPathQuery:@"//div[@id='viewer']/a"];
+    
+    // get image url and next html page
+    if ([aTagNodes count]) {
+        TFHppleElement *imageNode = [aTagNodes[0] firstChild];
+        
+        [result setObject:[imageNode objectForKey:@"src"] forKey:PAGE_IMAGE_URL]; // image URL
+        
+        NSString *nextPagePart = [aTagNodes[0] objectForKey:@"href"];
+        if ([nextPagePart rangeOfString:@"javascript:"].location == NSNotFound) {
+            NSString *nextPageToParse = [self urlForNextPage:chapterURL nextPagePart:nextPagePart];
+            [result setObject:nextPageToParse forKey:NEXT_PAGE_TO_PARSE];
+        }
+    }
+    
+    // get the number of pages
+    NSArray *optionNodes = [doc searchWithXPathQuery:@"//div[@class='l']/select/option"];
+    TFHppleElement *lastPageOptionNode = [optionNodes objectAtIndex:([optionNodes count] - 2)];
+    [result setObject:[lastPageOptionNode text] forKey:PAGES_COUNT];
+    
+    return result;
+}
+
++ (NSString *)urlForNextPage:(NSString *)currentPageHtmlURL nextPagePart:(NSString *)pagePart
+{
+    // Filter the chapter part from the chapter URL
+    NSString *chapterPart;
+    NSRange range = [currentPageHtmlURL rangeOfString:@"/" options:NSBackwardsSearch];
+    if ([currentPageHtmlURL rangeOfString:@".htm"].location != NSNotFound) {
+        chapterPart = [currentPageHtmlURL substringToIndex:(range.location+1)];
+    }
+
+    return [NSString stringWithFormat:@"%@%@", chapterPart, pagePart];
+}
+
++ (NSDictionary *)parseMangaDetails:(NSData *)htmlData
+{
+    TFHpple *doc = [[TFHpple alloc] initWithHTMLData:htmlData];
+
     NSArray *tableRowNodes = [doc searchWithXPathQuery:@"//table/tr"];
     
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
-    NSLog(@"test");
+
     /* Read Released, Author, Artist, Genres */
     for (TFHppleElement *tableRowNode in tableRowNodes) {
         if ([tableRowNode firstChildWithTagName:@"th"])
@@ -152,12 +215,27 @@
         NSArray *cellNodes = [tableRowNode childrenWithTagName:@"td"];
         
         if ([cellNodes count]) {
-            [result setValuesForKeysWithDictionary:@{@"released": [self stringFromDetailsTd:cellNodes[0]],
-                                   @"author": [self stringFromDetailsTd:cellNodes[1]],
-                                   @"artist": [self stringFromDetailsTd:cellNodes[2]],
-                                   @"genres": [self stringFromDetailsTd:cellNodes[3]] }];
+            [result setValuesForKeysWithDictionary:@{
+                                                    MANGA_RELEASED: [self stringFromDetailsTd:cellNodes[0]],
+                                                    MANGA_AUTHOR: [self stringFromDetailsTd:cellNodes[1]],
+                                                    MANGA_ARTIST: [self stringFromDetailsTd:cellNodes[2]],
+                                                    MANGA_GENRES: [self stringFromDetailsTd:cellNodes[3]]
+                                                     }];
         }
     }
+    
+    /* Read cover image URL */
+    NSArray *imageNodes = [doc searchWithXPathQuery:@"//div[@class='cover']/img"];
+    if ([imageNodes count] && [imageNodes[0] objectForKey:@"src"])
+        [result setObject:[imageNodes[0] objectForKey:@"src"] forKey:MANGA_COVER_URL];
+    
+    /* Read status and rank */
+    NSArray *dataNodes = [doc searchWithXPathQuery:@"//div[@class='data']/span"];
+    if ([dataNodes count]) {
+        [result setObject:[dataNodes[0] text] forKey:MANGA_STATUS];
+        [result setObject:[dataNodes[1] text] forKey:MANGA_RANK];
+    }
+    
     NSLog(@"%@", result);
     
     return result;
@@ -172,7 +250,7 @@
         [result addObject:[element text]];
     }
     
-    return [result componentsJoinedByString:@","];
+    return [result componentsJoinedByString:@", "];
 }
 
 @end

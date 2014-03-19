@@ -6,11 +6,12 @@
 //  Copyright (c) 2014 Ken Tran. All rights reserved.
 //
 
-#import "MangaDetailsViewController.h"
+#import "MangaSummaryViewController.h"
 #import "MangafoxFetcher.h"
-#import "DetailViewManager.h"
+#import "MangaDictionaryDefinition.h"
+#import "MangaBoxNotification.h"
 
-@interface MangaDetailsViewController ()
+@interface MangaSummaryViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 @property (weak, nonatomic) IBOutlet UILabel *artistLabel;
@@ -25,29 +26,13 @@
 
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *detailsSummarySpinner;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *coverSpinner;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
+
+@property (strong, nonatomic) NSDictionary *mangaDetails;
 @end
 
-@implementation MangaDetailsViewController
-
-// -------------------------------------------------------------------------------
-//	setNavigationPaneBarButtonItem:
-//  Custom implementation for the navigationPaneBarButtonItem setter.
-//  In addition to updating the _navigationPaneBarButtonItem ivar, it
-//  reconfigures the toolbar to either show or hide the
-//  navigationPaneBarButtonItem.
-// -------------------------------------------------------------------------------
-- (void)setNavigationPaneBarButtonItem:(UIBarButtonItem *)navigationPaneBarButtonItem
-{
-    if (navigationPaneBarButtonItem != _navigationPaneBarButtonItem) {
-        //        if (navigationPaneBarButtonItem)
-        //            [self.toolbar setItems:[NSArray arrayWithObject:navigationPaneBarButtonItem] animated:NO];
-        //        else
-        //            [self.toolbar setItems:nil animated:NO];
-        
-        _navigationPaneBarButtonItem = navigationPaneBarButtonItem;
-    }
-}
+@implementation MangaSummaryViewController
 
 - (void)setMangaURL:(NSURL *)mangaURL
 {
@@ -69,7 +54,9 @@
 {
     self.coverImageView.image = cover;
     self.coverImageView.contentMode = UIViewContentModeScaleAspectFit;
-    [self.coverSpinner stopAnimating];
+    
+    [self enableButtonsAndLabels];
+    [self.detailsSummarySpinner stopAnimating];
 }
 
 - (void)setCoverURL:(NSURL *)coverURL
@@ -81,8 +68,8 @@
 - (void)setMangaDetails:(NSDictionary *)mangaDetails
 {
     _mangaDetails = mangaDetails;
-    self.coverURL = [NSURL URLWithString:[self.mangaDetails objectForKey:@"cover"]];
-    [self displayMangaDetailsSummary];
+    self.coverURL = [NSURL URLWithString:[self.mangaDetails objectForKey:MANGA_COVER_URL]];
+    [self setMangaDetailsSummaryLabel];
 }
 
 - (void)setSummaryTextArea:(UITextView *)summaryTextArea
@@ -96,26 +83,55 @@
     _genresTextArea.contentInset = UIEdgeInsetsMake(-4, -4, 0, 0);
 }
 
-- (void)displayMangaDetailsSummary
+- (void)setMangaDetailsSummaryLabel
 {
     if (self.mangaDetails) {
-        self.authorLabel.text = [NSString stringWithFormat:@"%@", [self.mangaDetails objectForKey:@"author"]];
-        self.artistLabel.text = [NSString stringWithFormat:@"%@", [self.mangaDetails objectForKey:@"artist"]];
+        self.authorLabel.text = [NSString stringWithFormat:@"%@", [self.mangaDetails objectForKey:MANGA_AUTHOR]];
+        self.artistLabel.text = [NSString stringWithFormat:@"%@", [self.mangaDetails objectForKey:MANGA_ARTIST]];
         self.chapterLabel.text = [NSString stringWithFormat:@"%@", self.chaptersCount];
-        self.genresTextArea.text = [NSString stringWithFormat:@"%@", [self.mangaDetails objectForKey:@"genres"]];
-        self.summaryTextArea.text = [NSString stringWithFormat:@"%@", [self.mangaDetails objectForKey:@"summary"]];
+        self.genresTextArea.text = [NSString stringWithFormat:@"%@", [self.mangaDetails objectForKey:MANGA_GENRES]];
+        self.summaryTextArea.text = [NSString stringWithFormat:@"%@", [self.mangaDetails objectForKey:MANGA_SUMMARY]];
         [self.detailsSummarySpinner stopAnimating];
     }
 }
+
+- (void)enableButtonsAndLabels
+{
+    // Show all the labels in view, which originally hidden when the page is loaded
+    for (UIView *subview in self.view.subviews)
+    {
+        if (![subview isKindOfClass:[UIActivityIndicatorView class]]) {
+            subview.hidden = NO;
+        }
+    }
+    
+    // Enable add button
+    self.addButton.enabled = YES;
+}
+
+#pragma mark - Add Manga Action
+
+- (IBAction)addMangaButtonTouch:(UIBarButtonItem *)sender
+{
+    if ([self.mangaDetails valueForKey:MANGA_TITLE]) {
+        NSMutableDictionary *manga = [[NSMutableDictionary alloc] initWithDictionary:self.mangaDetails];
+        [manga setObject:[self.mangaURL absoluteString] forKey:MANGA_URL];
+        [manga setObject:self.mangaUnique forKey:MANGA_UNIQUE];
+        [manga setObject:UIImageJPEGRepresentation(self.coverImageView.image, 0.0f) forKey:MANGA_COVER_DATA];
+       
+        // Create notification to let others know that new manga is available to add to db
+        [[NSNotificationCenter defaultCenter] postNotificationName:addingNewMangaToCollectionNotification
+                                                            object:self
+                                                          userInfo:manga];
+    }
+}
+
 
 #pragma mark - Download Tasks
 
 - (void)startDownloadingMangaCover
 {
-    self.cover = nil;
-    
     if (self.coverURL) {
-        [self.coverSpinner startAnimating];
         NSURLRequest *request = [NSURLRequest requestWithURL:self.coverURL];
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
         NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -173,19 +189,6 @@
             }];
         [task resume];
     }
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

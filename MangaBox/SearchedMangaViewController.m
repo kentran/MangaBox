@@ -13,6 +13,7 @@
 @property (strong, nonatomic) NSMutableDictionary *nextPageCriteria;  // criteria to load next page
 @property (strong, nonatomic) NSMutableArray *searchedMangas;         // keeps track of mangas of all pages before set TVC
 @property (nonatomic) double lastFetchTimestamp;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @end
 
 @implementation SearchedMangaViewController
@@ -32,6 +33,7 @@
 - (void)setCriteria:(NSDictionary *)criteria
 {
     _criteria = criteria;
+    [self.spinner startAnimating];
     self.searchedMangas = nil;
     [self.nextPageCriteria setValuesForKeysWithDictionary:_criteria];
     [self fetchMangas];
@@ -77,6 +79,7 @@
         [self.searchedMangas addObjectsFromArray:result];   // add result to current list of mangas
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self.spinner stopAnimating];
             self.mangas = self.searchedMangas;              // set and display in TVC
         });
     });

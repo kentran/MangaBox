@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 Ken Tran. All rights reserved.
 //
 
-#import "AdvancedSearchVC.h"
+#import "AdvancedSearchViewController.h"
 #import "SearchedMangaViewController.h"
+#import "MangaBoxNotification.h"
 
-@interface AdvancedSearchVC ()
+@interface AdvancedSearchViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *seriesNameField;
 @property (weak, nonatomic) IBOutlet UITextField *authorNameField;
 @property (weak, nonatomic) IBOutlet UITextField *artistNameField;
@@ -22,7 +23,13 @@
 @property (nonatomic) double lastRequestTimestamp;
 @end
 
-@implementation AdvancedSearchVC
+@implementation AdvancedSearchViewController
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
+}
 
 - (NSMutableDictionary *)genres
 {
@@ -50,7 +57,18 @@
 
 #define SEARCH_DELAY_SEC 5
 
-- (IBAction)startSearch:(UIButton *)sender {
+- (IBAction)searchButtonTouch:(UIBarButtonItem *)sender
+{
+    [self prepareSearchCriteria];
+    
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:startAdvancedSearchNotification
+                                                        object:self
+                                                      userInfo:self.params];
+}
+
+- (void)prepareSearchCriteria
+{
     double fetchTimestamp;
     if (!self.lastRequestTimestamp) {
         // start search the first time after the controller is loaded
@@ -68,21 +86,52 @@
     }
     
     [self.params setValuesForKeysWithDictionary: @{
-        @"fetchTimestamp": [NSString stringWithFormat:@"%f", fetchTimestamp],
-        @"name": self.seriesNameField.text,
-        @"author": self.authorNameField.text,
-        @"artist": self.artistNameField.text,
-        @"genres": self.genres,
-        @"sortBy": self.sortByButton.currentTitle,
-        @"sortOrder": self.sortOrderButton.currentTitle,
-        @"isCompleted": self.seriesCompletionButton.currentTitle,
-        @"page": @"1"
-    }];
-    
-    if ([self.delegate respondsToSelector:@selector(advancedSearchVC:selectedParams:)]) {
-        [self.delegate advancedSearchVC:self selectedParams:self.params];
-    }
+                                                   @"fetchTimestamp": [NSString stringWithFormat:@"%f", fetchTimestamp],
+                                                   @"name": self.seriesNameField.text,
+                                                   @"author": self.authorNameField.text,
+                                                   @"artist": self.artistNameField.text,
+                                                   @"genres": self.genres,
+                                                   @"sortBy": self.sortByButton.currentTitle,
+                                                   @"sortOrder": self.sortOrderButton.currentTitle,
+                                                   @"isCompleted": self.seriesCompletionButton.currentTitle,
+                                                   @"page": @"1"
+                                                   }];
 }
+
+
+//- (IBAction)startSearch:(UIButton *)sender {
+//    double fetchTimestamp;
+//    if (!self.lastRequestTimestamp) {
+//        // start search the first time after the controller is loaded
+//        self.lastRequestTimestamp = [[NSDate date] timeIntervalSince1970];
+//        fetchTimestamp = self.lastRequestTimestamp;
+//    } else {
+//        // start search multiple time consecutively
+//        double now = [[NSDate date] timeIntervalSince1970];
+//        if (now > (self.lastRequestTimestamp + SEARCH_DELAY_SEC)) {
+//            fetchTimestamp = now;
+//        } else {
+//            fetchTimestamp = self.lastRequestTimestamp + SEARCH_DELAY_SEC;
+//        }
+//        self.lastRequestTimestamp = fetchTimestamp;
+//    }
+//    
+//    [self.params setValuesForKeysWithDictionary: @{
+//        @"fetchTimestamp": [NSString stringWithFormat:@"%f", fetchTimestamp],
+//        @"name": self.seriesNameField.text,
+//        @"author": self.authorNameField.text,
+//        @"artist": self.artistNameField.text,
+//        @"genres": self.genres,
+//        @"sortBy": self.sortByButton.currentTitle,
+//        @"sortOrder": self.sortOrderButton.currentTitle,
+//        @"isCompleted": self.seriesCompletionButton.currentTitle,
+//        @"page": @"1"
+//    }];
+//    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:startAdvancedSearchNotification
+//                                                        object:self
+//                                                      userInfo:self.params];
+//}
 
 
 - (IBAction)genresButtonTouch:(UIButton *)sender {
@@ -129,32 +178,12 @@
         [sender setTitle:@"Completed and Ongoing" forState:UIControlStateNormal];
     }
 }
-#pragma mark SubstitutableDetailViewController
-// -------------------------------------------------------------------------------
-//	setNavigationPaneBarButtonItem:
-//  Custom implementation for the navigationPaneBarButtonItem setter.
-//  In addition to updating the _navigationPaneBarButtonItem ivar, it
-//  reconfigures the toolbar to either show or hide the
-//  navigationPaneBarButtonItem.
-// -------------------------------------------------------------------------------
-- (void)setNavigationPaneBarButtonItem:(UIBarButtonItem *)navigationPaneBarButtonItem
-{
-    if (navigationPaneBarButtonItem != _navigationPaneBarButtonItem) {
-//        if (navigationPaneBarButtonItem)
-//            [self.toolbar setItems:[NSArray arrayWithObject:navigationPaneBarButtonItem] animated:NO];
-//        else
-//            [self.toolbar setItems:nil animated:NO];
-        
-        _navigationPaneBarButtonItem = navigationPaneBarButtonItem;
-    }
-}
-
-
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.destinationViewController isKindOfClass:[SearchedMangaViewController class]]) {
+        [self prepareSearchCriteria];
         SearchedMangaViewController *smvc = segue.destinationViewController;
         smvc.criteria = self.params;
     }

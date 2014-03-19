@@ -7,7 +7,7 @@
 //
 
 #import "MangaListTVC.h"
-#import "MangaDetailsViewController.h"
+#import "MangaSummaryViewController.h"
 #import "DetailViewManager.h"
 
 @interface MangaListTVC ()
@@ -93,72 +93,16 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     id detail = self.splitViewController.viewControllers[1];
-  
-    if (![detail isKindOfClass:[UINavigationController class]]
-        && ![detail isKindOfClass:[MangaDetailsViewController class]]) {
-        NSLog(@"test2");
-        // Get a reference to the DetailViewManager.
-        // DetailViewManager is the delegate of our split view.
-        DetailViewManager *detailViewManager = (DetailViewManager *)self.splitViewController.delegate;
-        
-        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main_iPad" bundle:[NSBundle mainBundle]];
-        detail = [sb instantiateViewControllerWithIdentifier:@"Manga Details View"];
-        
-        // DetailViewManager exposes a property, detailViewController.  Set this property
-        // to the detail view controller we want displayed.  Configuring the detail view
-        // controller to display the navigation button (if needed) and presenting it
-        // happens inside DetailViewManager.
-        detailViewManager.detailViewController = detail;
-    }
 
     if ([detail isKindOfClass:[UINavigationController class]])
     {
         detail = [((UINavigationController *)detail).viewControllers firstObject];
     }
-    if ([detail isKindOfClass:[MangaDetailsViewController class]])
+    if ([detail isKindOfClass:[MangaSummaryViewController class]])
     {
         [self prepareMangaDetailsViewController:detail toDisplayManga:self.mangas[indexPath.row]];
     }
@@ -166,7 +110,7 @@
 
 #pragma mark - Navigation
 
-- (void) prepareMangaDetailsViewController:(MangaDetailsViewController *)mvc toDisplayManga:(NSDictionary *)manga
+- (void) prepareMangaDetailsViewController:(MangaSummaryViewController *)mvc toDisplayManga:(NSDictionary *)manga
 {
     mvc.mangaURL = [NSURL URLWithString:[manga valueForKey:@"url"]];
     mvc.title = [manga valueForKey:@"title"];
@@ -182,12 +126,10 @@
     if ([sender isKindOfClass:[UITableViewCell class]]) {
         NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
         if (indexPath) {
-            if ([segue.identifier isEqualToString:@"Display Manga"]) {
-                if ([segue.destinationViewController isKindOfClass:[MangaDetailsViewController class]]) {
-                    [self prepareMangaDetailsViewController:segue.destinationViewController
-                                      toDisplayManga:self.mangas[indexPath.row]];
-                    
-                }
+            if ([segue.destinationViewController isKindOfClass:[MangaSummaryViewController class]]) {
+                [self prepareMangaDetailsViewController:segue.destinationViewController
+                                  toDisplayManga:self.mangas[indexPath.row]];
+                
             }
         }
     }
