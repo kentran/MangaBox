@@ -21,7 +21,7 @@
     // name search
     if ([criteria objectForKey:@"name"]) {
         NSString *value = [criteria objectForKey:@"name"];
-        [urlString appendString:[NSString stringWithFormat:@"&name_method=bw&name=%@", [value stringByReplacingOccurrencesOfString:@" " withString:@"+"]]];
+        [urlString appendString:[NSString stringWithFormat:@"&name_method=cw&name=%@", [value stringByReplacingOccurrencesOfString:@" " withString:@"+"]]];
     }
     
     // author search
@@ -111,8 +111,19 @@
             [result addObject:item];
         }
     }
-    
+
     return result;
+}
+
++ (BOOL)nextMangaListPageAvailability:(NSData *)htmlData
+{
+    TFHpple *doc = [[TFHpple alloc] initWithHTMLData:htmlData];
+    // Check if there is next page, if a node is found, the button is disabled, there is no next page
+    NSArray *nextButtonNodes = [doc searchWithXPathQuery:@"//span[@class='disable']/span[@class='next']"];
+    if ([nextButtonNodes count])
+        return NO;
+    else
+        return YES;
 }
 
 + (NSDictionary *)parseMangaDetailSummary:(NSData *)htmlData
@@ -201,13 +212,28 @@
 
 + (NSDictionary *)parseMangaDetails:(NSData *)htmlData
 {
-    TFHpple *doc = [[TFHpple alloc] initWithHTMLData:htmlData];
-
-    NSArray *tableRowNodes = [doc searchWithXPathQuery:@"//table/tr"];
-    
     NSMutableDictionary *result = [[NSMutableDictionary alloc] init];
-
+    TFHpple *doc = [[TFHpple alloc] initWithHTMLData:htmlData];
+    
+    /* Read title */
+    NSArray *h1Nodes = [doc searchWithXPathQuery:@"//h1"];
+    if ([h1Nodes count]) {
+        TFHppleElement *titleNode = h1Nodes[0];
+        NSString *title;
+        if ([[titleNode text] rangeOfString:@" Manga"].location != NSNotFound) {
+            NSInteger endIdx = [[titleNode text] rangeOfString:@" Manga"].location;
+            title = [[titleNode text] substringToIndex:endIdx];
+        } else if ([[titleNode text] rangeOfString:@" Manhwa"].location != NSNotFound) {
+            NSInteger endIdx = [[titleNode text] rangeOfString:@" Manhwa"].location;
+            title = [[titleNode text] substringToIndex:endIdx];
+        } else {
+            title = [titleNode text];
+        }
+        [result setObject:title forKey:MANGA_TITLE];
+    }
+    
     /* Read Released, Author, Artist, Genres */
+    NSArray *tableRowNodes = [doc searchWithXPathQuery:@"//table/tr"];
     for (TFHppleElement *tableRowNode in tableRowNodes) {
         if ([tableRowNode firstChildWithTagName:@"th"])
             continue;
@@ -229,14 +255,22 @@
     if ([imageNodes count] && [imageNodes[0] objectForKey:@"src"])
         [result setObject:[imageNodes[0] objectForKey:@"src"] forKey:MANGA_COVER_URL];
     
-    /* Read status and rank */
+    /* Read status */
     NSArray *dataNodes = [doc searchWithXPathQuery:@"//div[@class='data']/span"];
     if ([dataNodes count]) {
-        [result setObject:[dataNodes[0] text] forKey:MANGA_STATUS];
-        [result setObject:[dataNodes[1] text] forKey:MANGA_RANK];
+        NSString *status;
+        if ([[dataNodes[0] text] rangeOfString:@"Ongoing"].location != NSNotFound)
+            status = @"Ongoing";
+        else
+            status = @"Completed";
+        
+        [result setObject:status forKey:MANGA_COMPLETION_STATUS];
     }
     
-    NSLog(@"%@", result);
+    /* Add the source of the manga to be mangafox */
+    [result setObject:@"mangafox.me" forKey:MANGA_SOURCE];
+    
+    //NSLog(@"%@", result);
     
     return result;
 }

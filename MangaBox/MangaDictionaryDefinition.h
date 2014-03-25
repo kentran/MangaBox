@@ -18,6 +18,8 @@
 #define MANGA_CHAPTERS @"chaptersCount"
 #define MANGA_RANK @"rank"
 #define MANGA_STATUS @"status"
+#define MANGA_SOURCE @"source"
+#define MANGA_COMPLETION_STATUS @"completionStatus"
 
 #define MANGA_COVER_URL @"coverURL"
 #define MANGA_COVER_DATA @"coverData"
@@ -30,10 +32,17 @@
 #define CHAPTER_NAME @"ChapterName"
 #define CHAPTER_URL @"url"
 
+// Page dictionary
 #define PAGE_URL @"url"
 #define PAGE_IMAGE_URL @"imageURL"
 #define PAGE_IMAGE_DATA @"imageData"
 #define NEXT_PAGE_TO_PARSE @"nextPageToParse"
 #define PAGES_COUNT @"pagesCount"
+
+// Chapter download status
+#define CHAPTER_DOWNLOADING @"downloading"
+#define CHAPTER_DOWNLOADED @"downloaded"
+#define CHAPTER_STOPPED_DOWNLOADING @"stopDownloading"
+#define CHAPTER_CLEARED @"cleared"
 
 #endif

@@ -15,6 +15,7 @@
 
 + (NSURL *)urlForFetchingMangas:(NSDictionary *) criteria;
 + (NSArray *)parseFetchResult:(NSData *)htmlData;
++ (BOOL)nextMangaListPageAvailability:(NSData *)htmlData;
 + (NSDictionary *)parseMangaDetailSummary:(NSData *)htmlData;
 + (NSDictionary *)parseMangaDetails:(NSData *)htmlData;
 + (NSArray *)parseChapterList:(NSData *)htmlData;

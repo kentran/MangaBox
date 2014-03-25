@@ -40,6 +40,8 @@
             manga.author = [mangaDictionary valueForKeyPath:MANGA_AUTHOR];
             manga.artist = [mangaDictionary valueForKeyPath:MANGA_ARTIST];
             manga.genres = [mangaDictionary valueForKeyPath:MANGA_GENRES];
+            manga.source = [mangaDictionary valueForKeyPath:MANGA_SOURCE];
+            manga.completionStatus = [mangaDictionary valueForKeyPath:MANGA_COMPLETION_STATUS];
             manga.created = [NSDate date];
             
             NSData *coverData = [mangaDictionary valueForKeyPath:MANGA_COVER_DATA];

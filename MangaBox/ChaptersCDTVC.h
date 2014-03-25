@@ -15,4 +15,8 @@
 // use @"Chapter Cell" as your table view cell's reuse id
 // will segue to viewing chapter content
 
+- (void)prepareForAlert:(NSNotification *)notification;
+
+// make methods of UIActionSheetDelegate to use in child class
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 @end

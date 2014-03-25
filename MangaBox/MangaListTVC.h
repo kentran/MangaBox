@@ -12,4 +12,7 @@
 
 @property (strong, nonatomic) NSArray *mangas;
 
+- (void)alert:(NSString *)msg;
+- (void)fatalAlert:(NSString *)msg;
+
 @end

@@ -10,6 +10,7 @@
 #import "MangafoxFetcher.h"
 #import "MangaDictionaryDefinition.h"
 #import "MangaBoxNotification.h"
+#import "AddMangaConfirmViewController.h"
 
 @interface MangaSummaryViewController ()
 
@@ -109,24 +110,6 @@
     self.addButton.enabled = YES;
 }
 
-#pragma mark - Add Manga Action
-
-- (IBAction)addMangaButtonTouch:(UIBarButtonItem *)sender
-{
-    if ([self.mangaDetails valueForKey:MANGA_TITLE]) {
-        NSMutableDictionary *manga = [[NSMutableDictionary alloc] initWithDictionary:self.mangaDetails];
-        [manga setObject:[self.mangaURL absoluteString] forKey:MANGA_URL];
-        [manga setObject:self.mangaUnique forKey:MANGA_UNIQUE];
-        [manga setObject:UIImageJPEGRepresentation(self.coverImageView.image, 0.0f) forKey:MANGA_COVER_DATA];
-       
-        // Create notification to let others know that new manga is available to add to db
-        [[NSNotificationCenter defaultCenter] postNotificationName:addingNewMangaToCollectionNotification
-                                                            object:self
-                                                          userInfo:manga];
-    }
-}
-
-
 #pragma mark - Download Tasks
 
 - (void)startDownloadingMangaCover
@@ -160,7 +143,7 @@
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         [request setHTTPMethod:@"post"];
         NSString *post = [[NSString alloc] initWithFormat:@"sid=%@", self.mangaUnique];
-        [request setValue:[NSString stringWithFormat:@"%d", [post length]] forHTTPHeaderField:@"Content-Length"];
+        [request setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[post length]] forHTTPHeaderField:@"Content-Length"];
         [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
         [request setHTTPBody:[post dataUsingEncoding:NSUTF8StringEncoding]];
         
@@ -188,6 +171,16 @@
                 }
             }];
         [task resume];
+    }
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[AddMangaConfirmViewController class]]) {
+        AddMangaConfirmViewController *amcvc = (AddMangaConfirmViewController *)segue.destinationViewController;
+        amcvc.mangaURL = self.mangaURL;
     }
 }
 

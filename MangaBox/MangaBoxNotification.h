@@ -13,4 +13,8 @@
 
 #define startAdvancedSearchNotification @"startAdvancedSearchNotification"
 
+#define finishDownloadChapterPage @"finishDownloadChapterPage"
+#define errorDownloadingChapter @"errorDownloadingChapter"
+#define finishDownloadChapter @"finishDownloadChapter"
+
 #endif

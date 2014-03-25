@@ -10,6 +10,7 @@
 
 @interface Chapter (Download)
 
-+ (void)startDownloadingChapterPages:(Chapter *)chapter;
+- (void)startDownloadingChapterPages;
+- (void)stopDownloadingChapterPages;
 
 @end

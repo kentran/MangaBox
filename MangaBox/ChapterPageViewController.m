@@ -10,6 +10,7 @@
 #import "ImageViewController.h"
 #import "Page.h"
 #import "MangaDictionaryDefinition.h"
+#import "ImageScrollView.h"
 
 @interface ChapterPageViewController () <UIPageViewControllerDataSource>
 
@@ -25,7 +26,7 @@
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
     self.pageViewController.dataSource = self;
     
-    ImageViewController *startingViewController = [self viewControllerAtIndex:0];
+    ImageViewController *startingViewController = [self viewControllerAtIndex:[self.chapter.currentPageIndex intValue]];
     NSArray *viewControllers = @[startingViewController];
     [self.pageViewController setViewControllers:viewControllers
                                       direction:UIPageViewControllerNavigationDirectionForward
@@ -39,20 +40,11 @@
 
 - (ImageViewController *)viewControllerAtIndex:(NSUInteger)index
 {
-    if ([self.chapter.pages count] == 0)
-        return nil;
-    
-    // Create a new view controller and pass suitable data.
+    // Create ImageViewController, pass the chapter and index
+    // ImageViewController will figure it out which page to display
     ImageViewController *ivc = [self.storyboard instantiateViewControllerWithIdentifier:@"ImageViewController"];
     ivc.pageIndex = index;
-    NSArray *pages = [self.chapter.pages allObjects];
-    NSSortDescriptor *urlSort = [[NSSortDescriptor alloc] initWithKey:PAGE_URL
-                                                            ascending:YES
-                                                             selector:@selector(localizedStandardCompare:)];
-    
-    pages = [pages sortedArrayUsingDescriptors:@[urlSort]];
-    Page *page = pages[index];
-    ivc.image = [UIImage imageWithData:page.imageData];
+    ivc.chapter = self.chapter;
     
     return ivc;
 }
@@ -85,16 +77,5 @@
     
     return [self viewControllerAtIndex:index];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

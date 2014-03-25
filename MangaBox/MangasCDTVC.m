@@ -13,42 +13,18 @@
 #import "MangafoxFetcher.h"
 #import "ChaptersByMangaCDTVC.h"
 #import "CoverImage.h"
+#import "UIImage+Thumbnail.h"
+#import "MangaBoxAppDelegate.h"
 
-@interface MangasCDTVC ()
-@property (strong, nonatomic) NSArray *addedChapterDictionaryList;
+@interface MangasCDTVC () <UIAlertViewDelegate>
+
+@property (nonatomic, strong) NSIndexPath *indexPathForDeletedManga;
+
 @end
 
 @implementation MangasCDTVC
 
-- (void)setAddedMangaDictionary:(NSDictionary *)addedMangaDictionary\
-{
-    _addedMangaDictionary = addedMangaDictionary;
-    if (_addedMangaDictionary)
-        [self storeNewManga:_addedMangaDictionary];
-}
-
-- (void)setAddedChapterDictionaryList:(NSArray *)addedChapterDictionaryList
-{
-    _addedChapterDictionaryList = addedChapterDictionaryList;
-    if (_addedChapterDictionaryList)
-        [self loadNewChapterList:_addedChapterDictionaryList ofManga:[Manga mangaWithInfo:self.addedMangaDictionary inManagedObjectContext:self.managedObjectContext]];
-}
-
-- (void)storeNewManga:(NSDictionary *)newManga
-{
-    [Manga mangaWithInfo:newManga inManagedObjectContext:self.managedObjectContext];
-    [self fetchChapterList];
-    [self.tableView reloadData];
-}
-
-- (void)loadNewChapterList:(NSArray *)newChapterList
-                  ofManga:(Manga *)manga
-{
-    [Chapter loadChaptersFromArray:self.addedChapterDictionaryList
-                           ofManga:manga
-          intoManagedObjectContext:self.managedObjectContext];
-    [self.managedObjectContext save:NULL];
-}
+#pragma mark - Properties
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
@@ -68,48 +44,80 @@
                                                                                    cacheName:nil];
 }
 
+#pragma mark - UITableViewDataSource
+
+#define TITLE_LABEL_TAG 1
+#define CHAPTERS_LABEL_TAG 2
+#define COVER_IMAGE_TAG 3
+#define SOURCE_IMAGE_TAG 4
+#define STATUS_LABEL_TAG 5
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Manga Collection Cell"];
     
     Manga *manga = [self.fetchedResultsController objectAtIndexPath:indexPath];
+
+    UILabel *title = (UILabel *)[cell.contentView viewWithTag:TITLE_LABEL_TAG];
+    UILabel *chapters = (UILabel *)[cell.contentView viewWithTag:CHAPTERS_LABEL_TAG];
+    UILabel *status = (UILabel *)[cell.contentView viewWithTag:STATUS_LABEL_TAG];
     
-    cell.textLabel.text = manga.title;
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.textLabel.numberOfLines = 0;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d chapters", [manga.chapters count]];
-    cell.imageView.image = [UIImage imageWithData:manga.cover.imageData];
+    UIImageView *coverImageView = (UIImageView *)[cell.contentView viewWithTag:COVER_IMAGE_TAG];
+    UIImageView *sourceImageView = (UIImageView *)[cell.contentView viewWithTag:SOURCE_IMAGE_TAG];
+    
+    title.text = manga.title;
+    title.lineBreakMode = NSLineBreakByWordWrapping;
+    title.numberOfLines = 2;
+    
+    chapters.text = [NSString stringWithFormat:@"%d chapters", [manga.chapters count]];
+    
+    status.text = manga.completionStatus;
+    
+    coverImageView.image = [UIImage imageWithData:manga.cover.imageData];
+    coverImageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    UIImage *logo;
+    if ([manga.source isEqualToString:@"mangafox.me"]) {
+        logo = [UIImage imageNamed:@"MangafoxLogo"];
+    }
+    sourceImageView.image = logo;
+    sourceImageView.contentMode = UIViewContentModeLeft;
     
     return cell;
 }
 
-- (void)fetchChapterList
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([self.addedMangaDictionary objectForKey:MANGA_URL]) {
-        NSURL *url = [NSURL URLWithString:[self.addedMangaDictionary objectForKey:MANGA_URL]];
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-        NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-        
-        NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request
-            completionHandler:^(NSURL *localfile, NSURLResponse *response, NSError *error) {
-                if (!error) {
-                    if ([request.URL isEqual:url]) {
-                        NSString *urlString = [request.URL absoluteString];
-                        NSData *htmlData = [NSData dataWithContentsOfURL:localfile];
-                        
-                        NSArray *chapterList;
-                        if ([urlString rangeOfString:@"mangafox.me"].location != NSNotFound) {
-                            chapterList = [MangafoxFetcher parseChapterList:htmlData];
-                        }
-                        
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            self.addedChapterDictionaryList = chapterList;
-                        });
-                    }
-                }
-            }];
-        [task resume];
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        self.indexPathForDeletedManga = indexPath;
+        [self alert:@"This action will also delete all the data related to this manga"];
+    }
+}
+
+- (void)deleteMangaAtIndexPath:(NSIndexPath *)indexPath
+{
+    Manga *deletedManga = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [self.managedObjectContext deleteObject:deletedManga];
+    [(MangaBoxAppDelegate*)[[UIApplication sharedApplication] delegate] saveContext];
+}
+
+#pragma mark - Alerts
+
+- (void)alert:(NSString *)msg
+{
+    [[[UIAlertView alloc] initWithTitle:@"Warning"
+                                message:msg
+                               delegate:self
+                      cancelButtonTitle:@"Cancel"
+                      otherButtonTitles:@"OK", nil] show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"OK"]
+        && [alertView.title isEqualToString:@"Warning"])
+    {
+        [self deleteMangaAtIndexPath:self.indexPathForDeletedManga];
     }
 }
 

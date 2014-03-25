@@ -99,53 +99,20 @@
 }
 
 
-//- (IBAction)startSearch:(UIButton *)sender {
-//    double fetchTimestamp;
-//    if (!self.lastRequestTimestamp) {
-//        // start search the first time after the controller is loaded
-//        self.lastRequestTimestamp = [[NSDate date] timeIntervalSince1970];
-//        fetchTimestamp = self.lastRequestTimestamp;
-//    } else {
-//        // start search multiple time consecutively
-//        double now = [[NSDate date] timeIntervalSince1970];
-//        if (now > (self.lastRequestTimestamp + SEARCH_DELAY_SEC)) {
-//            fetchTimestamp = now;
-//        } else {
-//            fetchTimestamp = self.lastRequestTimestamp + SEARCH_DELAY_SEC;
-//        }
-//        self.lastRequestTimestamp = fetchTimestamp;
-//    }
-//    
-//    [self.params setValuesForKeysWithDictionary: @{
-//        @"fetchTimestamp": [NSString stringWithFormat:@"%f", fetchTimestamp],
-//        @"name": self.seriesNameField.text,
-//        @"author": self.authorNameField.text,
-//        @"artist": self.artistNameField.text,
-//        @"genres": self.genres,
-//        @"sortBy": self.sortByButton.currentTitle,
-//        @"sortOrder": self.sortOrderButton.currentTitle,
-//        @"isCompleted": self.seriesCompletionButton.currentTitle,
-//        @"page": @"1"
-//    }];
-//    
-//    [[NSNotificationCenter defaultCenter] postNotificationName:startAdvancedSearchNotification
-//                                                        object:self
-//                                                      userInfo:self.params];
-//}
-
-
 - (IBAction)genresButtonTouch:(UIButton *)sender {
     NSString *touchedGenre = sender.currentTitle;
-    NSLog(@"%@", [self.genres objectForKey:touchedGenre]);
     if ([[self.genres valueForKey:touchedGenre] isEqualToString:@"0"]) {
         [self.genres setObject:@"1" forKey:touchedGenre];
-        [sender setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+        //[sender setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+        [sender setBackgroundColor:[UIColor greenColor]];
     } else if ([[self.genres valueForKey:touchedGenre] isEqualToString:@"1"]) {
         [self.genres setObject:@"2" forKey:touchedGenre];
-        [sender setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        //[sender setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        [sender setBackgroundColor:[UIColor redColor]];
     } else {
         [self.genres setObject:@"0" forKey:touchedGenre];
-        [sender setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        //[sender setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [sender setBackgroundColor:[UIColor darkGrayColor]];
     }
 }
 

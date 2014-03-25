@@ -1,14 +1,14 @@
 //
-//  MangaCDTVC.h
+//  ChaptersByBookmarkCDTVC.h
 //  MangaBox
 //
-//  Created by Ken Tran on 9/3/14.
+//  Created by Ken Tran on 22/3/14.
 //  Copyright (c) 2014 Ken Tran. All rights reserved.
 //
 
-#import "CoreDataTableViewController.h"
+#import "ChaptersCDTVC.h"
 
-@interface MangasCDTVC : CoreDataTableViewController
+@interface ChaptersByBookmarkCDTVC : ChaptersCDTVC
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 

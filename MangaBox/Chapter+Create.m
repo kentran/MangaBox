@@ -83,6 +83,8 @@
     
     chapter.url = [chapterDictionary objectForKey:CHAPTER_URL];
     chapter.name = [chapterDictionary objectForKey:CHAPTER_NAME];
+    chapter.updated = [NSDate date];
+    chapter.bookmark = NO;
     
     chapter.whichManga = manga;
     

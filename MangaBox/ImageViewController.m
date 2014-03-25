@@ -7,95 +7,66 @@
 //
 
 #import "ImageViewController.h"
+#import "MangaDictionaryDefinition.h"
+#import "Page+Getter.h"
+#import "ImageScrollView.h"
+#import "Chapter+Download.h"
 
 @interface ImageViewController () <UIScrollViewDelegate>
-@property (nonatomic, strong) UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIView *tapAreaForToolBar;
-@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *showHideToolBar;
+
+@property (strong, nonatomic) IBOutlet UITapGestureRecognizer *toggleToolbar;
+
 @end
 
 @implementation ImageViewController
 
-#pragma mark - View Controller Lifecycle
-
-// add the UIImageView to the MVC's View
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self.scrollView addSubview:self.imageView];
-    [self.tapAreaForToolBar addGestureRecognizer:self.showHideToolBar];
-}
-
 #pragma mark - Properties
 
-// lazy instantiation
-
-- (UIImageView *)imageView
+- (void)setChapter:(Chapter *)chapter
 {
-    if (!_imageView) _imageView = [[UIImageView alloc] init];
-    return _imageView;
+    _chapter = chapter;
+    if ([chapter.pagesCount intValue] != [chapter.pages count])
+        [chapter startDownloadingChapterPages];
+    [self loadView];
 }
 
-- (UITapGestureRecognizer *)showHideToolBar
+- (UITapGestureRecognizer *)toggleToolbar
 {
-    if (!_showHideToolBar) _showHideToolBar = [[UITapGestureRecognizer alloc] init];
-    return _showHideToolBar;
+    if (!_toggleToolbar) _toggleToolbar = [[UITapGestureRecognizer alloc] init];
+    return _toggleToolbar;
 }
 
-// image property does not use an _image instance variable
-// instead it just reports/sets the image in the imageView property
-// thus we don't need @synthesize even though we implement both setter and getter
-
-- (UIImage *)image
+- (void)loadView
 {
-    return self.imageView.image;
-}
+    Page *page = [Page pageOfChapter:self.chapter atIndex:self.pageIndex];
 
-- (void)setImage:(UIImage *)image
-{
-    // Create the frame for imageView on each orientation
-    // so that full image is loaded from the start
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    UIInterfaceOrientation interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if (UIDeviceOrientationIsPortrait(interfaceOrientation)) {
-        self.imageView.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, screenRect.size.width, screenRect.size.height);
-    } else {
-        //CGPoint center = self.view.center;
-        NSLog(@"test");
-        self.imageView.frame = CGRectMake(screenRect.size.height/4, self.view.frame.origin.y, screenRect.size.height/2, screenRect.size.width);
-    }
-
-    self.imageView.image = image; // does not change the frame of the UIImageView
-    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-
-    // self.scrollView to be the screen size
-    self.scrollView.contentSize = self.view.bounds.size;
-}
-
-- (void)setScrollView:(UIScrollView *)scrollView
-{
-    _scrollView = scrollView;
+    // Prepare the ImageScroll View
+    ImageScrollView *scrollView = [[ImageScrollView alloc] init];
+    if (page)
+        scrollView.image = [UIImage imageWithData:page.imageData];
+    else
+        scrollView.image = [UIImage imageNamed:@"blank"];
     
-    // next three lines are necessary for zooming
-    _scrollView.minimumZoomScale = 1.0;
-    _scrollView.maximumZoomScale = 2.0;
-    _scrollView.delegate = self;
+    // Replace the view property with the ImageScrollView
+    self.view = scrollView;
+    
+    UIView *tapArea = [[UIView alloc] init];
+    [tapArea addGestureRecognizer:self.toggleToolbar];
+    [scrollView addSubview:tapArea];
 
-    // next line is necessary in case self.image gets set before self.scrollView does
-    // for example, prepareForSegue:sender: is called before outlet-setting phase
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    self.scrollView.contentSize = screenRect.size;
-}
+    // Must set constraints on width and height absolutely somewhere for UIScrollView
+    [tapArea setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[tapArea(==scrollView)]|"
+                                                                       options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                       metrics:nil
+                                                                         views:NSDictionaryOfVariableBindings(tapArea,scrollView)]];
 
-#pragma mark - UIScrollViewDelegate
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[tapArea(==scrollView)]|"
+                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                      metrics:nil
+                                                                        views:NSDictionaryOfVariableBindings(tapArea,scrollView)]];
+    
 
-// mandatory zooming method in UIScrollViewDelegate protocol
-
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
-{
-    return self.imageView;
 }
 
 #pragma mark - Gesture
@@ -107,12 +78,6 @@
     } else {
         [[self navigationController] setNavigationBarHidden:NO animated:YES];
     }
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    // reset image
-    self.image = self.image;
 }
 
 

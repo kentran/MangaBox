@@ -43,6 +43,7 @@
 
 - (NSArray *) fetchMangas
 {
+    [self.spinner startAnimating];
     NSURL *url = [MangafoxFetcher urlForFetchingMangas:self.nextPageCriteria];
     dispatch_queue_t fetchQ = dispatch_queue_create("mangafox fetcher", NULL);
     
@@ -62,9 +63,8 @@
             if (delayInSeconds < 0) delayInSeconds = 0;
         }
     }
-    
-    //NSLog(@"delay: %f", delayInSeconds);
 
+    // Atempt to delay the search for at least 5s
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, fetchQ, ^(void){
         NSData *htmlData = [NSData dataWithContentsOfURL:url];
@@ -73,14 +73,21 @@
         
         // update criteria to next page
         int nextPage = [[self.nextPageCriteria valueForKey:@"page"] intValue];
-        nextPage++;
-        [self.nextPageCriteria setValue:[NSString stringWithFormat:@"%d", nextPage] forKey:@"page"];
-        
-        [self.searchedMangas addObjectsFromArray:result];   // add result to current list of mangas
-        
+        if ([MangafoxFetcher nextMangaListPageAvailability:htmlData]) {
+            nextPage++;
+            [self.nextPageCriteria setValue:[NSString stringWithFormat:@"%d", nextPage] forKey:@"page"];
+        } else {
+            [self.nextPageCriteria setValue:@"0" forKey:@"page"];
+        }
+
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.spinner stopAnimating];
-            self.mangas = self.searchedMangas;              // set and display in TVC
+            if (!result) {  // if the result can't be found, alert the user
+                [self fatalAlert:@"Result is not available. You are not allow to search continuously within 5s"];
+            } else {
+                [self.searchedMangas addObjectsFromArray:result];   // add result to current list of mangas
+                self.mangas = self.searchedMangas;                  // set and display in TVC
+            }
         });
     });
     
@@ -89,8 +96,8 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // load more data if the last row is displayed
-    if (indexPath.row == ([self.mangas count] - 1)) {
+    // load more data if the last row is displayed and next page param is not 0
+    if (indexPath.row == ([self.mangas count] - 1) && [[self.nextPageCriteria objectForKey:@"page"] intValue]) {
         [self fetchMangas]; // fetch next page, criteria is already updated
     }
 }

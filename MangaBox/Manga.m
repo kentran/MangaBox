@@ -2,7 +2,7 @@
 //  Manga.m
 //  MangaBox
 //
-//  Created by Ken Tran on 11/3/14.
+//  Created by Ken Tran on 22/3/14.
 //  Copyright (c) 2014 Ken Tran. All rights reserved.
 //
 
@@ -16,11 +16,13 @@
 @dynamic artist;
 @dynamic author;
 @dynamic coverURL;
+@dynamic created;
 @dynamic genres;
 @dynamic title;
 @dynamic unique;
 @dynamic url;
-@dynamic created;
+@dynamic source;
+@dynamic completionStatus;
 @dynamic chapters;
 @dynamic cover;
 

@@ -8,9 +8,8 @@
 
 #import "MangaListTVC.h"
 #import "MangaSummaryViewController.h"
-#import "DetailViewManager.h"
 
-@interface MangaListTVC ()
+@interface MangaListTVC () <UIAlertViewDelegate>
 
 @end
 
@@ -20,32 +19,6 @@
 {
     _mangas = mangas;
     [self.tableView reloadData];
-}
-
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -133,6 +106,31 @@
             }
         }
     }
+}
+
+#pragma mark - Alerts
+
+- (void)alert:(NSString *)msg
+{
+    [[[UIAlertView alloc] initWithTitle:@"Error"
+                                message:msg
+                               delegate:nil
+                      cancelButtonTitle:nil
+                      otherButtonTitles:@"OK", nil] show];
+}
+
+- (void)fatalAlert:(NSString *)msg
+{
+    [[[UIAlertView alloc] initWithTitle:@"Error"
+                                message:msg
+                               delegate:self
+                      cancelButtonTitle:nil
+                      otherButtonTitles:@"OK", nil] show];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

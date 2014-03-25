@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Chapter.h"
 
 @interface ImageViewController : UIViewController
 
-// Model for this MVC ... an image to display
-@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) Chapter* chapter;
 @property NSUInteger pageIndex;
 
 @end

@@ -124,14 +124,9 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="5jg-6E-6uD">
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Add" id="PAn-4y-JwJ">
-                            <connections>
-                                <action selector="addMangaButtonTouch:" destination="EVY-tk-Le3" id="f04-eS-1ou"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Add" id="PAn-4y-JwJ"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="addButton" destination="PAn-4y-JwJ" id="8Kg-y3-um8"/>
                         <outlet property="artistLabel" destination="ksc-Bd-8gF" id="VyC-dA-ycG"/>
                         <outlet property="authorLabel" destination="L4C-Pa-djP" id="qA9-Ub-ATy"/>
                         <outlet property="chapterLabel" destination="Gcq-jk-sOj" id="KeF-dv-X7K"/>
