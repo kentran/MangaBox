@@ -20,6 +20,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *artistTextLabel;
 
 @property (nonatomic, strong) NSString *downloadButtonTitle;
+
+// Download queue
+@property (nonatomic, strong) NSMutableArray *downloadQueue;
+@property BOOL isDownloadQueueRunning;
+
 @end
 
 @implementation ChaptersByMangaCDTVC
@@ -30,12 +35,41 @@
     self.titleTextLabel.text = self.manga.title;
     self.authorTextLabel.text = self.manga.author;
     self.artistTextLabel.text = self.manga.artist;
+    self.navigationItem.title = @"Menu";
     
     self.downloadButtonTitle = @"Download all chapters";
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(prepareForAlert:)
                                                  name:errorDownloadingChapter
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(prepareNextChapter:)
+                                                 name:finishDownloadChapter
+                                               object:nil];
+}
+
+- (NSMutableArray *)downloadQueue
+{
+    if (!_downloadQueue) {
+        // Initialize download queue with non-downloading chapters
+        NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Chapter"];
+        request.predicate = [NSPredicate predicateWithFormat:@"whichManga = %@ and downloadStatus <> %@ and downloadStatus <> %@", self.manga, CHAPTER_DOWNLOADING, CHAPTER_DOWNLOADED];
+        
+        request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"url"
+                                                                  ascending:YES
+                                                                   selector:@selector(localizedStandardCompare:)]];
+        
+        NSError *error;
+        if (error) {
+            NSLog(@"Could not create download queue");
+        } else {
+            _downloadQueue = [[NSMutableArray alloc] initWithArray:[self.manga.managedObjectContext executeFetchRequest:request error:&error]];
+        }
+        
+    }
+    
+    return _downloadQueue;
 }
 
 - (void)setManga:(Manga *)manga
@@ -85,12 +119,54 @@
     NSString *choice = [actionSheet buttonTitleAtIndex:buttonIndex];
     if ([choice isEqualToString:@"Download all chapters"]) {
         self.downloadButtonTitle = @"Stop downloading";
-        [self.manga startDownloadingAllChapters];
+        self.isDownloadQueueRunning = YES;
+        [self startDownloadingQueue];
+        NSLog(@"%d", [self.downloadQueue count]);
+        //[self.manga startDownloadingAllChapters];
     } else if ([choice isEqualToString:@"Stop downloading"]) {
         self.downloadButtonTitle = @"Download all chapters";
+        self.isDownloadQueueRunning = NO;
+        self.downloadQueue = nil;
         [self.manga stopDownloadingAllChapters];
     } else if ([choice isEqualToString:@"Remove all downloaded pages"]) {
         [self.manga clearAllPages];
+    }
+}
+
+#pragma mark - Downloading Queue Task
+
+#define CHAPTERS_PER_RUN 3
+
+- (void)startDownloadingQueue
+{
+    for (int i = 0; i < CHAPTERS_PER_RUN; i++) {
+        [self downloadNextChapter];
+    }
+}
+
+- (void)downloadNextChapter
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if ([self.downloadQueue count] && self.isDownloadQueueRunning) {
+            Chapter *chapter = self.downloadQueue[0];
+            [self.downloadQueue removeObjectAtIndex:0];
+            [self startDownloadingChapter:chapter];
+        } else {
+            // Done, clear the download queue
+            self.downloadQueue = nil;
+            self.isDownloadQueueRunning = NO;
+            NSLog(@"Nothing more to download");
+        }
+    });
+}
+
+- (void)prepareNextChapter:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    
+    if ([[userInfo objectForKey:MANGA_TITLE] isEqualToString:self.manga.title] && self.isDownloadQueueRunning) {
+        [self downloadNextChapter];
+        NSLog(@"nextchapter");
     }
 }
 

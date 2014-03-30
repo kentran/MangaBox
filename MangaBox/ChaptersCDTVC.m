@@ -9,17 +9,38 @@
 #import "ChaptersCDTVC.h"
 #import "Chapter+Download.h"
 #import "Manga.h"
+#import "Page+Create.h"
+#import "Page+Getter.h"
 #import "CoverImage.h"
 #import "ImageViewController.h"
 #import "ChapterPageViewController.h"
 #import "MangaDictionaryDefinition.h"
 #import "MangaBoxNotification.h"
+#import "MangafoxFetcher.h"
+#import "MangareaderFetcher.h"
+#import "MangaBoxAppDelegate.h"
+#import "ChapterViewController.h"
 
-@interface ChaptersCDTVC() <UIActionSheetDelegate>
-
+@interface ChaptersCDTVC() <UIActionSheetDelegate, NSURLSessionDownloadDelegate, NSURLSessionDelegate>
+@property (nonatomic, strong) NSURLSession *chapterDownloadSession;
 @end
 
 @implementation ChaptersCDTVC
+
+#pragma mark - Properties
+
+- (NSURLSession *)chapterDownloadSession
+{
+    if (!_chapterDownloadSession) {
+    //    static dispatch_once_t onceToken;
+    //    dispatch_once(&onceToken, ^{
+            //NSLog(@"initializing");
+            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+            _chapterDownloadSession = [NSURLSession sessionWithConfiguration:configuration];
+    //    });
+    }
+    return _chapterDownloadSession;
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -35,27 +56,6 @@
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
-
-//- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-//{
-//
-//}
-//
-//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-//{
-//
-//}
-
-//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-//{
-////    if (![NSThread isMainThread])
-////        NSLog(@"NOT MAIN THREAD");
-////    dispatch_async(dispatch_get_main_queue(), ^{
-////        //[self.tableView reloadData];
-////    });
-////    NSLog(@"reload");
-//    
-//}
 
 // Overiding delegate defined in CoreDataTableViewController
 - (void)controller:(NSFetchedResultsController *)controller
@@ -76,7 +76,7 @@
             
         case NSFetchedResultsChangeUpdate:
             [self configure:[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-             //[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            //[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
             
         case NSFetchedResultsChangeMove:
@@ -98,8 +98,9 @@
         
         UIProgressView *progressBar = (UIProgressView *)[cell.contentView viewWithTag:PROGRESS_BAR_TAG];
         
-        if (![chapter.pages count] && ![chapter.pagesCount intValue]) {
+        if ([chapter.downloadStatus isEqualToString:CHAPTER_NEED_DOWNLOAD]) {
             pages.text = @"Please download to read";
+            progressBar.hidden = YES;
         } else if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED]) {
             progressBar.hidden = YES;
             pages.text = [NSString stringWithFormat:@"Downloaded %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
@@ -107,46 +108,14 @@
             pages.text = [NSString stringWithFormat:@"Downloading... %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
             
             // Add progress bar for downloading view
-            progressBar.hidden = NO;
-            progressBar.progress = [chapter.pages count] / [chapter.pagesCount doubleValue];
+            //progressBar.hidden = NO;
+            //progressBar.progress = [chapter.pages count] / [chapter.pagesCount doubleValue];
         } else if ([chapter.downloadStatus isEqualToString:CHAPTER_STOPPED_DOWNLOADING]) {
             progressBar.hidden = YES;
             pages.text = [NSString stringWithFormat:@"Download stopped... %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
         } else {
             pages.text = [NSString stringWithFormat:@"%lu/%@ Pages", (unsigned long)[chapter.pages count], chapter.pagesCount];
-        }
-        
-    });
-}
-
-- (void)configureCellAtIndexPath:(NSIndexPath *)indexPath withObject:(Chapter *)chapter
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
- 
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        
-        UILabel *title, *pages;
-        title = (UILabel *)[cell.contentView viewWithTag:TITLE_LABEL_TAG];
-        title.text = chapter.name;
-        pages = (UILabel *)[cell.contentView viewWithTag:PAGES_LABEL_TAG];
-        
-        UIProgressView *progressBar = (UIProgressView *)[cell.contentView viewWithTag:PROGRESS_BAR_TAG];
-        
-        if (![chapter.pages count]) {
-            pages.text = @"Please download to view";
-        } else if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED]) {
             progressBar.hidden = YES;
-            pages.text = [NSString stringWithFormat:@"%lu/%@ Downloaded", (unsigned long)[chapter.pages count], chapter.pagesCount];
-        } else if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING]) {
-            pages.text = [NSString stringWithFormat:@"%lu/%@ Downloading", (unsigned long)[chapter.pages count], chapter.pagesCount];
-            
-            // Add progress bar for downloading view
-            progressBar.hidden = NO;
-            progressBar.progress = [chapter.pages count] / [chapter.pagesCount doubleValue];
-            
-            if (progressBar.progress == 1.0) {
-                progressBar.hidden = YES;
-            }
         }
         
     });
@@ -162,7 +131,7 @@
 
     if ([choice isEqualToString:@"Download"]) {
         chapter.downloadStatus = CHAPTER_DOWNLOADING;
-        [chapter startDownloadingChapterPages];
+        [self startDownloadingChapter:chapter];
     } else if ([choice isEqualToString:@"Read"] || [choice isEqualToString:@"Read and Download"]) {
         id detailvc = [self.splitViewController.viewControllers lastObject];
         if ([detailvc isKindOfClass:[UINavigationController class]]) {
@@ -176,7 +145,7 @@
         chapter.bookmark = [NSNumber numberWithBool:YES];
         [chapter.managedObjectContext save:NULL];
     } else if ([choice isEqualToString:@"Stop downloading"]) {
-        [chapter stopDownloadingChapterPages];
+        [self stopDownloadingChapter:chapter];
     }
 }
 
@@ -207,8 +176,8 @@
     Chapter *chapter = [self.fetchedResultsController objectAtIndexPath:indexPath];
     // note that we don't check the segue identifier here
     // probably fine ... hard to imagine any other way this class would segue to PhotosByPhotographerCDTVC
-    if ([vc isKindOfClass:[ChapterPageViewController class]]) {
-        ChapterPageViewController *chapterPVC = (ChapterPageViewController *)vc;
+    if ([vc isKindOfClass:[ChapterViewController class]]) {
+        ChapterViewController *chapterPVC = (ChapterViewController *)vc;
         chapterPVC.title = chapter.name;
         chapterPVC.chapter = chapter;
         chapterPVC.hidesBottomBarWhenPushed = YES;
@@ -263,5 +232,205 @@
     
     [actionSheet showInView:self.view]; // different on iPad
 }
+
+#pragma mark - Download Tasks
+
+- (void)startDownloadingChapter:(Chapter *)chapter
+{
+    // If the chapter has been downloading half way
+    // continue from the last downloaded page
+    NSURL *url;
+    if ([chapter.pages count]) {
+        NSInteger lastPageIdx = [chapter.pages count] - 1;
+        Page *lastDownloadedPage = [Page pageOfChapter:chapter atIndex:lastPageIdx];
+        url = [NSURL URLWithString:lastDownloadedPage.url];
+    } else {
+        url = [NSURL URLWithString:chapter.url];
+    }
+    
+    chapter.downloadStatus = CHAPTER_DOWNLOADING;
+    [self downloadHtmlPage:url forChapter:chapter];
+}
+
+- (void)stopDownloadingChapter:(Chapter *)chapter
+{
+    if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING]) {
+        chapter.downloadStatus = CHAPTER_STOPPED_DOWNLOADING;
+        [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
+    }
+}
+
+#pragma mark - NSURLSessionDelegate
+
+//- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+//{
+//    if (error) {
+//        NSLog(@"Session error");
+//    }
+//    
+//    NSLog(@"Task ending");
+//    session = nil;
+//}
+//
+//- (void)URLSession:(NSURLSession *)session didBecomeInvalidWithError:(NSError *)error
+//{
+//    if (error) {
+//        NSLog(@"Session error");
+//    }
+//    
+//    NSLog(@"Session ending");
+//    session = nil;
+//}
+
+#pragma mark - NSURLSessionDownloadDelegate
+
+//- (void)URLSession:(NSURLSession *)session
+//      downloadTask:(NSURLSessionDownloadTask *)downloadTask
+//didFinishDownloadingToURL:(NSURL *)location
+//{
+//    if ([downloadTask.taskDescription isEqualToString:CHAPTER_HTML_FETCH]) {
+//        [self processHtmlPage:location forChapter:;]
+//    } else if ([downloadTask.taskDescription isEqualToString:CHAPTER_IMAGE_FETCH]) {
+//    
+//    } else {
+//        NSLog(@"Error: Could not identify download task!");
+//    }
+//}
+
+- (void)downloadHtmlPage:(NSURL *)pageHtmlURL forChapter:(Chapter *)chapter
+{
+    if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING]) {
+        NSURLRequest *request = [NSURLRequest requestWithURL:pageHtmlURL];
+        
+        __weak ChaptersCDTVC *weakSelf = self;
+        NSURLSessionDownloadTask *task = [self.chapterDownloadSession downloadTaskWithRequest:request
+            completionHandler:^(NSURL *localfile, NSURLResponse *response, NSError *error) {
+                if (!error) {
+                    NSString *urlString = [request.URL absoluteString];
+                    NSData *htmlData = [NSData dataWithContentsOfURL:localfile];
+                    
+                    // Fetch info according to the source and parse to temporary variable
+                    NSDictionary *pageDictionary;
+                    if ([urlString rangeOfString:@"mangafox.me"].location != NSNotFound) {
+                        pageDictionary = [MangafoxFetcher parseChapterPage:htmlData ofURLString:chapter.url];
+                    } else if ([urlString rangeOfString:@"mangareader.net"].location != NSNotFound) {
+                        pageDictionary = [MangareaderFetcher parseChapterPage:htmlData ofURLString:chapter.url];
+                    }
+                    
+                    // Check if the page is downloaded correctly
+                    if ([chapter.pagesCount intValue] != [chapter.pages count]
+                        && ![pageDictionary objectForKey:PAGE_IMAGE_URL])
+                    {
+                        [weakSelf alert:DOWNLOAD_ERROR];
+                        chapter.downloadStatus = CHAPTER_STOPPED_DOWNLOADING;
+                        return;
+                    }
+                    
+                    
+                    // Set the pagesCount in chapter if it is not already set
+                    if (![chapter.pagesCount intValue] && [pageDictionary objectForKey:PAGES_COUNT]) {
+                        chapter.pagesCount = [NSNumber numberWithInt:[[pageDictionary objectForKey:PAGES_COUNT] intValue]];
+                        [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
+                    }
+                    
+                    NSLog(@"%@", pageDictionary);
+                    NSLog(@"%d", [chapter.pages count]);
+                    // start download the image if applicable
+                    if ([pageDictionary objectForKey:PAGE_IMAGE_URL]) {
+                        [weakSelf downloadPageImageWithPageHtmlDictionary:pageDictionary
+                                                        ofPageHtmlURL:request.URL
+                                                           forChapter:chapter];
+                    }
+                } else {
+                    NSLog(@"Download Error");
+                    [weakSelf alert:DOWNLOAD_ERROR];
+                    chapter.downloadStatus = CHAPTER_STOPPED_DOWNLOADING;
+                    [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
+                }
+            }];
+        [task resume];
+    }
+}
+
+- (void)downloadPageImageWithPageHtmlDictionary:(NSDictionary *)pageHtmlDictionary
+                                  ofPageHtmlURL:(NSURL *)pageHtmlURL
+                                     forChapter:(Chapter *)chapter
+{
+    NSURL *imageURL = [NSURL URLWithString:[pageHtmlDictionary objectForKeyedSubscript:PAGE_IMAGE_URL]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+    
+    __weak ChaptersCDTVC *weakSelf = self;
+    NSURLSessionDownloadTask *task = [self.chapterDownloadSession downloadTaskWithRequest:request
+        completionHandler:^(NSURL *localfile, NSURLResponse *response, NSError *error) {
+            if (!error) {
+                NSData *imageData = [NSData dataWithContentsOfURL:localfile];
+                if (!imageData) { // if error, update the download status and return
+                    //[self errorHandling];
+                    [weakSelf alert:DOWNLOAD_ERROR];
+                    chapter.downloadStatus = CHAPTER_STOPPED_DOWNLOADING;
+                    [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
+                    return;
+                }
+                
+                UIImage *image = [UIImage imageWithData:imageData];
+                NSDictionary *pageDictionary = @{PAGE_URL: [pageHtmlURL absoluteString],
+                                                 PAGE_IMAGE_URL: [imageURL absoluteString],
+                                                 PAGE_IMAGE_DATA: UIImageJPEGRepresentation(image, 1.0)
+                                                 };
+                
+                // save the page into core data
+                Page *newPage = [Page pageWithInfo:pageDictionary
+                                         ofChapter:chapter
+                            inManagedObjectContext:chapter.managedObjectContext];
+                
+                // update the chapter updated attribute
+                newPage.whichChapter.updated = [NSDate date];
+                
+                // if all the pages of the chapter is downloaded, reset the downloadStatus
+                // and post a notification
+                if ([chapter.pagesCount intValue] == [chapter.pages count]) {
+                    NSLog(@"Done");
+                    chapter.downloadStatus = CHAPTER_DOWNLOADED;
+                    
+                    // Create notification for finishing download chapter
+                    NSDictionary *userInfo = @{ MANGA_TITLE: chapter.whichManga.title };
+                    [[NSNotificationCenter defaultCenter] postNotificationName:finishDownloadChapter
+                                                                        object:weakSelf
+                                                                      userInfo:userInfo];
+                }
+                [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
+                
+                // Download the next HTML page if applicable
+                if ([pageHtmlDictionary objectForKey:NEXT_PAGE_TO_PARSE]) {
+                    [weakSelf downloadHtmlPage:[NSURL URLWithString:[pageHtmlDictionary objectForKey:NEXT_PAGE_TO_PARSE]]
+                                forChapter:chapter];
+                }
+            } else {
+                // error
+                NSLog(@"Download Error");
+                [weakSelf alert:DOWNLOAD_ERROR];
+                chapter.downloadStatus = CHAPTER_STOPPED_DOWNLOADING;
+                [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
+            }
+        }];
+    [task resume];
+}
+
+//- (void)URLSession:(NSURLSession *)session
+//      downloadTask:(NSURLSessionDownloadTask *)downloadTask
+// didResumeAtOffset:(int64_t)fileOffset
+//expectedTotalBytes:(int64_t)expectedTotalBytes
+//{
+//
+//}
+//
+//- (void)URLSession:(NSURLSession *)session
+//      downloadTask:(NSURLSessionDownloadTask *)downloadTask
+//      didWriteData:(int64_t)bytesWritten
+// totalBytesWritten:(int64_t)totalBytesWritten
+//totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
+//{
+//
+//}
 
 @end

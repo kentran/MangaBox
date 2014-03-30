@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MangaListTVC : UITableViewController
+@interface ParsedMangasTVC : UITableViewController
 
 @property (strong, nonatomic) NSArray *mangas;
 

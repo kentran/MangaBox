@@ -17,4 +17,7 @@
 #define errorDownloadingChapter @"errorDownloadingChapter"
 #define finishDownloadChapter @"finishDownloadChapter"
 
+#define autoNextChapterNotification @"autoNextChapterNotification"
+#define autoPreviousChapterNotification @"autoPreviousChapterNotification"
+
 #endif

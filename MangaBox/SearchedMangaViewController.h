@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Ken Tran. All rights reserved.
 //
 
-#import "MangaListTVC.h"
+#import "ParsedMangasTVC.h"
 
-@interface SearchedMangaViewController : MangaListTVC
+@interface SearchedMangaViewController : ParsedMangasTVC
 
 @property (nonatomic, strong) NSDictionary *criteria;
 

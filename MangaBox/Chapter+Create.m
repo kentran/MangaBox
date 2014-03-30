@@ -85,6 +85,7 @@
     chapter.name = [chapterDictionary objectForKey:CHAPTER_NAME];
     chapter.updated = [NSDate date];
     chapter.bookmark = NO;
+    chapter.downloadStatus = CHAPTER_NEED_DOWNLOAD;
     
     chapter.whichManga = manga;
     

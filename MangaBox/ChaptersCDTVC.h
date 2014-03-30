@@ -7,6 +7,7 @@
 //
 
 #import "CoreDataTableViewController.h"
+#import "Chapter.h"
 
 @interface ChaptersCDTVC : CoreDataTableViewController
 
@@ -19,4 +20,6 @@
 
 // make methods of UIActionSheetDelegate to use in child class
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
+
+- (void)startDownloadingChapter:(Chapter *)chapter;
 @end

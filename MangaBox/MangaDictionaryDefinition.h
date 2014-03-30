@@ -44,5 +44,18 @@
 #define CHAPTER_DOWNLOADED @"downloaded"
 #define CHAPTER_STOPPED_DOWNLOADING @"stopDownloading"
 #define CHAPTER_CLEARED @"cleared"
+#define CHAPTER_NEED_DOWNLOAD @"needDownload"
+
+// Chapter download description
+#define CHAPTER_HTML_FETCH @"chapterHtmlFetch"
+#define CHAPTER_IMAGE_FETCH @"chapterImageFetch"
+
+#define DOWNLOAD_ERROR @"Error downloading pages. Pages may not be available at the moment. Please try again later"
+
+// Page Setting
+#define SHOW_2_PAGES @"Show 2 pages"
+#define SHOW_1_PAGE @"Show 1 page"
+#define SETTING_2_PAGES 2
+#define SETTING_1_PAGE 1
 
 #endif

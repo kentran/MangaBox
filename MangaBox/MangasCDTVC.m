@@ -79,6 +79,8 @@
     UIImage *logo;
     if ([manga.source isEqualToString:@"mangafox.me"]) {
         logo = [UIImage imageNamed:@"MangafoxLogo"];
+    } else if ([manga.source isEqualToString:@"mangareader.net"]) {
+        logo = [UIImage imageNamed:@"MangareaderLogo"];
     }
     sourceImageView.image = logo;
     sourceImageView.contentMode = UIViewContentModeLeft;

@@ -8,6 +8,7 @@
 
 #import "Manga+Clear.h"
 #import "Chapter.h"
+#import "Page.h"
 #import "MangaDictionaryDefinition.h"
 #import "MangaBoxAppDelegate.h"
 
@@ -18,7 +19,9 @@
     NSArray *chapters = [self.chapters allObjects];
     for (Chapter *chapter in chapters) {
         if (chapter.pagesCount) {
-            [chapter removePages:chapter.pages];
+            for (Page *page in [chapter.pages allObjects]) {
+                [chapter.managedObjectContext deleteObject:page];
+            }
             chapter.downloadStatus = CHAPTER_CLEARED;
         }
     }

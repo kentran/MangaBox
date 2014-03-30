@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddMangaConfirmViewController : UIViewController
+@interface AddMangaConfirmViewController : UITableViewController
 
 @property (nonatomic, strong) NSURL *mangaURL;
 

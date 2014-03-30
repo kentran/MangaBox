@@ -9,8 +9,8 @@
 #import "BrowserViewController.h"
 #import "AddMangaConfirmViewController.h"
 
-@interface BrowserViewController () <UISearchBarDelegate, UIWebViewDelegate>
-@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@interface BrowserViewController () <UITextFieldDelegate, UIWebViewDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *searchField;
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
@@ -18,15 +18,27 @@
 
 @implementation BrowserViewController
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.searchField resignFirstResponder];
+    [self loadWebpage];
+    return YES;
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [self loadWebpage];
 }
 
+- (IBAction)backButtonTap:(UIBarButtonItem *)sender
+{
+    [self.webView goBack];
+}
+
 - (void)loadWebpage
 {
-    NSString *searchedText = self.searchBar.text;
+    NSString *searchedText = self.searchField.text;
     NSString *urlString;
     if ([searchedText hasPrefix:@"http://"]) {
         urlString = searchedText;
@@ -35,14 +47,6 @@
     }
     
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
-}
-
-#pragma mark - UISearchBarDelegate
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
-    [searchBar resignFirstResponder];   // hide keyboard
-    [self loadWebpage];
 }
 
 #pragma mark - UIWebViewDelegate
@@ -61,7 +65,7 @@
 {
     [self.spinner stopAnimating];
     // set the searchbar text to be the url of the current view
-    self.searchBar.text = [self.webView.request.URL absoluteString];
+    self.searchField.text = [self.webView.request.URL absoluteString];
 }
 
 #pragma mark - Navigation

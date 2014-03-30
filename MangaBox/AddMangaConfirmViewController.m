@@ -15,7 +15,7 @@
 #import "MenuTabBarController.h"
 #import "MangaBoxAppDelegate.h"
 
-@interface AddMangaConfirmViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface AddMangaConfirmViewController ()
 @property (nonatomic, strong) NSArray *chapterDictionaryList;
 @property (nonatomic, strong) NSMutableDictionary *mangaDictionary;
 
@@ -32,7 +32,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *chapterTextLabel;
 @property (weak, nonatomic) IBOutlet UITextView *genresTextArea;
 @property (weak, nonatomic) IBOutlet UILabel *statusTextLabel;
-@property (weak, nonatomic) IBOutlet UITableView *chaptersTableView;
+@property (weak, nonatomic) IBOutlet UIView *infoView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *confirmButton;
 
@@ -90,7 +90,7 @@
 - (void)setChapterDictionaryList:(NSArray *)chapterDictionaryList
 {
     _chapterDictionaryList = chapterDictionaryList;
-    [self.chaptersTableView reloadData];
+    [self.tableView reloadData];
 }
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
@@ -116,7 +116,7 @@
     [self.spinner stopAnimating];
     
     // Show the labels
-    for (UIView *subview in self.view.subviews)
+    for (UIView *subview in self.infoView.subviews)
     {
         if (![subview isKindOfClass:[UIActivityIndicatorView class]]) {
             subview.hidden = NO;
@@ -136,11 +136,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [self.chaptersTableView dequeueReusableCellWithIdentifier:@"Parsed Chapter Cell"];
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Parsed Chapter Cell"];
     
     cell.textLabel.text = [self.chapterDictionaryList[indexPath.row] objectForKey:CHAPTER_NAME];
 
     return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"Chapter List";
 }
 
 #pragma mark - Confirm Add Manga

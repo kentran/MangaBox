@@ -12,6 +12,8 @@
 @interface ChapterPageViewController : UIViewController
 
 @property (nonatomic, strong) Chapter *chapter;
+@property (nonatomic) NSInteger pageSetting;
 @property (nonatomic, strong) UIPageViewController *pageViewController;
+@property (nonatomic) NSInteger currentPageIndex;
 
 @end

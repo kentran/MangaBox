@@ -50,7 +50,7 @@
         if ([value isEqualToString:@"Name"]) sortBy = @"name";
         else if ([value isEqualToString:@"Views"]) sortBy = @"views";
         else if ([value isEqualToString:@"Chapters"]) sortBy = @"total_chapters";
-        else if ([value isEqualToString:@"Latest Chapter"]) sortBy = @"last_chapter_time";
+        else if ([value isEqualToString:@"Latest Update"]) sortBy = @"last_chapter_time";
         [urlString appendString:[NSString stringWithFormat:@"&sort=%@", sortBy]];
     }
     
@@ -80,7 +80,7 @@
     }
 
     url = [NSURL URLWithString:urlString];
-
+    
     return url;
 }
 

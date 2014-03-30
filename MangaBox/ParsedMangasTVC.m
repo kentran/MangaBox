@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Ken Tran. All rights reserved.
 //
 
-#import "MangaListTVC.h"
+#import "ParsedMangasTVC.h"
 #import "MangaSummaryViewController.h"
 
-@interface MangaListTVC () <UIAlertViewDelegate>
+@interface ParsedMangasTVC () <UIAlertViewDelegate>
 
 @end
 
-@implementation MangaListTVC
+@implementation ParsedMangasTVC
 
 - (void)setMangas:(NSArray *)mangas
 {
