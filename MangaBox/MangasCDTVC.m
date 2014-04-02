@@ -69,7 +69,7 @@
     title.lineBreakMode = NSLineBreakByWordWrapping;
     title.numberOfLines = 2;
     
-    chapters.text = [NSString stringWithFormat:@"%d chapters", [manga.chapters count]];
+    chapters.text = [NSString stringWithFormat:@"%lu chapters", (unsigned long)[manga.chapters count]];
     
     status.text = manga.completionStatus;
     

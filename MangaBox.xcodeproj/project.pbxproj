@@ -56,6 +56,7 @@
 		BEA8CC7618CF4AB8000851E4 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8CC7518CF4AB8000851E4 /* ImageViewController.m */; };
 		BEA8CC7C18D0B207000851E4 /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8CC7B18D0B207000851E4 /* Page.m */; };
 		BEA8CC8218D0B2C5000851E4 /* Page+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8CC8118D0B2C5000851E4 /* Page+Create.m */; };
+		BEAA02F218EC8A6900E94277 /* Chapter+UpdateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAA02F118EC8A6900E94277 /* Chapter+UpdateInfo.m */; };
 		BEAC664718D725370010ABA1 /* ChapterPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC664618D725370010ABA1 /* ChapterPageViewController.m */; };
 		BEAC664A18D81FAA0010ABA1 /* Chapter+Download.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC664918D81FAA0010ABA1 /* Chapter+Download.m */; };
 		BEAC665318DAC7A90010ABA1 /* MenuTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC665218DAC7A90010ABA1 /* MenuTabBarController.m */; };
@@ -159,6 +160,8 @@
 		BEA8CC7B18D0B207000851E4 /* Page.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Page.m; sourceTree = "<group>"; };
 		BEA8CC8018D0B2C5000851E4 /* Page+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Page+Create.h"; sourceTree = "<group>"; };
 		BEA8CC8118D0B2C5000851E4 /* Page+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Page+Create.m"; sourceTree = "<group>"; };
+		BEAA02F018EC8A6900E94277 /* Chapter+UpdateInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Chapter+UpdateInfo.h"; sourceTree = "<group>"; };
+		BEAA02F118EC8A6900E94277 /* Chapter+UpdateInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Chapter+UpdateInfo.m"; sourceTree = "<group>"; };
 		BEAC664518D725370010ABA1 /* ChapterPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChapterPageViewController.h; sourceTree = "<group>"; };
 		BEAC664618D725370010ABA1 /* ChapterPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChapterPageViewController.m; sourceTree = "<group>"; };
 		BEAC664818D81FAA0010ABA1 /* Chapter+Download.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Chapter+Download.h"; sourceTree = "<group>"; };
@@ -230,6 +233,8 @@
 				BEAC664918D81FAA0010ABA1 /* Chapter+Download.m */,
 				BEA820FE18E5BB2C00AE2124 /* Chapter+Lookup.h */,
 				BEA820FF18E5BB2C00AE2124 /* Chapter+Lookup.m */,
+				BEAA02F018EC8A6900E94277 /* Chapter+UpdateInfo.h */,
+				BEAA02F118EC8A6900E94277 /* Chapter+UpdateInfo.m */,
 				BE14772118CA255E00537103 /* CoverImage.h */,
 				BE14772218CA255E00537103 /* CoverImage.m */,
 				BEC503B818CB72100013B7D0 /* CoverImage+Create.h */,
@@ -509,6 +514,7 @@
 			files = (
 				BE2B927A18C2281E003EC6D7 /* MangaBox.xcdatamodeld in Sources */,
 				BE3D847618CE173600AD9753 /* Chapter+Create.m in Sources */,
+				BEAA02F218EC8A6900E94277 /* Chapter+UpdateInfo.m in Sources */,
 				BEA58B6118DB309D002B7FB0 /* UIImage+Thumbnail.m in Sources */,
 				BE2B92C018C24ABF003EC6D7 /* SearchedMangaViewController.m in Sources */,
 				BEA8CC7C18D0B207000851E4 /* Page.m in Sources */,

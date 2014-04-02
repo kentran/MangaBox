@@ -98,8 +98,7 @@
 - (void)setChapter:(Chapter *)chapter
 {
     _chapter = chapter;
-    self.chapterPVC.chapter = chapter;
-    self.chapterPVC.title = chapter.name;
+    [self prepareChapterPageViewController:self.chapterPVC toDisplayChapter:_chapter];
     
     // update status of the previous and next button
     if (!self.previousChapter) self.previousButton.enabled = NO;
@@ -123,7 +122,7 @@
 - (void)setCurrentPage:(NSInteger)currentPage
 {
     _currentPage = currentPage;
-    self.navigationItem.title = [NSString stringWithFormat:@"%@ (%d/%d)", self.chapter.name, self.currentPage, [self.chapter.pagesCount intValue]];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@ (%ld/%d)", self.chapter.name, (long)self.currentPage, [self.chapter.pagesCount intValue]];
 }
 
 #pragma mark - Action
@@ -183,6 +182,8 @@
     if ([segue.destinationViewController isKindOfClass:[ChapterPageViewController class]]) {
         ChapterPageViewController *chapterPVC = (ChapterPageViewController *)segue.destinationViewController;
         [self prepareChapterPageViewController:chapterPVC toDisplayChapter:self.chapter];
+    } else {
+        [super prepareForSegue:segue sender:sender];
     }
 }
 

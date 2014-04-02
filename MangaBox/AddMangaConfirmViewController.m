@@ -110,7 +110,7 @@
     self.titleTextArea.text = [self.mangaDictionary objectForKey:MANGA_TITLE];
     self.authorTextLabel.text = [self.mangaDictionary objectForKey:MANGA_AUTHOR];
     self.artistTextLabel.text = [self.mangaDictionary objectForKey:MANGA_ARTIST];
-    self.chapterTextLabel.text = [NSString stringWithFormat:@"%d", [self.chapterDictionaryList count]];
+    self.chapterTextLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.chapterDictionaryList count]];
     self.genresTextArea.text = [self.mangaDictionary objectForKey:MANGA_GENRES];
     self.statusTextLabel.text = [self.mangaDictionary objectForKey:MANGA_COMPLETION_STATUS];
     [self.spinner stopAnimating];

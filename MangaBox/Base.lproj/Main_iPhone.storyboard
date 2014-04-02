@@ -536,6 +536,10 @@
                                             <rect key="frame" x="20" y="39" width="267" height="2"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </progressView>
+                                        <imageView userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GuT-Vk-P5I">
+                                            <rect key="frame" x="257" y="7" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="mIJ-Yl-bDN" firstAttribute="top" secondItem="S4d-2X-tSE" secondAttribute="top" constant="3" id="4Yb-IG-gYv"/>
@@ -1091,7 +1095,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="earth-icon" width="30" height="30"/>
+        <image name="earth-icon" width="63" height="63"/>
         <image name="emptyMark" width="336" height="333"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

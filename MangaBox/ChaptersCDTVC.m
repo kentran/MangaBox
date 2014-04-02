@@ -20,8 +20,9 @@
 #import "MangareaderFetcher.h"
 #import "MangaBoxAppDelegate.h"
 #import "ChapterViewController.h"
+#import "Chapter+UpdateInfo.h"
 
-@interface ChaptersCDTVC() <UIActionSheetDelegate, NSURLSessionDownloadDelegate, NSURLSessionDelegate>
+@interface ChaptersCDTVC() <UIActionSheetDelegate>
 @property (nonatomic, strong) NSURLSession *chapterDownloadSession;
 @end
 
@@ -35,7 +36,7 @@
     //    static dispatch_once_t onceToken;
     //    dispatch_once(&onceToken, ^{
             //NSLog(@"initializing");
-            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
             _chapterDownloadSession = [NSURLSession sessionWithConfiguration:configuration];
     //    });
     }
@@ -47,6 +48,8 @@
 #define TITLE_LABEL_TAG 1
 #define PAGES_LABEL_TAG 2
 #define PROGRESS_BAR_TAG 3
+#define STAR_IMAGE_TAG 4
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -96,6 +99,13 @@
         title.text = chapter.name;
         pages = (UILabel *)[cell.contentView viewWithTag:PAGES_LABEL_TAG];
         
+        UIImageView *startImageView = (UIImageView *)[cell viewWithTag:STAR_IMAGE_TAG];
+        if ([chapter.bookmark boolValue] == NO) {
+            startImageView.image = [UIImage imageNamed:@"emptyStar"];
+        } else {
+            startImageView.image = [UIImage imageNamed:@"filledStar"];
+        }
+        
         UIProgressView *progressBar = (UIProgressView *)[cell.contentView viewWithTag:PROGRESS_BAR_TAG];
         
         if ([chapter.downloadStatus isEqualToString:CHAPTER_NEED_DOWNLOAD]) {
@@ -142,8 +152,9 @@
         }
         [self performSegueWithIdentifier:@"Show Pages" sender:actionSheet];
     } else if ([choice isEqualToString:@"Bookmark"]) {
-        chapter.bookmark = [NSNumber numberWithBool:YES];
-        [chapter.managedObjectContext save:NULL];
+        [chapter addBookmark];
+    } else if ([choice isEqualToString:@"Remove Bookmark"]) {
+        [chapter removeBookmark];
     } else if ([choice isEqualToString:@"Stop downloading"]) {
         [self stopDownloadingChapter:chapter];
     }
@@ -227,7 +238,11 @@
         [actionSheet addButtonWithTitle:@"Stop downloading"];
     }
     
-    [actionSheet addButtonWithTitle:@"Bookmark"];
+    if ([chapter.bookmark boolValue] == NO) {
+        [actionSheet addButtonWithTitle:@"Bookmark"];
+    } else {
+        [actionSheet addButtonWithTitle:@"Remove Bookmark"];
+    }
     [actionSheet addButtonWithTitle:@"Cancel"]; // put at bottom (don't do at all on iPad)
     
     [actionSheet showInView:self.view]; // different on iPad
@@ -260,50 +275,21 @@
     }
 }
 
-#pragma mark - NSURLSessionDelegate
 
-//- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
-//{
-//    if (error) {
-//        NSLog(@"Session error");
-//    }
-//    
-//    NSLog(@"Task ending");
-//    session = nil;
-//}
-//
-//- (void)URLSession:(NSURLSession *)session didBecomeInvalidWithError:(NSError *)error
-//{
-//    if (error) {
-//        NSLog(@"Session error");
-//    }
-//    
-//    NSLog(@"Session ending");
-//    session = nil;
-//}
 
-#pragma mark - NSURLSessionDownloadDelegate
-
-//- (void)URLSession:(NSURLSession *)session
-//      downloadTask:(NSURLSessionDownloadTask *)downloadTask
-//didFinishDownloadingToURL:(NSURL *)location
-//{
-//    if ([downloadTask.taskDescription isEqualToString:CHAPTER_HTML_FETCH]) {
-//        [self processHtmlPage:location forChapter:;]
-//    } else if ([downloadTask.taskDescription isEqualToString:CHAPTER_IMAGE_FETCH]) {
-//    
-//    } else {
-//        NSLog(@"Error: Could not identify download task!");
-//    }
-//}
+#pragma mark - Download Tasks
 
 - (void)downloadHtmlPage:(NSURL *)pageHtmlURL forChapter:(Chapter *)chapter
 {
     if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING]) {
         NSURLRequest *request = [NSURLRequest requestWithURL:pageHtmlURL];
         
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+        
         __weak ChaptersCDTVC *weakSelf = self;
-        NSURLSessionDownloadTask *task = [self.chapterDownloadSession downloadTaskWithRequest:request
+        NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request
+        //NSURLSessionDownloadTask *task = [self.chapterDownloadSession downloadTaskWithRequest:request
             completionHandler:^(NSURL *localfile, NSURLResponse *response, NSError *error) {
                 if (!error) {
                     NSString *urlString = [request.URL absoluteString];
@@ -334,7 +320,7 @@
                     }
                     
                     NSLog(@"%@", pageDictionary);
-                    NSLog(@"%d", [chapter.pages count]);
+                    NSLog(@"%lu", (unsigned long)[chapter.pages count]);
                     // start download the image if applicable
                     if ([pageDictionary objectForKey:PAGE_IMAGE_URL]) {
                         [weakSelf downloadPageImageWithPageHtmlDictionary:pageDictionary
@@ -347,6 +333,7 @@
                     chapter.downloadStatus = CHAPTER_STOPPED_DOWNLOADING;
                     [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
                 }
+                [session invalidateAndCancel];
             }];
         [task resume];
     }
@@ -358,9 +345,12 @@
 {
     NSURL *imageURL = [NSURL URLWithString:[pageHtmlDictionary objectForKeyedSubscript:PAGE_IMAGE_URL]];
     NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
     
     __weak ChaptersCDTVC *weakSelf = self;
-    NSURLSessionDownloadTask *task = [self.chapterDownloadSession downloadTaskWithRequest:request
+    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request
+    //NSURLSessionDownloadTask *task = [self.chapterDownloadSession downloadTaskWithRequest:request
         completionHandler:^(NSURL *localfile, NSURLResponse *response, NSError *error) {
             if (!error) {
                 NSData *imageData = [NSData dataWithContentsOfURL:localfile];
@@ -412,25 +402,9 @@
                 chapter.downloadStatus = CHAPTER_STOPPED_DOWNLOADING;
                 [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
             }
+            [session invalidateAndCancel];
         }];
     [task resume];
 }
-
-//- (void)URLSession:(NSURLSession *)session
-//      downloadTask:(NSURLSessionDownloadTask *)downloadTask
-// didResumeAtOffset:(int64_t)fileOffset
-//expectedTotalBytes:(int64_t)expectedTotalBytes
-//{
-//
-//}
-//
-//- (void)URLSession:(NSURLSession *)session
-//      downloadTask:(NSURLSessionDownloadTask *)downloadTask
-//      didWriteData:(int64_t)bytesWritten
-// totalBytesWritten:(int64_t)totalBytesWritten
-//totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
-//{
-//
-//}
 
 @end

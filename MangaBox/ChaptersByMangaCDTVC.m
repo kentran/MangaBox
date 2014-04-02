@@ -121,7 +121,7 @@
         self.downloadButtonTitle = @"Stop downloading";
         self.isDownloadQueueRunning = YES;
         [self startDownloadingQueue];
-        NSLog(@"%d", [self.downloadQueue count]);
+        NSLog(@"%lu", (unsigned long)[self.downloadQueue count]);
         //[self.manga startDownloadingAllChapters];
     } else if ([choice isEqualToString:@"Stop downloading"]) {
         self.downloadButtonTitle = @"Download all chapters";
