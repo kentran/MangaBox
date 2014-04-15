@@ -37,15 +37,18 @@
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Chapter"];
         request.predicate = [NSPredicate predicateWithFormat:@"bookmark = %@", [NSNumber numberWithBool:YES]];
         
+        NSSortDescriptor *mangaSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"whichManga.title"
+                                                                              ascending:YES
+                                                                               selector:@selector(localizedStandardCompare:)];
         NSSortDescriptor *urlSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"url"
                                                                             ascending:YES
                                                                              selector:@selector(localizedStandardCompare:)];
         
-        request.sortDescriptors = @[urlSortDescriptor];
+        request.sortDescriptors = @[mangaSortDescriptor, urlSortDescriptor];
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                                             managedObjectContext:context
-                                                                              sectionNameKeyPath:nil
+                                                                              sectionNameKeyPath:@"whichManga.title"
                                                                                        cacheName:nil];
     } else {
         self.fetchedResultsController = nil;

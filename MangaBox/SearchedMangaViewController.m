@@ -26,7 +26,7 @@
 
 - (NSMutableDictionary *)nextPageCriteria
 {
-    if (!_nextPageCriteria) _nextPageCriteria = [[NSMutableDictionary alloc] init];
+    if (!_nextPageCriteria) _nextPageCriteria = [[NSMutableDictionary alloc] initWithDictionary:self.criteria];
     return  _nextPageCriteria;
 }
 
@@ -71,22 +71,27 @@
         self.lastFetchTimestamp = [[NSDate date] timeIntervalSince1970];
         NSArray *result = [MangafoxFetcher parseFetchResult:htmlData];
         
-        // update criteria to next page
-        int nextPage = [[self.nextPageCriteria valueForKey:@"page"] intValue];
-        if ([MangafoxFetcher nextMangaListPageAvailability:htmlData]) {
-            nextPage++;
-            [self.nextPageCriteria setValue:[NSString stringWithFormat:@"%d", nextPage] forKey:@"page"];
-        } else {
-            [self.nextPageCriteria setValue:@"0" forKey:@"page"];
-        }
-
         dispatch_async(dispatch_get_main_queue(), ^{
+            if (![url isEqual:[MangafoxFetcher urlForFetchingMangas:self.nextPageCriteria]]) {
+                return;
+            }
+            
             [self.spinner stopAnimating];
-            if (!result) {  // if the result can't be found, alert the user
+            if (!result) {
+                // if the result can't be found, alert the user
                 [self fatalAlert:@"Result is not available. You are not allow to search continuously within 5s"];
             } else {
                 [self.searchedMangas addObjectsFromArray:result];   // add result to current list of mangas
                 self.mangas = self.searchedMangas;                  // set and display in TVC
+            }
+            
+            // update criteria to next page
+            int nextPage = [[self.nextPageCriteria valueForKey:@"page"] intValue];
+            if ([MangafoxFetcher nextMangaListPageAvailability:htmlData]) {
+                nextPage++;
+                [self.nextPageCriteria setValue:[NSString stringWithFormat:@"%d", nextPage] forKey:@"page"];
+            } else {
+                [self.nextPageCriteria setValue:@"0" forKey:@"page"];
             }
         });
     });

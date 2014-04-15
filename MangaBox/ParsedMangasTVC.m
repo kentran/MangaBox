@@ -8,6 +8,7 @@
 
 #import "ParsedMangasTVC.h"
 #import "MangaSummaryViewController.h"
+#import "MangaBoxNotification.h"
 
 @interface ParsedMangasTVC () <UIAlertViewDelegate>
 
@@ -79,11 +80,14 @@
     {
         [self prepareMangaDetailsViewController:detail toDisplayManga:self.mangas[indexPath.row]];
     }
+    [[NSNotificationCenter defaultCenter] postNotificationName:parsedMangaSelected
+                                                        object:self
+                                                      userInfo:self.mangas[indexPath.row]];
 }
 
 #pragma mark - Navigation
 
-- (void) prepareMangaDetailsViewController:(MangaSummaryViewController *)mvc toDisplayManga:(NSDictionary *)manga
+- (void)prepareMangaDetailsViewController:(MangaSummaryViewController *)mvc toDisplayManga:(NSDictionary *)manga
 {
     mvc.mangaURL = [NSURL URLWithString:[manga valueForKey:@"url"]];
     mvc.title = [manga valueForKey:@"title"];

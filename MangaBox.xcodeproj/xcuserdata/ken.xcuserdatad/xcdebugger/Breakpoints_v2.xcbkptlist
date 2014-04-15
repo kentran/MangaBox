@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MangaBox/ParsedMangasTVC.m"
-            timestampString = "417426367.771494"
+            timestampString = "419245762.901463"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148">
+            startingLineNumber = "152"
+            endingLineNumber = "152">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -70,7 +70,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MangaBox/MangaSummaryViewController.m"
-            timestampString = "417179735.425002"
+            timestampString = "419243364.010219"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
@@ -176,11 +176,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MangaBox/ChapterPageViewController.m"
-            timestampString = "417719591.038467"
+            timestampString = "419280882.585119"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "-pageViewController:viewControllerBeforeViewController:"
             landmarkType = "5">
          </BreakpointContent>
@@ -192,11 +192,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MangaBox/ChapterPageViewController.m"
-            timestampString = "417719105.959793"
+            timestampString = "419280882.585119"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "-pageViewController:viewControllerBeforeViewController:"
             landmarkType = "5">
          </BreakpointContent>
@@ -208,11 +208,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MangaBox/Chapter+Download.m"
-            timestampString = "417423876.365292"
+            timestampString = "418630150.828491"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "@implementation Chapter(Download)"
             landmarkType = "3">
          </BreakpointContent>
@@ -224,11 +224,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MangaBox/Chapter+Download.m"
-            timestampString = "417423876.365292"
+            timestampString = "418630150.828491"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "@implementation Chapter(Download)"
             landmarkType = "3">
          </BreakpointContent>
@@ -240,11 +240,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MangaBox/ImageScrollView.m"
-            timestampString = "417675457.499326"
+            timestampString = "419240888.462078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "@implementation ImageScrollView"
             landmarkType = "3">
          </BreakpointContent>
@@ -272,11 +272,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MangaBox/ChaptersByMangaCDTVC.m"
-            timestampString = "417690506.42325"
+            timestampString = "418661488.003442"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "-actionButtonTouch:"
             landmarkType = "5">
          </BreakpointContent>
@@ -287,24 +287,8 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MangaBox/Chapter+Download.m"
-            timestampString = "417423196.367709"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "-startDownloadingChapterPages"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MangaBox/MangaBoxAppDelegate.h"
-            timestampString = "417426323.183216"
+            timestampString = "418640176.434981"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "9"
@@ -347,22 +331,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MangaBox/ChapterPageViewController.m"
-            timestampString = "417719105.959793"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "-setupPageViewController"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MangaBox/ImageScrollView.m"
             timestampString = "417675457.499326"
             startingColumnNumber = "9223372036854775807"
@@ -380,11 +348,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MangaBox/ImageViewController.m"
-            timestampString = "417687843.792819"
+            timestampString = "419277479.787835"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "-loadView"
             landmarkType = "5">
          </BreakpointContent>
@@ -444,11 +412,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MangaBox/ChapterPageViewController.m"
-            timestampString = "417719105.959793"
+            timestampString = "419279203.829516"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "-setupPageViewController"
             landmarkType = "5">
          </BreakpointContent>
@@ -460,11 +428,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MangaBox/ChapterPageViewController.m"
-            timestampString = "417719105.959793"
+            timestampString = "419279203.829516"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "-setupPageViewController"
             landmarkType = "5">
          </BreakpointContent>
@@ -476,11 +444,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MangaBox/ChapterPageViewController.m"
-            timestampString = "417719105.959793"
+            timestampString = "419279203.829516"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "@implementation ChapterPageViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -524,11 +492,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MangaBox/AdvancedSearchTVC.m"
-            timestampString = "417887426.707761"
+            timestampString = "419247259.73498"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "-pickerView:viewForRow:forComponent:reusingView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -547,6 +515,52 @@
             endingLineNumber = "82"
             landmarkName = "+urlForFetchingMangas:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MangaBox/SearchedMangaViewController.m"
+            timestampString = "419247348.829009"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "-fetchMangas"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__42-[SearchedMangaViewController fetchMangas]_block_invoke"
+                  moduleName = "MangaBox"
+                  urlString = "file:///Users/ken/Developer/MangaBox/MangaBox/SearchedMangaViewController.m"
+                  timestampString = "419246045.637304"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "265">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__42-[SearchedMangaViewController fetchMangas]_block_invoke_2"
+                  moduleName = "MangaBox"
+                  urlString = "file:///Users/ken/Developer/MangaBox/MangaBox/SearchedMangaViewController.m"
+                  timestampString = "419246045.63762"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "74"
+                  endingLineNumber = "74"
+                  offsetFromSymbolStart = "21">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -7,7 +7,6 @@
 //
 
 #import "ChaptersCDTVC.h"
-#import "Chapter+Download.h"
 #import "Manga.h"
 #import "Page+Create.h"
 #import "Page+Getter.h"
@@ -16,31 +15,24 @@
 #import "ChapterPageViewController.h"
 #import "MangaDictionaryDefinition.h"
 #import "MangaBoxNotification.h"
-#import "MangafoxFetcher.h"
-#import "MangareaderFetcher.h"
 #import "MangaBoxAppDelegate.h"
 #import "ChapterViewController.h"
 #import "Chapter+UpdateInfo.h"
+#import "MangaFetcher.h"
+
 
 @interface ChaptersCDTVC() <UIActionSheetDelegate>
-@property (nonatomic, strong) NSURLSession *chapterDownloadSession;
+
 @end
 
 @implementation ChaptersCDTVC
 
 #pragma mark - Properties
 
-- (NSURLSession *)chapterDownloadSession
+- (DownloadManager *)downloadManager
 {
-    if (!_chapterDownloadSession) {
-    //    static dispatch_once_t onceToken;
-    //    dispatch_once(&onceToken, ^{
-            //NSLog(@"initializing");
-            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-            _chapterDownloadSession = [NSURLSession sessionWithConfiguration:configuration];
-    //    });
-    }
-    return _chapterDownloadSession;
+    if (!_downloadManager) _downloadManager = [DownloadManager sharedManager];
+    return _downloadManager;
 }
 
 #pragma mark - UITableViewDataSource
@@ -140,8 +132,7 @@
     Chapter *chapter = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
     if ([choice isEqualToString:@"Download"]) {
-        chapter.downloadStatus = CHAPTER_DOWNLOADING;
-        [self startDownloadingChapter:chapter];
+        [self.downloadManager startDownloadingChapter:chapter];
     } else if ([choice isEqualToString:@"Read"] || [choice isEqualToString:@"Read and Download"]) {
         id detailvc = [self.splitViewController.viewControllers lastObject];
         if ([detailvc isKindOfClass:[UINavigationController class]]) {
@@ -156,7 +147,8 @@
     } else if ([choice isEqualToString:@"Remove Bookmark"]) {
         [chapter removeBookmark];
     } else if ([choice isEqualToString:@"Stop downloading"]) {
-        [self stopDownloadingChapter:chapter];
+        NSLog(@"TEST!!!!");
+        [self.downloadManager stopDownloadingChapter:chapter];
     }
 }
 
@@ -246,165 +238,6 @@
     [actionSheet addButtonWithTitle:@"Cancel"]; // put at bottom (don't do at all on iPad)
     
     [actionSheet showInView:self.view]; // different on iPad
-}
-
-#pragma mark - Download Tasks
-
-- (void)startDownloadingChapter:(Chapter *)chapter
-{
-    // If the chapter has been downloading half way
-    // continue from the last downloaded page
-    NSURL *url;
-    if ([chapter.pages count]) {
-        NSInteger lastPageIdx = [chapter.pages count] - 1;
-        Page *lastDownloadedPage = [Page pageOfChapter:chapter atIndex:lastPageIdx];
-        url = [NSURL URLWithString:lastDownloadedPage.url];
-    } else {
-        url = [NSURL URLWithString:chapter.url];
-    }
-    
-    chapter.downloadStatus = CHAPTER_DOWNLOADING;
-    [self downloadHtmlPage:url forChapter:chapter];
-}
-
-- (void)stopDownloadingChapter:(Chapter *)chapter
-{
-    if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING]) {
-        chapter.downloadStatus = CHAPTER_STOPPED_DOWNLOADING;
-        [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
-    }
-}
-
-
-
-#pragma mark - Download Tasks
-
-- (void)downloadHtmlPage:(NSURL *)pageHtmlURL forChapter:(Chapter *)chapter
-{
-    if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING]) {
-        NSURLRequest *request = [NSURLRequest requestWithURL:pageHtmlURL];
-        
-        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-        NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-        
-        __weak ChaptersCDTVC *weakSelf = self;
-        NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request
-        //NSURLSessionDownloadTask *task = [self.chapterDownloadSession downloadTaskWithRequest:request
-            completionHandler:^(NSURL *localfile, NSURLResponse *response, NSError *error) {
-                if (!error) {
-                    NSString *urlString = [request.URL absoluteString];
-                    NSData *htmlData = [NSData dataWithContentsOfURL:localfile];
-                    
-                    // Fetch info according to the source and parse to temporary variable
-                    NSDictionary *pageDictionary;
-                    if ([urlString rangeOfString:@"mangafox.me"].location != NSNotFound) {
-                        pageDictionary = [MangafoxFetcher parseChapterPage:htmlData ofURLString:chapter.url];
-                    } else if ([urlString rangeOfString:@"mangareader.net"].location != NSNotFound) {
-                        pageDictionary = [MangareaderFetcher parseChapterPage:htmlData ofURLString:chapter.url];
-                    }
-                    
-                    // Check if the page is downloaded correctly
-                    if ([chapter.pagesCount intValue] != [chapter.pages count]
-                        && ![pageDictionary objectForKey:PAGE_IMAGE_URL])
-                    {
-                        [weakSelf alert:DOWNLOAD_ERROR];
-                        chapter.downloadStatus = CHAPTER_STOPPED_DOWNLOADING;
-                        return;
-                    }
-                    
-                    
-                    // Set the pagesCount in chapter if it is not already set
-                    if (![chapter.pagesCount intValue] && [pageDictionary objectForKey:PAGES_COUNT]) {
-                        chapter.pagesCount = [NSNumber numberWithInt:[[pageDictionary objectForKey:PAGES_COUNT] intValue]];
-                        [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
-                    }
-                    
-                    NSLog(@"%@", pageDictionary);
-                    NSLog(@"%lu", (unsigned long)[chapter.pages count]);
-                    // start download the image if applicable
-                    if ([pageDictionary objectForKey:PAGE_IMAGE_URL]) {
-                        [weakSelf downloadPageImageWithPageHtmlDictionary:pageDictionary
-                                                        ofPageHtmlURL:request.URL
-                                                           forChapter:chapter];
-                    }
-                } else {
-                    NSLog(@"Download Error");
-                    [weakSelf alert:DOWNLOAD_ERROR];
-                    chapter.downloadStatus = CHAPTER_STOPPED_DOWNLOADING;
-                    [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
-                }
-                [session invalidateAndCancel];
-            }];
-        [task resume];
-    }
-}
-
-- (void)downloadPageImageWithPageHtmlDictionary:(NSDictionary *)pageHtmlDictionary
-                                  ofPageHtmlURL:(NSURL *)pageHtmlURL
-                                     forChapter:(Chapter *)chapter
-{
-    NSURL *imageURL = [NSURL URLWithString:[pageHtmlDictionary objectForKeyedSubscript:PAGE_IMAGE_URL]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:imageURL];
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-    
-    __weak ChaptersCDTVC *weakSelf = self;
-    NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request
-    //NSURLSessionDownloadTask *task = [self.chapterDownloadSession downloadTaskWithRequest:request
-        completionHandler:^(NSURL *localfile, NSURLResponse *response, NSError *error) {
-            if (!error) {
-                NSData *imageData = [NSData dataWithContentsOfURL:localfile];
-                if (!imageData) { // if error, update the download status and return
-                    //[self errorHandling];
-                    [weakSelf alert:DOWNLOAD_ERROR];
-                    chapter.downloadStatus = CHAPTER_STOPPED_DOWNLOADING;
-                    [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
-                    return;
-                }
-                
-                UIImage *image = [UIImage imageWithData:imageData];
-                NSDictionary *pageDictionary = @{PAGE_URL: [pageHtmlURL absoluteString],
-                                                 PAGE_IMAGE_URL: [imageURL absoluteString],
-                                                 PAGE_IMAGE_DATA: UIImageJPEGRepresentation(image, 1.0)
-                                                 };
-                
-                // save the page into core data
-                Page *newPage = [Page pageWithInfo:pageDictionary
-                                         ofChapter:chapter
-                            inManagedObjectContext:chapter.managedObjectContext];
-                
-                // update the chapter updated attribute
-                newPage.whichChapter.updated = [NSDate date];
-                
-                // if all the pages of the chapter is downloaded, reset the downloadStatus
-                // and post a notification
-                if ([chapter.pagesCount intValue] == [chapter.pages count]) {
-                    NSLog(@"Done");
-                    chapter.downloadStatus = CHAPTER_DOWNLOADED;
-                    
-                    // Create notification for finishing download chapter
-                    NSDictionary *userInfo = @{ MANGA_TITLE: chapter.whichManga.title };
-                    [[NSNotificationCenter defaultCenter] postNotificationName:finishDownloadChapter
-                                                                        object:weakSelf
-                                                                      userInfo:userInfo];
-                }
-                [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
-                
-                // Download the next HTML page if applicable
-                if ([pageHtmlDictionary objectForKey:NEXT_PAGE_TO_PARSE]) {
-                    [weakSelf downloadHtmlPage:[NSURL URLWithString:[pageHtmlDictionary objectForKey:NEXT_PAGE_TO_PARSE]]
-                                forChapter:chapter];
-                }
-            } else {
-                // error
-                NSLog(@"Download Error");
-                [weakSelf alert:DOWNLOAD_ERROR];
-                chapter.downloadStatus = CHAPTER_STOPPED_DOWNLOADING;
-                [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
-            }
-            [session invalidateAndCancel];
-        }];
-    [task resume];
 }
 
 @end

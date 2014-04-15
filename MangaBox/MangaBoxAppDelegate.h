@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Chapter.h"
 
 @interface MangaBoxAppDelegate : UIResponder <UIApplicationDelegate>
 

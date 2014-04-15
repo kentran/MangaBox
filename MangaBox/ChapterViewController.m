@@ -191,8 +191,8 @@
                         toDisplayChapter:(Chapter *)chapter
 {
     chapterPVC.title = chapter.name;
-    chapterPVC.chapter = chapter;
     chapterPVC.pageSetting = self.pageSetting;
+    chapterPVC.chapter = chapter;
     chapterPVC.pageViewController.delegate = self;
     self.chapterPVC = chapterPVC;
 }

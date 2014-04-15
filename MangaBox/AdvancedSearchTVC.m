@@ -8,6 +8,7 @@
 
 #import "AdvancedSearchTVC.h"
 #import "SearchedMangaViewController.h"
+#import "SearchResultSplitViewController.h"
 
 @interface AdvancedSearchTVC () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
@@ -218,8 +219,12 @@
 {
     if ([segue.destinationViewController isKindOfClass:[SearchedMangaViewController class]]) {
         [self prepareSearchCriteria];
-        SearchedMangaViewController *smvc = segue.destinationViewController;
+        SearchedMangaViewController *smvc = (SearchedMangaViewController *)segue.destinationViewController;
         smvc.criteria = self.params;
+    } else if ([segue.destinationViewController isKindOfClass:[SearchResultSplitViewController class]]) {
+        [self prepareSearchCriteria];
+        SearchResultSplitViewController *srsvc = (SearchResultSplitViewController *)segue.destinationViewController;
+        srsvc.criteria= self.params;
     }
 }
 

@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "emtpyStar.png"
+      "filename" : "star-extra-huge-empty.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "emtpyStar-1.png"
+      "filename" : "star-extra-huge-empty@2x.png"
     }
   ],
   "info" : {

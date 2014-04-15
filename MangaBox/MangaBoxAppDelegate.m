@@ -8,6 +8,7 @@
 
 #import "MangaBoxAppDelegate.h"
 #import "MenuTabBarController.h"
+#import "Chapter+UpdateInfo.h"
 
 @implementation MangaBoxAppDelegate
 
@@ -19,6 +20,7 @@
 {
     MenuTabBarController *tabBarController = (MenuTabBarController *)self.window.rootViewController;
     tabBarController.managedObjectContext = self.managedObjectContext;
+    [Chapter refreshDownloadStatusInContext:self.managedObjectContext];
     
     return YES;
 }

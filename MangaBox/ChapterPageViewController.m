@@ -24,19 +24,32 @@
 - (void)setPageSetting:(NSInteger)pageSetting
 {
     _pageSetting = pageSetting;
-    [self setupPageViewController];
+    if (self.chapter)
+        [self setupPageViewController];
 }
 
 - (void)setChapter:(Chapter *)chapter
 {
     _chapter = chapter;
-    self.currentPageIndex = [self.chapter.currentPageIndex intValue];
+    self.currentPageIndex = [self pageIndexForCurrentSetting];
+    [self setupPageViewController];
 }
 
 - (NSInteger)currentPageIndex
 {
-    if (!_currentPageIndex) _currentPageIndex = [self.chapter.currentPageIndex intValue];
+    if (!_currentPageIndex) _currentPageIndex = [self pageIndexForCurrentSetting];
     return _currentPageIndex;
+}
+
+- (NSInteger)pageIndexForCurrentSetting
+{
+    NSInteger currentPageIndex = [self.chapter.currentPageIndex intValue];
+    if (self.pageSetting == SETTING_2_PAGES && currentPageIndex % 2) {
+        // If setting is 2 page and the current page index is odd,
+        // display from the previous page index
+        currentPageIndex--;
+    }
+    return currentPageIndex;
 }
 
 #pragma mark - View Layout
@@ -44,6 +57,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self setupPageViewController];
 }
 
@@ -88,9 +102,15 @@
     self.pageViewController.dataSource = self;
     
     // Create the child view controller
-    ImageViewController *startingViewController1 = [self viewControllerAtIndex:self.currentPageIndex];
-    ImageViewController *startingViewController2 = [self viewControllerAtIndex:self.currentPageIndex+1];
-    NSArray *viewControllers = (self.pageSetting == SETTING_2_PAGES) ? @[startingViewController1, startingViewController2] : @[startingViewController1];
+    NSArray *viewControllers;
+    if (self.pageSetting == SETTING_2_PAGES) {
+        ImageViewController *startingViewController1 = [self viewControllerAtIndex:self.currentPageIndex];
+        ImageViewController *startingViewController2 = [self viewControllerAtIndex:self.currentPageIndex+1];
+        viewControllers = @[startingViewController1, startingViewController2];
+    } else {
+        ImageViewController *startingViewController1 = [self viewControllerAtIndex:self.currentPageIndex];
+        viewControllers = @[startingViewController1];
+    }
     
     [self.pageViewController setViewControllers:viewControllers
                                       direction:UIPageViewControllerNavigationDirectionForward

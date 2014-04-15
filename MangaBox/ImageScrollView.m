@@ -65,7 +65,7 @@
 
 - (void)setFrame:(CGRect)frame {
     BOOL sizeChanging = !CGSizeEqualToSize(frame.size, self.frame.size);
-    
+
     if (sizeChanging) {
         [self prepareToResize];
     }
@@ -114,9 +114,7 @@
     // Fill the smaller scale
     CGFloat minScale = MIN(xScale, yScale);
     
-    // on high resolution screens we have double the pixel density, so we will be seeing every pixel if we limit the
-    // maximum zoom scale to 0.5.
-    CGFloat maxScale = 1.0 / [[UIScreen mainScreen] scale];
+    CGFloat maxScale = 2.0;
     
     // don't let minScale exceed maxScale. (If the image is smaller than the screen, we don't want to force it to be zoomed.)
     if (minScale > maxScale) {

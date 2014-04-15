@@ -7,7 +7,7 @@
 //
 
 #import "CoreDataTableViewController.h"
-#import "Chapter.h"
+#import "DownloadManager.h"
 
 @interface ChaptersCDTVC : CoreDataTableViewController
 
@@ -16,10 +16,11 @@
 // use @"Chapter Cell" as your table view cell's reuse id
 // will segue to viewing chapter content
 
+@property (nonatomic, strong) DownloadManager *downloadManager;
+
 - (void)prepareForAlert:(NSNotification *)notification;
 
 // make methods of UIActionSheetDelegate to use in child class
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex;
 
-- (void)startDownloadingChapter:(Chapter *)chapter;
 @end

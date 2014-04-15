@@ -7,13 +7,12 @@
 //
 
 #import "AddMangaConfirmViewController.h"
-#import "MangafoxFetcher.h"
-#import "MangareaderFetcher.h"
 #import "MangaDictionaryDefinition.h"
 #import "Manga+Create.h"
 #import "Chapter+Create.h"
 #import "MenuTabBarController.h"
 #import "MangaBoxAppDelegate.h"
+#import "MangaFetcher.h"
 
 @interface AddMangaConfirmViewController ()
 @property (nonatomic, strong) NSArray *chapterDictionaryList;
@@ -189,26 +188,11 @@
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
     
     NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request
-        completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
+        completionHandler:^(NSURL *localfile, NSURLResponse *response, NSError *error) {
             if (!error) {
                 if ([request.URL isEqual:self.mangaURL]) {
-                    NSData *htmlData = [NSData dataWithContentsOfURL:location];
-                    
-                    NSArray *chapterList;
-                    NSDictionary *mangaInfo;
-                    if ([[self.mangaURL absoluteString] rangeOfString:@"mangafox.me"].location != NSNotFound) {
-                        // Fetch mangaInfo
-                        mangaInfo = [MangafoxFetcher parseMangaDetails:htmlData];
-                        
-                        // Fetch chapter list;
-                        chapterList = [MangafoxFetcher parseChapterList:htmlData];
-                    } else if([[self.mangaURL absoluteString] rangeOfString:@"mangareader.net"].location != NSNotFound) {
-                        // Fetch mangaInfo
-                        mangaInfo = [MangareaderFetcher parseMangaDetails:htmlData];
-                        
-                        // Fetch chapter list
-                        chapterList = [MangareaderFetcher parseChapterList:htmlData];
-                    }
+                    NSDictionary *mangaInfo = [MangaFetcher parseMangaDetails:localfile ofSourceURL:self.mangaURL];
+                    NSArray *chapterList = [MangaFetcher parseChapterList:localfile ofSourceURL:self.mangaURL];
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
                         // Set the variables

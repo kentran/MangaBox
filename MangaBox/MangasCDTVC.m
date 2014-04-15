@@ -10,11 +10,11 @@
 #import "Manga+Create.h"
 #import "Chapter+Create.h"
 #import "MangaDictionaryDefinition.h"
-#import "MangafoxFetcher.h"
 #import "ChaptersByMangaCDTVC.h"
 #import "CoverImage.h"
 #import "UIImage+Thumbnail.h"
 #import "MangaBoxAppDelegate.h"
+#import "MangaFetcher.h"
 
 @interface MangasCDTVC () <UIAlertViewDelegate>
 
@@ -76,12 +76,7 @@
     coverImageView.image = [UIImage imageWithData:manga.cover.imageData];
     coverImageView.contentMode = UIViewContentModeScaleAspectFit;
     
-    UIImage *logo;
-    if ([manga.source isEqualToString:@"mangafox.me"]) {
-        logo = [UIImage imageNamed:@"MangafoxLogo"];
-    } else if ([manga.source isEqualToString:@"mangareader.net"]) {
-        logo = [UIImage imageNamed:@"MangareaderLogo"];
-    }
+    UIImage *logo = [MangaFetcher logoForSource:manga.source];
     sourceImageView.image = logo;
     sourceImageView.contentMode = UIViewContentModeLeft;
     

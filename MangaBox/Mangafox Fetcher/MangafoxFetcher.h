@@ -13,12 +13,16 @@
 
 @interface MangafoxFetcher : NSObject
 
-+ (NSURL *)urlForFetchingMangas:(NSDictionary *) criteria;
-+ (NSArray *)parseFetchResult:(NSData *)htmlData;
-+ (BOOL)nextMangaListPageAvailability:(NSData *)htmlData;
-+ (NSDictionary *)parseMangaDetailSummary:(NSData *)htmlData;
+// Manga Info API
 + (NSDictionary *)parseMangaDetails:(NSData *)htmlData;
 + (NSArray *)parseChapterList:(NSData *)htmlData;
 + (NSDictionary *)parseChapterPage:(NSData *)htmlData ofURLString:(NSString *)chapterURL;
+
+// Advanced Search API
++ (NSURL *)urlForFetchingMangas:(NSDictionary *)criteria;
++ (NSArray *)parseFetchResult:(NSData *)htmlData;
++ (BOOL)nextMangaListPageAvailability:(NSData *)htmlData;
++ (NSDictionary *)parseMangaDetailSummary:(NSData *)htmlData;
+
 
 @end

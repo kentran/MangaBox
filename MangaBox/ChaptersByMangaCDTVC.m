@@ -8,7 +8,6 @@
 
 #import "ChaptersByMangaCDTVC.h"
 #import "MangaBoxNotification.h"
-#import "Manga+Download.h"
 #import "Manga+Clear.h"
 #import "CoverImage.h"
 #import "MangaDictionaryDefinition.h"
@@ -41,11 +40,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(prepareForAlert:)
                                                  name:errorDownloadingChapter
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(prepareNextChapter:)
-                                                 name:finishDownloadChapter
                                                object:nil];
 }
 
@@ -115,60 +109,22 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    // calling super since ChaptersCDTVC also implement actionSheetDelegate
+    // this method only add on to the code
     [super actionSheet:actionSheet clickedButtonAtIndex:buttonIndex];
     NSString *choice = [actionSheet buttonTitleAtIndex:buttonIndex];
     if ([choice isEqualToString:@"Download all chapters"]) {
-        self.downloadButtonTitle = @"Stop downloading";
-        self.isDownloadQueueRunning = YES;
-        [self startDownloadingQueue];
-        NSLog(@"%lu", (unsigned long)[self.downloadQueue count]);
-        //[self.manga startDownloadingAllChapters];
-    } else if ([choice isEqualToString:@"Stop downloading"]) {
+        self.downloadButtonTitle = @"Stop all downloading";
+        [self.downloadManager enqueueChapters:self.downloadQueue];
+    } else if ([choice isEqualToString:@"Stop all downloading"]) {
         self.downloadButtonTitle = @"Download all chapters";
-        self.isDownloadQueueRunning = NO;
-        self.downloadQueue = nil;
-        [self.manga stopDownloadingAllChapters];
+        [self.downloadManager stopAllDownloadingForManga:self.manga];
     } else if ([choice isEqualToString:@"Remove all downloaded pages"]) {
         [self.manga clearAllPages];
     }
 }
 
-#pragma mark - Downloading Queue Task
 
-#define CHAPTERS_PER_RUN 3
-
-- (void)startDownloadingQueue
-{
-    for (int i = 0; i < CHAPTERS_PER_RUN; i++) {
-        [self downloadNextChapter];
-    }
-}
-
-- (void)downloadNextChapter
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if ([self.downloadQueue count] && self.isDownloadQueueRunning) {
-            Chapter *chapter = self.downloadQueue[0];
-            [self.downloadQueue removeObjectAtIndex:0];
-            [self startDownloadingChapter:chapter];
-        } else {
-            // Done, clear the download queue
-            self.downloadQueue = nil;
-            self.isDownloadQueueRunning = NO;
-            NSLog(@"Nothing more to download");
-        }
-    });
-}
-
-- (void)prepareNextChapter:(NSNotification *)notification
-{
-    NSDictionary *userInfo = notification.userInfo;
-    
-    if ([[userInfo objectForKey:MANGA_TITLE] isEqualToString:self.manga.title] && self.isDownloadQueueRunning) {
-        [self downloadNextChapter];
-        NSLog(@"nextchapter");
-    }
-}
 
 
 @end

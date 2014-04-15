@@ -13,4 +13,12 @@
 - (void)addBookmark;
 - (void)removeBookmark;
 
+- (void)updateCurrentPageIndex:(NSInteger)pageIndex;
+
+- (void)updateDownloadStatus:(NSString *)downloadStatus;
+
+// Refresh downloadStatus for all chapter when the app launch
+// Set downloadStatus to download stopped if it is downloading
++ (void)refreshDownloadStatusInContext:(NSManagedObjectContext *)context;
+
 @end

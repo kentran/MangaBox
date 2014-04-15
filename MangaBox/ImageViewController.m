@@ -10,7 +10,7 @@
 #import "MangaDictionaryDefinition.h"
 #import "Page+Getter.h"
 #import "ImageScrollView.h"
-#import "Chapter+Download.h"
+#import "Chapter+UpdateInfo.h"
 
 @interface ImageViewController () <UIScrollViewDelegate>
 
@@ -23,8 +23,10 @@
 - (void)setChapter:(Chapter *)chapter
 {
     _chapter = chapter;
-    if ([chapter.pagesCount intValue] != [chapter.pages count])
-        [chapter startDownloadingChapterPages];
+    
+#warning start download chapter here
+    //if ([chapter.pagesCount intValue] != [chapter.pages count])
+        //[chapter startDownloadingChapterPages];
     [self loadView];
 }
 
@@ -34,6 +36,7 @@
     ImageScrollView *scrollView = [[ImageScrollView alloc] init];
     if (self.pageIndex <= [self.chapter.pages count] - 1) {
         Page *page = [Page pageOfChapter:self.chapter atIndex:self.pageIndex];
+        [self.chapter updateCurrentPageIndex:self.pageIndex];
         if (page)
             scrollView.image = [UIImage imageWithData:page.imageData];
     } else {

@@ -20,4 +20,6 @@
 #define autoNextChapterNotification @"autoNextChapterNotification"
 #define autoPreviousChapterNotification @"autoPreviousChapterNotification"
 
+#define parsedMangaSelected @"parsedMangaSelected"
+
 #endif

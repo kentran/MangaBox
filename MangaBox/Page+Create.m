@@ -36,6 +36,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
         page.imageData = [pageDictionary objectForKey:PAGE_IMAGE_DATA];
         page.whichChapter = chapter;
     }
+    [page.managedObjectContext save:NULL];
     
     return page;
 }

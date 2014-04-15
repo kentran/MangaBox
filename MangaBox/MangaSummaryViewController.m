@@ -28,8 +28,6 @@
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *detailsSummarySpinner;
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *addButton;
-
 @property (strong, nonatomic) NSDictionary *mangaDetails;
 @end
 
@@ -105,9 +103,6 @@
             subview.hidden = NO;
         }
     }
-    
-    // Enable add button
-    self.addButton.enabled = YES;
 }
 
 #pragma mark - Download Tasks

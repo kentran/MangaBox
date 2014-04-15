@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "filledStar.png"
+      "filename" : "star-extra-huge-blue.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "filledStar-1.png"
+      "filename" : "star-extra-huge-blue@2x.png"
     }
   ],
   "info" : {
