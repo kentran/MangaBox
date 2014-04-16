@@ -15,19 +15,16 @@
 - (void)addBookmark
 {
     self.bookmark = [NSNumber numberWithBool:YES];
-    [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
 }
 
 - (void)removeBookmark
 {
     self.bookmark = [NSNumber numberWithBool:NO];
-    [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
 }
 
 - (void)updateCurrentPageIndex:(NSInteger)pageIndex
 {
     self.currentPageIndex = [NSNumber numberWithInteger:pageIndex];
-    [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
 }
 
 - (void)updateDownloadStatus:(NSString *)downloadStatus

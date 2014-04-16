@@ -12,9 +12,12 @@
 #import "Chapter+Lookup.h"
 #import "ImageViewController.h"
 #import "MangaBoxNotification.h"
+#import "MangaBoxSettingsPropertyKeys.h"
 
 @interface ChapterViewController () <UIPageViewControllerDelegate>
+
 @property (nonatomic, strong) ChapterPageViewController *chapterPVC;
+
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *pageSettingButton;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapScreen;
 @property (nonatomic)  NSInteger pageSetting;
@@ -33,6 +36,12 @@
 @implementation ChapterViewController
 
 #pragma mark - View Layout
+
+- (void)dealloc
+{
+    // save the current page index before removing viewcontroller
+    self.chapter.currentPageIndex = [NSNumber numberWithInt:self.chapterPVC.currentPageIndex];
+}
 
 - (void)viewDidLoad
 {
@@ -105,7 +114,7 @@
     else self.previousButton.enabled = YES;
     if (!self.nextChapter) self.nextButton.enabled = NO;
     else self.nextButton.enabled = YES;
-    
+
     self.currentPage = [chapter.currentPageIndex intValue] + 1;
 }
 
@@ -129,12 +138,18 @@
 
 - (IBAction)previousButtonTap:(UIBarButtonItem *)sender
 {
+    // save the current page index before navigate to other chapters
+    self.chapter.currentPageIndex = [NSNumber numberWithInt:self.chapterPVC.currentPageIndex];
+    
     self.chapter = self.previousChapter;
     [self prepareChapterPageViewController:self.chapterPVC toDisplayChapter:self.chapter];
 }
 
 - (IBAction)nextButtonTap:(UIBarButtonItem *)sender
 {
+    // save the current page index before navigate to other chapters
+    self.chapter.currentPageIndex = [NSNumber numberWithInt:self.chapterPVC.currentPageIndex];
+    
     self.chapter = self.nextChapter;
     [self prepareChapterPageViewController:self.chapterPVC toDisplayChapter:self.chapter];
 }
@@ -207,9 +222,21 @@
     self.currentPage = self.chapterPVC.currentPageIndex + 1;
 }
 
+#pragma mark - Auto Switch Chapter
+
+- (BOOL)autoSwitchChapterEnable
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([[defaults valueForKey:AUTO_SWITCH_CHAPTER] isEqualToString:AUTO_SWITCH_CHAPTER_ON]) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 - (void)autoNextChapter
 {
-    if (self.nextChapter) {
+    if (self.nextChapter && [self autoSwitchChapterEnable]) {
         [self performSelectorOnMainThread:@selector(nextButtonTap:) withObject:nil waitUntilDone:YES];
         [self notice:self.chapter.name];
     }
@@ -217,7 +244,7 @@
 
 - (void)autoPreviousChapter
 {
-    if (self.previousChapter) {
+    if (self.previousChapter && [self autoSwitchChapterEnable]) {
         [self performSelectorOnMainThread:@selector(previousButtonTap:) withObject:nil waitUntilDone:YES];
         [self notice:self.chapter.name];
     }

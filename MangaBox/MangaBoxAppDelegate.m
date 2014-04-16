@@ -9,6 +9,7 @@
 #import "MangaBoxAppDelegate.h"
 #import "MenuTabBarController.h"
 #import "Chapter+UpdateInfo.h"
+#import "MangaBoxSettingsPropertyKeys.h"
 
 @implementation MangaBoxAppDelegate
 
@@ -21,6 +22,9 @@
     MenuTabBarController *tabBarController = (MenuTabBarController *)self.window.rootViewController;
     tabBarController.managedObjectContext = self.managedObjectContext;
     [Chapter refreshDownloadStatusInContext:self.managedObjectContext];
+    
+    [self loadDefaultSettings];
+    [self resetKeepAwakeSetting];
     
     return YES;
 }
@@ -35,6 +39,7 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    [self saveContext];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -51,6 +56,28 @@
 {
     // Saves changes in the application's managed object context before the application terminates.
     [self saveContext];
+}
+
+// If app settings are not set, set the default values
+- (void)loadDefaultSettings
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if (![defaults valueForKey:DEVICE_AWAKE]) {
+        [defaults setObject:DEVICE_AWAKE_ON forKey:DEVICE_AWAKE];
+    }
+    
+    if (![defaults valueForKey:AUTO_SWITCH_CHAPTER]) {
+        [defaults setObject:AUTO_SWITCH_CHAPTER_ON forKey:AUTO_SWITCH_CHAPTER];
+    }
+}
+
+// Reset the Keep awake status for the app based on the current settings
+- (void)resetKeepAwakeSetting
+{
+    if ([[[NSUserDefaults standardUserDefaults] valueForKey:DEVICE_AWAKE] isEqualToString:DEVICE_AWAKE_ON])
+        [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    else
+        [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
 }
 
 - (void)saveContext
