@@ -18,8 +18,7 @@
 #import "MangaBoxAppDelegate.h"
 
 @interface DownloadManager()
-@property (nonatomic, strong) NSMutableArray *downloadingChapters;
-@property (nonatomic, strong) NSMutableArray *queueingChapters;
+
 @end
 
 @implementation DownloadManager
@@ -279,9 +278,9 @@
                 NSLog(@"Creating new page object for chapter: %@, with image URL: %@", chapter.name, [imageURL absoluteString]);
 #endif
                 // save the page into core data
-                Page *newPage = [Page pageWithInfo:pageDictionary
-                                         ofChapter:chapter
-                            inManagedObjectContext:chapter.managedObjectContext];
+                [Page pageWithInfo:pageDictionary
+                         ofChapter:chapter
+            inManagedObjectContext:chapter.managedObjectContext];
                 
 #ifdef DEBUG
                 NSLog(@"Finish creating new page: %@", newPage.url);
@@ -349,7 +348,7 @@
                         NSArray *chapters = [Chapter loadChaptersFromArray:chapterList
                                                ofManga:manga
                               intoManagedObjectContext:manga.managedObjectContext];
-                        [weakSelf notice:[NSString stringWithFormat:@"%d chapter(s) added", [chapters count]]];
+                        [weakSelf notice:[NSString stringWithFormat:@"%lu chapter(s) added", (unsigned long)[chapters count]]];
                     } else {
                         [weakSelf alert:@"Unable to get chapter list"];
                     }

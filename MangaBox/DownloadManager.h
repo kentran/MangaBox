@@ -14,6 +14,9 @@
 
 + (id)sharedManager;
 
+@property (nonatomic, strong) NSMutableArray *downloadingChapters;
+@property (nonatomic, strong) NSMutableArray *queueingChapters;
+
 - (void)startDownloadingChapter:(Chapter *)chapter;
 - (void)stopDownloadingChapter:(Chapter *)chapter;
 

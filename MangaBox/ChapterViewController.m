@@ -40,7 +40,7 @@
 - (void)dealloc
 {
     // save the current page index before removing viewcontroller
-    self.chapter.currentPageIndex = [NSNumber numberWithInt:self.chapterPVC.currentPageIndex];
+    self.chapter.currentPageIndex = [NSNumber numberWithInteger:self.chapterPVC.currentPageIndex];
 }
 
 - (void)viewDidLoad
@@ -140,7 +140,7 @@
 - (IBAction)previousButtonTap:(UIBarButtonItem *)sender
 {
     // save the current page index before navigate to other chapters
-    self.chapter.currentPageIndex = [NSNumber numberWithInt:self.chapterPVC.currentPageIndex];
+    self.chapter.currentPageIndex = [NSNumber numberWithInteger:self.chapterPVC.currentPageIndex];
     
     self.chapter = self.previousChapter;
     [self prepareChapterPageViewController:self.chapterPVC toDisplayChapter:self.chapter];
@@ -149,7 +149,7 @@
 - (IBAction)nextButtonTap:(UIBarButtonItem *)sender
 {
     // save the current page index before navigate to other chapters
-    self.chapter.currentPageIndex = [NSNumber numberWithInt:self.chapterPVC.currentPageIndex];
+    self.chapter.currentPageIndex = [NSNumber numberWithInteger:self.chapterPVC.currentPageIndex];
     
     self.chapter = self.nextChapter;
     [self prepareChapterPageViewController:self.chapterPVC toDisplayChapter:self.chapter];

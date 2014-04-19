@@ -1232,10 +1232,34 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Downloads" id="1WL-He-Vc0">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="k8n-ZR-cHI" style="IBUITableViewCellStyleDefault" id="8DH-jA-l5N">
+                                        <rect key="frame" x="0.0" y="255" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8DH-jA-l5N" id="g6S-9a-aWv">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Download Tasks" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="k8n-ZR-cHI">
+                                                    <rect key="frame" x="15" y="0.0" width="270" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="l2r-hk-zAz" kind="push" identifier="Show Download Tasks" id="ZHi-qb-hI3"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Help" id="TNL-0Z-zWy">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="gtv-LQ-QuN" style="IBUITableViewCellStyleDefault" id="1Ve-DW-qJz">
-                                        <rect key="frame" x="0.0" y="255" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="347" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Ve-DW-qJz" id="ryG-Wc-qtb">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1255,7 +1279,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="0Zk-GM-aXu" style="IBUITableViewCellStyleDefault" id="m40-1c-SxI">
-                                        <rect key="frame" x="0.0" y="299" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="391" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m40-1c-SxI" id="Aoc-gf-Ajh">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1275,7 +1299,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="fr4-SO-RDu" style="IBUITableViewCellStyleDefault" id="wRW-jT-KsS">
-                                        <rect key="frame" x="0.0" y="343" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="435" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wRW-jT-KsS" id="JWM-jm-FTK">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1295,7 +1319,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="VuC-3Z-eeh" style="IBUITableViewCellStyleDefault" id="JmV-by-eka">
-                                        <rect key="frame" x="0.0" y="387" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="479" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JmV-by-eka" id="jOG-7K-1ZR">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -1333,6 +1357,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2dd-eG-wbU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2150" y="-3557"/>
+        </scene>
+        <!--Download TasksTVC - Download Tasks-->
+        <scene sceneID="xXM-EB-KF3">
+            <objects>
+                <tableViewController id="l2r-hk-zAz" customClass="DownloadTasksTVC" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="vbW-ff-QlS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Download Task" textLabel="W3y-Xr-5YX" detailTextLabel="a3N-fH-V0A" style="IBUITableViewCellStyleSubtitle" id="aA7-0b-YHs">
+                                <rect key="frame" x="0.0" y="119" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aA7-0b-YHs" id="77V-53-sJb">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W3y-Xr-5YX">
+                                            <rect key="frame" x="15" y="3" width="34" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a3N-fH-V0A">
+                                            <rect key="frame" x="15" y="25" width="43" height="15"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="l2r-hk-zAz" id="An4-VS-S8B"/>
+                            <outlet property="delegate" destination="l2r-hk-zAz" id="z9d-Pc-2x2"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Download Tasks" id="1dr-Ii-Bui"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Q8s-Xs-myK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1896" y="-5072"/>
         </scene>
         <!--Static Scroll View Controller - About-->
         <scene sceneID="QZ6-vp-1u5">
@@ -1418,7 +1487,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OJq-UP-afk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2150" y="-4431"/>
+            <point key="canvasLocation" x="2422" y="-4683"/>
         </scene>
         <!--Static Scroll View Controller - Help - Browser-->
         <scene sceneID="1XW-eN-CN1">
@@ -1588,7 +1657,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cKO-Qi-hHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2676" y="-5333"/>
+            <point key="canvasLocation" x="3088" y="-5461"/>
         </scene>
         <!--View Controller - Report a Problem-->
         <scene sceneID="SWs-L3-3SD">
@@ -1617,7 +1686,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GiR-Dp-ech" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2862" y="-3515"/>
+            <point key="canvasLocation" x="3154" y="-3507"/>
         </scene>
         <!--Static Scroll View Controller - Help - Search-->
         <scene sceneID="AZp-n8-ZT8">
@@ -1790,7 +1859,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wbh-vk-dT3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3236" y="-4658"/>
+            <point key="canvasLocation" x="3536" y="-4710"/>
         </scene>
     </scenes>
     <resources>

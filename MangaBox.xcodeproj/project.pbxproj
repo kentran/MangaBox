@@ -49,6 +49,7 @@
 		BEA8394E18C4759900184150 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8394A18C4759900184150 /* TFHppleElement.m */; };
 		BEA8394F18C4759900184150 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8394C18C4759900184150 /* XPathQuery.m */; };
 		BEA8395218C4D35800184150 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8395118C4D35800184150 /* NSString+Helper.m */; };
+		BEA87F731902D49400477D97 /* DownloadTasksTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA87F721902D49400477D97 /* DownloadTasksTVC.m */; };
 		BEA8CC6718CF0688000851E4 /* ChaptersByMangaCDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8CC6618CF0688000851E4 /* ChaptersByMangaCDTVC.m */; };
 		BEA8CC6A18CF09A9000851E4 /* ChaptersCDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8CC6918CF09A9000851E4 /* ChaptersCDTVC.m */; };
 		BEA8CC7618CF4AB8000851E4 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8CC7518CF4AB8000851E4 /* ImageViewController.m */; };
@@ -148,6 +149,8 @@
 		BEA8394C18C4759900184150 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XPathQuery.m; path = "HTML Parser/XPathQuery.m"; sourceTree = "<group>"; };
 		BEA8395018C4D35800184150 /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
 		BEA8395118C4D35800184150 /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
+		BEA87F711902D49400477D97 /* DownloadTasksTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadTasksTVC.h; sourceTree = "<group>"; };
+		BEA87F721902D49400477D97 /* DownloadTasksTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadTasksTVC.m; sourceTree = "<group>"; };
 		BEA8CC6518CF0688000851E4 /* ChaptersByMangaCDTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaptersByMangaCDTVC.h; sourceTree = "<group>"; };
 		BEA8CC6618CF0688000851E4 /* ChaptersByMangaCDTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaptersByMangaCDTVC.m; sourceTree = "<group>"; };
 		BEA8CC6818CF09A9000851E4 /* ChaptersCDTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaptersCDTVC.h; sourceTree = "<group>"; };
@@ -371,6 +374,8 @@
 			children = (
 				BEADD7B118F42D4B000C5440 /* DownloadManager.h */,
 				BEADD7B218F42D4B000C5440 /* DownloadManager.m */,
+				BEA87F711902D49400477D97 /* DownloadTasksTVC.h */,
+				BEA87F721902D49400477D97 /* DownloadTasksTVC.m */,
 				BEAAFAE418FF00B600C3649A /* StaticScrollViewController.h */,
 				BEAAFAE518FF00B600C3649A /* StaticScrollViewController.m */,
 				BEAAFAE018FE7D2100C3649A /* SettingsTVC.h */,
@@ -538,6 +543,7 @@
 				BEA58B8518DDCA4D002B7FB0 /* BrowserViewController.m in Sources */,
 				BEC503BA18CB72100013B7D0 /* CoverImage+Create.m in Sources */,
 				BEADD7B018F1D0CE000C5440 /* MangaFetcher.m in Sources */,
+				BEA87F731902D49400477D97 /* DownloadTasksTVC.m in Sources */,
 				BEC503AF18CB26D00013B7D0 /* Manga+Create.m in Sources */,
 				BEA58B7F18DDA032002B7FB0 /* AddMangaConfirmViewController.m in Sources */,
 				BEA58B7918DD6FD7002B7FB0 /* Chapter.m in Sources */,
@@ -664,6 +670,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -685,7 +692,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ken Tran (W5QSS7NALV)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -701,6 +708,7 @@
 					$SDK_DIR/usr/include/libxml2,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -718,7 +726,7 @@
 				GCC_PREFIX_HEADER = "MangaBox/MangaBox-Prefix.pch";
 				INFOPLIST_FILE = "MangaBox/MangaBox-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0B193B42-A735-4839-934A-743549728CEC";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -728,13 +736,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ken Tran (W5QSS7NALV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ken Tran (W5QSS7NALV)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MangaBox/MangaBox-Prefix.pch";
 				INFOPLIST_FILE = "MangaBox/MangaBox-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "60A685EF-242E-40E0-9487-9EDAF30465DC";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
