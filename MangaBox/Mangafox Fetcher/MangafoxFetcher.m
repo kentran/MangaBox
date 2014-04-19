@@ -247,6 +247,9 @@
                                                     MANGA_ARTIST: [self stringFromDetailsTd:cellNodes[2]],
                                                     MANGA_GENRES: [self stringFromDetailsTd:cellNodes[3]]
                                                      }];
+        } else {
+            // error parsing
+            return nil;
         }
     }
     
@@ -254,6 +257,8 @@
     NSArray *imageNodes = [doc searchWithXPathQuery:@"//div[@class='cover']/img"];
     if ([imageNodes count] && [imageNodes[0] objectForKey:@"src"])
         [result setObject:[imageNodes[0] objectForKey:@"src"] forKey:MANGA_COVER_URL];
+    else
+        return nil; // error parsing
     
     /* Read status */
     NSArray *dataNodes = [doc searchWithXPathQuery:@"//div[@class='data']/span"];
@@ -265,6 +270,9 @@
             status = @"Completed";
         
         [result setObject:status forKey:MANGA_COMPLETION_STATUS];
+    } else {
+        // error parsing
+        return nil;
     }
     
     /* Add the source of the manga to be mangafox */

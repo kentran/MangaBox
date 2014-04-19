@@ -14,7 +14,7 @@
 #import "MangaBoxAppDelegate.h"
 #import "MangaFetcher.h"
 
-@interface AddMangaConfirmViewController ()
+@interface AddMangaConfirmViewController () <UIAlertViewDelegate>
 @property (nonatomic, strong) NSArray *chapterDictionaryList;
 @property (nonatomic, strong) NSMutableDictionary *mangaDictionary;
 
@@ -195,6 +195,11 @@
                     NSArray *chapterList = [MangaFetcher parseChapterList:localfile ofSourceURL:self.mangaURL];
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
+                        if (!mangaInfo || !chapterList) {
+                            [self fatalAlert:PARSE_MANGA_ERROR];
+                            return;
+                        }
+                        
                         // Set the variables
                         self.chapterDictionaryList = chapterList;
                         self.coverURL = [NSURL URLWithString:[mangaInfo objectForKey:MANGA_COVER_URL]];
@@ -203,6 +208,9 @@
                         [self.mangaDictionary setObject:[self.mangaURL absoluteString] forKey:MANGA_URL];
                     });
                 }
+            } else {
+                NSLog(@"Error parsing manga info");
+                [self fatalAlert:PARSE_MANGA_ERROR];
             }
         }];
     [task resume];
@@ -222,10 +230,28 @@
                         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:localfile]];
                         dispatch_async(dispatch_get_main_queue(), ^{ self.coverImage = image; });
                     }
+                } else {
+                    NSLog(@"Error downloading manga cover");
                 }
             }];
         [task resume];
     }
+}
+
+#pragma mark - Alerts
+
+- (void)fatalAlert:(NSString *)msg
+{
+    [[[UIAlertView alloc] initWithTitle:@"Error"
+                                message:msg
+                               delegate:self
+                      cancelButtonTitle:nil
+                      otherButtonTitles:@"OK", nil] show];
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

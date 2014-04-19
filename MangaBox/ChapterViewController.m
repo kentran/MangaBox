@@ -54,6 +54,7 @@
                                              selector:@selector(autoNextChapter)
                                                  name:autoNextChapterNotification
                                                object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(autoPreviousChapter)
                                                  name:autoPreviousChapterNotification object:nil];
@@ -236,7 +237,9 @@
 
 - (void)autoNextChapter
 {
-    if (self.nextChapter && [self autoSwitchChapterEnable]) {
+    if (self.nextChapter && [self autoSwitchChapterEnable]
+        && [self.chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED])
+    {
         [self performSelectorOnMainThread:@selector(nextButtonTap:) withObject:nil waitUntilDone:YES];
         [self notice:self.chapter.name];
     }

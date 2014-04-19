@@ -7,7 +7,6 @@
 //
 
 #import "Chapter+UpdateInfo.h"
-#import "MangaBoxAppDelegate.h"
 #import "MangaDictionaryDefinition.h"
 
 @implementation Chapter (UpdateInfo)
@@ -29,9 +28,10 @@
 
 - (void)updateDownloadStatus:(NSString *)downloadStatus
 {
+#ifdef DEBUG
     NSLog(@"Updating chapter status: %@ - %@", self.name, downloadStatus);
+#endif
     self.downloadStatus = downloadStatus;
-    [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
 }
 
 + (void)refreshDownloadStatusInContext:(NSManagedObjectContext *)context;
@@ -46,12 +46,13 @@
     NSArray *matches = [context executeFetchRequest:request error:&error];
     
     if (error) {
+#ifdef DEBUG
         NSLog(@"Error fetching downloading chapter at launch");
+#endif
     } else {
         for (Chapter *chapter in matches) {
             chapter.downloadStatus = CHAPTER_STOPPED_DOWNLOADING;
         }
-        [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
     }
 }
 

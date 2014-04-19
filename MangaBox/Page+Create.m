@@ -8,6 +8,7 @@
 
 #import "Page+Create.h"
 #import "MangaDictionaryDefinition.h"
+#import "MangaBoxAppDelegate.h"
 
 @implementation Page (Create)
 
@@ -17,26 +18,40 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 {
     Page *page = nil;
     
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Page"];
-    request.predicate = [NSPredicate predicateWithFormat:@"url = %@", [pageDictionary objectForKey:@"url"]];
-    
-    NSError *error;
-    NSArray *matches = [context executeFetchRequest:request error:&error];
-    
-    if (!matches || error || ([matches count] > 1)) {
-        // handle error
-    } else if ([matches count]) {
-        page = [matches firstObject];
-    } else {
-        page = [NSEntityDescription insertNewObjectForEntityForName:@"Page"
-                                             inManagedObjectContext:context];
-        
-        page.url = [pageDictionary objectForKey:PAGE_URL];
-        page.imageURL = [pageDictionary objectForKey:PAGE_IMAGE_URL];
-        page.imageData = [pageDictionary objectForKey:PAGE_IMAGE_DATA];
-        page.whichChapter = chapter;
+    // Check if page exist
+#if DEBUG
+    NSLog(@"Checking existed page for chapter: %@", chapter.name);
+#endif
+    for (Page *existedPage in [chapter.pages allObjects]) {
+        if ([page.url isEqualToString:[pageDictionary objectForKey:PAGE_IMAGE_URL]]) {
+            // Page exist, return it
+#if DEBUG
+            NSLog(@"Page existed for chapter: %@", chapter.name);
+#endif
+            return existedPage;
+        }
     }
-    [page.managedObjectContext save:NULL];
+    
+    // Page not exist, create it and add to core data
+#if DEBUG
+    NSLog(@"Inserting new page for chapter: %@", chapter.name);
+#endif
+    page = [NSEntityDescription insertNewObjectForEntityForName:@"Page"
+                                         inManagedObjectContext:context];
+    
+#if DEBUG
+    NSLog(@"Finish inserting new page for chapter: %@", chapter.name);
+#endif
+    page.url = [pageDictionary objectForKey:PAGE_URL];
+    page.imageURL = [pageDictionary objectForKey:PAGE_IMAGE_URL];
+    page.imageData = [pageDictionary objectForKey:PAGE_IMAGE_DATA];
+#if DEBUG
+    NSLog(@"Finish adding new page params for chapter: %@", chapter.name);
+#endif
+    page.whichChapter = chapter;
+#if DEBUG
+    NSLog(@"Finish linking new page chapter: %@", chapter.name);
+#endif
     
     return page;
 }

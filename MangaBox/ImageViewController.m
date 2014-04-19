@@ -23,10 +23,6 @@
 - (void)setChapter:(Chapter *)chapter
 {
     _chapter = chapter;
-    
-#warning start download chapter here
-    //if ([chapter.pagesCount intValue] != [chapter.pages count])
-        //[chapter startDownloadingChapterPages];
     [self loadView];
 }
 

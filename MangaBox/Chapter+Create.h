@@ -14,7 +14,7 @@
                      ofManga:(Manga *)manga
       inManagedObjectContext:(NSManagedObjectContext *)context;
 
-+ (void)loadChaptersFromArray:(NSArray *)chapters
++ (NSArray *)loadChaptersFromArray:(NSArray *)chapters
                       ofManga:(Manga *)manga
      intoManagedObjectContext:(NSManagedObjectContext *)context;
 

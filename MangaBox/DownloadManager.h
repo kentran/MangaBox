@@ -19,4 +19,6 @@
 
 - (void)enqueueChapters:(NSArray *)chapters;
 - (void)stopAllDownloadingForManga:(Manga *)manga;
+
+- (void)updateChapterListForManga:(Manga *)manga;
 @end

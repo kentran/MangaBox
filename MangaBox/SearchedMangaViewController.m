@@ -80,6 +80,7 @@
             if (!result) {
                 // if the result can't be found, alert the user
                 [self fatalAlert:@"Result is not available. You are not allow to search continuously within 5s"];
+                return;
             } else {
                 [self.searchedMangas addObjectsFromArray:result];   // add result to current list of mangas
                 self.mangas = self.searchedMangas;                  // set and display in TVC

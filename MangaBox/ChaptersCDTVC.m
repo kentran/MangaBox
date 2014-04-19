@@ -50,6 +50,14 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Chapter *deletedChapter = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [deletedChapter.managedObjectContext deleteObject:deletedChapter];
+    }
+}
+
 #pragma mark - NSFetchedResultsControllerDelegate
 
 // Overiding delegate defined in CoreDataTableViewController
@@ -133,7 +141,17 @@
 
     if ([choice isEqualToString:@"Download"]) {
         [self.downloadManager startDownloadingChapter:chapter];
-    } else if ([choice isEqualToString:@"Read"] || [choice isEqualToString:@"Read and Download"]) {
+    } else if ([choice isEqualToString:@"Read"]) {
+        id detailvc = [self.splitViewController.viewControllers lastObject];
+        if ([detailvc isKindOfClass:[UINavigationController class]]) {
+            detailvc = [((UINavigationController *)detailvc).viewControllers firstObject];
+            [self prepareViewController:detailvc
+                               forSegue:nil
+                          fromIndexPath:indexPath];
+        }
+        [self performSegueWithIdentifier:@"Show Pages" sender:actionSheet];
+    } else if ([choice isEqualToString:@"Read and Download"]) {
+        [self.downloadManager startDownloadingChapter:chapter];
         id detailvc = [self.splitViewController.viewControllers lastObject];
         if ([detailvc isKindOfClass:[UINavigationController class]]) {
             detailvc = [((UINavigationController *)detailvc).viewControllers firstObject];

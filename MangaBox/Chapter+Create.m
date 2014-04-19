@@ -37,7 +37,7 @@
     return chapter;
 }
 
-+ (void)loadChaptersFromArray:(NSArray *)chapters
++ (NSArray *)loadChaptersFromArray:(NSArray *)chapters
                       ofManga:(Manga *)manga
      intoManagedObjectContext:(NSManagedObjectContext *)context
 {
@@ -52,6 +52,7 @@
     
     NSError *error;
     NSArray *matches = [context executeFetchRequest:request error:&error];
+    NSMutableArray *result = [[NSMutableArray alloc] init];
     
     if (!matches || error) {
         // handle error
@@ -67,11 +68,15 @@
         
         NSArray *filteredChapters = [chapters filteredArrayUsingPredicate:predicate];
         for (NSDictionary *chapterDictionary in filteredChapters) {
-            [self insertChapterWithInfo:chapterDictionary
+            Chapter *newChapter = [self insertChapterWithInfo:chapterDictionary
                                 ofManga:manga
                intoManagedObjectContext:context];
+            
+            [result addObject:newChapter];
         }
     }
+    
+    return result;
 }
 
 + (Chapter *)insertChapterWithInfo:(NSDictionary *)chapterDictionary

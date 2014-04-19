@@ -25,6 +25,13 @@
     return YES;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.webView.delegate = self;
+    self.searchField.delegate = self;
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];

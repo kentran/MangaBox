@@ -25,6 +25,11 @@
     /* Read the author, artist, genres, status, coverURL */
     NSArray *tableRowNodes = [doc searchWithXPathQuery:@"//div[@id='mangaproperties']/table/tr"];
     
+    if ([tableRowNodes count] < 6) {
+        // Error parsing
+        return nil;
+    }
+    
     /* Completion Status */
     NSArray *statusCells = [tableRowNodes[3] childrenWithTagName:@"td"];
     if ([statusCells count] > 1 && [[statusCells[0] text] rangeOfString:@"Status"].location != NSNotFound) {

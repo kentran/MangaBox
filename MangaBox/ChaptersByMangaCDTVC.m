@@ -22,7 +22,6 @@
 
 // Download queue
 @property (nonatomic, strong) NSMutableArray *downloadQueue;
-@property BOOL isDownloadQueueRunning;
 
 @end
 
@@ -121,6 +120,8 @@
         [self.downloadManager stopAllDownloadingForManga:self.manga];
     } else if ([choice isEqualToString:@"Remove all downloaded pages"]) {
         [self.manga clearAllPages];
+    } else if ([choice isEqualToString:@"Update chapter list"]) {
+        [self.downloadManager updateChapterListForManga:self.manga];
     }
 }
 
