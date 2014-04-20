@@ -1300,7 +1300,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="5kt-8K-6fi" kind="push" id="3a7-KW-vbR"/>
+                                            <segue destination="2i0-hb-llt" kind="push" id="Mdr-O3-YS2"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -1834,49 +1834,62 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
             <point key="canvasLocation" x="4108" y="-5746"/>
         </scene>
         <!--Download TasksTVC - Download Tasks-->
-        <scene sceneID="4Ff-CB-yst">
+        <scene sceneID="qCY-KL-7le">
             <objects>
-                <tableViewController id="5kt-8K-6fi" customClass="DownloadTasksTVC" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="CxB-Zm-qwz">
+                <tableViewController id="2i0-hb-llt" customClass="DownloadTasksTVC" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Wau-0I-Cj0">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Download Task" textLabel="h52-so-v6y" detailTextLabel="0Cx-vQ-D8L" style="IBUITableViewCellStyleSubtitle" id="5zN-DT-lsT">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Download Task" id="PPd-fJ-bA6">
                                 <rect key="frame" x="0.0" y="119" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5zN-DT-lsT" id="rXj-kg-kqa">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PPd-fJ-bA6" id="8Q5-EI-qqx">
+                                    <rect key="frame" x="0.0" y="0.0" width="735" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="h52-so-v6y">
-                                            <rect key="frame" x="15" y="3" width="34" height="22"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TNY-bY-hl5">
+                                            <rect key="frame" x="20" y="3" width="35" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0Cx-vQ-D8L">
-                                            <rect key="frame" x="15" y="25" width="43" height="15"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emg-vO-7CE">
+                                            <rect key="frame" x="20" y="20" width="35" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <progressView hidden="YES" opaque="NO" tag="3" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="rvj-ys-2Dp">
+                                            <rect key="frame" x="20" y="39" width="715" height="2"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </progressView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="emg-vO-7CE" firstAttribute="leading" secondItem="rvj-ys-2Dp" secondAttribute="leading" id="JL2-Gc-0SI"/>
+                                        <constraint firstAttribute="trailing" secondItem="rvj-ys-2Dp" secondAttribute="trailing" id="Nec-sB-f0E"/>
+                                        <constraint firstItem="TNY-bY-hl5" firstAttribute="top" secondItem="8Q5-EI-qqx" secondAttribute="top" constant="3" id="WtG-au-dfg"/>
+                                        <constraint firstItem="emg-vO-7CE" firstAttribute="top" secondItem="8Q5-EI-qqx" secondAttribute="top" constant="20" symbolic="YES" id="egG-Yc-Oyk"/>
+                                        <constraint firstItem="TNY-bY-hl5" firstAttribute="trailing" secondItem="emg-vO-7CE" secondAttribute="trailing" id="foj-6s-rLa"/>
+                                        <constraint firstItem="rvj-ys-2Dp" firstAttribute="top" secondItem="TNY-bY-hl5" secondAttribute="bottom" constant="14" id="jR5-fl-Q19"/>
+                                        <constraint firstItem="TNY-bY-hl5" firstAttribute="leading" secondItem="8Q5-EI-qqx" secondAttribute="leading" constant="20" symbolic="YES" id="oEh-CO-eSU"/>
+                                        <constraint firstItem="TNY-bY-hl5" firstAttribute="leading" secondItem="rvj-ys-2Dp" secondAttribute="leading" id="ugi-v9-Fq8"/>
+                                        <constraint firstItem="rvj-ys-2Dp" firstAttribute="bottom" secondItem="emg-vO-7CE" secondAttribute="bottom" id="y5e-Ag-orI"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="5kt-8K-6fi" id="8RW-W4-sFU"/>
-                            <outlet property="delegate" destination="5kt-8K-6fi" id="Kbp-jd-siE"/>
+                            <outlet property="dataSource" destination="2i0-hb-llt" id="e62-vC-qX8"/>
+                            <outlet property="delegate" destination="2i0-hb-llt" id="rZo-TY-dPB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Download Tasks" id="cen-tk-OMB"/>
+                    <navigationItem key="navigationItem" title="Download Tasks" id="Lbg-3p-FmA"/>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VGx-Pg-UJi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tLv-yK-3iN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1144" y="-5856"/>
+            <point key="canvasLocation" x="1272" y="-5628"/>
         </scene>
     </scenes>
     <resources>

@@ -37,12 +37,6 @@
 
 #pragma mark - UITableViewDataSource
 
-#define TITLE_LABEL_TAG 1
-#define PAGES_LABEL_TAG 2
-#define PROGRESS_BAR_TAG 3
-#define STAR_IMAGE_TAG 4
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Chapter Cell"];
@@ -89,6 +83,11 @@
     }
 }
 
+#define TITLE_LABEL_TAG 1
+#define PAGES_LABEL_TAG 2
+#define PROGRESS_BAR_TAG 3
+#define STAR_IMAGE_TAG 4
+
 - (void)configure:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -118,8 +117,12 @@
             pages.text = [NSString stringWithFormat:@"Downloading... %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
             
             // Add progress bar for downloading view
-            //progressBar.hidden = NO;
-            //progressBar.progress = [chapter.pages count] / [chapter.pagesCount doubleValue];
+            progressBar.hidden = NO;
+            if ([chapter.pagesCount doubleValue]) {
+                progressBar.progress = [chapter.pages count] / [chapter.pagesCount doubleValue];
+            } else {
+                progressBar.progress = 0.0;
+            }
         } else if ([chapter.downloadStatus isEqualToString:CHAPTER_STOPPED_DOWNLOADING]) {
             progressBar.hidden = YES;
             pages.text = [NSString stringWithFormat:@"Download stopped... %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];

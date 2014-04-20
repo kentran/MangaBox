@@ -60,21 +60,37 @@
     return @"";
 }
 
+#define TITLE_LABEL_TAG 1
+#define PAGES_LABEL_TAG 2
+#define PROGRESS_BAR_TAG 3
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Download Task" forIndexPath:indexPath];
     
+    UILabel *title = (UILabel *)[cell.contentView viewWithTag:TITLE_LABEL_TAG];
+    UILabel *pages = (UILabel *)[cell.contentView viewWithTag:PAGES_LABEL_TAG];
+    UIProgressView *progressBar = (UIProgressView *)[cell.contentView viewWithTag:PROGRESS_BAR_TAG];
+    
     if (indexPath.section == 0) {
         if (indexPath.row < [self.downloadManager.downloadingChapters count]) {
             Chapter *chapter = self.downloadManager.downloadingChapters[indexPath.row];
-            cell.textLabel.text = chapter.name;
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"Downloading... %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
+            title.text = chapter.name;
+            pages.text = [NSString stringWithFormat:@"Downloading... %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
+            
+            progressBar.hidden = NO;
+            if ([chapter.pagesCount doubleValue]) {
+                progressBar.progress = [chapter.pages count] / [chapter.pagesCount doubleValue];
+            } else {
+                progressBar.progress = 0.0;
+            }
         }
     } else if (indexPath.section == 1) {
         if (indexPath.row < [self.downloadManager.queueingChapters count]) {
             Chapter *chapter = self.downloadManager.queueingChapters[indexPath.row];
-            cell.textLabel.text = chapter.name;
-            cell.detailTextLabel.text = @"Waiting...";
+            title.text = chapter.name;
+            pages.text = @"Waiting...";
+            progressBar.hidden = YES;
         }
     }
     

@@ -278,7 +278,7 @@
                 NSLog(@"Creating new page object for chapter: %@, with image URL: %@", chapter.name, [imageURL absoluteString]);
 #endif
                 // save the page into core data
-                [Page pageWithInfo:pageDictionary
+                Page *newPage = [Page pageWithInfo:pageDictionary
                          ofChapter:chapter
             inManagedObjectContext:chapter.managedObjectContext];
                 
@@ -348,7 +348,7 @@
                         NSArray *chapters = [Chapter loadChaptersFromArray:chapterList
                                                ofManga:manga
                               intoManagedObjectContext:manga.managedObjectContext];
-                        [weakSelf notice:[NSString stringWithFormat:@"%lu chapter(s) added", (unsigned long)[chapters count]]];
+                        [weakSelf notice:[NSString stringWithFormat:@"%d chapter(s) added", [chapters count]]];
                     } else {
                         [weakSelf alert:@"Unable to get chapter list"];
                     }

@@ -1367,28 +1367,41 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Download Task" textLabel="W3y-Xr-5YX" detailTextLabel="a3N-fH-V0A" style="IBUITableViewCellStyleSubtitle" id="aA7-0b-YHs">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Download Task" id="VLm-k2-Gxp">
                                 <rect key="frame" x="0.0" y="119" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aA7-0b-YHs" id="77V-53-sJb">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VLm-k2-Gxp" id="SLL-ry-O77">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W3y-Xr-5YX">
-                                            <rect key="frame" x="15" y="3" width="34" height="22"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6oM-jk-Jma">
+                                            <rect key="frame" x="20" y="3" width="35" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="a3N-fH-V0A">
-                                            <rect key="frame" x="15" y="25" width="43" height="15"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PpK-la-BQl">
+                                            <rect key="frame" x="20" y="20" width="35" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <progressView hidden="YES" opaque="NO" tag="3" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mmD-oo-kUO">
+                                            <rect key="frame" x="20" y="39" width="267" height="2"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </progressView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="PpK-la-BQl" firstAttribute="top" secondItem="SLL-ry-O77" secondAttribute="top" constant="20" symbolic="YES" id="1rA-ro-3qy"/>
+                                        <constraint firstItem="6oM-jk-Jma" firstAttribute="leading" secondItem="SLL-ry-O77" secondAttribute="leading" constant="20" symbolic="YES" id="4WP-l9-uHG"/>
+                                        <constraint firstItem="PpK-la-BQl" firstAttribute="leading" secondItem="mmD-oo-kUO" secondAttribute="leading" id="Dfx-DQ-oxI"/>
+                                        <constraint firstItem="6oM-jk-Jma" firstAttribute="leading" secondItem="mmD-oo-kUO" secondAttribute="leading" id="O1A-7u-GSt"/>
+                                        <constraint firstAttribute="trailing" secondItem="mmD-oo-kUO" secondAttribute="trailing" id="QCO-Hp-N2W"/>
+                                        <constraint firstItem="mmD-oo-kUO" firstAttribute="top" secondItem="6oM-jk-Jma" secondAttribute="bottom" constant="14" id="TwS-Dx-Hbe"/>
+                                        <constraint firstItem="6oM-jk-Jma" firstAttribute="trailing" secondItem="PpK-la-BQl" secondAttribute="trailing" id="Uww-JO-NeA"/>
+                                        <constraint firstItem="6oM-jk-Jma" firstAttribute="top" secondItem="SLL-ry-O77" secondAttribute="top" constant="3" id="cRN-25-HfG"/>
+                                        <constraint firstItem="mmD-oo-kUO" firstAttribute="bottom" secondItem="PpK-la-BQl" secondAttribute="bottom" id="oTm-4U-Y02"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -1879,7 +1892,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="LLB-VJ-RU4"/>
+        <segue reference="eeK-KZ-euQ"/>
         <segue reference="eNi-zr-JUu"/>
     </inferredMetricsTieBreakers>
 </document>
