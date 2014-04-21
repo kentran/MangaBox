@@ -112,7 +112,8 @@
             progressBar.hidden = YES;
         } else if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED]) {
             progressBar.hidden = YES;
-            pages.text = [NSString stringWithFormat:@"Downloaded %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
+            pages.text = [NSString stringWithFormat:@"Pages: %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
+            pages.textColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
         } else if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING]) {
             pages.text = [NSString stringWithFormat:@"Downloading... %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
             
@@ -127,7 +128,8 @@
             progressBar.hidden = YES;
             pages.text = [NSString stringWithFormat:@"Download stopped... %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
         } else {
-            pages.text = [NSString stringWithFormat:@"%lu/%@ Pages", (unsigned long)[chapter.pages count], chapter.pagesCount];
+            pages.text = [NSString stringWithFormat:@"Pages: %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
+            pages.textColor = [UIColor blackColor];
             progressBar.hidden = YES;
         }
         
@@ -168,7 +170,6 @@
     } else if ([choice isEqualToString:@"Remove Bookmark"]) {
         [chapter removeBookmark];
     } else if ([choice isEqualToString:@"Stop downloading"]) {
-        NSLog(@"TEST!!!!");
         [self.downloadManager stopDownloadingChapter:chapter];
     }
 }

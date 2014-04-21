@@ -61,6 +61,7 @@
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     [self.spinner startAnimating];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
@@ -71,6 +72,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [self.spinner stopAnimating];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     // set the searchbar text to be the url of the current view
     self.searchField.text = [self.webView.request.URL absoluteString];
 }

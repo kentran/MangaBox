@@ -422,7 +422,7 @@
         <!--Chapters By MangaCDTVC-->
         <scene sceneID="FXi-5r-gtC">
             <objects>
-                <tableViewController id="HWQ-05-wLS" customClass="ChaptersByMangaCDTVC" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Chapters By Manga" id="HWQ-05-wLS" customClass="ChaptersByMangaCDTVC" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="45" sectionHeaderHeight="22" sectionFooterHeight="22" id="65n-ei-QpU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

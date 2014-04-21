@@ -13,6 +13,7 @@
 #import "MenuTabBarController.h"
 #import "MangaBoxAppDelegate.h"
 #import "MangaFetcher.h"
+#import "ChaptersByMangaCDTVC.h"
 
 @interface AddMangaConfirmViewController () <UIAlertViewDelegate>
 @property (nonatomic, strong) NSArray *chapterDictionaryList;
@@ -95,11 +96,23 @@
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
     _managedObjectContext = managedObjectContext;
+    [self addMangaAndNavigate];
+}
+
+- (void)addMangaAndNavigate
+{
     Manga *newManga = [self storeNewManga:self.mangaDictionary];
     [self loadNewChapterList:self.chapterDictionaryList ofManga:newManga];
     
-    // Switch to collection tab when done
+    // When done, switch to collection tab
     [self.tabBarController setSelectedIndex:0];
+    
+    // Navigate the navigation controller to the new manga
+    UINavigationController *navigationController = (UINavigationController *)self.tabBarController.viewControllers[0];
+    [navigationController popToRootViewControllerAnimated:NO];
+    ChaptersByMangaCDTVC *cbmcdtvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Chapters By Manga"];
+    cbmcdtvc.manga = newManga;
+    [navigationController pushViewController:cbmcdtvc animated:YES];
 }
 
 #pragma mark - Display Label
@@ -113,6 +126,7 @@
     self.genresTextArea.text = [self.mangaDictionary objectForKey:MANGA_GENRES];
     self.statusTextLabel.text = [self.mangaDictionary objectForKey:MANGA_COMPLETION_STATUS];
     [self.spinner stopAnimating];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
     // Show the labels
     for (UIView *subview in self.infoView.subviews)
@@ -182,6 +196,7 @@
     self.coverURL = nil;
     self.chapterDictionaryList = nil;
     [self.spinner startAnimating];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:self.mangaURL];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];

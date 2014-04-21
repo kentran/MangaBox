@@ -34,6 +34,7 @@
 {
     _criteria = criteria;
     [self.spinner startAnimating];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     self.searchedMangas = nil;
     [self.nextPageCriteria setValuesForKeysWithDictionary:_criteria];
     [self fetchMangas];
@@ -43,7 +44,10 @@
 
 - (NSArray *) fetchMangas
 {
+    // Animating the activity indicator and networkActivityIndicator
     [self.spinner startAnimating];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
     NSURL *url = [MangafoxFetcher urlForFetchingMangas:self.nextPageCriteria];
     dispatch_queue_t fetchQ = dispatch_queue_create("mangafox fetcher", NULL);
     
@@ -77,6 +81,7 @@
             }
             
             [self.spinner stopAnimating];
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             if (!result) {
                 // if the result can't be found, alert the user
                 [self fatalAlert:@"Result is not available. You are not allow to search continuously within 5s"];

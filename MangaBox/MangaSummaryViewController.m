@@ -56,6 +56,7 @@
     
     [self enableButtonsAndLabels];
     [self.detailsSummarySpinner stopAnimating];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 
 - (void)setCoverURL:(NSURL *)coverURL
@@ -133,6 +134,7 @@
 
     if (self.mangaURL && self.mangaUnique) {
         [self.detailsSummarySpinner startAnimating];
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
         
         NSURL *url = [NSURL URLWithString:MANGAFOX_AJAX_SEARCH_URL];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];

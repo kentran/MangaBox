@@ -112,18 +112,28 @@
 
 #pragma mark - Download Tasks
 
+- (void)refreshNetworkActivityIndicator
+{
+    if ([self.downloadingChapters count])
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    else
+        [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
 - (void)stopAllDownloadingForManga:(Manga *)manga
 {
     for (Chapter *chapter in [manga.chapters allObjects]) {
         if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING])
             [self stopDownloadingChapter:chapter];
     }
+    self.queueingChapters = nil;
 }
 
 - (void)stopDownloadingChapter:(Chapter *)chapter
 {
     [chapter updateDownloadStatus:CHAPTER_STOPPED_DOWNLOADING];
     [self.downloadingChapters removeObject:chapter];
+    [self refreshNetworkActivityIndicator];
 }
 
 - (void)finishDownloadingChapter:(Chapter *)chapter
@@ -160,6 +170,7 @@
     [chapter updateDownloadStatus:CHAPTER_DOWNLOADING];
     [self.downloadingChapters addObject:chapter];
     [self downloadHtmlPage:url forChapter:chapter];
+    [self refreshNetworkActivityIndicator];
 }
 
 
@@ -332,6 +343,9 @@
 
 - (void)updateChapterListForManga:(Manga *)manga
 {
+    // Show networkActivityIndicator
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    
     NSURL *url = [NSURL URLWithString:manga.url];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
@@ -340,6 +354,7 @@
     __weak DownloadManager *weakSelf = self;
     NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request
         completionHandler:^(NSURL *localfile, NSURLResponse *response, NSError *error) {
+            [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             if (!error) {
                 NSArray *chapterList = [MangaFetcher parseChapterList:localfile ofSourceURL:url];
                 
