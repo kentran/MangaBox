@@ -41,6 +41,15 @@
 
 @implementation AddMangaConfirmViewController
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Add Manga Confirm Screen"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 #pragma mark - Properties
 
 - (NSMutableDictionary *)mangaDictionary

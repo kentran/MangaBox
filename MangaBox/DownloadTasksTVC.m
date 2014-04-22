@@ -19,6 +19,15 @@
 
 @implementation DownloadTasksTVC
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Download Task Screen"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

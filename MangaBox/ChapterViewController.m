@@ -31,9 +31,19 @@
 
 @property (nonatomic)  NSInteger currentPage;
 
+@property (nonatomic, strong) id<GAITracker> tracker;
+
 @end
 
 @implementation ChapterViewController
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self.tracker set:kGAIScreenName value:@"Reading Screen"];
+    [self.tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
 
 #pragma mark - View Layout
 
@@ -87,6 +97,11 @@
 }
 
 #pragma mark - Properties
+
+- (id<GAITracker>)tracker
+{
+    return [[GAI sharedInstance] defaultTracker];
+}
 
 - (NSInteger)pageSetting
 {
@@ -144,6 +159,9 @@
     
     self.chapter = self.previousChapter;
     [self prepareChapterPageViewController:self.chapterPVC toDisplayChapter:self.chapter];
+    
+    // Track the event
+    [self trackEventWithLabel:@"Previous chapter tap" andValue:nil];
 }
 
 - (IBAction)nextButtonTap:(UIBarButtonItem *)sender
@@ -153,14 +171,19 @@
     
     self.chapter = self.nextChapter;
     [self prepareChapterPageViewController:self.chapterPVC toDisplayChapter:self.chapter];
+    
+    // Track the event
+    [self trackEventWithLabel:@"Next chapter tap" andValue:nil];
 }
 
 - (IBAction)toggleLockRotation:(UIBarButtonItem *)sender
 {
     if ([sender.title isEqualToString:@"🔓"]) {
         sender.title = @"🔒";
+        [self trackEventWithLabel:@"Toggle lock rotation" andValue:[NSNumber numberWithInt:1]];
     } else {
         sender.title = @"🔓";
+        [self trackEventWithLabel:@"Toggle lock rotation" andValue:[NSNumber numberWithInt:0]];
     }
 }
 
@@ -180,12 +203,22 @@
     if ([sender.title isEqualToString:SHOW_2_PAGES]) {
         self.pageSetting = SETTING_2_PAGES;
         sender.title = SHOW_1_PAGE;
+        [self trackEventWithLabel:@"Change page setting" andValue:[NSNumber numberWithInt:SETTING_2_PAGES]];
     } else {
         self.pageSetting = SETTING_1_PAGE;
         sender.title = SHOW_2_PAGES;
+        [self trackEventWithLabel:@"Change page setting" andValue:[NSNumber numberWithInt:SETTING_1_PAGE]];
     }
 
     self.chapterPVC.pageSetting = self.pageSetting;
+}
+
+- (void)trackEventWithLabel:(NSString *)label andValue:(NSNumber *)value
+{
+    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+                                                               action:@"button_press"
+                                                                label:label
+                                                                value:value] build]];
 }
 
 #pragma mark - Navigation

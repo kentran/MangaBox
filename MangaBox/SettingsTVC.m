@@ -27,6 +27,15 @@
     [self loadUserSettings];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Settings Screen"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 - (void)loadUserSettings
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];

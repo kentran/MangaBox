@@ -19,6 +19,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    /* Set up Google Analytics */
+    // Optional: automatically send uncaught exceptions to Google Analytics.
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
+    [GAI sharedInstance].dispatchInterval = 20;
+    // Optional: set Logger to VERBOSE for debug information.
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    
+    // Create tracker instance.
+    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:TRACKING_ID];
+    
+    /* Set up managedObjectContext */
     MenuTabBarController *tabBarController = (MenuTabBarController *)self.window.rootViewController;
     tabBarController.managedObjectContext = self.managedObjectContext;
     [Chapter refreshDownloadStatusInContext:self.managedObjectContext];

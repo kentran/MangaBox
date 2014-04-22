@@ -30,6 +30,15 @@
 
 @implementation AdvancedSearchTVC
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Advanced Search Screen"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

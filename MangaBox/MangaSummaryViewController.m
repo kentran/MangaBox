@@ -33,6 +33,15 @@
 
 @implementation MangaSummaryViewController
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Manga Summary Screen"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 - (void)setMangaURL:(NSURL *)mangaURL
 {
     _mangaURL = mangaURL;
@@ -147,7 +156,6 @@
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
         
         NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-# warning handle if ajax fails here
         NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request
             completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {
                 //this handler is not executing on the main queue so we can't do UI directly here
@@ -165,6 +173,8 @@
                             if (mangaDetails) self.mangaDetails = mangaDetails;
                         });
                     }
+                } else {
+                    NSLog(@"Ajax fails");
                 }
             }];
         [task resume];

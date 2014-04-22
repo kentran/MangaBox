@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong) DownloadManager *downloadManager;
 
+@property (nonatomic, strong) id<GAITracker> tracker;
+
 - (void)prepareForAlert:(NSNotification *)notification;
 
 // make methods of UIActionSheetDelegate to use in child class

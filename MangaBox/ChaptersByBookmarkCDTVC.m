@@ -15,6 +15,15 @@
 
 @implementation ChaptersByBookmarkCDTVC
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Bookmarks Screen"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 - (void)viewDidLoad
 {
     [[NSNotificationCenter defaultCenter] addObserver:self

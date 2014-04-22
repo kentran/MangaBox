@@ -36,6 +36,10 @@
 {
     [super viewDidAppear:animated];
     [self loadWebpage];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Browser Screen"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (IBAction)backButtonTap:(UIBarButtonItem *)sender

@@ -18,6 +18,15 @@
 
 @implementation SearchedMangaViewController
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Parsed Manga List Screen"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 - (NSMutableArray *)searchedMangas
 {
     if (!_searchedMangas) _searchedMangas = [[NSMutableArray alloc] init];

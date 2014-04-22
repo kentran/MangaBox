@@ -50,6 +50,10 @@
 		BEA8394F18C4759900184150 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8394C18C4759900184150 /* XPathQuery.m */; };
 		BEA8395218C4D35800184150 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8395118C4D35800184150 /* NSString+Helper.m */; };
 		BEA87F731902D49400477D97 /* DownloadTasksTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA87F721902D49400477D97 /* DownloadTasksTVC.m */; };
+		BEA87F7D1906227800477D97 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA87F7C1906227800477D97 /* SystemConfiguration.framework */; };
+		BEA87F7F1906231500477D97 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA87F7E1906231500477D97 /* libGoogleAnalyticsServices.a */; };
+		BEA87F8219062BB300477D97 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA87F8119062BB300477D97 /* AdSupport.framework */; };
+		BEA87F8419062BBA00477D97 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA87F8319062BBA00477D97 /* libz.dylib */; };
 		BEA8CC6718CF0688000851E4 /* ChaptersByMangaCDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8CC6618CF0688000851E4 /* ChaptersByMangaCDTVC.m */; };
 		BEA8CC6A18CF09A9000851E4 /* ChaptersCDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8CC6918CF09A9000851E4 /* ChaptersCDTVC.m */; };
 		BEA8CC7618CF4AB8000851E4 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8CC7518CF4AB8000851E4 /* ImageViewController.m */; };
@@ -151,6 +155,17 @@
 		BEA8395118C4D35800184150 /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
 		BEA87F711902D49400477D97 /* DownloadTasksTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadTasksTVC.h; sourceTree = "<group>"; };
 		BEA87F721902D49400477D97 /* DownloadTasksTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadTasksTVC.m; sourceTree = "<group>"; };
+		BEA87F761906223B00477D97 /* GAI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		BEA87F771906223B00477D97 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		BEA87F781906223B00477D97 /* GAIFields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		BEA87F791906223B00477D97 /* GAILogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		BEA87F7A1906223B00477D97 /* GAITrackedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		BEA87F7B1906223B00477D97 /* GAITracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		BEA87F7C1906227800477D97 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		BEA87F7E1906231500477D97 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = ../GoogleAnalyticsServicesiOS_3.06/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		BEA87F80190629F200477D97 /* GoogleAnalyticsConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleAnalyticsConstant.h; sourceTree = "<group>"; };
+		BEA87F8119062BB300477D97 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		BEA87F8319062BBA00477D97 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		BEA8CC6518CF0688000851E4 /* ChaptersByMangaCDTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaptersByMangaCDTVC.h; sourceTree = "<group>"; };
 		BEA8CC6618CF0688000851E4 /* ChaptersByMangaCDTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaptersByMangaCDTVC.m; sourceTree = "<group>"; };
 		BEA8CC6818CF09A9000851E4 /* ChaptersCDTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaptersCDTVC.h; sourceTree = "<group>"; };
@@ -195,6 +210,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEA87F8419062BBA00477D97 /* libz.dylib in Frameworks */,
+				BEA87F8219062BB300477D97 /* AdSupport.framework in Frameworks */,
+				BEA87F7F1906231500477D97 /* libGoogleAnalyticsServices.a in Frameworks */,
+				BEA87F7D1906227800477D97 /* SystemConfiguration.framework in Frameworks */,
 				BE2B92BD18C243EB003EC6D7 /* libxml2.dylib in Frameworks */,
 				BE2B926118C2281E003EC6D7 /* CoreGraphics.framework in Frameworks */,
 				BE2B926518C2281E003EC6D7 /* CoreData.framework in Frameworks */,
@@ -271,6 +290,10 @@
 		BE2B925D18C2281E003EC6D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BEA87F8319062BBA00477D97 /* libz.dylib */,
+				BEA87F8119062BB300477D97 /* AdSupport.framework */,
+				BEA87F7E1906231500477D97 /* libGoogleAnalyticsServices.a */,
+				BEA87F7C1906227800477D97 /* SystemConfiguration.framework */,
 				BE2B92BC18C243EB003EC6D7 /* libxml2.dylib */,
 				BE2B925E18C2281E003EC6D7 /* Foundation.framework */,
 				BE2B926018C2281E003EC6D7 /* CoreGraphics.framework */,
@@ -286,6 +309,7 @@
 			children = (
 				BEC503B718CB71050013B7D0 /* MangaDictionaryDefinition.h */,
 				BEAAFAE318FE807E00C3649A /* MangaBoxSettingsPropertyKeys.h */,
+				BEA87F80190629F200477D97 /* GoogleAnalyticsConstant.h */,
 				BEDEE60A18CDBA4000BF16A2 /* MangaBoxNotification.h */,
 				BE2B926F18C2281E003EC6D7 /* MangaBoxAppDelegate.h */,
 				BE2B927018C2281E003EC6D7 /* MangaBoxAppDelegate.m */,
@@ -294,6 +318,7 @@
 				BE2B928118C2281E003EC6D7 /* Images.xcassets */,
 				BE14772018CA24DA00537103 /* Models */,
 				BE2B92A218C228D3003EC6D7 /* Manga Fetcher */,
+				BEA87F75190621E200477D97 /* Google Analytics */,
 				BEA8395318C5BE1100184150 /* Helpers */,
 				BEA8394618C4758800184150 /* HTML Parser */,
 				BE2B926718C2281E003EC6D7 /* Supporting Files */,
@@ -367,6 +392,19 @@
 				BEA820FC18E56C9200AE2124 /* UITabBarController+Rotation.m */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		BEA87F75190621E200477D97 /* Google Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				BEA87F761906223B00477D97 /* GAI.h */,
+				BEA87F771906223B00477D97 /* GAIDictionaryBuilder.h */,
+				BEA87F781906223B00477D97 /* GAIFields.h */,
+				BEA87F791906223B00477D97 /* GAILogger.h */,
+				BEA87F7A1906223B00477D97 /* GAITrackedViewController.h */,
+				BEA87F7B1906223B00477D97 /* GAITracker.h */,
+			);
+			name = "Google Analytics";
 			sourceTree = "<group>";
 		};
 		BEB0363618C879A6006591C8 /* Controllers */ = {
@@ -725,6 +763,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MangaBox/MangaBox-Prefix.pch";
 				INFOPLIST_FILE = "MangaBox/MangaBox-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/ken/Developer/GoogleAnalyticsServicesiOS_3.06,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "0B193B42-A735-4839-934A-743549728CEC";
 				WRAPPER_EXTENSION = app;
@@ -741,6 +783,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MangaBox/MangaBox-Prefix.pch";
 				INFOPLIST_FILE = "MangaBox/MangaBox-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/ken/Developer/GoogleAnalyticsServicesiOS_3.06,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "006A12A4-01D1-4CA6-AA11-D092B7B1815F";
 				WRAPPER_EXTENSION = app;

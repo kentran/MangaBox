@@ -27,6 +27,15 @@
 
 @implementation ChaptersByMangaCDTVC
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Chapters By Manga Screen"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 - (void)viewDidLoad
 {
     self.coverImageView.image = [UIImage imageWithData:self.manga.cover.imageData];

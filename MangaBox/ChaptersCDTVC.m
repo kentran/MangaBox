@@ -35,6 +35,11 @@
     return _downloadManager;
 }
 
+- (id<GAITracker>)tracker
+{
+    return [[GAI sharedInstance] defaultTracker];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -172,6 +177,17 @@
     } else if ([choice isEqualToString:@"Stop downloading"]) {
         [self.downloadManager stopDownloadingChapter:chapter];
     }
+    
+    // Track the action sheet button
+    [self trackEventWithLabel:choice andValue:nil];
+}
+
+- (void)trackEventWithLabel:(NSString *)label andValue:(NSNumber *)value
+{
+    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"action_sheet"
+                                                               action:@"button_press"
+                                                                label:label
+                                                                value:value] build]];
 }
 
 #pragma mark - Alerts

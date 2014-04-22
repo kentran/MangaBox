@@ -24,6 +24,15 @@
 
 @implementation MangasCDTVC
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Collections Screen"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 #pragma mark - Properties
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
