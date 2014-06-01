@@ -8,7 +8,6 @@
 
 #import "Manga+Create.h"
 #import "CoverImage+Create.h"
-#import "MangaDictionaryDefinition.h"
 
 @implementation Manga (Create)
 

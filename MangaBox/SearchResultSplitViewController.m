@@ -10,7 +10,6 @@
 #import "SearchedMangaViewController.h"
 #import "MangaSummaryViewController.h"
 #import "AddMangaConfirmViewController.h"
-#import "MangaBoxNotification.h"
 
 @interface SearchResultSplitViewController ()
 @property (nonatomic, strong) SearchedMangaViewController *searchedMangasVC;

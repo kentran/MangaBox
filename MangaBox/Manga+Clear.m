@@ -9,8 +9,6 @@
 #import "Manga+Clear.h"
 #import "Chapter.h"
 #import "Page.h"
-#import "MangaDictionaryDefinition.h"
-#import "MangaBoxAppDelegate.h"
 
 @implementation Manga (Clear)
 
@@ -25,7 +23,6 @@
             chapter.downloadStatus = CHAPTER_CLEARED;
         }
     }
-    [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
 }
 
 @end

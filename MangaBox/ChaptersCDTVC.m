@@ -13,19 +13,30 @@
 #import "CoverImage.h"
 #import "ImageViewController.h"
 #import "ChapterPageViewController.h"
-#import "MangaDictionaryDefinition.h"
-#import "MangaBoxNotification.h"
-#import "MangaBoxAppDelegate.h"
 #import "ChapterViewController.h"
 #import "Chapter+UpdateInfo.h"
 #import "MangaFetcher.h"
 
 
 @interface ChaptersCDTVC() <UIActionSheetDelegate>
-
+// hold the value of the index path selected
+@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 @end
 
 @implementation ChaptersCDTVC
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.fetchedResultsController.delegate = self;
+    [self.tableView reloadData];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    self.fetchedResultsController.delegate = nil;
+}
 
 #pragma mark - Properties
 
@@ -57,37 +68,6 @@
     }
 }
 
-#pragma mark - NSFetchedResultsControllerDelegate
-
-// Overiding delegate defined in CoreDataTableViewController
-- (void)controller:(NSFetchedResultsController *)controller
-   didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath
-     forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath
-{
-    switch(type)
-    {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [self configure:[self.tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-            //[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeMove:
-            [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
-}
-
 #define TITLE_LABEL_TAG 1
 #define PAGES_LABEL_TAG 2
 #define PROGRESS_BAR_TAG 3
@@ -95,50 +75,49 @@
 
 - (void)configure:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
+    Chapter *chapter = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    UILabel *title, *pages;
+    title = (UILabel *)[cell.contentView viewWithTag:TITLE_LABEL_TAG];
+    title.text = chapter.name;
+    pages = (UILabel *)[cell.contentView viewWithTag:PAGES_LABEL_TAG];
+    
+    UIImageView *startImageView = (UIImageView *)[cell viewWithTag:STAR_IMAGE_TAG];
+    if ([chapter.bookmark boolValue] == NO) {
+        startImageView.image = [UIImage imageNamed:@"emptyStar"];
+    } else {
+        startImageView.image = [UIImage imageNamed:@"filledStar"];
+    }
+    
+    UIProgressView *progressBar = (UIProgressView *)[cell.contentView viewWithTag:PROGRESS_BAR_TAG];
+    
+    if ([chapter.downloadStatus isEqualToString:CHAPTER_NEED_DOWNLOAD]) {
+        pages.text = @"Please download to read";
+        pages.textColor = [UIColor blackColor];
+        progressBar.hidden = YES;
+    } else if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED]) {
+        progressBar.hidden = YES;
+        pages.text = [NSString stringWithFormat:@"Pages: %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
+        pages.textColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+    } else if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING]) {
+        pages.text = [NSString stringWithFormat:@"Downloading... %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
+        pages.textColor = [UIColor blackColor];
         
-        Chapter *chapter = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        UILabel *title, *pages;
-        title = (UILabel *)[cell.contentView viewWithTag:TITLE_LABEL_TAG];
-        title.text = chapter.name;
-        pages = (UILabel *)[cell.contentView viewWithTag:PAGES_LABEL_TAG];
-        
-        UIImageView *startImageView = (UIImageView *)[cell viewWithTag:STAR_IMAGE_TAG];
-        if ([chapter.bookmark boolValue] == NO) {
-            startImageView.image = [UIImage imageNamed:@"emptyStar"];
+        // Add progress bar for downloading view
+        progressBar.hidden = NO;
+        if ([chapter.pagesCount doubleValue]) {
+            progressBar.progress = [chapter.pages count] / [chapter.pagesCount doubleValue];
         } else {
-            startImageView.image = [UIImage imageNamed:@"filledStar"];
+            progressBar.progress = 0.0;
         }
-        
-        UIProgressView *progressBar = (UIProgressView *)[cell.contentView viewWithTag:PROGRESS_BAR_TAG];
-        
-        if ([chapter.downloadStatus isEqualToString:CHAPTER_NEED_DOWNLOAD]) {
-            pages.text = @"Please download to read";
-            progressBar.hidden = YES;
-        } else if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED]) {
-            progressBar.hidden = YES;
-            pages.text = [NSString stringWithFormat:@"Pages: %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
-            pages.textColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
-        } else if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING]) {
-            pages.text = [NSString stringWithFormat:@"Downloading... %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
-            
-            // Add progress bar for downloading view
-            progressBar.hidden = NO;
-            if ([chapter.pagesCount doubleValue]) {
-                progressBar.progress = [chapter.pages count] / [chapter.pagesCount doubleValue];
-            } else {
-                progressBar.progress = 0.0;
-            }
-        } else if ([chapter.downloadStatus isEqualToString:CHAPTER_STOPPED_DOWNLOADING]) {
-            progressBar.hidden = YES;
-            pages.text = [NSString stringWithFormat:@"Download stopped... %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
-        } else {
-            pages.text = [NSString stringWithFormat:@"Pages: %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
-            pages.textColor = [UIColor blackColor];
-            progressBar.hidden = YES;
-        }
-        
-    });
+    } else if ([chapter.downloadStatus isEqualToString:CHAPTER_STOPPED_DOWNLOADING]) {
+        progressBar.hidden = YES;
+        pages.text = [NSString stringWithFormat:@"Download stopped... %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
+        pages.textColor = [UIColor blackColor];
+    } else {
+        pages.text = [NSString stringWithFormat:@"Pages: %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
+        pages.textColor = [UIColor blackColor];
+        progressBar.hidden = YES;
+    }
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -146,8 +125,8 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *choice = [actionSheet buttonTitleAtIndex:buttonIndex];
-    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-    Chapter *chapter = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    NSIndexPath *indexPath = self.selectedIndexPath;
+    Chapter *chapter = [self.fetchedResultsController objectAtIndexPath:self.selectedIndexPath];
 
     if ([choice isEqualToString:@"Download"]) {
         [self.downloadManager startDownloadingChapter:chapter];
@@ -232,7 +211,9 @@
     if ([sender isKindOfClass:[UITableViewCell class]]) {
         indexPath = [self.tableView indexPathForCell:sender];
     } else if ([sender isKindOfClass:[UIActionSheet class]]) {
-        indexPath = [self.tableView indexPathForSelectedRow];
+        indexPath = self.selectedIndexPath;
+    } else if ([sender isKindOfClass:[Chapter class]]) {
+        indexPath = [self.fetchedResultsController indexPathForObject:sender];
     }
     [self prepareViewController:segue.destinationViewController
                        forSegue:segue.identifier
@@ -242,6 +223,7 @@
 // boilerplate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    self.selectedIndexPath = indexPath;
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:cell.textLabel.text
                                                              delegate:self
@@ -250,7 +232,7 @@
                                                     otherButtonTitles:nil];
     
     Chapter *chapter = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    if ([chapter.pagesCount intValue] != [chapter.pages count]
+    if (![chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED]
         && ![chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING])
     {
         [actionSheet addButtonWithTitle:@"Read and Download"];

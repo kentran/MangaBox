@@ -7,7 +7,6 @@
 //
 
 #import "ChaptersByBookmarkCDTVC.h"
-#import "MangaBoxNotification.h"
 
 @interface ChaptersByBookmarkCDTVC ()
 

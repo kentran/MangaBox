@@ -59,4 +59,23 @@
     }
 }
 
++ (Chapter *)lastReadChapterOfManga:(Manga *)manga
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Chapter"];
+    request.predicate = [NSPredicate predicateWithFormat:@"whichManga = %@", manga];
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"updated"
+                                                              ascending:NO
+                                                               selector:@selector(compare:)]];
+    [request setFetchLimit:1];
+    
+    NSError *error;
+    NSArray *result = [manga.managedObjectContext executeFetchRequest:request error:&error];
+    
+    if (!error) {
+        return result[0];
+    } else {
+        return nil;
+    }
+}
+
 @end

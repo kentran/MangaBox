@@ -7,7 +7,6 @@
 //
 
 #import "Chapter+Create.h"
-#import "MangaDictionaryDefinition.h"
 #import "Manga+Create.h"
 
 @implementation Chapter (Create)

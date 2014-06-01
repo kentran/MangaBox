@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Chapter" representedClassName="Chapter" syncable="YES">
         <attribute name="bookmark" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="currentPageIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -30,7 +30,7 @@
         <relationship name="cover" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoverImage" inverseName="whichManga" inverseEntity="CoverImage" syncable="YES"/>
     </entity>
     <entity name="Page" representedClassName="Page" syncable="YES">
-        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="whichChapter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chapter" inverseName="pages" inverseEntity="Chapter" syncable="YES"/>

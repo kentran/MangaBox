@@ -2,7 +2,7 @@
 //  Chapter.m
 //  MangaBox
 //
-//  Created by Ken Tran on 22/3/14.
+//  Created by Ken Tran on 1/6/14.
 //  Copyright (c) 2014 Ken Tran. All rights reserved.
 //
 
@@ -13,13 +13,13 @@
 
 @implementation Chapter
 
+@dynamic bookmark;
+@dynamic currentPageIndex;
+@dynamic downloadStatus;
 @dynamic name;
 @dynamic pagesCount;
-@dynamic url;
-@dynamic downloadStatus;
 @dynamic updated;
-@dynamic currentPageIndex;
-@dynamic bookmark;
+@dynamic url;
 @dynamic pages;
 @dynamic whichManga;
 

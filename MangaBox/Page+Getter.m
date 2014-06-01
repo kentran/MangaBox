@@ -7,7 +7,6 @@
 //
 
 #import "Page+Getter.h"
-#import "MangaDictionaryDefinition.h"
 
 @implementation Page (Getter)
 

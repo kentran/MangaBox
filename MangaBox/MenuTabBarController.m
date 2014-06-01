@@ -8,7 +8,6 @@
 
 #import "MenuTabBarController.h"
 #import "MangasCDTVC.h"
-#import "MangaBoxNotification.h"
 #import "ChaptersByBookmarkCDTVC.h"
 
 @interface MenuTabBarController () <UITabBarControllerDelegate>
@@ -22,10 +21,9 @@
     self.delegate = self;
 }
 
-- (void)viewDidLoad
+- (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
-    [super viewDidLoad];
-    
+    _managedObjectContext = managedObjectContext;
     id vc = [self.viewControllers objectAtIndex:0];
     [self prepareViewController:vc];
 }

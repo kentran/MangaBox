@@ -9,9 +9,7 @@
 #import "ChapterPageViewController.h"
 #import "ImageViewController.h"
 #import "Page.h"
-#import "MangaDictionaryDefinition.h"
 #import "ImageScrollView.h"
-#import "MangaBoxNotification.h"
 
 @interface ChapterPageViewController () <UIPageViewControllerDataSource>
 
@@ -23,9 +21,13 @@
 
 - (void)setPageSetting:(NSInteger)pageSetting
 {
-    _pageSetting = pageSetting;
-    if (self.chapter)
+    if (self.chapter && _pageSetting != pageSetting) {
+        // Reload the pageviewcontroller when pageSetting changed
+        _pageSetting = pageSetting;
         [self setupPageViewController];
+    } else {
+        _pageSetting = pageSetting;
+    }
 }
 
 - (void)setChapter:(Chapter *)chapter
@@ -33,12 +35,6 @@
     _chapter = chapter;
     self.currentPageIndex = [self pageIndexForCurrentSetting];
     [self setupPageViewController];
-}
-
-- (NSInteger)currentPageIndex
-{
-    if (!_currentPageIndex) _currentPageIndex = [self pageIndexForCurrentSetting];
-    return _currentPageIndex;
 }
 
 - (NSInteger)pageIndexForCurrentSetting
@@ -92,12 +88,20 @@
     self.pageViewController = nil;
     
     // Create a PageViewController
-    NSDictionary *options = (self.pageSetting == SETTING_2_PAGES) ? [NSDictionary dictionaryWithObject: [NSNumber numberWithInteger:UIPageViewControllerSpineLocationMid] forKey: UIPageViewControllerOptionSpineLocationKey] : nil;
-    
-    self.pageViewController = [[UIPageViewController alloc]
-                               initWithTransitionStyle: UIPageViewControllerTransitionStylePageCurl
-                               navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
-                               options:options];
+    if (self.pageSetting == SETTING_2_PAGES) {
+        NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:UIPageViewControllerSpineLocationMid] forKey: UIPageViewControllerOptionSpineLocationKey];
+        
+        self.pageViewController = [[UIPageViewController alloc]
+                                   initWithTransitionStyle: UIPageViewControllerTransitionStylePageCurl
+                                   navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                   options:options];
+    } else {
+        self.pageViewController = [[UIPageViewController alloc]
+                                   initWithTransitionStyle: UIPageViewControllerTransitionStylePageCurl
+                                   navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                                   options:nil];
+    }
+
     
     self.pageViewController.dataSource = self;
     

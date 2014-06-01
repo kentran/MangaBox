@@ -7,10 +7,13 @@
 //
 
 #import "Chapter.h"
+#import "Manga.h"
 
 @interface Chapter (Lookup)
 
 - (Chapter *)nextChapter;
 - (Chapter *)previousChapter;
+
++ (Chapter *)lastReadChapterOfManga:(Manga *)manga;
 
 @end

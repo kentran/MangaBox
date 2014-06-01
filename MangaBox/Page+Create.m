@@ -7,8 +7,6 @@
 //
 
 #import "Page+Create.h"
-#import "MangaDictionaryDefinition.h"
-#import "MangaBoxAppDelegate.h"
 
 @implementation Page (Create)
 
@@ -42,9 +40,15 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 #if DEBUG
     NSLog(@"Finish inserting new page for chapter: %@", chapter.name);
 #endif
-    page.url = [pageDictionary objectForKey:PAGE_URL];
-    page.imageURL = [pageDictionary objectForKey:PAGE_IMAGE_URL];
-    page.imageData = [pageDictionary objectForKey:PAGE_IMAGE_DATA];
+    page.url = (NSString *)[pageDictionary objectForKey:PAGE_URL];
+    
+    /* save image to disk */
+    UIImage *image = [UIImage imageWithData:[pageDictionary objectForKey:PAGE_IMAGE_DATA]];
+    NSData *imageData = UIImageJPEGRepresentation(image, 1.0f);
+    NSURL *imageURL = [self uniqueDocumentURL];
+    page.imageURL = [imageURL absoluteString];
+    [imageData writeToURL:imageURL atomically:YES];
+
 #if DEBUG
     NSLog(@"Finish adding new page params for chapter: %@", chapter.name);
 #endif
@@ -54,6 +58,13 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 #endif
     
     return page;
+}
+
++ (NSURL *)uniqueDocumentURL
+{
+    NSArray *documentDirectories = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSString *unique = [NSString stringWithFormat:@"%.0f", floor([NSDate timeIntervalSinceReferenceDate])];
+    return [[documentDirectories firstObject] URLByAppendingPathComponent:unique];
 }
 
 @end

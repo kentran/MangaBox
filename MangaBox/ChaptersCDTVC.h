@@ -16,8 +16,10 @@
 // use @"Chapter Cell" as your table view cell's reuse id
 // will segue to viewing chapter content
 
+// shared instance of DownloadManager
 @property (nonatomic, strong) DownloadManager *downloadManager;
 
+// Google Analytics tracker
 @property (nonatomic, strong) id<GAITracker> tracker;
 
 - (void)prepareForAlert:(NSNotification *)notification;

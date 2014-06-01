@@ -20,3 +20,8 @@
 #import "GAIDictionaryBuilder.h"
 #import "GAIFields.h"
 #import "GoogleAnalyticsConstant.h"
+
+#import "MangaDictionaryDefinition.h"
+#import "MangaBoxSettingsPropertyKeys.h"
+#import "GoogleAnalyticsConstant.h"
+#import "MangaBoxNotification.h"

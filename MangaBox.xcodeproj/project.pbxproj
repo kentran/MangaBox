@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BE14772318CA255E00537103 /* CoverImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BE14772218CA255E00537103 /* CoverImage.m */; };
+		BE1443C2193AF4A000FC9DE4 /* CoverImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1443C1193AF4A000FC9DE4 /* CoverImage.m */; };
+		BE1443C5193AF4A000FC9DE4 /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1443C4193AF4A000FC9DE4 /* Page.m */; };
+		BE1443C8193AF4A000FC9DE4 /* Manga.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1443C7193AF4A000FC9DE4 /* Manga.m */; };
+		BE1443CB193AF4A000FC9DE4 /* Chapter.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1443CA193AF4A000FC9DE4 /* Chapter.m */; };
 		BE2B925F18C2281E003EC6D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B925E18C2281E003EC6D7 /* Foundation.framework */; };
 		BE2B926118C2281E003EC6D7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B926018C2281E003EC6D7 /* CoreGraphics.framework */; };
 		BE2B926318C2281E003EC6D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2B926218C2281E003EC6D7 /* UIKit.framework */; };
@@ -33,9 +36,7 @@
 		BEA58B6118DB309D002B7FB0 /* UIImage+Thumbnail.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA58B6018DB309D002B7FB0 /* UIImage+Thumbnail.m */; };
 		BEA58B7018DC3E0B002B7FB0 /* ImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA58B6F18DC3E0B002B7FB0 /* ImageScrollView.m */; };
 		BEA58B7618DCD63E002B7FB0 /* ChaptersByBookmarkCDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA58B7518DCD63E002B7FB0 /* ChaptersByBookmarkCDTVC.m */; };
-		BEA58B7918DD6FD7002B7FB0 /* Chapter.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA58B7818DD6FD7002B7FB0 /* Chapter.m */; };
 		BEA58B7F18DDA032002B7FB0 /* AddMangaConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA58B7E18DDA032002B7FB0 /* AddMangaConfirmViewController.m */; };
-		BEA58B8218DDAA90002B7FB0 /* Manga.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA58B8118DDAA90002B7FB0 /* Manga.m */; };
 		BEA58B8518DDCA4D002B7FB0 /* BrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA58B8418DDCA4D002B7FB0 /* BrowserViewController.m */; };
 		BEA58B8818DE1E59002B7FB0 /* MangareaderFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA58B8718DE1E59002B7FB0 /* MangareaderFetcher.m */; };
 		BEA58B8B18E0AA23002B7FB0 /* Page+Getter.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA58B8A18E0AA23002B7FB0 /* Page+Getter.m */; };
@@ -57,7 +58,6 @@
 		BEA8CC6718CF0688000851E4 /* ChaptersByMangaCDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8CC6618CF0688000851E4 /* ChaptersByMangaCDTVC.m */; };
 		BEA8CC6A18CF09A9000851E4 /* ChaptersCDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8CC6918CF09A9000851E4 /* ChaptersCDTVC.m */; };
 		BEA8CC7618CF4AB8000851E4 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8CC7518CF4AB8000851E4 /* ImageViewController.m */; };
-		BEA8CC7C18D0B207000851E4 /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8CC7B18D0B207000851E4 /* Page.m */; };
 		BEA8CC8218D0B2C5000851E4 /* Page+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8CC8118D0B2C5000851E4 /* Page+Create.m */; };
 		BEAA02F218EC8A6900E94277 /* Chapter+UpdateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAA02F118EC8A6900E94277 /* Chapter+UpdateInfo.m */; };
 		BEAAFAE218FE7D2100C3649A /* SettingsTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAAFAE118FE7D2100C3649A /* SettingsTVC.m */; };
@@ -84,8 +84,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BE14772118CA255E00537103 /* CoverImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverImage.h; sourceTree = "<group>"; };
-		BE14772218CA255E00537103 /* CoverImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverImage.m; sourceTree = "<group>"; };
+		BE1443C0193AF4A000FC9DE4 /* CoverImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverImage.h; sourceTree = "<group>"; };
+		BE1443C1193AF4A000FC9DE4 /* CoverImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverImage.m; sourceTree = "<group>"; };
+		BE1443C3193AF4A000FC9DE4 /* Page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Page.h; sourceTree = "<group>"; };
+		BE1443C4193AF4A000FC9DE4 /* Page.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Page.m; sourceTree = "<group>"; };
+		BE1443C6193AF4A000FC9DE4 /* Manga.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Manga.h; sourceTree = "<group>"; };
+		BE1443C7193AF4A000FC9DE4 /* Manga.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Manga.m; sourceTree = "<group>"; };
+		BE1443C9193AF4A000FC9DE4 /* Chapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chapter.h; sourceTree = "<group>"; };
+		BE1443CA193AF4A000FC9DE4 /* Chapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chapter.m; sourceTree = "<group>"; };
 		BE2B925B18C2281E003EC6D7 /* MangaBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MangaBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE2B925E18C2281E003EC6D7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BE2B926018C2281E003EC6D7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -121,12 +127,8 @@
 		BEA58B6F18DC3E0B002B7FB0 /* ImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageScrollView.m; sourceTree = "<group>"; };
 		BEA58B7418DCD63E002B7FB0 /* ChaptersByBookmarkCDTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChaptersByBookmarkCDTVC.h; sourceTree = "<group>"; };
 		BEA58B7518DCD63E002B7FB0 /* ChaptersByBookmarkCDTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaptersByBookmarkCDTVC.m; sourceTree = "<group>"; };
-		BEA58B7718DD6FD7002B7FB0 /* Chapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chapter.h; sourceTree = "<group>"; };
-		BEA58B7818DD6FD7002B7FB0 /* Chapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chapter.m; sourceTree = "<group>"; };
 		BEA58B7D18DDA032002B7FB0 /* AddMangaConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddMangaConfirmViewController.h; sourceTree = "<group>"; };
 		BEA58B7E18DDA032002B7FB0 /* AddMangaConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddMangaConfirmViewController.m; sourceTree = "<group>"; };
-		BEA58B8018DDAA90002B7FB0 /* Manga.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Manga.h; sourceTree = "<group>"; };
-		BEA58B8118DDAA90002B7FB0 /* Manga.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Manga.m; sourceTree = "<group>"; };
 		BEA58B8318DDCA4D002B7FB0 /* BrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowserViewController.h; sourceTree = "<group>"; };
 		BEA58B8418DDCA4D002B7FB0 /* BrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowserViewController.m; sourceTree = "<group>"; };
 		BEA58B8618DE1E59002B7FB0 /* MangareaderFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MangareaderFetcher.h; sourceTree = "<group>"; };
@@ -172,8 +174,6 @@
 		BEA8CC6918CF09A9000851E4 /* ChaptersCDTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChaptersCDTVC.m; sourceTree = "<group>"; };
 		BEA8CC7418CF4AB8000851E4 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		BEA8CC7518CF4AB8000851E4 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
-		BEA8CC7A18D0B207000851E4 /* Page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Page.h; sourceTree = "<group>"; };
-		BEA8CC7B18D0B207000851E4 /* Page.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Page.m; sourceTree = "<group>"; };
 		BEA8CC8018D0B2C5000851E4 /* Page+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Page+Create.h"; sourceTree = "<group>"; };
 		BEA8CC8118D0B2C5000851E4 /* Page+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Page+Create.m"; sourceTree = "<group>"; };
 		BEAA02F018EC8A6900E94277 /* Chapter+UpdateInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Chapter+UpdateInfo.h"; sourceTree = "<group>"; };
@@ -236,20 +236,97 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE1443CC193B419900FC9DE4 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				BEA58B8318DDCA4D002B7FB0 /* BrowserViewController.h */,
+				BEA58B8418DDCA4D002B7FB0 /* BrowserViewController.m */,
+				BEA8210118E83A5100AE2124 /* AdvancedSearchTVC.h */,
+				BEA8210218E83A5100AE2124 /* AdvancedSearchTVC.m */,
+				BE2B92BE18C24ABF003EC6D7 /* SearchedMangaViewController.h */,
+				BE2B92BF18C24ABF003EC6D7 /* SearchedMangaViewController.m */,
+				BE2B92C418C31DFA003EC6D7 /* ParsedMangasTVC.h */,
+				BE2B92C518C31DFA003EC6D7 /* ParsedMangasTVC.m */,
+				BEA8394318C3766700184150 /* MangaSummaryViewController.h */,
+				BEA8394418C3766700184150 /* MangaSummaryViewController.m */,
+				BEB4445018FD1EFE00F0F578 /* SearchResultSplitViewController.h */,
+				BEB4445118FD1EFE00F0F578 /* SearchResultSplitViewController.m */,
+				BEA58B7D18DDA032002B7FB0 /* AddMangaConfirmViewController.h */,
+				BEA58B7E18DDA032002B7FB0 /* AddMangaConfirmViewController.m */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		BE1443CD193B41C900FC9DE4 /* View Chapter Pages */ = {
+			isa = PBXGroup;
+			children = (
+				BEA820F818E53D2B00AE2124 /* ChapterViewController.h */,
+				BEA820F918E53D2B00AE2124 /* ChapterViewController.m */,
+				BEAC664518D725370010ABA1 /* ChapterPageViewController.h */,
+				BEAC664618D725370010ABA1 /* ChapterPageViewController.m */,
+				BEA8CC7418CF4AB8000851E4 /* ImageViewController.h */,
+				BEA8CC7518CF4AB8000851E4 /* ImageViewController.m */,
+				BEA58B6E18DC3E0B002B7FB0 /* ImageScrollView.h */,
+				BEA58B6F18DC3E0B002B7FB0 /* ImageScrollView.m */,
+			);
+			name = "View Chapter Pages";
+			sourceTree = "<group>";
+		};
+		BE1443CE193B41F900FC9DE4 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				BEA87F711902D49400477D97 /* DownloadTasksTVC.h */,
+				BEA87F721902D49400477D97 /* DownloadTasksTVC.m */,
+				BEAAFAE418FF00B600C3649A /* StaticScrollViewController.h */,
+				BEAAFAE518FF00B600C3649A /* StaticScrollViewController.m */,
+				BEAAFAE018FE7D2100C3649A /* SettingsTVC.h */,
+				BEAAFAE118FE7D2100C3649A /* SettingsTVC.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		BE1443CF193B423D00FC9DE4 /* Mangas/Chapters List */ = {
+			isa = PBXGroup;
+			children = (
+				BEC503BE18CB868F0013B7D0 /* MangasCDTVC.h */,
+				BEC503BF18CB868F0013B7D0 /* MangasCDTVC.m */,
+				BEA58B7418DCD63E002B7FB0 /* ChaptersByBookmarkCDTVC.h */,
+				BEA58B7518DCD63E002B7FB0 /* ChaptersByBookmarkCDTVC.m */,
+				BEA8CC6518CF0688000851E4 /* ChaptersByMangaCDTVC.h */,
+				BEA8CC6618CF0688000851E4 /* ChaptersByMangaCDTVC.m */,
+				BEA8CC6818CF09A9000851E4 /* ChaptersCDTVC.h */,
+				BEA8CC6918CF09A9000851E4 /* ChaptersCDTVC.m */,
+				BEC503BB18CB83840013B7D0 /* CoreDataTableViewController.h */,
+				BEC503BC18CB83840013B7D0 /* CoreDataTableViewController.m */,
+			);
+			name = "Mangas/Chapters List";
+			sourceTree = "<group>";
+		};
+		BE1443D0193B427800FC9DE4 /* Download Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BEADD7B118F42D4B000C5440 /* DownloadManager.h */,
+				BEADD7B218F42D4B000C5440 /* DownloadManager.m */,
+			);
+			name = "Download Controllers";
+			sourceTree = "<group>";
+		};
 		BE14772018CA24DA00537103 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BEA58B7718DD6FD7002B7FB0 /* Chapter.h */,
-				BEA58B7818DD6FD7002B7FB0 /* Chapter.m */,
-				BEA58B8018DDAA90002B7FB0 /* Manga.h */,
-				BEA58B8118DDAA90002B7FB0 /* Manga.m */,
+				BEA8CC8018D0B2C5000851E4 /* Page+Create.h */,
+				BEA8CC8118D0B2C5000851E4 /* Page+Create.m */,
 				BEA820F518E1672E00AE2124 /* Manga+Clear.h */,
 				BEA820F618E1672E00AE2124 /* Manga+Clear.m */,
 				BE2B927818C2281E003EC6D7 /* MangaBox.xcdatamodeld */,
-				BEA8CC7A18D0B207000851E4 /* Page.h */,
-				BEA8CC7B18D0B207000851E4 /* Page.m */,
-				BEA8CC8018D0B2C5000851E4 /* Page+Create.h */,
-				BEA8CC8118D0B2C5000851E4 /* Page+Create.m */,
+				BE1443C6193AF4A000FC9DE4 /* Manga.h */,
+				BE1443C7193AF4A000FC9DE4 /* Manga.m */,
+				BE1443C9193AF4A000FC9DE4 /* Chapter.h */,
+				BE1443CA193AF4A000FC9DE4 /* Chapter.m */,
+				BE1443C3193AF4A000FC9DE4 /* Page.h */,
+				BE1443C4193AF4A000FC9DE4 /* Page.m */,
+				BE1443C0193AF4A000FC9DE4 /* CoverImage.h */,
+				BE1443C1193AF4A000FC9DE4 /* CoverImage.m */,
 				BEA58B8918E0AA23002B7FB0 /* Page+Getter.h */,
 				BEA58B8A18E0AA23002B7FB0 /* Page+Getter.m */,
 				BEC503AD18CB26D00013B7D0 /* Manga+Create.h */,
@@ -260,8 +337,6 @@
 				BEA820FF18E5BB2C00AE2124 /* Chapter+Lookup.m */,
 				BEAA02F018EC8A6900E94277 /* Chapter+UpdateInfo.h */,
 				BEAA02F118EC8A6900E94277 /* Chapter+UpdateInfo.m */,
-				BE14772118CA255E00537103 /* CoverImage.h */,
-				BE14772218CA255E00537103 /* CoverImage.m */,
 				BEC503B818CB72100013B7D0 /* CoverImage+Create.h */,
 				BEC503B918CB72100013B7D0 /* CoverImage+Create.m */,
 			);
@@ -307,15 +382,10 @@
 		BE2B926618C2281E003EC6D7 /* MangaBox */ = {
 			isa = PBXGroup;
 			children = (
-				BEC503B718CB71050013B7D0 /* MangaDictionaryDefinition.h */,
-				BEAAFAE318FE807E00C3649A /* MangaBoxSettingsPropertyKeys.h */,
-				BEA87F80190629F200477D97 /* GoogleAnalyticsConstant.h */,
-				BEDEE60A18CDBA4000BF16A2 /* MangaBoxNotification.h */,
 				BE2B926F18C2281E003EC6D7 /* MangaBoxAppDelegate.h */,
 				BE2B927018C2281E003EC6D7 /* MangaBoxAppDelegate.m */,
 				BEB0363618C879A6006591C8 /* Controllers */,
 				BEB0363718C879ED006591C8 /* Views */,
-				BE2B928118C2281E003EC6D7 /* Images.xcassets */,
 				BE14772018CA24DA00537103 /* Models */,
 				BE2B92A218C228D3003EC6D7 /* Manga Fetcher */,
 				BEA87F75190621E200477D97 /* Google Analytics */,
@@ -329,6 +399,10 @@
 		BE2B926718C2281E003EC6D7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BEC503B718CB71050013B7D0 /* MangaDictionaryDefinition.h */,
+				BEAAFAE318FE807E00C3649A /* MangaBoxSettingsPropertyKeys.h */,
+				BEA87F80190629F200477D97 /* GoogleAnalyticsConstant.h */,
+				BEDEE60A18CDBA4000BF16A2 /* MangaBoxNotification.h */,
 				BE2B926818C2281E003EC6D7 /* MangaBox-Info.plist */,
 				BE2B926918C2281E003EC6D7 /* InfoPlist.strings */,
 				BE2B926C18C2281E003EC6D7 /* main.m */,
@@ -410,48 +484,13 @@
 		BEB0363618C879A6006591C8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BEADD7B118F42D4B000C5440 /* DownloadManager.h */,
-				BEADD7B218F42D4B000C5440 /* DownloadManager.m */,
-				BEA87F711902D49400477D97 /* DownloadTasksTVC.h */,
-				BEA87F721902D49400477D97 /* DownloadTasksTVC.m */,
-				BEAAFAE418FF00B600C3649A /* StaticScrollViewController.h */,
-				BEAAFAE518FF00B600C3649A /* StaticScrollViewController.m */,
-				BEAAFAE018FE7D2100C3649A /* SettingsTVC.h */,
-				BEAAFAE118FE7D2100C3649A /* SettingsTVC.m */,
 				BEAC665118DAC7A90010ABA1 /* MenuTabBarController.h */,
 				BEAC665218DAC7A90010ABA1 /* MenuTabBarController.m */,
-				BEA58B8318DDCA4D002B7FB0 /* BrowserViewController.h */,
-				BEA58B8418DDCA4D002B7FB0 /* BrowserViewController.m */,
-				BEA8210118E83A5100AE2124 /* AdvancedSearchTVC.h */,
-				BEA8210218E83A5100AE2124 /* AdvancedSearchTVC.m */,
-				BE2B92BE18C24ABF003EC6D7 /* SearchedMangaViewController.h */,
-				BE2B92BF18C24ABF003EC6D7 /* SearchedMangaViewController.m */,
-				BE2B92C418C31DFA003EC6D7 /* ParsedMangasTVC.h */,
-				BE2B92C518C31DFA003EC6D7 /* ParsedMangasTVC.m */,
-				BEA8394318C3766700184150 /* MangaSummaryViewController.h */,
-				BEA8394418C3766700184150 /* MangaSummaryViewController.m */,
-				BEB4445018FD1EFE00F0F578 /* SearchResultSplitViewController.h */,
-				BEB4445118FD1EFE00F0F578 /* SearchResultSplitViewController.m */,
-				BEA58B7D18DDA032002B7FB0 /* AddMangaConfirmViewController.h */,
-				BEA58B7E18DDA032002B7FB0 /* AddMangaConfirmViewController.m */,
-				BEC503BE18CB868F0013B7D0 /* MangasCDTVC.h */,
-				BEC503BF18CB868F0013B7D0 /* MangasCDTVC.m */,
-				BEA58B7418DCD63E002B7FB0 /* ChaptersByBookmarkCDTVC.h */,
-				BEA58B7518DCD63E002B7FB0 /* ChaptersByBookmarkCDTVC.m */,
-				BEA8CC6518CF0688000851E4 /* ChaptersByMangaCDTVC.h */,
-				BEA8CC6618CF0688000851E4 /* ChaptersByMangaCDTVC.m */,
-				BEA8CC6818CF09A9000851E4 /* ChaptersCDTVC.h */,
-				BEA8CC6918CF09A9000851E4 /* ChaptersCDTVC.m */,
-				BEA820F818E53D2B00AE2124 /* ChapterViewController.h */,
-				BEA820F918E53D2B00AE2124 /* ChapterViewController.m */,
-				BEAC664518D725370010ABA1 /* ChapterPageViewController.h */,
-				BEAC664618D725370010ABA1 /* ChapterPageViewController.m */,
-				BEA8CC7418CF4AB8000851E4 /* ImageViewController.h */,
-				BEA8CC7518CF4AB8000851E4 /* ImageViewController.m */,
-				BEA58B6E18DC3E0B002B7FB0 /* ImageScrollView.h */,
-				BEA58B6F18DC3E0B002B7FB0 /* ImageScrollView.m */,
-				BEC503BB18CB83840013B7D0 /* CoreDataTableViewController.h */,
-				BEC503BC18CB83840013B7D0 /* CoreDataTableViewController.m */,
+				BE1443CE193B41F900FC9DE4 /* Settings */,
+				BE1443CC193B419900FC9DE4 /* Search */,
+				BE1443CF193B423D00FC9DE4 /* Mangas/Chapters List */,
+				BE1443CD193B41C900FC9DE4 /* View Chapter Pages */,
+				BE1443D0193B427800FC9DE4 /* Download Controllers */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -461,6 +500,7 @@
 			children = (
 				BE2B927218C2281E003EC6D7 /* Main_iPhone.storyboard */,
 				BE2B927518C2281E003EC6D7 /* Main_iPad.storyboard */,
+				BE2B928118C2281E003EC6D7 /* Images.xcassets */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -567,12 +607,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE1443C8193AF4A000FC9DE4 /* Manga.m in Sources */,
 				BE2B927A18C2281E003EC6D7 /* MangaBox.xcdatamodeld in Sources */,
 				BE3D847618CE173600AD9753 /* Chapter+Create.m in Sources */,
 				BEAA02F218EC8A6900E94277 /* Chapter+UpdateInfo.m in Sources */,
 				BEA58B6118DB309D002B7FB0 /* UIImage+Thumbnail.m in Sources */,
+				BE1443C2193AF4A000FC9DE4 /* CoverImage.m in Sources */,
 				BE2B92C018C24ABF003EC6D7 /* SearchedMangaViewController.m in Sources */,
-				BEA8CC7C18D0B207000851E4 /* Page.m in Sources */,
 				BEC503BD18CB83840013B7D0 /* CoreDataTableViewController.m in Sources */,
 				BEAC664718D725370010ABA1 /* ChapterPageViewController.m in Sources */,
 				BEA58B8818DE1E59002B7FB0 /* MangareaderFetcher.m in Sources */,
@@ -584,7 +625,6 @@
 				BEA87F731902D49400477D97 /* DownloadTasksTVC.m in Sources */,
 				BEC503AF18CB26D00013B7D0 /* Manga+Create.m in Sources */,
 				BEA58B7F18DDA032002B7FB0 /* AddMangaConfirmViewController.m in Sources */,
-				BEA58B7918DD6FD7002B7FB0 /* Chapter.m in Sources */,
 				BEA820F718E1672E00AE2124 /* Manga+Clear.m in Sources */,
 				BE2B92A118C228CB003EC6D7 /* MangafoxFetcher.m in Sources */,
 				BEA8210318E83A5100AE2124 /* AdvancedSearchTVC.m in Sources */,
@@ -593,11 +633,11 @@
 				BE2B92C618C31DFA003EC6D7 /* ParsedMangasTVC.m in Sources */,
 				BE2B926D18C2281E003EC6D7 /* main.m in Sources */,
 				BE2B927118C2281E003EC6D7 /* MangaBoxAppDelegate.m in Sources */,
-				BE14772318CA255E00537103 /* CoverImage.m in Sources */,
 				BEA58B7618DCD63E002B7FB0 /* ChaptersByBookmarkCDTVC.m in Sources */,
 				BEA820FD18E56C9200AE2124 /* UITabBarController+Rotation.m in Sources */,
 				BEA8CC7618CF4AB8000851E4 /* ImageViewController.m in Sources */,
 				BEA820FA18E53D2B00AE2124 /* ChapterViewController.m in Sources */,
+				BE1443C5193AF4A000FC9DE4 /* Page.m in Sources */,
 				BEA8CC8218D0B2C5000851E4 /* Page+Create.m in Sources */,
 				BEA8394F18C4759900184150 /* XPathQuery.m in Sources */,
 				BEA8210018E5BB2C00AE2124 /* Chapter+Lookup.m in Sources */,
@@ -610,7 +650,7 @@
 				BEA8394E18C4759900184150 /* TFHppleElement.m in Sources */,
 				BEAC665318DAC7A90010ABA1 /* MenuTabBarController.m in Sources */,
 				BEA8CC6A18CF09A9000851E4 /* ChaptersCDTVC.m in Sources */,
-				BEA58B8218DDAA90002B7FB0 /* Manga.m in Sources */,
+				BE1443CB193AF4A000FC9DE4 /* Chapter.m in Sources */,
 				BEC503C018CB868F0013B7D0 /* MangasCDTVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -788,7 +828,7 @@
 					/Users/ken/Developer/GoogleAnalyticsServicesiOS_3.06,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "006A12A4-01D1-4CA6-AA11-D092B7B1815F";
+				PROVISIONING_PROFILE = "0B193B42-A735-4839-934A-743549728CEC";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

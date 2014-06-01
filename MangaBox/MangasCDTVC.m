@@ -9,7 +9,6 @@
 #import "MangasCDTVC.h"
 #import "Manga+Create.h"
 #import "Chapter+Create.h"
-#import "MangaDictionaryDefinition.h"
 #import "ChaptersByMangaCDTVC.h"
 #import "CoverImage.h"
 #import "UIImage+Thumbnail.h"
@@ -104,7 +103,6 @@
 {
     Manga *deletedManga = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [self.managedObjectContext deleteObject:deletedManga];
-    [(MangaBoxAppDelegate*)[[UIApplication sharedApplication] delegate] saveContext];
 }
 
 #pragma mark - Alerts

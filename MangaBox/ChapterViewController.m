@@ -8,11 +8,10 @@
 
 #import "ChapterViewController.h"
 #import "ChapterPageViewController.h"
-#import "MangaDictionaryDefinition.h"
 #import "Chapter+Lookup.h"
 #import "ImageViewController.h"
-#import "MangaBoxNotification.h"
-#import "MangaBoxSettingsPropertyKeys.h"
+#import "DownloadManager.h"
+#import "Chapter+UpdateInfo.h"
 
 @interface ChapterViewController () <UIPageViewControllerDelegate>
 
@@ -46,12 +45,6 @@
 }
 
 #pragma mark - View Layout
-
-- (void)dealloc
-{
-    // save the current page index before removing viewcontroller
-    self.chapter.currentPageIndex = [NSNumber numberWithInteger:self.chapterPVC.currentPageIndex];
-}
 
 - (void)viewDidLoad
 {
@@ -123,6 +116,14 @@
 - (void)setChapter:(Chapter *)chapter
 {
     _chapter = chapter;
+    
+    // Fire the download if not downloaded or downloading
+    if (![chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED]
+        && ![chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING])
+    {
+        [[DownloadManager sharedManager] startDownloadingChapter:chapter];
+    }
+    
     [self prepareChapterPageViewController:self.chapterPVC toDisplayChapter:_chapter];
     
     // update status of the previous and next button
@@ -154,11 +155,8 @@
 
 - (IBAction)previousButtonTap:(UIBarButtonItem *)sender
 {
-    // save the current page index before navigate to other chapters
-    self.chapter.currentPageIndex = [NSNumber numberWithInteger:self.chapterPVC.currentPageIndex];
-    
+    [self cleanUpChapterPages:self.chapter];
     self.chapter = self.previousChapter;
-    [self prepareChapterPageViewController:self.chapterPVC toDisplayChapter:self.chapter];
     
     // Track the event
     [self trackEventWithLabel:@"Previous chapter tap" andValue:nil];
@@ -166,14 +164,17 @@
 
 - (IBAction)nextButtonTap:(UIBarButtonItem *)sender
 {
-    // save the current page index before navigate to other chapters
-    self.chapter.currentPageIndex = [NSNumber numberWithInteger:self.chapterPVC.currentPageIndex];
-    
+    [self cleanUpChapterPages:self.chapter];
     self.chapter = self.nextChapter;
-    [self prepareChapterPageViewController:self.chapterPVC toDisplayChapter:self.chapter];
     
     // Track the event
     [self trackEventWithLabel:@"Next chapter tap" andValue:nil];
+}
+
+- (void)cleanUpChapterPages:(Chapter *)chapter
+{
+    [chapter.managedObjectContext refreshObject:chapter mergeChanges:YES];
+    //[chapter didTurnIntoFault];
 }
 
 - (IBAction)toggleLockRotation:(UIBarButtonItem *)sender
@@ -243,6 +244,7 @@
     chapterPVC.pageSetting = self.pageSetting;
     chapterPVC.chapter = chapter;
     chapterPVC.pageViewController.delegate = self;
+    chapterPVC.currentPageIndex = [chapter.currentPageIndex integerValue];
     self.chapterPVC = chapterPVC;
 }
 
@@ -275,6 +277,7 @@
     {
         [self performSelectorOnMainThread:@selector(nextButtonTap:) withObject:nil waitUntilDone:YES];
         [self notice:self.chapter.name];
+        [self trackEventWithLabel:@"Auto Next Chapter" andValue:nil];
     }
 }
 
@@ -283,12 +286,13 @@
     if (self.previousChapter && [self autoSwitchChapterEnable]) {
         [self performSelectorOnMainThread:@selector(previousButtonTap:) withObject:nil waitUntilDone:YES];
         [self notice:self.chapter.name];
+        [self trackEventWithLabel:@"Auto Previous Chapter" andValue:nil];
     }
 }
 
 #pragma mark - Alerts
 
-#define DISMISS_INTERVAL 1
+#define DISMISS_INTERVAL 0.5
 
 - (void)notice:(NSString *)msg
 {

@@ -7,16 +7,16 @@
 //
 
 #import "ChaptersByMangaCDTVC.h"
-#import "MangaBoxNotification.h"
 #import "Manga+Clear.h"
 #import "CoverImage.h"
-#import "MangaDictionaryDefinition.h"
+#import "Chapter+Lookup.h"
 
 @interface ChaptersByMangaCDTVC () <UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *authorTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *artistTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusTextLabel;
 
 @property (nonatomic, strong) NSString *downloadButtonTitle;
 
@@ -42,6 +42,7 @@
     self.titleTextLabel.text = self.manga.title;
     self.authorTextLabel.text = self.manga.author;
     self.artistTextLabel.text = self.manga.artist;
+    self.statusTextLabel.text = self.manga.completionStatus;
     self.navigationItem.title = @"Menu";
     
     self.downloadButtonTitle = @"Download all chapters";
@@ -134,6 +135,13 @@
     }
 }
 
+#pragma mark - Continue Reading
+
+- (IBAction)contReadingButtonTap:(UIButton *)sender
+{
+    Chapter *lastReadingChapter = [Chapter lastReadChapterOfManga:self.manga];
+    [self performSegueWithIdentifier:@"Show Pages" sender:lastReadingChapter];
+}
 
 
 

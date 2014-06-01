@@ -7,7 +7,6 @@
 //
 
 #import "ImageViewController.h"
-#import "MangaDictionaryDefinition.h"
 #import "Page+Getter.h"
 #import "ImageScrollView.h"
 #import "Chapter+UpdateInfo.h"
@@ -31,9 +30,12 @@
     // Prepare the ImageScroll View
     ImageScrollView *scrollView = [[ImageScrollView alloc] init];
     if (self.pageIndex <= [self.chapter.pages count] - 1) {
+        [self.chapter updateCurrentPageIndex:self.pageIndex];
         Page *page = [Page pageOfChapter:self.chapter atIndex:self.pageIndex];
-        if (page)
-            scrollView.image = [UIImage imageWithData:page.imageData];
+        if (page) {
+            NSURL *imageURL = [NSURL URLWithString:page.imageURL];
+            scrollView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+        }
     } else {
         scrollView.image = [UIImage imageNamed:@"blank"];
     }

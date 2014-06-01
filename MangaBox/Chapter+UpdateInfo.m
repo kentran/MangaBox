@@ -7,7 +7,6 @@
 //
 
 #import "Chapter+UpdateInfo.h"
-#import "MangaDictionaryDefinition.h"
 
 @implementation Chapter (UpdateInfo)
 
@@ -24,6 +23,7 @@
 - (void)updateCurrentPageIndex:(NSInteger)pageIndex
 {
     self.currentPageIndex = [NSNumber numberWithInteger:pageIndex];
+    self.updated = [NSDate date];
 }
 
 - (void)updateDownloadStatus:(NSString *)downloadStatus

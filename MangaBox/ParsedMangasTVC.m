@@ -8,7 +8,6 @@
 
 #import "ParsedMangasTVC.h"
 #import "MangaSummaryViewController.h"
-#import "MangaBoxNotification.h"
 
 @interface ParsedMangasTVC () <UIAlertViewDelegate>
 

@@ -7,11 +7,9 @@
 //
 
 #import "AddMangaConfirmViewController.h"
-#import "MangaDictionaryDefinition.h"
 #import "Manga+Create.h"
 #import "Chapter+Create.h"
 #import "MenuTabBarController.h"
-#import "MangaBoxAppDelegate.h"
 #import "MangaFetcher.h"
 #import "ChaptersByMangaCDTVC.h"
 
@@ -192,7 +190,6 @@
     [Chapter loadChaptersFromArray:newChapterList
                            ofManga:manga
           intoManagedObjectContext:self.managedObjectContext];
-    [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
 }
 
 

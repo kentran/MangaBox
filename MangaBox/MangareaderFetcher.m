@@ -115,8 +115,10 @@
     
     // Get the number of pages
     NSArray *optionNodes = [doc searchWithXPathQuery:@"//div[@id='selectpage']/select/option"];
-    TFHppleElement *lastPageOptionNode = [optionNodes objectAtIndex:([optionNodes count] - 1)];
-    [result setObject:[lastPageOptionNode text] forKey:PAGES_COUNT];
+    if ([optionNodes count]) {
+        TFHppleElement *lastPageOptionNode = [optionNodes objectAtIndex:([optionNodes count] - 1)];
+        [result setObject:[lastPageOptionNode text] forKey:PAGES_COUNT];
+    }
     
     return result;
 }

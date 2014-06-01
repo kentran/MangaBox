@@ -8,8 +8,6 @@
 
 #import "MangaSummaryViewController.h"
 #import "MangafoxFetcher.h"
-#import "MangaDictionaryDefinition.h"
-#import "MangaBoxNotification.h"
 #import "AddMangaConfirmViewController.h"
 
 @interface MangaSummaryViewController ()

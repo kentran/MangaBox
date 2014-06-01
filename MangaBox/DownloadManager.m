@@ -11,9 +11,7 @@
 #import "Chapter+UpdateInfo.h"
 #import "Page+Create.h"
 #import "Page+Getter.h"
-#import "MangaDictionaryDefinition.h"
 #import "MangaFetcher.h"
-#import "MangaBoxNotification.h"
 #import "Manga.h"
 #import "MangaBoxAppDelegate.h"
 
@@ -100,7 +98,6 @@
 #ifdef DEBUG
             NSLog(@"Nothing more to download");
 #endif
-            [(MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate] saveContext];
         }
     });
 }
@@ -146,12 +143,15 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:finishDownloadChapter
                                                         object:self
                                                       userInfo:userInfo];
+
 }
 
 - (void)startDownloadingChapter:(Chapter *)chapter
 {
-    // Skip if chapter downloaded
-    if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED]) return;
+    // Skip if chapter downloaded or downloading
+    if (!chapter || [chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED] ||
+        [chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING])
+        return;
     
     // If the chapter has been downloading half way
     // continue from the last downloaded page
@@ -266,40 +266,40 @@
             NSLog(@"Image completionHandler for chapter: %@", chapter.name);
 #endif
             if (!error) {
-                NSData *imageData = [NSData dataWithContentsOfURL:localfile];
-                if (!imageData) { // if error, update the download status and return
-                    //[weakSelf alert:DOWNLOAD_ERROR];
-                    [weakSelf stopDownloadingChapter:chapter];
-                    [weakSelf performSelectorOnMainThread:@selector(alert:)
-                                               withObject:DOWNLOAD_ERROR
-                                            waitUntilDone:NO];
-                    return;
+                @autoreleasepool {
+                    
+                    NSData *imageData = [NSData dataWithContentsOfURL:localfile];
+                    if (!imageData) {
+                        // if error, update the download status and return
+                        [weakSelf stopDownloadingChapter:chapter];
+                        [weakSelf performSelectorOnMainThread:@selector(alert:)
+                                                   withObject:DOWNLOAD_ERROR
+                                                waitUntilDone:NO];
+                        return;
+                    }
+                    
+#ifdef DEBUG
+                    NSLog(@"Finish downloading image for chapter: %@", chapter.name);
+#endif
+                    NSDictionary *pageDictionary = @{PAGE_URL: [pageHtmlURL absoluteString],
+                                                     PAGE_IMAGE_URL: [imageURL absoluteString],
+                                                     PAGE_IMAGE_DATA: imageData
+                                                     };
+                    
+#ifdef DEBUG
+                    NSLog(@"Creating new page object for chapter: %@, with image URL: %@", chapter.name, [imageURL absoluteString]);
+#endif
+                    
+                    // save the page into core data
+                    Page *newPage = [Page pageWithInfo:pageDictionary
+                                             ofChapter:chapter
+                                inManagedObjectContext:chapter.managedObjectContext];
+                    
                 }
-                
-#ifdef DEBUG
-                NSLog(@"Finish downloading image for chapter: %@", chapter.name);
-#endif
-                UIImage *image = [UIImage imageWithData:imageData];
-                NSDictionary *pageDictionary = @{PAGE_URL: [pageHtmlURL absoluteString],
-                                                 PAGE_IMAGE_URL: [imageURL absoluteString],
-                                                 PAGE_IMAGE_DATA: UIImageJPEGRepresentation(image, 1.0)
-                                                 };
-                
-#ifdef DEBUG
-                NSLog(@"Creating new page object for chapter: %@, with image URL: %@", chapter.name, [imageURL absoluteString]);
-#endif
-                // save the page into core data
-                Page *newPage = [Page pageWithInfo:pageDictionary
-                         ofChapter:chapter
-            inManagedObjectContext:chapter.managedObjectContext];
-                
-#ifdef DEBUG
-                NSLog(@"Finish creating new page: %@", newPage.url);
-#endif
-                
                 [[NSNotificationCenter defaultCenter] postNotificationName:finishDownloadChapterPage
                                                                     object:self
                                                                   userInfo:@{ CHAPTER_NAME: chapter.name }];
+
                 
                 // if all the pages of the chapter is downloaded, reset the downloadStatus
                 // and post a notification
@@ -313,6 +313,7 @@
 #ifdef DEBUG
                 NSLog(@"Download next html page for chapter: %@, nextpage: %@", chapter.name, [pageHtmlDictionary objectForKey:NEXT_PAGE_TO_PARSE]);
 #endif
+                
                 // Download the next HTML page if applicable
                 if ([pageHtmlDictionary objectForKey:NEXT_PAGE_TO_PARSE]) {
                     [weakSelf downloadHtmlPage:[NSURL URLWithString:[pageHtmlDictionary objectForKey:NEXT_PAGE_TO_PARSE]]
@@ -323,6 +324,7 @@
                                                withObject:DOWNLOAD_ERROR
                                             waitUntilDone:NO];
                 }
+                
 #ifdef DEBUG
                 NSLog(@"Exiting completionHandler for image: %@", [imageURL absoluteString]);
 #endif
@@ -363,7 +365,7 @@
                         NSArray *chapters = [Chapter loadChaptersFromArray:chapterList
                                                ofManga:manga
                               intoManagedObjectContext:manga.managedObjectContext];
-                        [weakSelf notice:[NSString stringWithFormat:@"%d chapter(s) added", [chapters count]]];
+                        [weakSelf notice:[NSString stringWithFormat:@"%lu chapter(s) added", (unsigned long)[chapters count]]];
                     } else {
                         [weakSelf alert:@"Unable to get chapter list"];
                     }

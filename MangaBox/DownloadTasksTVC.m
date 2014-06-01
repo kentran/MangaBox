@@ -9,8 +9,6 @@
 #import "DownloadTasksTVC.h"
 #import "DownloadManager.h"
 #import "Chapter.h"
-#import "MangaDictionaryDefinition.h"
-#import "MangaBoxNotification.h"
 
 @interface DownloadTasksTVC ()
 @property (nonatomic, strong) DownloadManager *downloadManager;

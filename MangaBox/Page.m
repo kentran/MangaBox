@@ -2,7 +2,7 @@
 //  Page.m
 //  MangaBox
 //
-//  Created by Ken Tran on 12/3/14.
+//  Created by Ken Tran on 1/6/14.
 //  Copyright (c) 2014 Ken Tran. All rights reserved.
 //
 
@@ -13,8 +13,8 @@
 @implementation Page
 
 @dynamic imageData;
-@dynamic url;
 @dynamic imageURL;
+@dynamic url;
 @dynamic whichChapter;
 
 @end
