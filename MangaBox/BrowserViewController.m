@@ -20,7 +20,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self.searchField resignFirstResponder];
+    [textField resignFirstResponder];
     [self loadWebpage];
     return YES;
 }

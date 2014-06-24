@@ -45,7 +45,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
     /* save image to disk */
     UIImage *image = [UIImage imageWithData:[pageDictionary objectForKey:PAGE_IMAGE_DATA]];
     NSData *imageData = UIImageJPEGRepresentation(image, 1.0f);
-    NSURL *imageURL = [self uniqueDocumentURL];
+    NSURL *imageURL = [self uniqueDocumentURLForChapter:chapter];
     page.imageURL = [imageURL absoluteString];
     [imageData writeToURL:imageURL atomically:YES];
 
@@ -60,10 +60,10 @@ inManagedObjectContext:(NSManagedObjectContext *)context
     return page;
 }
 
-+ (NSURL *)uniqueDocumentURL
++ (NSURL *)uniqueDocumentURLForChapter:(Chapter *)chapter
 {
     NSArray *documentDirectories = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
-    NSString *unique = [NSString stringWithFormat:@"%.0f", floor([NSDate timeIntervalSinceReferenceDate])];
+    NSString *unique = [NSString stringWithFormat:@"%@_%.0f", chapter.name, floor([NSDate timeIntervalSinceReferenceDate])];
     return [[documentDirectories firstObject] URLByAppendingPathComponent:unique];
 }
 

@@ -72,6 +72,15 @@
                     @"School Life", @"Sci-fi", @"Seinen", @"Shoujo", @"Shoujo Ai",
                     @"Shounen", @"Shounen Ai", @"Slice of Life", @"Smut", @"Sports",
                     @"Supernatural", @"Tragedy", @"Webtoons", @"Yaoi", @"Yuri"];
+//        _genres = @[@"Action", @"Adventure", @"Comedy", @"Doujinshi",
+//                    @"Drama", @"Fantasy", @"Harem",
+//                    @"Historical", @"Horror", @"Josei", @"Martial Arts",
+//                    @"Mecha", @"Mystery", @"One Shot", @"Psychological", @"Romance",
+//                    @"School Life", @"Sci-fi", @"Seinen", @"Shoujo", @"Shoujo Ai",
+//                    @"Shounen", @"Shounen Ai", @"Slice of Life", @"Smut", @"Sports",
+//                    @"Supernatural", @"Tragedy", @"Webtoons", @"Yaoi", @"Yuri"];
+
+        
     }
     return _genres;
 }

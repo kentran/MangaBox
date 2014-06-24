@@ -67,6 +67,7 @@
 		BEADD7B018F1D0CE000C5440 /* MangaFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = BEADD7AF18F1D0CE000C5440 /* MangaFetcher.m */; };
 		BEADD7B318F42D4B000C5440 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEADD7B218F42D4B000C5440 /* DownloadManager.m */; };
 		BEB4445218FD1EFE00F0F578 /* SearchResultSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4445118FD1EFE00F0F578 /* SearchResultSplitViewController.m */; };
+		BEB46F3919585C8D008E81EB /* Page+Delete.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB46F3819585C8D008E81EB /* Page+Delete.m */; };
 		BEC503AF18CB26D00013B7D0 /* Manga+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC503AE18CB26D00013B7D0 /* Manga+Create.m */; };
 		BEC503BA18CB72100013B7D0 /* CoverImage+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC503B918CB72100013B7D0 /* CoverImage+Create.m */; };
 		BEC503BD18CB83840013B7D0 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC503BC18CB83840013B7D0 /* CoreDataTableViewController.m */; };
@@ -193,6 +194,8 @@
 		BEADD7B218F42D4B000C5440 /* DownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadManager.m; sourceTree = "<group>"; };
 		BEB4445018FD1EFE00F0F578 /* SearchResultSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultSplitViewController.h; sourceTree = "<group>"; };
 		BEB4445118FD1EFE00F0F578 /* SearchResultSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultSplitViewController.m; sourceTree = "<group>"; };
+		BEB46F3719585C8D008E81EB /* Page+Delete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Page+Delete.h"; sourceTree = "<group>"; };
+		BEB46F3819585C8D008E81EB /* Page+Delete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Page+Delete.m"; sourceTree = "<group>"; };
 		BEC503AD18CB26D00013B7D0 /* Manga+Create.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Manga+Create.h"; sourceTree = "<group>"; };
 		BEC503AE18CB26D00013B7D0 /* Manga+Create.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Manga+Create.m"; sourceTree = "<group>"; };
 		BEC503B718CB71050013B7D0 /* MangaDictionaryDefinition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MangaDictionaryDefinition.h; sourceTree = "<group>"; };
@@ -316,6 +319,8 @@
 			children = (
 				BEA8CC8018D0B2C5000851E4 /* Page+Create.h */,
 				BEA8CC8118D0B2C5000851E4 /* Page+Create.m */,
+				BEB46F3719585C8D008E81EB /* Page+Delete.h */,
+				BEB46F3819585C8D008E81EB /* Page+Delete.m */,
 				BEA820F518E1672E00AE2124 /* Manga+Clear.h */,
 				BEA820F618E1672E00AE2124 /* Manga+Clear.m */,
 				BE2B927818C2281E003EC6D7 /* MangaBox.xcdatamodeld */,
@@ -644,6 +649,7 @@
 				BEA58B8B18E0AA23002B7FB0 /* Page+Getter.m in Sources */,
 				BEAAFAE618FF00B600C3649A /* StaticScrollViewController.m in Sources */,
 				BEB4445218FD1EFE00F0F578 /* SearchResultSplitViewController.m in Sources */,
+				BEB46F3919585C8D008E81EB /* Page+Delete.m in Sources */,
 				BEAAFAE218FE7D2100C3649A /* SettingsTVC.m in Sources */,
 				BEA58B7018DC3E0B002B7FB0 /* ImageScrollView.m in Sources */,
 				BEA8395218C4D35800184150 /* NSString+Helper.m in Sources */,
@@ -808,7 +814,7 @@
 					/Users/ken/Developer/GoogleAnalyticsServicesiOS_3.06,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0B193B42-A735-4839-934A-743549728CEC";
+				PROVISIONING_PROFILE = "A21D43E4-DB27-458F-A448-2548476F390F";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -818,8 +824,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ken Tran (W5QSS7NALV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ken Tran (W5QSS7NALV)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MangaBox/MangaBox-Prefix.pch";
 				INFOPLIST_FILE = "MangaBox/MangaBox-Info.plist";
@@ -828,7 +834,7 @@
 					/Users/ken/Developer/GoogleAnalyticsServicesiOS_3.06,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0B193B42-A735-4839-934A-743549728CEC";
+				PROVISIONING_PROFILE = "5BCFDDAB-88DD-4234-AD4C-A5C70EDC1DB0";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

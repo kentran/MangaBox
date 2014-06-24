@@ -17,6 +17,15 @@
 
 @implementation ImageViewController
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"View Manga Page"];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 #pragma mark - Properties
 
 - (void)setChapter:(Chapter *)chapter
