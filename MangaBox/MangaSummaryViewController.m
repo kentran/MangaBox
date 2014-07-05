@@ -31,6 +31,20 @@
 
 @implementation MangaSummaryViewController
 
+#pragma mark - View Controller Life Cycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.coverImageView.hidden = YES;
+    self.coverImageView.layer.masksToBounds = NO;
+    self.coverImageView.layer.shadowRadius = 2;
+    self.coverImageView.layer.shadowOpacity = 0.2f;
+    self.coverImageView.layer.borderWidth = 1;
+    self.coverImageView.layer.borderColor = UIColorFromRGB(0xbfbfbf).CGColor;
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -39,6 +53,8 @@
     [tracker set:kGAIScreenName value:@"Manga Summary Screen"];
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
+
+#pragma mark - Properties
 
 - (void)setMangaURL:(NSURL *)mangaURL
 {
@@ -59,7 +75,7 @@
 - (void)setCover:(UIImage *)cover
 {
     self.coverImageView.image = cover;
-    self.coverImageView.contentMode = UIViewContentModeScaleAspectFit;
+    self.coverImageView.contentMode = UIViewContentModeScaleToFill;
     
     [self enableButtonsAndLabels];
     [self.detailsSummarySpinner stopAnimating];

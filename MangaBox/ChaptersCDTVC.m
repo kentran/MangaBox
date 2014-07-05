@@ -120,10 +120,23 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat direction = 1; // from right
+    cell.transform = CGAffineTransformMakeTranslation(direction * cell.bounds.size.width, 0);
+    [UIView animateWithDuration:0.25 animations:^{
+        cell.transform = CGAffineTransformIdentity;
+    }];
+}
+
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    NSLog(@"%d", buttonIndex);
+    // if tap outside of actionsheet on ipad, actionsheet will automatically cancel
+    if (buttonIndex < 0) return;
+    
     NSString *choice = [actionSheet buttonTitleAtIndex:buttonIndex];
     NSIndexPath *indexPath = self.selectedIndexPath;
     Chapter *chapter = [self.fetchedResultsController objectAtIndexPath:self.selectedIndexPath];
@@ -255,7 +268,10 @@
     } else {
         [actionSheet addButtonWithTitle:@"Remove Bookmark"];
     }
-    [actionSheet addButtonWithTitle:@"Cancel"]; // put at bottom (don't do at all on iPad)
+
+    if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
+        [actionSheet addButtonWithTitle:@"Cancel"]; // put at bottom (don't do at all on iPad)
+    }
     
     [actionSheet showInView:self.view]; // different on iPad
 }

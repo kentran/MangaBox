@@ -70,9 +70,6 @@
     UILabel *chapters = (UILabel *)[cell.contentView viewWithTag:CHAPTERS_LABEL_TAG];
     UILabel *status = (UILabel *)[cell.contentView viewWithTag:STATUS_LABEL_TAG];
     
-    UIImageView *coverImageView = (UIImageView *)[cell.contentView viewWithTag:COVER_IMAGE_TAG];
-    UIImageView *sourceImageView = (UIImageView *)[cell.contentView viewWithTag:SOURCE_IMAGE_TAG];
-    
     title.text = manga.title;
     title.lineBreakMode = NSLineBreakByWordWrapping;
     title.numberOfLines = 2;
@@ -81,14 +78,29 @@
     
     status.text = manga.completionStatus;
     
+    UIImageView *coverImageView = (UIImageView *)[cell.contentView viewWithTag:COVER_IMAGE_TAG];
+    coverImageView.layer.masksToBounds = NO;
+    coverImageView.layer.shadowRadius = 2;
+    coverImageView.layer.shadowOpacity = 0.2f;
+    coverImageView.layer.borderWidth = 1;
+    coverImageView.layer.borderColor = UIColorFromRGB(0xbfbfbf).CGColor;
     coverImageView.image = [UIImage imageWithData:manga.cover.imageData];
     coverImageView.contentMode = UIViewContentModeScaleAspectFit;
     
+    UIImageView *sourceImageView = (UIImageView *)[cell.contentView viewWithTag:SOURCE_IMAGE_TAG];
     UIImage *logo = [MangaFetcher logoForSource:manga.source];
     sourceImageView.image = logo;
     sourceImageView.contentMode = UIViewContentModeLeft;
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    cell.layer.transform = CATransform3DMakeScale(0.5, 0.5, 1);
+    [UIView animateWithDuration:0.25 animations:^{
+        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);;
+    }];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

@@ -93,7 +93,7 @@
             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
             if (!result) {
                 // if the result can't be found, alert the user
-                [self fatalAlert:@"Result is not available. You are not allow to search continuously within 5s"];
+                [self fatalAlert:@"No result is availabel for your search. Please note that some website does not allow you to search continuously within 5s. You can change the criteria and try again later"];
                 return;
             } else {
                 [self.searchedMangas addObjectsFromArray:result];   // add result to current list of mangas

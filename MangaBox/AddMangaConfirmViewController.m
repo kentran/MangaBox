@@ -39,6 +39,20 @@
 
 @implementation AddMangaConfirmViewController
 
+#pragma mark - View Controller Life Cycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.imageView.hidden = YES;
+    self.imageView.layer.masksToBounds = NO;
+    self.imageView.layer.shadowRadius = 2;
+    self.imageView.layer.shadowOpacity = 0.2f;
+    self.imageView.layer.borderWidth = 1;
+    self.imageView.layer.borderColor = UIColorFromRGB(0xbfbfbf).CGColor;
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];

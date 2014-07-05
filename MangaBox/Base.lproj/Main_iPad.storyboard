@@ -1444,7 +1444,7 @@
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <attributedString key="attributedText">
                                     <fragment>
-                                        <string key="content">MangaBox is an mobile application that allow user to search, download and read manga.   MangaBox currently supports the following manga websites: - mangafox.me - mangareader.net  More manga websites will be integrated in the future. If you have any suggestion please send an email to mangaboxdev@gmail.com  Version: 1.0.0</string>
+                                        <string key="content">MangaBox is an mobile application that allow user to search, download and read manga.   MangaBox currently supports the following manga websites: - mangafox.me - mangareader.net  More manga websites will be integrated in the future. If you have any suggestion please send an email to mangaboxdev@gmail.com  Version: 1.0.1</string>
                                         <attributes>
                                             <color key="NSColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <font key="NSFont" size="17" name="Helvetica"/>

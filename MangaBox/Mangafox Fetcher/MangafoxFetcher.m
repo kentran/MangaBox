@@ -162,7 +162,15 @@
         if ([chapterURL rangeOfString:@".html"].location == NSNotFound)
             [chapterURL appendString:@"1.html"];
         
-        NSDictionary *chapterInfo = @{CHAPTER_NAME: [aTags[0] text],
+        NSString *chapterName = [aTags[0] text];
+        
+        // get the volume text in the URL
+        NSArray *urlComponents = [chapterURL componentsSeparatedByString:@"/"];
+        NSInteger volumeIdx = [urlComponents count] - 3;
+        NSString *volumeText = urlComponents[volumeIdx];
+        volumeText = [volumeText uppercaseString];
+        
+        NSDictionary *chapterInfo = @{CHAPTER_NAME: [NSString stringWithFormat:@"%@ - %@", volumeText, chapterName],
                                      CHAPTER_URL: chapterURL
                                      };
         [result addObject:chapterInfo];

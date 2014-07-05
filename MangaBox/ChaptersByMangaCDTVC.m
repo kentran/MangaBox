@@ -17,6 +17,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *authorTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *artistTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusTextLabel;
+@property (weak, nonatomic) IBOutlet UIButton *continueReadingButton;
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *chapterOrderButton;
 
 @property (nonatomic, strong) NSString *downloadButtonTitle;
 
@@ -45,11 +48,25 @@
     self.statusTextLabel.text = self.manga.completionStatus;
     self.navigationItem.title = @"Menu";
     
+    /* Decorate the cover */
+    self.coverImageView.layer.masksToBounds = NO;
+    self.coverImageView.layer.shadowRadius = 2;
+    self.coverImageView.layer.shadowOpacity = 0.2f;
+    self.coverImageView.layer.borderWidth = 1;
+    self.coverImageView.layer.borderColor = UIColorFromRGB(0xbfbfbf).CGColor;
+    
+    self.continueReadingButton.layer.cornerRadius = 4.0f;
+    
     self.downloadButtonTitle = @"Download all chapters";
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(prepareForAlert:)
                                                  name:errorDownloadingChapter
                                                object:nil];
+    
+    /* Register the value changed event for segment control button */
+    [self.chapterOrderButton addTarget:self
+                                action:@selector(setupFetchedResultsController)
+                      forControlEvents:UIControlEventValueChanged];
 }
 
 - (NSMutableArray *)downloadQueue
@@ -90,7 +107,7 @@
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Chapter"];
         request.predicate = [NSPredicate predicateWithFormat:@"whichManga = %@", self.manga];
         request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"url"
-                                                                  ascending:YES
+                                                                  ascending:!self.chapterOrderButton.selectedSegmentIndex
                                                                    selector:@selector(localizedStandardCompare:)]];
         
         self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
@@ -118,6 +135,9 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    // if tap outside of actionsheet on ipad, actionsheet will automatically cancel
+    if (buttonIndex < 0) return;
+    
     // calling super since ChaptersCDTVC also implement actionSheetDelegate
     // this method only add on to the code
     [super actionSheet:actionSheet clickedButtonAtIndex:buttonIndex];

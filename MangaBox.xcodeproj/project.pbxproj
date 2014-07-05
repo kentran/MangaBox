@@ -393,10 +393,10 @@
 				BEB0363718C879ED006591C8 /* Views */,
 				BE14772018CA24DA00537103 /* Models */,
 				BE2B92A218C228D3003EC6D7 /* Manga Fetcher */,
+				BE2B926718C2281E003EC6D7 /* Supporting Files */,
 				BEA87F75190621E200477D97 /* Google Analytics */,
 				BEA8395318C5BE1100184150 /* Helpers */,
 				BEA8394618C4758800184150 /* HTML Parser */,
-				BE2B926718C2281E003EC6D7 /* Supporting Files */,
 			);
 			path = MangaBox;
 			sourceTree = "<group>";

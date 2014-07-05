@@ -105,8 +105,6 @@
 {
     if (self.document.documentState == UIDocumentStateNormal) {
         NSManagedObjectContext *context = self.document.managedObjectContext;
-        [context setUndoManager:nil];
-        [context setRetainsRegisteredObjects:NO];
         MenuTabBarController *tabBarController = (MenuTabBarController *)self.window.rootViewController;
         tabBarController.managedObjectContext = context;
         [Chapter refreshDownloadStatusInContext:context];

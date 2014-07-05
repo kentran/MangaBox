@@ -12,10 +12,26 @@
 
 @interface AdvancedSearchTVC () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *criteriaView;
 @property (weak, nonatomic) IBOutlet UITextField *seriesNameField;
+
+
+@property (weak, nonatomic) IBOutlet UIView *orderView;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *statusText;
 @property (weak, nonatomic) IBOutlet UILabel *sortText;
+
+@property (weak, nonatomic) IBOutlet UIView *completedMangaView;
+@property (weak, nonatomic) IBOutlet UILabel *completedIndicatorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *completedLabel;
+
+
+
+@property (weak, nonatomic) IBOutlet UIView *ongoingMangaView;
+@property (weak, nonatomic) IBOutlet UILabel *ongoingIndicatorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ongoingLabel;
 
 @property (nonatomic, strong) NSArray *sortBy;
 @property (nonatomic, strong) NSArray *sortOrder;
@@ -42,13 +58,44 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Make search text field clearer
+    self.seriesNameField.borderStyle = UITextBorderStyleRoundedRect;
+    
+    // Completion status view
+    self.completedMangaView.layer.cornerRadius = 8.0f;
+    self.ongoingMangaView.layer.cornerRadius = 8.0f;
+    
+    /* By default, make the both status as selected */
+    self.ongoingMangaView.backgroundColor = STATUS_SELECTED_BORDER_BACKGROUND_COLOR;
+    self.ongoingLabel.backgroundColor = STATUS_SELECTED_LABEL_BACKGROUND_COLOR;
+    self.ongoingLabel.textColor = [UIColor whiteColor];
+    self.ongoingIndicatorLabel.backgroundColor = STATUS_SELECTED_LABEL_BACKGROUND_COLOR;
+    self.ongoingIndicatorLabel.text = STATUS_SELECTED;
+    self.ongoingIndicatorLabel.textColor = [UIColor whiteColor];
+    
+    self.completedMangaView.backgroundColor = STATUS_SELECTED_BORDER_BACKGROUND_COLOR;
+    self.completedLabel.backgroundColor = STATUS_SELECTED_LABEL_BACKGROUND_COLOR;
+    self.completedLabel.textColor = [UIColor whiteColor];
+    self.completedIndicatorLabel.backgroundColor = STATUS_SELECTED_LABEL_BACKGROUND_COLOR;
+    self.completedIndicatorLabel.text = STATUS_SELECTED;
+    self.completedIndicatorLabel.textColor = [UIColor whiteColor];
+    
+    /* Order view layout */
+    //self.orderView.layer.borderWidth = 1;
+    //self.orderView.layer.borderColor = UIColorFromRGB(0xbfbfbf).CGColor;
+    self.orderView.layer.cornerRadius = 8.0f;
+    self.orderView.layer.masksToBounds = NO;
+    self.orderView.layer.shadowOpacity = 0.1;
+    self.orderView.layer.shadowRadius = 2;
+    
+    /* Initialize value for ordering */
     self.sortBy = @[@"Name", @"Chapters", @"Views", @"Latest Update"];
     self.sortOrder = @[@"ASC", @"DESC"];
     self.completionStatus = @[@"Both", @"Completed", @"Ongoing"];
     
-    self.statusText.text = self.completionStatus[[self.pickerView selectedRowInComponent:0]];
-    NSString *selectedSort = self.sortBy[[self.pickerView selectedRowInComponent:1]];
-    NSString *selectedOrder = self.sortOrder[[self.pickerView selectedRowInComponent:2]];
+    NSString *selectedSort = self.sortBy[[self.pickerView selectedRowInComponent:0]];
+    NSString *selectedOrder = self.sortOrder[[self.pickerView selectedRowInComponent:1]];
     self.sortText.text = [NSString stringWithFormat:@"%@ - %@", selectedSort, selectedOrder];
     
     [self.tableView reloadData];
@@ -107,21 +154,17 @@
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
     switch (component) {
         case 0:
-            return [self.completionStatus count];
-            break;
-          
-        case 1:
             return [self.sortBy count];
             break;
             
-        case 2:
+        case 1:
             return [self.sortOrder count];
             break;
     }
@@ -132,15 +175,11 @@
 {
     switch (component) {
         case 0:
-            self.statusText.text = self.completionStatus[row];
+            self.sortText.text = [NSString stringWithFormat:@"%@ - %@", self.sortBy[row], self.sortOrder[[pickerView selectedRowInComponent:1]]];
             break;
             
         case 1:
-            self.sortText.text = [NSString stringWithFormat:@"%@ - %@", self.sortBy[row], self.sortOrder[[pickerView selectedRowInComponent:2]]];
-            break;
-            
-        case 2:
-            self.sortText.text = [NSString stringWithFormat:@"%@ - %@", self.sortBy[[pickerView selectedRowInComponent:1]], self.sortOrder[row]];
+            self.sortText.text = [NSString stringWithFormat:@"%@ - %@", self.sortBy[[pickerView selectedRowInComponent:0]], self.sortOrder[row]];
             break;
     }
 }
@@ -153,13 +192,11 @@
     if (!pView) {
         pView = [[UILabel alloc] init];
         if (component == 0) {
-            pView.text = self.completionStatus[row];
-        } else if (component == 1) {
             pView.text = self.sortBy[row];
         } else {
             pView.text = self.sortOrder[row];
         }
-        pView.font = [UIFont fontWithName:@"HelveticaNeue" size:12];
+        pView.font = [UIFont systemFontOfSize:17.0f];
     }
     return pView;
 }
@@ -266,7 +303,17 @@
         self.lastRequestTimestamp = fetchTimestamp;
     }
     
-    
+    NSString *completionStatus;
+    if ([self.completedIndicatorLabel.text isEqualToString:STATUS_SELECTED]
+        && [self.ongoingIndicatorLabel.text isEqualToString:STATUS_SELECTED]) {
+        completionStatus = @"Both";
+    } else if ([self.completedIndicatorLabel.text isEqualToString:STATUS_SELECTED]) {
+        completionStatus = @"Completed";
+    } else if ([self.ongoingIndicatorLabel.text isEqualToString:STATUS_SELECTED]) {
+        completionStatus = @"Ongoing";
+    } else {
+        completionStatus = @"";
+    }
     
     [self.params setValuesForKeysWithDictionary: @{
        @"fetchTimestamp": [NSString stringWithFormat:@"%f", fetchTimestamp],
@@ -274,11 +321,55 @@
        @"author": @"",
        @"artist": @"",
        @"genres": self.genresDictionary,
-       @"sortBy": self.sortBy[[self.pickerView selectedRowInComponent:1]],
-       @"sortOrder": self.sortOrder[[self.pickerView selectedRowInComponent:2]],
-       @"isCompleted": self.completionStatus[[self.pickerView selectedRowInComponent:0]],
+       @"sortBy": self.sortBy[[self.pickerView selectedRowInComponent:0]],
+       @"sortOrder": self.sortOrder[[self.pickerView selectedRowInComponent:1]],
+       @"isCompleted": completionStatus,
        @"page": @"1"
     }];
+}
+
+#pragma mark - IBAction
+
+- (IBAction)completedToggle:(UITapGestureRecognizer *)sender
+{
+    if ([self.completedIndicatorLabel.text isEqualToString:STATUS_SELECTED]) {
+        /* Change to deselected status */
+        self.completedMangaView.backgroundColor = STATUS_DESELECTED_BORDER_BACKGROUND_COLOR;
+        self.completedLabel.backgroundColor = STATUS_DESELECTED_LABEL_BACKGROUND_COLOR;
+        self.completedLabel.textColor = [UIColor darkGrayColor];
+        self.completedIndicatorLabel.backgroundColor = STATUS_DESELECTED_LABEL_BACKGROUND_COLOR;
+        self.completedIndicatorLabel.text = STATUS_DESELECTED;
+        self.completedIndicatorLabel.textColor = [UIColor darkGrayColor];
+    } else {
+        /* Change to selected status */
+        self.completedMangaView.backgroundColor = STATUS_SELECTED_BORDER_BACKGROUND_COLOR;
+        self.completedLabel.backgroundColor = STATUS_SELECTED_LABEL_BACKGROUND_COLOR;
+        self.completedLabel.textColor = [UIColor whiteColor];
+        self.completedIndicatorLabel.backgroundColor = STATUS_SELECTED_LABEL_BACKGROUND_COLOR;
+        self.completedIndicatorLabel.text = STATUS_SELECTED;
+        self.completedIndicatorLabel.textColor = [UIColor whiteColor];
+    }
+}
+
+- (IBAction)ongoingToggle:(UITapGestureRecognizer *)sender
+{
+    if ([self.ongoingIndicatorLabel.text isEqualToString:STATUS_SELECTED]) {
+        /* Change to deselected status */
+        self.ongoingMangaView.backgroundColor = STATUS_DESELECTED_BORDER_BACKGROUND_COLOR;
+        self.ongoingLabel.backgroundColor = STATUS_DESELECTED_LABEL_BACKGROUND_COLOR;
+        self.ongoingLabel.textColor = [UIColor darkGrayColor];
+        self.ongoingIndicatorLabel.backgroundColor = STATUS_DESELECTED_LABEL_BACKGROUND_COLOR;
+        self.ongoingIndicatorLabel.text = STATUS_DESELECTED;
+        self.ongoingIndicatorLabel.textColor = [UIColor darkGrayColor];
+    } else {
+        /* Change to selected status */
+        self.ongoingMangaView.backgroundColor = STATUS_SELECTED_BORDER_BACKGROUND_COLOR;
+        self.ongoingLabel.backgroundColor = STATUS_SELECTED_LABEL_BACKGROUND_COLOR;
+        self.ongoingLabel.textColor = [UIColor whiteColor];
+        self.ongoingIndicatorLabel.backgroundColor = STATUS_SELECTED_LABEL_BACKGROUND_COLOR;
+        self.ongoingIndicatorLabel.text = STATUS_SELECTED;
+        self.ongoingIndicatorLabel.textColor = [UIColor whiteColor];
+    }
 }
 
 
