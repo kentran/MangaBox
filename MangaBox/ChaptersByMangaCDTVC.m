@@ -46,14 +46,11 @@
     self.authorTextLabel.text = self.manga.author;
     self.artistTextLabel.text = self.manga.artist;
     self.statusTextLabel.text = self.manga.completionStatus;
-    self.navigationItem.title = @"Menu";
     
-    /* Decorate the cover */
-    self.coverImageView.layer.masksToBounds = NO;
-    self.coverImageView.layer.shadowRadius = 2;
-    self.coverImageView.layer.shadowOpacity = 0.2f;
-    self.coverImageView.layer.borderWidth = 1;
-    self.coverImageView.layer.borderColor = UIColorFromRGB(0xbfbfbf).CGColor;
+    /* Background Image */
+    UIImage *backgroundImage = [[UIImage imageWithData:self.manga.cover.imageData] imageByApplyingFilterNamed:@"CIGaussianBlur"];
+    
+    self.view.backgroundColor = [[UIColor colorWithPatternImage:backgroundImage] colorWithAlphaComponent:0.19f];
     
     self.continueReadingButton.layer.cornerRadius = 4.0f;
     

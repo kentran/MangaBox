@@ -12,6 +12,7 @@
 #import "MenuTabBarController.h"
 #import "MangaFetcher.h"
 #import "ChaptersByMangaCDTVC.h"
+#import "MangaViewController.h"
 
 @interface AddMangaConfirmViewController () <UIAlertViewDelegate>
 @property (nonatomic, strong) NSArray *chapterDictionaryList;
@@ -131,9 +132,9 @@
     // Navigate the navigation controller to the new manga
     UINavigationController *navigationController = (UINavigationController *)self.tabBarController.viewControllers[0];
     [navigationController popToRootViewControllerAnimated:NO];
-    ChaptersByMangaCDTVC *cbmcdtvc = [self.storyboard instantiateViewControllerWithIdentifier:@"Chapters By Manga"];
-    cbmcdtvc.manga = newManga;
-    [navigationController pushViewController:cbmcdtvc animated:YES];
+    MangaViewController *mangaVC = [self.storyboard instantiateViewControllerWithIdentifier:@"Chapters List"];
+    mangaVC.manga = newManga;
+    [navigationController pushViewController:mangaVC animated:YES];
 }
 
 #pragma mark - Display Label

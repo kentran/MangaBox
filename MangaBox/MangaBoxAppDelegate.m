@@ -30,6 +30,12 @@
     NSURL *url = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"MangaBox"];
     self.document = [[UIManagedDocument alloc] initWithFileURL:url];
     
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                             [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+    
+    self.document.persistentStoreOptions = options;
+    
     if ([[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
         [self.document openWithCompletionHandler:^(BOOL success) {
             if (success) [self documentIsReady];
@@ -45,6 +51,18 @@
     
     [self loadDefaultSettings];
     [self resetKeepAwakeSetting];
+    
+    /* Cutomize appearance */
+    
+    // Global tint color
+    [self.window setTintColor:UIColorFromRGB(0x648f00)];
+    
+    // Status bar
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    // UINavigationBar
+    //[[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
     
     return YES;
 }

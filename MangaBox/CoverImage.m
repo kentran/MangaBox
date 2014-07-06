@@ -2,7 +2,7 @@
 //  CoverImage.m
 //  MangaBox
 //
-//  Created by Ken Tran on 1/6/14.
+//  Created by Ken Tran on 6/7/14.
 //  Copyright (c) 2014 Ken Tran. All rights reserved.
 //
 
@@ -13,6 +13,7 @@
 @implementation CoverImage
 
 @dynamic imageData;
+@dynamic blurImageData;
 @dynamic whichManga;
 
 @end

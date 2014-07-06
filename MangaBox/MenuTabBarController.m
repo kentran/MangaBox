@@ -16,10 +16,22 @@
 
 @implementation MenuTabBarController
 
+#pragma mark - View Controller Life Cycle
+
 - (void)awakeFromNib
 {
     self.delegate = self;
 }
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.tabBar.translucent = YES;
+}
+
+
+#pragma mark - Properties
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {

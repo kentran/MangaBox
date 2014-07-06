@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Chapter" representedClassName="Chapter" syncable="YES">
+        <attribute name="bookmark" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="currentPageIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="downloadStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pagesCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="updated" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="pages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Page" inverseName="whichChapter" inverseEntity="Page" syncable="YES"/>
+        <relationship name="whichManga" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Manga" inverseName="chapters" inverseEntity="Manga" syncable="YES"/>
+    </entity>
+    <entity name="CoverImage" representedClassName="CoverImage" syncable="YES">
+        <attribute name="blurImageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <relationship name="whichManga" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Manga" inverseName="cover" inverseEntity="Manga" syncable="YES"/>
+    </entity>
+    <entity name="Manga" representedClassName="Manga" syncable="YES">
+        <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="completionStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="coverURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="genres" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unique" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="chapters" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Chapter" inverseName="whichManga" inverseEntity="Chapter" syncable="YES"/>
+        <relationship name="cover" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoverImage" inverseName="whichManga" inverseEntity="CoverImage" syncable="YES"/>
+    </entity>
+    <entity name="Page" representedClassName="Page" syncable="YES">
+        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="whichChapter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chapter" inverseName="pages" inverseEntity="Chapter" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Chapter" positionX="-333" positionY="-27" width="128" height="178"/>
+        <element name="CoverImage" positionX="79" positionY="-0" width="128" height="90"/>
+        <element name="Manga" positionX="160" positionY="155" width="128" height="223"/>
+        <element name="Page" positionX="-63" positionY="-117" width="128" height="105"/>
+    </elements>
+</model>

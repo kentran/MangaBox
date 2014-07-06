@@ -14,6 +14,7 @@
 #import "UIImage+Thumbnail.h"
 #import "MangaBoxAppDelegate.h"
 #import "MangaFetcher.h"
+#import "MangaViewController.h"
 
 @interface MangasCDTVC () <UIAlertViewDelegate>
 
@@ -79,13 +80,8 @@
     status.text = manga.completionStatus;
     
     UIImageView *coverImageView = (UIImageView *)[cell.contentView viewWithTag:COVER_IMAGE_TAG];
-    coverImageView.layer.masksToBounds = NO;
-    coverImageView.layer.shadowRadius = 2;
-    coverImageView.layer.shadowOpacity = 0.2f;
-    coverImageView.layer.borderWidth = 1;
-    coverImageView.layer.borderColor = UIColorFromRGB(0xbfbfbf).CGColor;
     coverImageView.image = [UIImage imageWithData:manga.cover.imageData];
-    coverImageView.contentMode = UIViewContentModeScaleAspectFit;
+    coverImageView.contentMode = UIViewContentModeScaleToFill;
     
     UIImageView *sourceImageView = (UIImageView *)[cell.contentView viewWithTag:SOURCE_IMAGE_TAG];
     UIImage *logo = [MangaFetcher logoForSource:manga.source];
@@ -146,8 +142,10 @@
     // probably fine ... hard to imagine any other way this class would segue to PhotosByPhotographerCDTVC
     if ([vc isKindOfClass:[ChaptersByMangaCDTVC class]]) {
         ChaptersByMangaCDTVC *clbmcdtvc = (ChaptersByMangaCDTVC *)vc;
-        clbmcdtvc.title = manga.title;
         clbmcdtvc.manga = manga;
+    } else if ([vc isKindOfClass:[MangaViewController class]]) {
+        MangaViewController *mangaVC = (MangaViewController *)vc;
+        mangaVC.manga = manga;
     }
 }
 

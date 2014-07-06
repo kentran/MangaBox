@@ -23,12 +23,20 @@
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self setupFetchedResultsController];
+}
+
 - (void)viewDidLoad
 {
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(prepareForAlert:)
                                                  name:errorDownloadingChapter
                                                object:nil];
+    
+    self.tableView.sectionIndexBackgroundColor = self.view.backgroundColor;
 }
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext

@@ -92,15 +92,15 @@
     
     if ([chapter.downloadStatus isEqualToString:CHAPTER_NEED_DOWNLOAD]) {
         pages.text = @"Please download to read";
-        pages.textColor = [UIColor blackColor];
+        pages.textColor = UIColorFromRGB(0x88898c);
         progressBar.hidden = YES;
     } else if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED]) {
         progressBar.hidden = YES;
         pages.text = [NSString stringWithFormat:@"Pages: %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
-        pages.textColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+        pages.textColor = UIColorFromRGB(0x648f00);
     } else if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING]) {
         pages.text = [NSString stringWithFormat:@"Downloading... %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
-        pages.textColor = [UIColor blackColor];
+        pages.textColor = UIColorFromRGB(0x648f00);
         
         // Add progress bar for downloading view
         progressBar.hidden = NO;
@@ -112,21 +112,21 @@
     } else if ([chapter.downloadStatus isEqualToString:CHAPTER_STOPPED_DOWNLOADING]) {
         progressBar.hidden = YES;
         pages.text = [NSString stringWithFormat:@"Download stopped... %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
-        pages.textColor = [UIColor blackColor];
+        pages.textColor = UIColorFromRGB(0x88898c);
     } else {
         pages.text = [NSString stringWithFormat:@"Pages: %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
-        pages.textColor = [UIColor blackColor];
+        pages.textColor = UIColorFromRGB(0x88898c);
         progressBar.hidden = YES;
     }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat direction = 1; // from right
-    cell.transform = CGAffineTransformMakeTranslation(direction * cell.bounds.size.width, 0);
-    [UIView animateWithDuration:0.25 animations:^{
-        cell.transform = CGAffineTransformIdentity;
-    }];
+//    CGFloat direction = 1; // from right
+//    cell.transform = CGAffineTransformMakeTranslation(direction * cell.bounds.size.width, 0);
+//    [UIView animateWithDuration:0.25 animations:^{
+//        cell.transform = CGAffineTransformIdentity;
+//    }];
 }
 
 #pragma mark - UIActionSheetDelegate
