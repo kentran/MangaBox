@@ -61,6 +61,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(autoPreviousChapter)
                                                  name:autoPreviousChapterNotification object:nil];
+    
+    self.navigationController.toolbar.barStyle = UIBarStyleBlackTranslucent;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -82,7 +84,6 @@
 
 - (BOOL)shouldAutorotate
 {
-    [super shouldAutorotate];
     if ([self.lockRotationButton.title isEqualToString:@"🔒"])
         return NO;
     else

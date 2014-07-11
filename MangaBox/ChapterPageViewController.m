@@ -126,13 +126,27 @@
     [self.pageViewController didMoveToParentViewController:self];
 }
 
-- (ImageViewController *)viewControllerAtIndex:(NSUInteger)index
+- (ImageViewController *)viewControllerAtIndex:(NSInteger)index
 {
     // Create ImageViewController, pass the chapter and index
     // ImageViewController will figure it out which page to display
     ImageViewController *ivc = [[ImageViewController alloc] init];
     ivc.pageIndex = index;
     ivc.chapter = self.chapter;
+    
+    if (!(index <= ((int)[self.chapter.pages count] - 1))) {
+        // If there is no page downloaded
+        // Busy waiting on another queue until download is finished
+        dispatch_queue_t loadPageQ = dispatch_queue_create("Loading Page", NULL);
+        dispatch_async(loadPageQ, ^{
+            NSLog(@"Waiting");
+            while (!(index <= ((int)[self.chapter.pages count] - 1))) {}
+            NSLog(@"Loading done");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self setupPageViewController];
+            });
+        });
+    }
     
     return ivc;
 }
@@ -142,7 +156,7 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
       viewControllerBeforeViewController:(UIViewController *)viewController
 {
-    NSUInteger index = ((ImageViewController *)viewController).pageIndex;
+    NSInteger index = ((ImageViewController *)viewController).pageIndex;
     self.currentPageIndex = index;
     
     if ((index == 0) || (index == NSNotFound)) {
@@ -158,7 +172,7 @@
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
        viewControllerAfterViewController:(UIViewController *)viewController
 {
-    NSUInteger index = ((ImageViewController *)viewController).pageIndex;
+    NSInteger index = ((ImageViewController *)viewController).pageIndex;
     self.currentPageIndex = index;
     
     NSInteger lastAllowableIndex = [self.chapter.pages count] - 1;

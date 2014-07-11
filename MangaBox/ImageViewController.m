@@ -13,6 +13,8 @@
 
 @interface ImageViewController () <UIScrollViewDelegate>
 
+@property (nonatomic ,strong) ImageScrollView *scrollView;
+
 @end
 
 @implementation ImageViewController
@@ -34,23 +36,48 @@
     [self loadView];
 }
 
+- (ImageScrollView *)scrollView
+{
+    if (!_scrollView) _scrollView = [[ImageScrollView alloc] init];
+    return _scrollView;
+}
+
 - (void)loadView
 {
     // Prepare the ImageScroll View
-    ImageScrollView *scrollView = [[ImageScrollView alloc] init];
-    if (self.pageIndex <= [self.chapter.pages count] - 1) {
-        [self.chapter updateCurrentPageIndex:self.pageIndex];
-        Page *page = [Page pageOfChapter:self.chapter atIndex:self.pageIndex];
-        if (page) {
-            NSURL *imageURL = [NSURL URLWithString:page.imageURL];
-            scrollView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-        }
+    NSInteger blankFlag = 0;
+    if (self.pageIndex <= ((int)[self.chapter.pages count] - 1)) {
+        [self loadPageToView];
     } else {
-        scrollView.image = [UIImage imageNamed:@"blank"];
+        //NSLog(@"BLANK");
+        //self.scrollView.image = [UIImage imageNamed:@"blank"];
+        blankFlag = 1;
     }
     
-    // Replace the view property with the ImageScrollView
-    self.view = scrollView;
+//    if (blankFlag) {
+//        dispatch_queue_t loadPageQ = dispatch_queue_create("Loading Page", NULL);
+//        dispatch_async(loadPageQ, ^{
+//            NSLog(@"Wating");
+//            while (!(self.pageIndex <= ((int)[self.chapter.pages count] - 1)));
+//            NSLog(@"Loading done");
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self loadPageToView];
+//                //[self loadView];
+//                //self.view = self.scrollView;
+//            });
+//        });
+//    }
+}
+
+- (void)loadPageToView
+{
+    [self.chapter updateCurrentPageIndex:self.pageIndex];
+    Page *page = [Page pageOfChapter:self.chapter atIndex:self.pageIndex];
+    if (page) {
+        NSURL *imageURL = [NSURL URLWithString:page.imageURL];
+        self.scrollView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+        self.view = self.scrollView;
+    }
 }
 
 

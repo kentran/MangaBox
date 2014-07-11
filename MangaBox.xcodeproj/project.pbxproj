@@ -69,6 +69,8 @@
 		BEB04249196853260021ECA0 /* UIImage+Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB04248196853260021ECA0 /* UIImage+Filter.m */; };
 		BEB0424D1968F9E40021ECA0 /* CoverImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0424C1968F9E40021ECA0 /* CoverImage.m */; };
 		BEB04250196901590021ECA0 /* MangaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0424F196901590021ECA0 /* MangaViewController.m */; };
+		BEB0425219699D460021ECA0 /* popular in Resources */ = {isa = PBXBuildFile; fileRef = BEB0425119699D460021ECA0 /* popular */; };
+		BEB0425519699F440021ECA0 /* PopularTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0425419699F440021ECA0 /* PopularTVC.m */; };
 		BEB4445218FD1EFE00F0F578 /* SearchResultSplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB4445118FD1EFE00F0F578 /* SearchResultSplitViewController.m */; };
 		BEB46F3919585C8D008E81EB /* Page+Delete.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB46F3819585C8D008E81EB /* Page+Delete.m */; };
 		BEC503AF18CB26D00013B7D0 /* Manga+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC503AE18CB26D00013B7D0 /* Manga+Create.m */; };
@@ -202,6 +204,9 @@
 		BEB0424C1968F9E40021ECA0 /* CoverImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverImage.m; sourceTree = "<group>"; };
 		BEB0424E196901590021ECA0 /* MangaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MangaViewController.h; sourceTree = "<group>"; };
 		BEB0424F196901590021ECA0 /* MangaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MangaViewController.m; sourceTree = "<group>"; };
+		BEB0425119699D460021ECA0 /* popular */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = popular; sourceTree = "<group>"; };
+		BEB0425319699F440021ECA0 /* PopularTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopularTVC.h; sourceTree = "<group>"; };
+		BEB0425419699F440021ECA0 /* PopularTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopularTVC.m; sourceTree = "<group>"; };
 		BEB4445018FD1EFE00F0F578 /* SearchResultSplitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultSplitViewController.h; sourceTree = "<group>"; };
 		BEB4445118FD1EFE00F0F578 /* SearchResultSplitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultSplitViewController.m; sourceTree = "<group>"; };
 		BEB46F3719585C8D008E81EB /* Page+Delete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Page+Delete.h"; sourceTree = "<group>"; };
@@ -266,6 +271,8 @@
 				BEB4445118FD1EFE00F0F578 /* SearchResultSplitViewController.m */,
 				BEA58B7D18DDA032002B7FB0 /* AddMangaConfirmViewController.h */,
 				BEA58B7E18DDA032002B7FB0 /* AddMangaConfirmViewController.m */,
+				BEB0425319699F440021ECA0 /* PopularTVC.h */,
+				BEB0425419699F440021ECA0 /* PopularTVC.m */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -418,6 +425,7 @@
 		BE2B926718C2281E003EC6D7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BEB0425119699D460021ECA0 /* popular */,
 				BEC503B718CB71050013B7D0 /* MangaDictionaryDefinition.h */,
 				BEAAFAE318FE807E00C3649A /* MangaBoxSettingsPropertyKeys.h */,
 				BEA87F80190629F200477D97 /* GoogleAnalyticsConstant.h */,
@@ -608,6 +616,7 @@
 			files = (
 				BE2B927718C2281E003EC6D7 /* Main_iPad.storyboard in Resources */,
 				BE2B928218C2281E003EC6D7 /* Images.xcassets in Resources */,
+				BEB0425219699D460021ECA0 /* popular in Resources */,
 				BE2B927418C2281E003EC6D7 /* Main_iPhone.storyboard in Resources */,
 				BE2B926B18C2281E003EC6D7 /* InfoPlist.strings in Resources */,
 			);
@@ -661,6 +670,7 @@
 				BEB04249196853260021ECA0 /* UIImage+Filter.m in Sources */,
 				BEA820FA18E53D2B00AE2124 /* ChapterViewController.m in Sources */,
 				BE1443C5193AF4A000FC9DE4 /* Page.m in Sources */,
+				BEB0425519699F440021ECA0 /* PopularTVC.m in Sources */,
 				BEA8CC8218D0B2C5000851E4 /* Page+Create.m in Sources */,
 				BEA8394F18C4759900184150 /* XPathQuery.m in Sources */,
 				BEA8210018E5BB2C00AE2124 /* Chapter+Lookup.m in Sources */,

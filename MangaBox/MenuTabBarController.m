@@ -30,7 +30,6 @@
     self.tabBar.translucent = YES;
 }
 
-
 #pragma mark - Properties
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext

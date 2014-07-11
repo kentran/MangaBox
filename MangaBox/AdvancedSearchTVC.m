@@ -197,6 +197,7 @@
             pView.text = self.sortOrder[row];
         }
         pView.font = [UIFont systemFontOfSize:17.0f];
+        pView.textColor = [UIColor whiteColor];
     }
     return pView;
 }

@@ -47,10 +47,15 @@
     self.artistTextLabel.text = self.manga.artist;
     self.statusTextLabel.text = self.manga.completionStatus;
     
+    
+    
     /* Background Image */
     UIImage *backgroundImage = [[UIImage imageWithData:self.manga.cover.imageData] imageByApplyingFilterNamed:@"CIGaussianBlur"];
     
-    self.view.backgroundColor = [[UIColor colorWithPatternImage:backgroundImage] colorWithAlphaComponent:0.19f];
+    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:self.tableView.frame];
+    backgroundImageView.image = backgroundImage;
+    backgroundImageView.alpha = 0.19f;
+    self.tableView.backgroundView = backgroundImageView;
     
     self.continueReadingButton.layer.cornerRadius = 4.0f;
     

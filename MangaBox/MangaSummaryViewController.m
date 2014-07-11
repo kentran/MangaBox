@@ -18,6 +18,10 @@
 @property (weak, nonatomic) IBOutlet UITextView *summaryTextArea;
 @property (weak, nonatomic) IBOutlet UITextView *genresTextArea;
 
+@property (weak, nonatomic) IBOutlet UILabel *genresLabel;
+@property (weak, nonatomic) IBOutlet UILabel *summaryLabel;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
 @property (strong, nonatomic) UIImage *cover;
@@ -33,18 +37,6 @@
 
 #pragma mark - View Controller Life Cycle
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    self.coverImageView.hidden = YES;
-    self.coverImageView.layer.masksToBounds = NO;
-    self.coverImageView.layer.shadowRadius = 2;
-    self.coverImageView.layer.shadowOpacity = 0.2f;
-    self.coverImageView.layer.borderWidth = 1;
-    self.coverImageView.layer.borderColor = UIColorFromRGB(0xbfbfbf).CGColor;
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -55,11 +47,6 @@
 }
 
 #pragma mark - Properties
-
-- (void)setMangaURL:(NSURL *)mangaURL
-{
-    _mangaURL = mangaURL;
-}
 
 - (void)setMangaUnique:(NSString *)mangaUnique
 {
@@ -112,9 +99,11 @@
         self.authorLabel.text = [NSString stringWithFormat:@"%@", [self.mangaDetails objectForKey:MANGA_AUTHOR]];
         self.artistLabel.text = [NSString stringWithFormat:@"%@", [self.mangaDetails objectForKey:MANGA_ARTIST]];
         self.chapterLabel.text = [NSString stringWithFormat:@"%@", self.chaptersCount];
-        self.genresTextArea.text = [NSString stringWithFormat:@"%@", [self.mangaDetails objectForKey:MANGA_GENRES]];
-        self.summaryTextArea.text = [NSString stringWithFormat:@"%@", [self.mangaDetails objectForKey:MANGA_SUMMARY]];
+        self.genresLabel.text = [NSString stringWithFormat:@"%@", [self.mangaDetails objectForKey:MANGA_GENRES]];
+        self.summaryLabel.text = [NSString stringWithFormat:@"%@", [self.mangaDetails objectForKey:MANGA_SUMMARY]];
         [self.detailsSummarySpinner stopAnimating];
+        
+        NSLog(@"%f", self.contentView.bounds.size.width);
     }
 }
 
@@ -168,7 +157,7 @@
         [request setHTTPBody:[post dataUsingEncoding:NSUTF8StringEncoding]];
         
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-        
+
         NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
         NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request
             completionHandler:^(NSURL *location, NSURLResponse *response, NSError *error) {

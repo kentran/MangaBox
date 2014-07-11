@@ -42,18 +42,6 @@
 
 #pragma mark - View Controller Life Cycle
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    self.imageView.hidden = YES;
-    self.imageView.layer.masksToBounds = NO;
-    self.imageView.layer.shadowRadius = 2;
-    self.imageView.layer.shadowOpacity = 0.2f;
-    self.imageView.layer.borderWidth = 1;
-    self.imageView.layer.borderColor = UIColorFromRGB(0xbfbfbf).CGColor;
-}
-
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -174,6 +162,7 @@
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"Parsed Chapter Cell"];
     
     cell.textLabel.text = [self.chapterDictionaryList[indexPath.row] objectForKey:CHAPTER_NAME];
+    cell.textLabel.textColor = [UIColor whiteColor];
 
     return cell;
 }

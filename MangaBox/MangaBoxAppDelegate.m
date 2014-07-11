@@ -61,7 +61,6 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     // UINavigationBar
-    //[[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
     
     return YES;

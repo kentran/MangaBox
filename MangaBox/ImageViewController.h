@@ -12,6 +12,6 @@
 @interface ImageViewController : UIViewController
 
 @property (nonatomic, strong) Chapter *chapter;
-@property NSUInteger pageIndex;
+@property NSInteger pageIndex;
 
 @end
