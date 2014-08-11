@@ -91,14 +91,6 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    cell.layer.transform = CATransform3DMakeScale(0.5, 0.5, 1);
-    [UIView animateWithDuration:0.25 animations:^{
-        cell.layer.transform = CATransform3DMakeScale(1, 1, 1);;
-    }];
-}
-
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {

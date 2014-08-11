@@ -80,9 +80,10 @@
 {
     self.imageView.image = coverImage;
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-    
-    [self displayMangaInfo];
     [self.mangaDictionary setObject:UIImageJPEGRepresentation(coverImage, 1.0) forKey:MANGA_COVER_DATA];
+    [self.spinner stopAnimating];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    [self displayMangaInfo];
 }
 
 - (void)setGenresTextArea:(UITextView *)genresTextArea
@@ -129,25 +130,35 @@
 
 - (void)displayMangaInfo
 {
-    self.titleTextArea.text = [self.mangaDictionary objectForKey:MANGA_TITLE];
-    self.authorTextLabel.text = [self.mangaDictionary objectForKey:MANGA_AUTHOR];
-    self.artistTextLabel.text = [self.mangaDictionary objectForKey:MANGA_ARTIST];
-    self.chapterTextLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.chapterDictionaryList count]];
-    self.genresTextArea.text = [self.mangaDictionary objectForKey:MANGA_GENRES];
-    self.statusTextLabel.text = [self.mangaDictionary objectForKey:MANGA_COMPLETION_STATUS];
-    [self.spinner stopAnimating];
+
+    
+    /*** The code below can be removed, right now just leave it there *****/
+    
+//    self.titleTextArea.text = [self.mangaDictionary objectForKey:MANGA_TITLE];
+//    self.authorTextLabel.text = [self.mangaDictionary objectForKey:MANGA_AUTHOR];
+//    self.artistTextLabel.text = [self.mangaDictionary objectForKey:MANGA_ARTIST];
+//    self.chapterTextLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)[self.chapterDictionaryList count]];
+//    self.genresTextArea.text = [self.mangaDictionary objectForKey:MANGA_GENRES];
+//    self.statusTextLabel.text = [self.mangaDictionary objectForKey:MANGA_COMPLETION_STATUS];
+//    
+//    // Show the labels
+//    for (UIView *subview in self.infoView.subviews)
+//    {
+//        if (![subview isKindOfClass:[UIActivityIndicatorView class]]) {
+//            subview.hidden = NO;
+//        }
+//    }
+//    
+//    // Enable the confirm button
+//    self.confirmButton.enabled = YES;
+    
+    /*=========================================*/
+    
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     
-    // Show the labels
-    for (UIView *subview in self.infoView.subviews)
-    {
-        if (![subview isKindOfClass:[UIActivityIndicatorView class]]) {
-            subview.hidden = NO;
-        }
-    }
-    
-    // Enable the confirm button
-    self.confirmButton.enabled = YES;
+    /* To make it user friendly we try to add the manga immediately when the info is available */
+    [self performSelectorOnMainThread:@selector(confirm:) withObject:nil waitUntilDone:YES];
+    [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:NO];
 }
 
 #pragma UITableViewDataSource
@@ -165,11 +176,6 @@
     cell.textLabel.textColor = [UIColor whiteColor];
 
     return cell;
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    return @"Chapter List";
 }
 
 #pragma mark - Confirm Add Manga

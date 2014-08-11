@@ -29,6 +29,7 @@
 
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *detailsSummarySpinner;
+@property (weak, nonatomic) IBOutlet UIButton *addButton;
 
 @property (strong, nonatomic) NSDictionary *mangaDetails;
 @end
@@ -36,6 +37,15 @@
 @implementation MangaSummaryViewController
 
 #pragma mark - View Controller Life Cycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.addButton.backgroundColor = STATUS_SELECTED_LABEL_BACKGROUND_COLOR;
+    [self.addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    self.addButton.layer.cornerRadius = 6.0f;
+}
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -64,7 +74,6 @@
     self.coverImageView.image = cover;
     self.coverImageView.contentMode = UIViewContentModeScaleToFill;
     
-    [self enableButtonsAndLabels];
     [self.detailsSummarySpinner stopAnimating];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
@@ -103,18 +112,7 @@
         self.summaryLabel.text = [NSString stringWithFormat:@"%@", [self.mangaDetails objectForKey:MANGA_SUMMARY]];
         [self.detailsSummarySpinner stopAnimating];
         
-        NSLog(@"%f", self.contentView.bounds.size.width);
-    }
-}
-
-- (void)enableButtonsAndLabels
-{
-    // Show all the labels in view, which originally hidden when the page is loaded
-    for (UIView *subview in self.view.subviews)
-    {
-        if (![subview isKindOfClass:[UIActivityIndicatorView class]]) {
-            subview.hidden = NO;
-        }
+        self.scrollView.hidden = NO;
     }
 }
 

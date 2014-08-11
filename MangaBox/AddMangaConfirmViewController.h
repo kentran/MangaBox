@@ -10,6 +10,12 @@
 
 @interface AddMangaConfirmViewController : UITableViewController
 
+/* This view controller is a place to make sure the info is loaded before
+ * the manga is added to collection, there are labels to display but for
+ * better user experience, the manga is automatically added when its information
+ * is fully loaded
+ */
+
 @property (nonatomic, strong) NSURL *mangaURL;
 
 @end

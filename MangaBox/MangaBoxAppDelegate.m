@@ -122,8 +122,10 @@
 {
     if (self.document.documentState == UIDocumentStateNormal) {
         NSManagedObjectContext *context = self.document.managedObjectContext;
-        MenuTabBarController *tabBarController = (MenuTabBarController *)self.window.rootViewController;
-        tabBarController.managedObjectContext = context;
+        if ([self.window.rootViewController isKindOfClass:[MenuTabBarController class]]) {
+            MenuTabBarController *tabBarController = (MenuTabBarController *)self.window.rootViewController;
+            tabBarController.managedObjectContext = context;
+        }
         [Chapter refreshDownloadStatusInContext:context];
     }
 }

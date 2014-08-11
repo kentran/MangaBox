@@ -12,7 +12,6 @@
 #import "Page+Getter.h"
 #import "CoverImage.h"
 #import "ImageViewController.h"
-#import "ChapterPageViewController.h"
 #import "ChapterViewController.h"
 #import "Chapter+UpdateInfo.h"
 #import "MangaFetcher.h"

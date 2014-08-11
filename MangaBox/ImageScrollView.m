@@ -30,8 +30,23 @@
         self.bouncesZoom = YES;
         self.decelerationRate = UIScrollViewDecelerationRateFast;
         self.delegate = self;
+        
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                     action:@selector(doubleTap:)];
+        tapGesture.numberOfTapsRequired = 2;
+        [self addGestureRecognizer:tapGesture];
     }
     return self;
+}
+
+- (void)doubleTap:(UIGestureRecognizer *)gestureRecognizer
+{
+    CGFloat doubleTapZoomScale = self.minimumZoomScale + (self.maximumZoomScale - self.minimumZoomScale) / 2;
+    if (self.zoomScale > self.minimumZoomScale) {
+        [self setZoomScale:self.minimumZoomScale animated:YES];
+    } else {
+        [self setZoomScale:doubleTapZoomScale animated:YES];
+    }
 }
 
 - (void)setImage:(UIImage *)image

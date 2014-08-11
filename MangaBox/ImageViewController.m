@@ -11,7 +11,7 @@
 #import "ImageScrollView.h"
 #import "Chapter+UpdateInfo.h"
 
-@interface ImageViewController () <UIScrollViewDelegate>
+@interface ImageViewController () <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic ,strong) ImageScrollView *scrollView;
 
@@ -30,9 +30,9 @@
 
 #pragma mark - Properties
 
-- (void)setChapter:(Chapter *)chapter
+- (void)setPageIndex:(NSInteger)pageIndex
 {
-    _chapter = chapter;
+    _pageIndex = pageIndex;
     [self loadView];
 }
 
@@ -45,40 +45,36 @@
 - (void)loadView
 {
     // Prepare the ImageScroll View
-    NSInteger blankFlag = 0;
     if (self.pageIndex <= ((int)[self.chapter.pages count] - 1)) {
-        [self loadPageToView];
+        Page *page = [Page pageOfChapter:self.chapter atIndex:self.pageIndex];
+        if (page) {
+            NSURL *imageURL = [NSURL URLWithString:page.imageURL];
+            self.scrollView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
+            self.view = self.scrollView;
+            NSLog(@"%@ %d", page.url, self.pageIndex);
+        }
     } else {
-        //NSLog(@"BLANK");
-        //self.scrollView.image = [UIImage imageNamed:@"blank"];
-        blankFlag = 1;
+        self.scrollView.image = [UIImage imageNamed:@"blank"];
+        self.view = self.scrollView;
+        [self showSpinner];
+    }
+}
+
+- (void)showSpinner
+{
+    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [self.view addSubview:spinner];
+    
+    // Center the spinner in view
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    if (self.pageSetting == SETTING_1_PAGE) {
+        spinner.center = CGPointMake(screenRect.size.width/2, screenRect.size.height/2);
+    } else if (self.pageSetting == SETTING_2_PAGES) {
+        spinner.center = CGPointMake(screenRect.size.height/4, screenRect.size.width/2);
     }
     
-//    if (blankFlag) {
-//        dispatch_queue_t loadPageQ = dispatch_queue_create("Loading Page", NULL);
-//        dispatch_async(loadPageQ, ^{
-//            NSLog(@"Wating");
-//            while (!(self.pageIndex <= ((int)[self.chapter.pages count] - 1)));
-//            NSLog(@"Loading done");
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                [self loadPageToView];
-//                //[self loadView];
-//                //self.view = self.scrollView;
-//            });
-//        });
-//    }
+    // Start animating
+    [spinner startAnimating];
 }
-
-- (void)loadPageToView
-{
-    [self.chapter updateCurrentPageIndex:self.pageIndex];
-    Page *page = [Page pageOfChapter:self.chapter atIndex:self.pageIndex];
-    if (page) {
-        NSURL *imageURL = [NSURL URLWithString:page.imageURL];
-        self.scrollView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
-        self.view = self.scrollView;
-    }
-}
-
 
 @end
