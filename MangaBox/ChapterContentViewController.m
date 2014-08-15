@@ -23,31 +23,86 @@
 {
     [super viewDidLoad];
     
+    /**
+     * Swipe gesture can also fire when user scroll the page to go to the next page
+     * Therefore, in any case, do not fire the next page action when user swipe
+     * Instead, detect the swipe and only fire action on the last page to go to the next chapter
+     */
+    [self loadSwipeLeft];
+    [self loadSwipeRight];
+    
+    /**
+     * Tap on the left and right side of the screen should go to the next and previous page
+     * This tap should not be simultaneously recognized with other tap gesture
+     */
+    [self loadNextPageTap];
+    [self loadPreviousPageTap];
+}
+
+- (void)loadNextPageTap
+{
+    UITapGestureRecognizer *nextTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                     action:@selector(nextPageTap:)];
+    CGFloat switchPageAreaWidth = self.view.frame.size.width / 5;
+    CGRect nextTapAreaFrame = CGRectMake(self.view.frame.size.width - switchPageAreaWidth, 0, switchPageAreaWidth, self.view.frame.size.height);
+    UIView *nextTapArea = [[UIView alloc] initWithFrame:nextTapAreaFrame];
+    [nextTapArea addGestureRecognizer:nextTapGesture];
+    [self.view addSubview:nextTapArea];
+}
+
+- (void)loadPreviousPageTap
+{
+    UITapGestureRecognizer *previousTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                         action:@selector(previousPageTap:)];
+    CGFloat switchPageAreaWidth = self.view.frame.size.width / 5;
+    CGRect previousTapAreaFrame = CGRectMake(0, 0, switchPageAreaWidth, self.view.frame.size.height);
+    UIView *previousTapArea = [[UIView alloc] initWithFrame:previousTapAreaFrame];
+    [previousTapArea addGestureRecognizer:previousTapGesture];
+    [self.view addSubview:previousTapArea];
+}
+
+- (void)loadSwipeLeft
+{
+
     UISwipeGestureRecognizer *swipeLeftGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self
-                                                                                       action:@selector(swipeLeft:)];
+                                                                                           action:@selector(swipeLeft:)];
     swipeLeftGesture.direction = UISwipeGestureRecognizerDirectionLeft;
     swipeLeftGesture.delegate = self;
     [self.view addGestureRecognizer:swipeLeftGesture];
-    
+}
+
+- (void)loadSwipeRight
+{
     UISwipeGestureRecognizer *swipeRightGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self
-                                                                                           action:@selector(swipeRight:)];
+                                                                                            action:@selector(swipeRight:)];
     swipeRightGesture.direction = UISwipeGestureRecognizerDirectionRight;
     swipeRightGesture.delegate = self;
     [self.view addGestureRecognizer:swipeRightGesture];
 }
 
-- (void)swipeLeft:(UIGestureRecognizer *)gestureRegcognizer
+- (void)previousPageTap:(UIGestureRecognizer *)gestureRecognizer
+{
+    [self.delegate previousPage];
+}
+
+- (void)nextPageTap:(UIGestureRecognizer *)gestureRecognizer
+{
+    [self.delegate nextPage];
+}
+
+- (void)swipeLeft:(UIGestureRecognizer *)gestureRecognizer
 {
     NSLog(@"Swipe left");
     if (self.index >= self.childViewsCount - 1) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:autoNextChapterNotification object:self];
+        [self.delegate autoNextChapter];
     }
 }
 
-- (void)swipeRight:(UIGestureRecognizer *)gestureRegcognizer
+- (void)swipeRight:(UIGestureRecognizer *)gestureRecognizer
 {
+    NSLog(@"Swipe right");
     if (self.index == 0) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:autoPreviousChapterNotification object:self];
+        [self.delegate autoPreviousChapter];
     }
 }
 

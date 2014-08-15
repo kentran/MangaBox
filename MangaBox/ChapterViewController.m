@@ -13,7 +13,7 @@
 #import "Chapter+UpdateInfo.h"
 #import "ChapterContentViewController.h"
 
-@interface ChapterViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIGestureRecognizerDelegate>
+@interface ChapterViewController () <UIPageViewControllerDelegate, UIPageViewControllerDataSource, UIGestureRecognizerDelegate, ChapterContentViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *pageSettingButton;
 @property (strong, nonatomic) IBOutlet UITapGestureRecognizer *tapScreen;
@@ -48,15 +48,6 @@
     [self.view addGestureRecognizer:self.tapScreen];
     if (!self.previousChapter) self.previousButton.enabled = NO;
     if (!self.nextChapter) self.nextButton.enabled = NO;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(autoNextChapter)
-                                                 name:autoNextChapterNotification
-                                               object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(autoPreviousChapter)
-                                                 name:autoPreviousChapterNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(checkNeedReload:)
@@ -152,6 +143,14 @@
         return YES;
 }
 
+#pragma mark - UIGestureRecoginizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
+
 #pragma mark - Properties
 
 - (id<GAITracker>)tracker
@@ -203,26 +202,22 @@
 - (NSInteger)childIndexForCurrentSetting
 {
     NSInteger currentPageIndex = [self.chapter.currentPageIndex intValue];
-    if (currentPageIndex >= [self.chapter.pagesCount integerValue] - 1) {
+    
+    // Set the index to 0 if the chapter is at the end page or still downloading when opened
+    // It is to avoid user open a loading page
+    if (currentPageIndex >= [self.chapter.pagesCount integerValue] - 1
+        || [self.chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING])
+    {
         [self.chapter updateCurrentPageIndex:0];
         currentPageIndex = 0;
     }
+    
     if (self.pageSetting == SETTING_2_PAGES && currentPageIndex % 2) {
         // If setting is 2 page and the current page index is odd,
         // display from the previous page index
         return floor(currentPageIndex / 2);
     }
     return currentPageIndex;
-}
-
-- (Chapter *)previousChapter
-{
-    return [self.chapter previousChapter];
-}
-
-- (Chapter *)nextChapter
-{
-    return [self.chapter nextChapter];
 }
 
 - (void)setCurrentPage:(NSInteger)currentPage
@@ -381,25 +376,29 @@
 
 #pragma mark - UIPageViewControllerDelegate
 
+- (void)setupCurrentPage:(UIPageViewController *)pageViewController
+{
+    // We do not update the page index when the page is loaded because it may not be accurate
+    // the pageViewController always load the next page before it is displayed
+    // we update the current page here as well as in the core data
+    self.currentChildIndex = ((ChapterContentViewController *)[pageViewController viewControllers][0]).index;
+    NSInteger currentIndex;
+    if (self.pageSetting == SETTING_1_PAGE) {
+        currentIndex = self.currentChildIndex;
+    } else {
+        currentIndex = self.currentChildIndex * 2 + 1;
+    }
+    self.currentPage = currentIndex + 1;
+    [self.chapter updateCurrentPageIndex:currentIndex];
+}
+
 - (void)pageViewController:(UIPageViewController *)pageViewController
         didFinishAnimating:(BOOL)finished
    previousViewControllers:(NSArray *)previousViewControllers
        transitionCompleted:(BOOL)completed
 {
     if (completed) {
-        // We do not update the page index when the page is loaded because it may not be accurate
-        // the pageViewController always load the next page before it is displayed
-        // we update the current page here as well as in the core data
-        NSInteger currentChildIndex = ((ChapterContentViewController *)[pageViewController viewControllers][0]).index;
-        NSInteger currentIndex;
-        if (self.pageSetting == SETTING_1_PAGE) {
-            currentIndex = currentChildIndex;
-        } else {
-            currentIndex = currentChildIndex * 2 + 1;
-        }
-        
-        self.currentPage = currentIndex + 1;
-        [self.chapter updateCurrentPageIndex:currentIndex];
+        [self setupCurrentPage:pageViewController];
     }
 }
 
@@ -416,6 +415,7 @@
     } else {
         childVC = [self.storyboard instantiateViewControllerWithIdentifier:@"SinglePage"];
     }
+    childVC.delegate = self;
     childVC.pageSetting = self.pageSetting;
     childVC.chapter = self.chapter;
     childVC.index = index;
@@ -433,8 +433,6 @@
     }
     
     index--;
-    self.currentChildIndex = index;
-    NSLog(@"%d -", self.currentChildIndex);
     return [self viewControllerAtIndex:index];
 }
 
@@ -448,12 +446,68 @@
     }
     
     index++;
-    self.currentChildIndex = index;
-    NSLog(@"%d +", self.currentChildIndex);
     return [self viewControllerAtIndex:index];
 }
 
+#pragma mark - ChapterContentViewControllerDelegate
+#pragma mark - Switch Page
+
+- (void)previousPage
+{
+    if (self.currentChildIndex > 0) {
+        // If the current page is not the first page, go to previous page
+        self.currentChildIndex--;
+        NSArray *viewControllers;
+        UIViewController *startingViewController1 = [self viewControllerAtIndex:self.currentChildIndex];
+        viewControllers = @[startingViewController1];
+        
+        __weak ChapterViewController *weakSelf = self;
+        [self.pageViewController setViewControllers:viewControllers
+                                          direction:UIPageViewControllerNavigationDirectionReverse
+                                           animated:YES
+                                         completion:^(BOOL finished) {
+                                             if (finished) [weakSelf setupCurrentPage:weakSelf.pageViewController];
+                                         }];
+    } else {
+        // If the current page is the first page, auto previous chapter
+        [self autoPreviousChapter];
+        //[[NSNotificationCenter defaultCenter] postNotificationName:autoPreviousChapterNotification object:self];
+    }
+}
+
+- (void)nextPage
+{
+    if (self.currentChildIndex < self.childViewsCount - 1) {
+        self.currentChildIndex++;
+        NSArray *viewControllers;
+        UIViewController *startingViewController1 = [self viewControllerAtIndex:self.currentChildIndex];
+        viewControllers = @[startingViewController1];
+        
+        __weak ChapterViewController *weakSelf = self;
+        [self.pageViewController setViewControllers:viewControllers
+                                          direction:UIPageViewControllerNavigationDirectionForward
+                                           animated:YES
+                                         completion:^(BOOL finished) {
+                                             if (finished) [weakSelf setupCurrentPage:weakSelf.pageViewController];
+                                         }];
+    } else {
+        // If the current page is the last page, auto next chapter
+        [self autoNextChapter];
+        //[[NSNotificationCenter defaultCenter] postNotificationName:autoNextChapterNotification object:self];
+    }
+}
+
 #pragma mark - Auto Switch Chapter
+
+- (Chapter *)previousChapter
+{
+    return [self.chapter previousChapter];
+}
+
+- (Chapter *)nextChapter
+{
+    return [self.chapter nextChapter];
+}
 
 - (BOOL)autoSwitchChapterEnable
 {
