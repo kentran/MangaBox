@@ -94,6 +94,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Saves changes in the application's managed object context before the application terminates.
+    [self saveDocument];
 }
 
 // If app settings are not set, set the default values

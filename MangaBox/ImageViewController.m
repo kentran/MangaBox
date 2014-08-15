@@ -51,7 +51,6 @@
             NSURL *imageURL = [NSURL URLWithString:page.imageURL];
             self.scrollView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:imageURL]];
             self.view = self.scrollView;
-            NSLog(@"%@ %d", page.url, self.pageIndex);
         }
     } else {
         self.scrollView.image = [UIImage imageNamed:@"blank"];

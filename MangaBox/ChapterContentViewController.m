@@ -38,7 +38,8 @@
 
 - (void)swipeLeft:(UIGestureRecognizer *)gestureRegcognizer
 {
-    if (self.index == self.childViewsCount - 1) {
+    NSLog(@"Swipe left");
+    if (self.index >= self.childViewsCount - 1) {
         [[NSNotificationCenter defaultCenter] postNotificationName:autoNextChapterNotification object:self];
     }
 }
@@ -77,9 +78,7 @@
         
         if ([segue.identifier isEqualToString:@"Show Single Page"]) {
             // On single page view, page index = child view index
-            NSLog(@"Displaying: %d", self.index);
             ivc.pageIndex = self.index;
-            NSLog(@"Displaying: %d", ivc.pageIndex);
         } else if ([segue.identifier isEqualToString:@"Show First Page"]) {
             // On double page view, first page index = child view index * 2
             ivc.pageIndex = self.index * 2;

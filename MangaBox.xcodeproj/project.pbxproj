@@ -843,7 +843,7 @@
 					/Users/ken/Developer/GoogleAnalyticsServicesiOS_3.06,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "A21D43E4-DB27-458F-A448-2548476F390F";
+				PROVISIONING_PROFILE = "3bedec02-679e-42f4-934d-acdb9bf0006b";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -863,7 +863,7 @@
 					/Users/ken/Developer/GoogleAnalyticsServicesiOS_3.06,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5BCFDDAB-88DD-4234-AD4C-A5C70EDC1DB0";
+				PROVISIONING_PROFILE = "3bedec02-679e-42f4-934d-acdb9bf0006b";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

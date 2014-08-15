@@ -63,6 +63,8 @@
     NSNumber *viewsCount = [numberFormatter numberFromString:[manga valueForKey:@"views"]];
     views.text = [NSString stringWithFormat:@"%@ views", [numberFormatter stringFromNumber:viewsCount]];
     
+    cell.backgroundColor = UIColorFromRGB(0x121314);
+    
     return cell;
 }
 

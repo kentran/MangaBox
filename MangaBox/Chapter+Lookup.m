@@ -72,7 +72,7 @@
     NSArray *result = [manga.managedObjectContext executeFetchRequest:request error:&error];
     
     if (!error) {
-        return result[0];
+        return [result firstObject];
     } else {
         return nil;
     }

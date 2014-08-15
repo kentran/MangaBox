@@ -33,6 +33,19 @@
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:@"Settings Screen"];
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    
+    [self loadBackgroundColorForAllCells]; // for disclosure indicator on ipad
+}
+
+- (void)loadBackgroundColorForAllCells
+{
+    for (int section = 0; section < [self.tableView numberOfSections]; section++) {
+        for (int row = 0; row < [self.tableView numberOfRowsInSection:section]; row++) {
+            NSIndexPath* cellPath = [NSIndexPath indexPathForRow:row inSection:section];
+            UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:cellPath];
+            cell.backgroundColor = UIColorFromRGB(0x121314);
+        }
+    }
 }
 
 - (void)loadUserSettings

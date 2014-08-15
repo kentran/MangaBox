@@ -207,8 +207,8 @@
                                         <constraint firstAttribute="height" constant="150" id="ZZ7-kq-Jsk"/>
                                     </constraints>
                                 </imageView>
-                                <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" editable="NO" text="genresText" translatesAutoresizingMaskIntoConstraints="NO" id="tT3-lq-e7E">
-                                    <rect key="frame" x="20" y="244" width="280" height="175"/>
+                                <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" editable="NO" text="genresText" translatesAutoresizingMaskIntoConstraints="NO" id="tT3-lq-e7E">
+                                    <rect key="frame" x="20" y="244" width="280" height="138"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -301,7 +301,6 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="ldj-Qo-3QB" firstAttribute="leading" secondItem="dTf-ml-ai8" secondAttribute="leading" id="4E7-Gh-JgD"/>
-                                <constraint firstAttribute="bottom" secondItem="tT3-lq-e7E" secondAttribute="bottom" constant="20" symbolic="YES" id="6ra-84-ktC"/>
                                 <constraint firstItem="uMV-bT-Fx9" firstAttribute="leading" secondItem="U0e-9u-Lb0" secondAttribute="leading" id="9aX-Qd-vF0"/>
                                 <constraint firstItem="SDX-QY-yLb" firstAttribute="baseline" secondItem="7QG-al-bly" secondAttribute="baseline" id="9nU-6W-csW"/>
                                 <constraint firstItem="uMV-bT-Fx9" firstAttribute="leading" secondItem="20v-bI-XTL" secondAttribute="leading" constant="20" id="9yy-uN-ZJb"/>
@@ -316,8 +315,6 @@
                                 <constraint firstItem="CAm-l0-rpz" firstAttribute="top" secondItem="hBP-BT-59q" secondAttribute="bottom" constant="-2" id="O3h-xs-F25"/>
                                 <constraint firstItem="CAm-l0-rpz" firstAttribute="leading" secondItem="uMV-bT-Fx9" secondAttribute="trailing" constant="8" id="QdG-Nn-0Go"/>
                                 <constraint firstItem="SDX-QY-yLb" firstAttribute="top" secondItem="U0e-9u-Lb0" secondAttribute="bottom" constant="9" id="RJL-14-zC3"/>
-                                <constraint firstItem="tT3-lq-e7E" firstAttribute="leading" secondItem="bKG-1R-0ga" secondAttribute="leading" id="UDa-9V-YdR"/>
-                                <constraint firstItem="tT3-lq-e7E" firstAttribute="top" secondItem="bKG-1R-0ga" secondAttribute="bottom" constant="4" id="YxQ-Dn-ae4"/>
                                 <constraint firstItem="uMV-bT-Fx9" firstAttribute="top" secondItem="20v-bI-XTL" secondAttribute="top" constant="20" id="Z4E-ru-beB"/>
                                 <constraint firstItem="bKG-1R-0ga" firstAttribute="top" secondItem="SDX-QY-yLb" secondAttribute="bottom" constant="8" id="aAg-GA-Udb"/>
                                 <constraint firstItem="HJc-1f-KSb" firstAttribute="top" secondItem="20v-bI-XTL" secondAttribute="top" constant="20" id="bYW-s2-pvD"/>
@@ -326,7 +323,6 @@
                                 <constraint firstItem="ldj-Qo-3QB" firstAttribute="leading" secondItem="FPu-hx-6Gj" secondAttribute="leading" id="dCn-NJ-qqC"/>
                                 <constraint firstItem="dTf-ml-ai8" firstAttribute="top" secondItem="ldj-Qo-3QB" secondAttribute="bottom" constant="1" id="dnX-Yu-ezs"/>
                                 <constraint firstItem="hBP-BT-59q" firstAttribute="leading" secondItem="uMV-bT-Fx9" secondAttribute="trailing" constant="8" id="eta-4o-6J5"/>
-                                <constraint firstAttribute="trailing" secondItem="tT3-lq-e7E" secondAttribute="trailing" constant="20" symbolic="YES" id="f4O-wN-ItY"/>
                                 <constraint firstItem="0b7-8w-B1b" firstAttribute="baseline" secondItem="U0e-9u-Lb0" secondAttribute="baseline" constant="1" id="qnk-CL-rG2"/>
                                 <constraint firstItem="U0e-9u-Lb0" firstAttribute="top" secondItem="uMV-bT-Fx9" secondAttribute="bottom" constant="8" id="t8X-h6-xVV"/>
                                 <constraint firstAttribute="centerY" secondItem="OAs-MB-Uky" secondAttribute="centerY" id="xo6-Z9-3bT"/>
@@ -805,8 +801,8 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" misplaced="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X3O-Yc-43e">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="456"/>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X3O-Yc-43e">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="455"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
@@ -1346,7 +1342,7 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="wkt-Zb-E7D">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
                             <tableViewSection headerTitle="General" id="Dtx-vR-VJ0">
                                 <cells>
@@ -1368,6 +1364,7 @@
                                                     <rect key="frame" x="20" y="6" width="142" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53u-Ge-Elq">
@@ -1377,7 +1374,7 @@
                                                         <constraint firstAttribute="width" constant="42" id="WVa-2h-oo5"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="0.53333333333333333" green="0.53725490196078429" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1393,6 +1390,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="3g6-Bk-bly" secondAttribute="bottom" constant="16" id="zxv-iI-7Kl"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="R0w-ca-d9H">
                                         <rect key="frame" x="0.0" y="163" width="320" height="44"/>
@@ -1405,7 +1403,7 @@
                                                     <rect key="frame" x="20" y="6" width="211" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GN2-n9-dIY">
@@ -1422,7 +1420,7 @@
                                                         <constraint firstAttribute="width" constant="42" id="zt3-gT-6fm"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" red="0.53333333329999999" green="0.53725490200000003" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1438,6 +1436,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="J6L-At-lBQ" secondAttribute="bottom" constant="16" id="xua-dp-yh8"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1454,11 +1453,12 @@
                                                     <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="l2r-hk-zAz" kind="push" identifier="Show Download Tasks" id="ZHi-qb-hI3"/>
                                         </connections>
@@ -1478,11 +1478,12 @@
                                                     <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="6Vi-38-0p3" kind="push" id="MT1-PO-uWC"/>
                                         </connections>
@@ -1498,11 +1499,12 @@
                                                     <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="uDb-bp-ALX" kind="push" id="GAF-3d-yLB"/>
                                         </connections>
@@ -1518,11 +1520,12 @@
                                                     <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="goX-dZ-wcG" kind="push" identifier="Browser Help" id="02F-hw-AFi"/>
                                         </connections>
@@ -1538,11 +1541,12 @@
                                                     <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="hcv-Wv-SXP" kind="push" identifier="Report Problems" id="ew1-BY-1MH"/>
                                         </connections>
@@ -1574,7 +1578,7 @@
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="vbW-ff-QlS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" red="0.070588235294117646" green="0.074509803921568626" blue="0.078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Download Task" id="VLm-k2-Gxp">
                                 <rect key="frame" x="0.0" y="119" width="320" height="44"/>
@@ -1587,12 +1591,14 @@
                                             <rect key="frame" x="20" y="3" width="35" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PpK-la-BQl">
                                             <rect key="frame" x="20" y="20" width="35" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.53333333329999999" green="0.53725490200000003" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <progressView hidden="YES" opaque="NO" tag="3" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mmD-oo-kUO">
@@ -1612,6 +1618,7 @@
                                         <constraint firstItem="mmD-oo-kUO" firstAttribute="bottom" secondItem="PpK-la-BQl" secondAttribute="bottom" id="oTm-4U-Y02"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1656,12 +1663,12 @@
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VTk-32-Blr">
                                                 <rect key="frame" x="20" y="145" width="320" height="359"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <attributedString key="attributedText">
                                                     <fragment>
-                                                        <string key="content">MangaBox is an mobile application that allow user to search, download and read manga.   MangaBox currently supports the following manga websites: - mangafox.me - mangareader.net  More manga websites will be integrated in the future. If you have any suggestion please send an email to mangaboxdev@gmail.com  Version: 1.0.1</string>
+                                                        <string key="content">MangaBox is an mobile application that allow user to search, download and read manga.   MangaBox currently supports the following manga websites: - mangafox.me - mangareader.net  More manga websites will be integrated in the future. If you have any suggestion please send an email to mangaboxdev@gmail.com  Version: 1.1</string>
                                                         <attributes>
-                                                            <color key="NSColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="17" name="Helvetica"/>
                                                             <font key="NSOriginalFont" size="17" name="Helvetica"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
@@ -1671,7 +1678,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="VTk-32-Blr" firstAttribute="top" secondItem="p05-UI-ipU" secondAttribute="bottom" constant="8" symbolic="YES" id="9ty-bT-zmD"/>
                                             <constraint firstAttribute="bottom" secondItem="VTk-32-Blr" secondAttribute="bottom" id="CkY-8K-IyZ"/>
@@ -1693,7 +1700,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="H74-Mb-r5c" firstAttribute="centerX" secondItem="luS-Ge-nGM" secondAttribute="centerX" id="16l-UZ-0cb"/>
                             <constraint firstAttribute="bottom" secondItem="H74-Mb-r5c" secondAttribute="bottom" id="oIw-XK-Fs0"/>
@@ -1720,21 +1727,21 @@
                         <viewControllerLayoutGuide type="bottom" id="RGF-B8-kht"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jQ6-XP-1dG">
-                        <rect key="frame" x="0.0" y="64" width="320" height="1106"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="833"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHb-sI-m1X">
-                                <rect key="frame" x="-20" y="-20" width="360" height="1126"/>
+                                <rect key="frame" x="-20" y="-20" width="360" height="853"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r2e-EE-QWu" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="360" height="1242"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="360" height="897"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Y1-Oc-atI">
                                                 <rect key="frame" x="20" y="20" width="320" height="234"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="234" id="9ox-Hd-Ng5"/>
                                                 </constraints>
@@ -1745,12 +1752,14 @@
 For instance, we will try to add Naruto on mangareader.net to MangaBox. The full link to naruto webpage is:
 </string>
                                                         <attributes>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                             <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content="http://www.mangareader.net/93/naruto.html">
                                                         <attributes>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                             <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
@@ -1759,6 +1768,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                                         <string key="content">
  You can enter the full link to the address bar to navigate to the manga webpage or navigate to mangareader.net homepage first then navigate to the manga using the website. The destination page should look like the image below:</string>
                                                         <attributes>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                             <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
@@ -1768,55 +1778,38 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                             </textView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="browser-screenshot" translatesAutoresizingMaskIntoConstraints="NO" id="6In-Ih-MSc">
-                                                <rect key="frame" x="40" y="262" width="280" height="420"/>
+                                                <rect key="frame" x="40" y="262" width="280" height="497"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="280" id="gUz-l4-Orp"/>
-                                                    <constraint firstAttribute="height" constant="420" id="rHs-Ah-kJy"/>
+                                                    <constraint firstAttribute="height" constant="497" id="rHs-Ah-kJy"/>
                                                 </constraints>
                                             </imageView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nF5-yr-aOz">
-                                                <rect key="frame" x="20" y="690" width="320" height="104"/>
+                                                <rect key="frame" x="20" y="767" width="320" height="104"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="104" id="2cf-uF-IXf"/>
                                                 </constraints>
                                                 <attributedString key="attributedText">
                                                     <fragment content="After the page is loaded, tap the &quot;">
                                                         <attributes>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                             <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content="+">
                                                         <attributes>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                             <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
                                                     </fragment>
-                                                    <fragment content="&quot; button to add to collection. Another view appears and you will need to check if the information is correct, then tap &quot;">
+                                                    <fragment content="&quot; button to add to collection. ">
                                                         <attributes>
-                                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="confirm">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
-                                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue-Bold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="&quot;">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content=". The manga will be added to your collections.">
-                                                        <attributes>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                             <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
@@ -1824,24 +1817,12 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                                 </attributedString>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="confirm-screenshot" translatesAutoresizingMaskIntoConstraints="NO" id="Vbh-pe-m1q">
-                                                <rect key="frame" x="40" y="802" width="280" height="420"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="280" id="1cn-E0-iC8"/>
-                                                    <constraint firstAttribute="height" constant="420" id="z8m-hb-D9U"/>
-                                                </constraints>
-                                            </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="nF5-yr-aOz" firstAttribute="centerX" secondItem="6In-Ih-MSc" secondAttribute="centerX" id="39M-p2-WaS"/>
-                                            <constraint firstItem="Vbh-pe-m1q" firstAttribute="trailing" secondItem="6In-Ih-MSc" secondAttribute="trailing" id="8rW-Q3-nK2"/>
                                             <constraint firstItem="1Y1-Oc-atI" firstAttribute="leading" secondItem="nF5-yr-aOz" secondAttribute="leading" id="Hm7-xh-XUc"/>
-                                            <constraint firstAttribute="bottom" secondItem="Vbh-pe-m1q" secondAttribute="bottom" constant="20" symbolic="YES" id="JGp-Wc-hno"/>
-                                            <constraint firstAttribute="height" constant="1242" id="L4A-7I-OG4"/>
-                                            <constraint firstItem="Vbh-pe-m1q" firstAttribute="leading" secondItem="6In-Ih-MSc" secondAttribute="leading" id="MpS-G1-W2N"/>
-                                            <constraint firstItem="Vbh-pe-m1q" firstAttribute="top" secondItem="nF5-yr-aOz" secondAttribute="bottom" constant="8" symbolic="YES" id="Y4t-J5-T20"/>
+                                            <constraint firstAttribute="height" constant="897" id="L4A-7I-OG4"/>
                                             <constraint firstItem="nF5-yr-aOz" firstAttribute="top" secondItem="6In-Ih-MSc" secondAttribute="bottom" constant="8" symbolic="YES" id="aLL-0m-uYJ"/>
                                             <constraint firstItem="nF5-yr-aOz" firstAttribute="trailing" secondItem="1Y1-Oc-atI" secondAttribute="trailing" id="cYc-y5-C5t"/>
                                             <constraint firstItem="1Y1-Oc-atI" firstAttribute="top" secondItem="r2e-EE-QWu" secondAttribute="top" constant="20" symbolic="YES" id="dlW-Dw-xZu"/>
@@ -1860,7 +1841,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="qHb-sI-m1X" firstAttribute="centerX" secondItem="jQ6-XP-1dG" secondAttribute="centerX" id="Ijq-Md-CLn"/>
                             <constraint firstItem="qHb-sI-m1X" firstAttribute="leading" secondItem="jQ6-XP-1dG" secondAttribute="leading" constant="-20" id="awe-SF-9VN"/>
@@ -1868,10 +1849,10 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                             <constraint firstAttribute="bottom" secondItem="qHb-sI-m1X" secondAttribute="bottom" id="w1w-Dy-pJz"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Help - Browser" id="sIh-tj-0eV"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="1219"/>
+                    <size key="freeformSize" width="320" height="897"/>
                     <connections>
                         <outlet property="contentView" destination="r2e-EE-QWu" id="F7a-cb-f7Y"/>
                         <outlet property="scrollView" destination="qHb-sI-m1X" id="NxC-9F-ecW"/>
@@ -1879,7 +1860,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cKO-Qi-hHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3088" y="-5461"/>
+            <point key="canvasLocation" x="3080" y="-5381"/>
         </scene>
         <!--View Controller - Report a Problem-->
         <scene sceneID="SWs-L3-3SD">
@@ -1890,20 +1871,23 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                         <viewControllerLayoutGuide type="bottom" id="ti9-1I-hao"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="e9T-4Q-OXb">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Please send an email to mangaboxdev@gmail.com  Thank you very much for supporting MangaBox." translatesAutoresizingMaskIntoConstraints="NO" id="UYJ-aT-yN1">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UYJ-aT-yN1">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="244"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <string key="text">Please send an email to mangaboxdev@gmail.com or post your comment on MangaBox Facebook page at https://www.facebook.com/mangabox.ios  Thank you very much for supporting MangaBox.</string>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Report a Problem" id="vzv-P4-CD5"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GiR-Dp-ech" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1919,39 +1903,42 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                         <viewControllerLayoutGuide type="bottom" id="0nT-H9-4J2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9sM-qC-2rB">
-                        <rect key="frame" x="0.0" y="64" width="320" height="1087"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="1269"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="umY-Dw-qK5">
-                                <rect key="frame" x="-20" y="-20" width="360" height="1107"/>
+                                <rect key="frame" x="-20" y="-20" width="360" height="1289"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iN4-h8-XGX" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="360" height="1115"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="360" height="1333"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g8v-Ue-xj8">
                                                 <rect key="frame" x="20" y="20" width="320" height="68"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="68" id="sgM-Sw-hCG"/>
                                                 </constraints>
                                                 <attributedString key="attributedText">
                                                     <fragment content="In the search tab, input the criteria of the mangas you want. When done, tap the &quot;">
                                                         <attributes>
+                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content="search">
                                                         <attributes>
+                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
                                                     </fragment>
                                                     <fragment content="&quot; button at the top.">
                                                         <attributes>
+                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
@@ -1961,49 +1948,56 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                             </textView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="search-screenshot" translatesAutoresizingMaskIntoConstraints="NO" id="bkA-h4-H2O">
-                                                <rect key="frame" x="40" y="96" width="280" height="420"/>
+                                                <rect key="frame" x="40" y="96" width="280" height="497"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="420" id="8WL-g5-4Sh"/>
+                                                    <constraint firstAttribute="height" constant="497" id="8WL-g5-4Sh"/>
                                                     <constraint firstAttribute="width" constant="280" id="vVZ-Cc-WII"/>
                                                 </constraints>
                                             </imageView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nye-lC-Sym">
-                                                <rect key="frame" x="20" y="1010" width="320" height="67"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dragonball-screenshot" translatesAutoresizingMaskIntoConstraints="NO" id="wyq-KK-6lG">
+                                                <rect key="frame" x="40" y="659" width="280" height="497"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="67" id="qUv-ea-Ibx"/>
+                                                    <constraint firstAttribute="width" constant="280" id="fnW-tf-cTZ"/>
+                                                    <constraint firstAttribute="height" constant="497" id="wLW-hC-FLS"/>
                                                 </constraints>
+                                            </imageView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="A list of mangs that match your criteria will appear. Tap on one of it to view the details." translatesAutoresizingMaskIntoConstraints="NO" id="ZrR-JP-7Ec">
+                                                <rect key="frame" x="20" y="601" width="320" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="gm7-MC-a8M"/>
+                                                </constraints>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                            </textView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nye-lC-Sym">
+                                                <rect key="frame" x="20" y="1164" width="320" height="67"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="When you are happy with the manga, add it by tap on the &quot;">
                                                         <attributes>
+                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
                                                     </fragment>
-                                                    <fragment content="+">
+                                                    <fragment content="Add to Collections">
                                                         <attributes>
+                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
                                                             <font key="NSOriginalFont" size="14" name="HelveticaNeue-Bold"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
                                                     </fragment>
-                                                    <fragment content="&quot; button at the top, then &quot;">
+                                                    <fragment content="&quot; button">
                                                         <attributes>
-                                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="confirm">
-                                                        <attributes>
-                                                            <font key="NSFont" size="14" name="HelveticaNeue-Bold"/>
-                                                            <font key="NSOriginalFont" size="14" name="HelveticaNeue-Bold"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                    <fragment content="&quot; after the details are loaded.">
-                                                        <attributes>
+                                                            <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                                         </attributes>
@@ -2012,43 +2006,23 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                                             </textView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dragonball-screenshot" translatesAutoresizingMaskIntoConstraints="NO" id="wyq-KK-6lG">
-                                                <rect key="frame" x="40" y="582" width="280" height="420"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="280" id="fnW-tf-cTZ"/>
-                                                    <constraint firstAttribute="height" constant="420" id="wLW-hC-FLS"/>
-                                                </constraints>
-                                            </imageView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="A list of mangs that match your criteria will appear. Tap on one of it to view the details." translatesAutoresizingMaskIntoConstraints="NO" id="ZrR-JP-7Ec">
-                                                <rect key="frame" x="20" y="524" width="320" height="50"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="gm7-MC-a8M"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                                            </textView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="Nye-lC-Sym" firstAttribute="trailing" secondItem="ZrR-JP-7Ec" secondAttribute="trailing" id="270-E6-Zh8"/>
                                             <constraint firstItem="g8v-Ue-xj8" firstAttribute="top" secondItem="iN4-h8-XGX" secondAttribute="top" constant="20" symbolic="YES" id="2wy-FV-8up"/>
                                             <constraint firstItem="bkA-h4-H2O" firstAttribute="top" secondItem="g8v-Ue-xj8" secondAttribute="bottom" constant="8" symbolic="YES" id="58l-oR-LIG"/>
                                             <constraint firstItem="bkA-h4-H2O" firstAttribute="centerX" secondItem="ZrR-JP-7Ec" secondAttribute="centerX" id="5IT-yW-pek"/>
-                                            <constraint firstAttribute="height" constant="1115" id="7ae-N7-ESA"/>
+                                            <constraint firstItem="Nye-lC-Sym" firstAttribute="top" secondItem="wyq-KK-6lG" secondAttribute="bottom" constant="8" id="75n-qt-oik"/>
+                                            <constraint firstAttribute="height" constant="1333" id="7ae-N7-ESA"/>
                                             <constraint firstItem="g8v-Ue-xj8" firstAttribute="leading" secondItem="ZrR-JP-7Ec" secondAttribute="leading" id="Asz-CK-YWZ"/>
+                                            <constraint firstItem="Nye-lC-Sym" firstAttribute="leading" secondItem="iN4-h8-XGX" secondAttribute="leading" constant="20" id="CNw-53-eXE"/>
                                             <constraint firstAttribute="trailing" secondItem="g8v-Ue-xj8" secondAttribute="trailing" constant="20" symbolic="YES" id="KXC-We-MHv"/>
                                             <constraint firstItem="wyq-KK-6lG" firstAttribute="trailing" secondItem="bkA-h4-H2O" secondAttribute="trailing" id="OYZ-iC-7aQ"/>
                                             <constraint firstItem="g8v-Ue-xj8" firstAttribute="trailing" secondItem="ZrR-JP-7Ec" secondAttribute="trailing" id="Qh0-1k-SHS"/>
+                                            <constraint firstAttribute="trailing" secondItem="Nye-lC-Sym" secondAttribute="trailing" constant="20" id="VoL-Mh-ZYG"/>
                                             <constraint firstItem="ZrR-JP-7Ec" firstAttribute="top" secondItem="bkA-h4-H2O" secondAttribute="bottom" constant="8" symbolic="YES" id="YUp-16-4n8"/>
                                             <constraint firstItem="g8v-Ue-xj8" firstAttribute="leading" secondItem="iN4-h8-XGX" secondAttribute="leading" constant="20" symbolic="YES" id="bm9-4J-vNo"/>
                                             <constraint firstItem="wyq-KK-6lG" firstAttribute="top" secondItem="ZrR-JP-7Ec" secondAttribute="bottom" constant="8" symbolic="YES" id="hoG-uW-bWw"/>
-                                            <constraint firstAttribute="bottom" secondItem="Nye-lC-Sym" secondAttribute="bottom" constant="38" id="mdk-64-j4s"/>
-                                            <constraint firstItem="ZrR-JP-7Ec" firstAttribute="leading" secondItem="Nye-lC-Sym" secondAttribute="leading" id="ulS-TL-qXO"/>
-                                            <constraint firstItem="Nye-lC-Sym" firstAttribute="top" secondItem="wyq-KK-6lG" secondAttribute="bottom" constant="8" symbolic="YES" id="yQL-AZ-LrB"/>
                                             <constraint firstItem="wyq-KK-6lG" firstAttribute="leading" secondItem="bkA-h4-H2O" secondAttribute="leading" id="ybm-9a-fD2"/>
                                         </constraints>
                                     </view>
@@ -2062,7 +2036,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="umY-Dw-qK5" firstAttribute="leading" secondItem="9sM-qC-2rB" secondAttribute="leading" constant="-20" id="IOA-wZ-R85"/>
                             <constraint firstItem="umY-Dw-qK5" firstAttribute="centerX" secondItem="9sM-qC-2rB" secondAttribute="centerX" id="Vmw-cR-acs"/>
@@ -2070,10 +2044,10 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                             <constraint firstAttribute="bottom" secondItem="umY-Dw-qK5" secondAttribute="bottom" id="hV9-V2-gZu"/>
                         </constraints>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Help - Search" id="4jB-Fg-vAp"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="1200"/>
+                    <size key="freeformSize" width="320" height="1333"/>
                     <connections>
                         <outlet property="contentView" destination="iN4-h8-XGX" id="ubH-ek-lxE"/>
                         <outlet property="scrollView" destination="umY-Dw-qK5" id="AqZ-zU-AIc"/>
@@ -2096,7 +2070,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hkB-A4-7yS">
-                                    <rect key="frame" x="20" y="10" width="100" height="145"/>
+                                    <rect key="frame" x="20" y="10" width="100" height="146"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="100" id="ibG-eL-Hgr"/>
@@ -2138,8 +2112,8 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="artistText" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RII-Js-Vh4">
-                                    <rect key="frame" x="128" y="100" width="53" height="21"/>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="artistText" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RII-Js-Vh4">
+                                    <rect key="frame" x="128" y="101" width="53" height="15"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2156,21 +2130,21 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SvD-d1-Jwo">
-                                    <rect key="frame" x="128" y="125" width="36" height="15"/>
+                                    <rect key="frame" x="128" y="126" width="36" height="15"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.53333333329999999" green="0.53725490200000003" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="statusText" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sT0-q8-Wdx">
-                                    <rect key="frame" x="128" y="140" width="59" height="15"/>
+                                    <rect key="frame" x="128" y="141" width="59" height="15"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="evg-sJ-8v6">
-                                    <rect key="frame" x="20" y="163" width="280" height="40"/>
+                                    <rect key="frame" x="20" y="164" width="280" height="39"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.3921568627" green="0.56078431370000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -2224,7 +2198,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                 <constraint firstItem="jqm-xc-sBF" firstAttribute="top" secondItem="rPf-0V-Bd9" secondAttribute="bottom" constant="1" id="ttJ-cJ-8tN"/>
                                 <constraint firstItem="SvD-d1-Jwo" firstAttribute="leading" secondItem="hkB-A4-7yS" secondAttribute="trailing" constant="8" id="vzb-3i-Uq0"/>
                                 <constraint firstItem="BaM-k8-ffo" firstAttribute="top" secondItem="lZj-Yv-jY9" secondAttribute="bottom" constant="2" id="wFJ-3J-I8c"/>
-                                <constraint firstItem="RII-Js-Vh4" firstAttribute="top" secondItem="lZj-Yv-jY9" secondAttribute="bottom" constant="17" id="yGM-6x-Fxs"/>
+                                <constraint firstItem="RII-Js-Vh4" firstAttribute="top" secondItem="lZj-Yv-jY9" secondAttribute="bottom" constant="18" id="yGM-6x-Fxs"/>
                                 <constraint firstItem="hkB-A4-7yS" firstAttribute="top" secondItem="vSU-vg-irR" secondAttribute="top" constant="10" id="zAK-YQ-Lgy"/>
                                 <constraint firstItem="hkB-A4-7yS" firstAttribute="top" secondItem="h9w-yV-LVh" secondAttribute="top" id="zKh-1b-aXj"/>
                             </constraints>
@@ -2237,8 +2211,8 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Znd-Vd-a7r">
-                                            <rect key="frame" x="20" y="3" width="35" height="22"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Znd-Vd-a7r">
+                                            <rect key="frame" x="20" y="3" width="229" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2255,28 +2229,32 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                             <rect key="frame" x="20" y="39" width="267" height="2"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </progressView>
-                                        <imageView userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EV5-uE-dpc">
+                                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v5k-Q5-RF7">
                                             <rect key="frame" x="257" y="7" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="30" id="TvU-6I-XtA"/>
-                                                <constraint firstAttribute="height" constant="30" id="c77-vS-YSM"/>
+                                                <constraint firstAttribute="width" constant="30" id="tcu-An-pYP"/>
                                             </constraints>
-                                        </imageView>
+                                            <state key="normal" image="emptyStar">
+                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="znh-qJ-L2k" secondAttribute="trailing" id="ChJ-7F-qgA"/>
-                                        <constraint firstItem="Znd-Vd-a7r" firstAttribute="leading" secondItem="znh-qJ-L2k" secondAttribute="leading" id="Dcm-j3-Wrs"/>
-                                        <constraint firstItem="JR5-nU-kJI" firstAttribute="top" secondItem="0jm-ZY-Kls" secondAttribute="top" constant="20" symbolic="YES" id="FeC-xf-6zC"/>
-                                        <constraint firstItem="Znd-Vd-a7r" firstAttribute="top" secondItem="0jm-ZY-Kls" secondAttribute="top" constant="3" id="HDF-hj-TAs"/>
-                                        <constraint firstAttribute="trailing" secondItem="EV5-uE-dpc" secondAttribute="trailing" id="Pnr-Iq-LcG"/>
-                                        <constraint firstItem="znh-qJ-L2k" firstAttribute="bottom" secondItem="JR5-nU-kJI" secondAttribute="bottom" id="eLE-T6-Rgm"/>
-                                        <constraint firstItem="znh-qJ-L2k" firstAttribute="top" secondItem="Znd-Vd-a7r" secondAttribute="bottom" constant="14" id="o1R-4O-yRh"/>
-                                        <constraint firstItem="JR5-nU-kJI" firstAttribute="leading" secondItem="znh-qJ-L2k" secondAttribute="leading" id="ogi-cK-asl"/>
-                                        <constraint firstItem="Znd-Vd-a7r" firstAttribute="trailing" secondItem="JR5-nU-kJI" secondAttribute="trailing" id="re8-O9-H1R"/>
-                                        <constraint firstItem="Znd-Vd-a7r" firstAttribute="leading" secondItem="0jm-ZY-Kls" secondAttribute="leading" constant="20" symbolic="YES" id="tyK-vA-sKn"/>
-                                        <constraint firstAttribute="centerY" secondItem="EV5-uE-dpc" secondAttribute="centerY" id="vFz-Tt-bCY"/>
+                                        <constraint firstItem="v5k-Q5-RF7" firstAttribute="leading" secondItem="Znd-Vd-a7r" secondAttribute="trailing" constant="8" symbolic="YES" id="2DK-qF-WFb"/>
+                                        <constraint firstItem="Znd-Vd-a7r" firstAttribute="leading" secondItem="0jm-ZY-Kls" secondAttribute="leading" constant="20" symbolic="YES" id="2PS-qM-SNS"/>
+                                        <constraint firstItem="znh-qJ-L2k" firstAttribute="top" secondItem="Znd-Vd-a7r" secondAttribute="bottom" constant="14" id="Esj-KB-fTM"/>
+                                        <constraint firstItem="znh-qJ-L2k" firstAttribute="leading" secondItem="JR5-nU-kJI" secondAttribute="leading" id="Jla-a5-PQN"/>
+                                        <constraint firstAttribute="bottom" secondItem="JR5-nU-kJI" secondAttribute="bottom" constant="2" id="NdR-M4-xcb"/>
+                                        <constraint firstItem="znh-qJ-L2k" firstAttribute="top" secondItem="v5k-Q5-RF7" secondAttribute="bottom" constant="2" id="fRb-Sm-IGN"/>
+                                        <constraint firstItem="JR5-nU-kJI" firstAttribute="top" secondItem="0jm-ZY-Kls" secondAttribute="top" constant="20" symbolic="YES" id="nbT-XF-VHH"/>
+                                        <constraint firstAttribute="trailing" secondItem="v5k-Q5-RF7" secondAttribute="trailing" id="pDU-zy-aRZ"/>
+                                        <constraint firstItem="Znd-Vd-a7r" firstAttribute="top" secondItem="0jm-ZY-Kls" secondAttribute="top" constant="3" id="vEf-W1-foS"/>
+                                        <constraint firstItem="znh-qJ-L2k" firstAttribute="leading" secondItem="Znd-Vd-a7r" secondAttribute="leading" id="vJ2-cI-Nsb"/>
+                                        <constraint firstItem="v5k-Q5-RF7" firstAttribute="top" secondItem="0jm-ZY-Kls" secondAttribute="top" constant="7" id="xEu-bW-Mj1"/>
+                                        <constraint firstItem="znh-qJ-L2k" firstAttribute="bottom" secondItem="JR5-nU-kJI" secondAttribute="bottom" id="xaZ-8e-kU9"/>
+                                        <constraint firstItem="znh-qJ-L2k" firstAttribute="trailing" secondItem="v5k-Q5-RF7" secondAttribute="trailing" id="ySD-14-HbW"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -2289,7 +2267,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="6Mm-xZ-Xcm">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="PEk-E7-hrM">
+                        <barButtonItem key="rightBarButtonItem" image="icon-more" id="PEk-E7-hrM">
                             <connections>
                                 <action selector="actionButtonTouch:" destination="s7l-GE-29I" id="LqX-Ml-cej"/>
                             </connections>
@@ -2369,14 +2347,15 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
         </scene>
     </scenes>
     <resources>
-        <image name="browser-screenshot" width="636" height="926"/>
+        <image name="browser-screenshot" width="320" height="568"/>
         <image name="collection-icon" width="30" height="30"/>
-        <image name="confirm-screenshot" width="642" height="906"/>
-        <image name="dragonball-screenshot" width="638" height="914"/>
+        <image name="dragonball-screenshot" width="320" height="568"/>
         <image name="earth-icon" width="30" height="30"/>
         <image name="emptyMark" width="208" height="208"/>
+        <image name="emptyStar" width="209" height="209"/>
+        <image name="icon-more" width="30" height="30"/>
         <image name="mangabox-icon" width="512" height="512"/>
-        <image name="search-screenshot" width="640" height="910"/>
+        <image name="search-screenshot" width="320" height="568"/>
         <image name="setting-icon" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -2385,8 +2364,8 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="JOd-X3-uYW"/>
         <segue reference="SeT-QY-XhK"/>
-        <segue reference="eNi-zr-JUu"/>
+        <segue reference="VJ6-kO-Hys"/>
+        <segue reference="JOd-X3-uYW"/>
     </inferredMetricsTieBreakers>
 </document>

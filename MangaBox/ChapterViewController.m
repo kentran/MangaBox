@@ -58,8 +58,33 @@
                                              selector:@selector(autoPreviousChapter)
                                                  name:autoPreviousChapterNotification object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(checkNeedReload:)
+                                                 name:finishDownloadChapterPage
+                                               object:nil];
+    
     self.navigationController.toolbar.barStyle = UIBarStyleBlackTranslucent;
     self.navigationController.navigationBar.backItem.title = @" ";
+}
+
+- (void)checkNeedReload:(NSNotification *)note
+{
+    NSDictionary *userInfo = note.userInfo;
+    if ([userInfo[CHAPTER_NAME] isEqualToString:self.chapter.name]) {
+        NSInteger currentMaxChildViews;
+        if (self.pageSetting == SETTING_2_PAGES) {
+            currentMaxChildViews = ceil((double)[self.chapter.pages count] / 2);
+        } else {
+            currentMaxChildViews = [self.chapter.pages count];
+        }
+
+        if (self.currentChildIndex <= currentMaxChildViews - 1) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.currentChildIndex = [self childIndexForCurrentSetting];
+                [self setupPageViewController];
+            });
+        }
+    }
 }
 
 - (void)viewWillLayoutSubviews
@@ -178,6 +203,10 @@
 - (NSInteger)childIndexForCurrentSetting
 {
     NSInteger currentPageIndex = [self.chapter.currentPageIndex intValue];
+    if (currentPageIndex >= [self.chapter.pagesCount integerValue] - 1) {
+        [self.chapter updateCurrentPageIndex:0];
+        currentPageIndex = 0;
+    }
     if (self.pageSetting == SETTING_2_PAGES && currentPageIndex % 2) {
         // If setting is 2 page and the current page index is odd,
         // display from the previous page index
@@ -199,8 +228,28 @@
 - (void)setCurrentPage:(NSInteger)currentPage
 {
     _currentPage = currentPage;
-    self.navigationItem.title = [NSString stringWithFormat:@"%ld/%d", (long)self.currentPage, [self.chapter.pagesCount intValue]];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@ %ld/%d", self.chapter.name, (long)self.currentPage, [self.chapter.pagesCount intValue]];
     self.navigationController.navigationBar.backItem.title = @" ";
+    
+    UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+    titleView.backgroundColor = [UIColor clearColor];
+    titleView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 2, 200, 24)];
+    titleLabel.text = self.chapter.name;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+    [titleView addSubview:titleLabel];
+    
+    UILabel *subtitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 24, 200, 44-24)];
+    subtitleLabel.text = [NSString stringWithFormat:@"%ld/%d", (long)self.currentPage, [self.chapter.pagesCount intValue]];
+    subtitleLabel.textAlignment = NSTextAlignmentCenter;
+    subtitleLabel.textColor = [UIColor whiteColor];
+    subtitleLabel.font = [UIFont systemFontOfSize:13.0f];
+    [titleView addSubview:subtitleLabel];
+    
+    self.navigationItem.titleView = titleView;
 }
 
 - (NSInteger)childViewsCount
@@ -298,8 +347,6 @@
     
     // Create a PageViewController
     if (self.pageSetting == SETTING_2_PAGES) {
-        //        NSDictionary *options = [NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:UIPageViewControllerSpineLocationMid] forKey: UIPageViewControllerOptionSpineLocationKey];
-        
         NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:UIPageViewControllerSpineLocationMid], UIPageViewControllerOptionSpineLocationKey, @40, UIPageViewControllerOptionInterPageSpacingKey, nil];
         self.pageViewController = [[UIPageViewController alloc]
                                    initWithTransitionStyle: UIPageViewControllerTransitionStyleScroll
@@ -319,16 +366,8 @@
     
     // Create the child view controller
     NSArray *viewControllers;
-    if (self.pageSetting == SETTING_2_PAGES) {
-        //        UIViewController *startingViewController1 = [self viewControllerAtIndex:self.currentPageIndex];
-        //        UIViewController *startingViewController2 = [self viewControllerAtIndex:self.currentPageIndex+1];
-        //        viewControllers = @[startingViewController1, startingViewController2];
-        UIViewController *startingViewController1 = [self viewControllerAtIndex:self.currentChildIndex];
-        viewControllers = @[startingViewController1];
-    } else {
-        UIViewController *startingViewController1 = [self viewControllerAtIndex:self.currentChildIndex];
-        viewControllers = @[startingViewController1];
-    }
+    UIViewController *startingViewController1 = [self viewControllerAtIndex:self.currentChildIndex];
+    viewControllers = @[startingViewController1];
     
     [self.pageViewController setViewControllers:viewControllers
                                       direction:UIPageViewControllerNavigationDirectionForward
@@ -364,12 +403,6 @@
     }
 }
 
-- (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers
-{
-    NSLog(@"TEST: %d", [pendingViewControllers count]);
-}
-
-
 #pragma mark - PageViewController datasource
 
 
@@ -386,21 +419,6 @@
     childVC.pageSetting = self.pageSetting;
     childVC.chapter = self.chapter;
     childVC.index = index;
-
-    
-    if (!(index <= ((int)self.childViewsCount - 1))) {
-        // If there is no page downloaded
-        // Busy waiting on another queue until download is finished
-        dispatch_queue_t loadPageQ = dispatch_queue_create("Loading Page", NULL);
-        dispatch_async(loadPageQ, ^{
-            NSLog(@"Waiting");
-            while (!(index <= ((int)self.childViewsCount - 1))) {}
-            NSLog(@"Loading done");
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self setupPageViewController];
-            });
-        });
-    }
     
     return childVC;
 }
@@ -411,7 +429,6 @@
     NSInteger index = ((ChapterContentViewController *)viewController).index;
     
     if ((index == 0) || (index == NSNotFound)) {
-        //[[NSNotificationCenter defaultCenter] postNotificationName:autoPreviousChapterNotification object:self];
         return nil;
     }
     
@@ -425,20 +442,6 @@
        viewControllerAfterViewController:(UIViewController *)viewController
 {
     NSInteger index = ((ChapterContentViewController *)viewController).index;
-    
-//    NSInteger lastAllowableIndex = [self.chapter.pages count]  - 1;
-//    if (self.pageSetting == SETTING_2_PAGES) {
-//        // if setting is 2 pages, we need to load a blank page at the end
-//        // only need when the total pages is odd (when lastAllowableIndex is even)
-//        if (!(lastAllowableIndex % 2)) {
-//            lastAllowableIndex++;
-//        }
-//    }
-//    
-//    NSLog(@"Lastallowableindex: %d, %d", lastAllowableIndex, index);
-//    if (index == NSNotFound || index == lastAllowableIndex) {
-//        return nil;
-//    }
     
     if (index == NSNotFound || index >= (self.childViewsCount - 1)) {
         return nil;
@@ -468,8 +471,7 @@
     // Make sure the chapter is downloaded and at the end of the page before go to the next
     // check the end of the page using self.currentPage is more reliable
     if (self.nextChapter && [self autoSwitchChapterEnable]
-        && [self.chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED]
-        && self.currentPage == [self.chapter.pages count])
+        && [self.chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED])
     {
         [self performSelectorOnMainThread:@selector(nextButtonTap:) withObject:nil waitUntilDone:YES];
         [self notice:self.chapter.name];

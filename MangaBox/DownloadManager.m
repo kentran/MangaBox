@@ -143,7 +143,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:finishDownloadChapter
                                                         object:self
                                                       userInfo:userInfo];
-
+    
+    [((MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate]) saveDocument];
 }
 
 - (void)startDownloadingChapter:(Chapter *)chapter

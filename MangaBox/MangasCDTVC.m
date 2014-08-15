@@ -88,6 +88,8 @@
     sourceImageView.image = logo;
     sourceImageView.contentMode = UIViewContentModeLeft;
     
+    cell.backgroundColor = UIColorFromRGB(0x121314);
+    
     return cell;
 }
 

@@ -70,7 +70,8 @@
 #define TITLE_LABEL_TAG 1
 #define PAGES_LABEL_TAG 2
 #define PROGRESS_BAR_TAG 3
-#define STAR_IMAGE_TAG 4
+#define STAR_BUTTON_TAG 4
+#define ACTION_BUTTON_TAG 5
 
 - (void)configure:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
@@ -80,12 +81,13 @@
     title.text = chapter.name;
     pages = (UILabel *)[cell.contentView viewWithTag:PAGES_LABEL_TAG];
     
-    UIImageView *startImageView = (UIImageView *)[cell viewWithTag:STAR_IMAGE_TAG];
+    UIButton *starButton = (UIButton *)[cell viewWithTag:STAR_BUTTON_TAG];
     if ([chapter.bookmark boolValue] == NO) {
-        startImageView.image = [UIImage imageNamed:@"emptyStar"];
+        [starButton setImage:[UIImage imageNamed:@"emptyStar"] forState:UIControlStateNormal];
     } else {
-        startImageView.image = [UIImage imageNamed:@"filledStar"];
+        [starButton setImage:[UIImage imageNamed:@"filledStar"] forState:UIControlStateNormal];
     }
+    [starButton addTarget:self action:@selector(toggleBookmark:) forControlEvents:UIControlEventTouchUpInside];
     
     UIProgressView *progressBar = (UIProgressView *)[cell.contentView viewWithTag:PROGRESS_BAR_TAG];
     
@@ -98,8 +100,13 @@
         pages.text = [NSString stringWithFormat:@"Pages: %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
         pages.textColor = UIColorFromRGB(0x648f00);
     } else if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING]) {
-        pages.text = [NSString stringWithFormat:@"Downloading... %lu/%@", (unsigned long)[chapter.pages count], chapter.pagesCount];
-        pages.textColor = UIColorFromRGB(0x648f00);
+        if ([chapter.pages count] > 6) {
+            pages.text = [NSString stringWithFormat:@"Tap here to start reading... %d/%@", (int)[chapter.pages count], chapter.pagesCount];
+            pages.textColor = UIColorFromRGB(0x648f00);
+        } else {
+            pages.text = [NSString stringWithFormat:@"Please wait for buffering... %d/%@", (int)[chapter.pages count], chapter.pagesCount];
+            pages.textColor = UIColorFromRGB(0x64adf0);
+        }
         
         // Add progress bar for downloading view
         progressBar.hidden = NO;
@@ -117,6 +124,9 @@
         pages.textColor = UIColorFromRGB(0x88898c);
         progressBar.hidden = YES;
     }
+    
+    cell.backgroundColor = [UIColor clearColor];
+    cell.contentView.backgroundColor = [UIColor clearColor];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -132,7 +142,6 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"%d", buttonIndex);
     // if tap outside of actionsheet on ipad, actionsheet will automatically cancel
     if (buttonIndex < 0) return;
     
@@ -143,24 +152,10 @@
     if ([choice isEqualToString:@"Download"]) {
         [self.downloadManager startDownloadingChapter:chapter];
     } else if ([choice isEqualToString:@"Read"]) {
-        id detailvc = [self.splitViewController.viewControllers lastObject];
-        if ([detailvc isKindOfClass:[UINavigationController class]]) {
-            detailvc = [((UINavigationController *)detailvc).viewControllers firstObject];
-            [self prepareViewController:detailvc
-                               forSegue:nil
-                          fromIndexPath:indexPath];
-        }
-        [self performSegueWithIdentifier:@"Show Pages" sender:actionSheet];
+        [self readChapterAtIndexPath:indexPath];
     } else if ([choice isEqualToString:@"Read and Download"]) {
         [self.downloadManager startDownloadingChapter:chapter];
-        id detailvc = [self.splitViewController.viewControllers lastObject];
-        if ([detailvc isKindOfClass:[UINavigationController class]]) {
-            detailvc = [((UINavigationController *)detailvc).viewControllers firstObject];
-            [self prepareViewController:detailvc
-                               forSegue:nil
-                          fromIndexPath:indexPath];
-        }
-        [self performSegueWithIdentifier:@"Show Pages" sender:actionSheet];
+        [self readChapterAtIndexPath:indexPath];
     } else if ([choice isEqualToString:@"Bookmark"]) {
         [chapter addBookmark];
     } else if ([choice isEqualToString:@"Remove Bookmark"]) {
@@ -179,26 +174,6 @@
                                                                action:@"button_press"
                                                                 label:label
                                                                 value:value] build]];
-}
-
-#pragma mark - Alerts
-
-- (void)alert:(NSString *)msg
-{
-    [[[UIAlertView alloc] initWithTitle:@"Error"
-                                message:msg
-                               delegate:nil
-                      cancelButtonTitle:nil
-                      otherButtonTitles:@"OK", nil] show];
-}
-
-#pragma mark - Error Observer
-
-- (void)prepareForAlert:(NSNotification *)notification
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self alert:[notification.userInfo objectForKey:@"msg"]];
-    });
 }
 
 #pragma mark - Navigation
@@ -232,47 +207,95 @@
                   fromIndexPath:indexPath];
 }
 
-// boilerplate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.selectedIndexPath = indexPath;
-    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:cell.textLabel.text
-                                                             delegate:self
-                                                    cancelButtonTitle:nil
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:nil];
     
     Chapter *chapter = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    if (![chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED]
+    if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED]) {
+        // Read it right away if downloaded
+        [self readChapterAtIndexPath:indexPath];
+    } else if (![chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED]
         && ![chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING])
     {
-        [actionSheet addButtonWithTitle:@"Read and Download"];
-    } else {
-        [actionSheet addButtonWithTitle:@"Read"];
+        // If chapter is not downloaded or downloading, start the download on tap
+        [self.downloadManager startDownloadingChapter:chapter];
+        // If the chapter is ready to read then read it as well
+        if ([chapter.pages count] > 6) [self readChapterAtIndexPath:indexPath];
+    } else if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING]) {
+        // If the chapter is downloading, read it if it is ready to read
+        if ([chapter.pages count] > 6) [self readChapterAtIndexPath:indexPath];
     }
-    
-    if (![chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADED]
-        && ![chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING])
-    {
-        [actionSheet addButtonWithTitle:@"Download"];
+}
+
+- (void)readChapterAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    id detailvc = [self.splitViewController.viewControllers lastObject];
+    if ([detailvc isKindOfClass:[UINavigationController class]]) {
+        detailvc = [((UINavigationController *)detailvc).viewControllers firstObject];
+        [self prepareViewController:detailvc
+                           forSegue:nil
+                      fromIndexPath:indexPath];
     }
-    
-    if ([chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING]) {
-        [actionSheet addButtonWithTitle:@"Stop downloading"];
-    }
+    [self performSegueWithIdentifier:@"Show Pages" sender:cell];
+}
+
+#pragma mark - Action
+
+- (void)toggleBookmark:(id)sender
+{
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:[self cellForTappedView:sender]];
+    Chapter *chapter = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     if ([chapter.bookmark boolValue] == NO) {
-        [actionSheet addButtonWithTitle:@"Bookmark"];
+        [chapter addBookmark];
     } else {
-        [actionSheet addButtonWithTitle:@"Remove Bookmark"];
+        [chapter removeBookmark];
     }
+}
 
-    if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPad) {
-        [actionSheet addButtonWithTitle:@"Cancel"]; // put at bottom (don't do at all on iPad)
+- (UITableViewCell *)cellForTappedView:(id)sender
+{
+    /* Find out what the cell that the tapped event was sent to
+     based on the tapped view
+     */
+    UITableViewCell *cell;
+    
+    while (![sender isKindOfClass:[UITableViewCell class]]) {
+        if ([sender isKindOfClass:[UIView class]]) {
+            sender = ((UIView *)sender).superview;
+        } else {
+            sender = nil;
+            break;
+        }
     }
     
-    [actionSheet showInView:self.view]; // different on iPad
+    if (sender) {
+        cell = (UITableViewCell *)sender;
+        return cell;
+    }
+    return nil;
+}
+
+#pragma mark - Alerts
+
+- (void)alert:(NSString *)msg
+{
+    [[[UIAlertView alloc] initWithTitle:@"Error"
+                                message:msg
+                               delegate:nil
+                      cancelButtonTitle:nil
+                      otherButtonTitles:@"OK", nil] show];
+}
+
+#pragma mark - Error Observer
+
+- (void)prepareForAlert:(NSNotification *)notification
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self alert:[notification.userInfo objectForKey:@"msg"]];
+    });
 }
 
 @end

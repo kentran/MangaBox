@@ -64,7 +64,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSArray *documentDirectories = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
     NSString *chapterName = [[chapter.name  componentsSeparatedByCharactersInSet:[[NSCharacterSet alphanumericCharacterSet] invertedSet]] componentsJoinedByString:@"_"];
-    NSString *unique = [NSString stringWithFormat:@"%@_%.0f", chapterName, floor([NSDate timeIntervalSinceReferenceDate])];
+    NSString *unique = [NSString stringWithFormat:@"%@_%.0f_%u", chapterName, floor([NSDate timeIntervalSinceReferenceDate]), arc4random()];
     return [[documentDirectories firstObject] URLByAppendingPathComponent:unique];
 }
 
