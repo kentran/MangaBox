@@ -883,7 +883,7 @@
 					/Users/ken/Developer/GoogleAnalyticsServicesiOS_3.09,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3bedec02-679e-42f4-934d-acdb9bf0006b";
+				PROVISIONING_PROFILE = "5BCFDDAB-88DD-4234-AD4C-A5C70EDC1DB0";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
