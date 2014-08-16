@@ -20,7 +20,7 @@
 @property (nonatomic, strong) DownloadManager *downloadManager;
 
 // Google Analytics tracker
-@property (nonatomic, strong) id<GAITracker> tracker;
+@property (nonatomic, strong) id tracker;
 
 - (void)prepareForAlert:(NSNotification *)notification;
 

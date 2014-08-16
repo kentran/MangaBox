@@ -33,6 +33,15 @@
     [self setRefreshControl:refreshControl];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Popular List"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+}
+
 - (void)loadData
 {
     NSURL *url;
@@ -59,6 +68,7 @@
 - (void)refresh
 {
     [self fetchMangasInfo];
+    [Tracker trackPopularWithAction:@"Refresh" label:nil];
 }
 
 #pragma mark - Load Popular Manga Data

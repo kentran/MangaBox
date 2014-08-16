@@ -18,9 +18,9 @@
 {
     [super viewDidAppear:animated];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    id tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:@"Bookmarks Screen"];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (void)viewWillAppear:(BOOL)animated

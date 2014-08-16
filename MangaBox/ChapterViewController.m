@@ -28,7 +28,7 @@
 
 @property (nonatomic)  NSInteger currentPage;
 
-@property (nonatomic, strong) id<GAITracker> tracker;
+@property (nonatomic, strong) id tracker;
 
 @property (nonatomic) NSInteger childViewsCount;
 
@@ -106,7 +106,7 @@
     [super viewDidAppear:animated];
     
     [self.tracker set:kGAIScreenName value:@"Reading Screen"];
-    [self.tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    [self.tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -153,7 +153,7 @@
 
 #pragma mark - Properties
 
-- (id<GAITracker>)tracker
+- (id)tracker
 {
     return [[GAI sharedInstance] defaultTracker];
 }
@@ -202,19 +202,16 @@
 - (NSInteger)childIndexForCurrentSetting
 {
     NSInteger currentPageIndex = [self.chapter.currentPageIndex intValue];
-    
-    // Set the index to 0 if the chapter is at the end page or still downloading when opened
-    // It is to avoid user open a loading page
-    if (currentPageIndex >= [self.chapter.pagesCount integerValue] - 1
-        || [self.chapter.downloadStatus isEqualToString:CHAPTER_DOWNLOADING])
+
+    // Set the index to 0 if the chapter is at the end page
+    if (currentPageIndex >= [self.chapter.pagesCount integerValue] - 1)
     {
         [self.chapter updateCurrentPageIndex:0];
         currentPageIndex = 0;
     }
     
-    if (self.pageSetting == SETTING_2_PAGES && currentPageIndex % 2) {
-        // If setting is 2 page and the current page index is odd,
-        // display from the previous page index
+    if (self.pageSetting == SETTING_2_PAGES) {
+        // If setting is 2 pages: (0, 1) -> index 0, (2, 3) -> index 1 etc
         return floor(currentPageIndex / 2);
     }
     return currentPageIndex;
@@ -324,7 +321,7 @@
 
 - (void)trackEventWithLabel:(NSString *)label andValue:(NSNumber *)value
 {
-    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"ui_action"
+    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"View Manga Pages"
                                                                action:@"button_press"
                                                                 label:label
                                                                 value:value] build]];
@@ -464,14 +461,13 @@
         __weak ChapterViewController *weakSelf = self;
         [self.pageViewController setViewControllers:viewControllers
                                           direction:UIPageViewControllerNavigationDirectionReverse
-                                           animated:YES
+                                           animated:NO
                                          completion:^(BOOL finished) {
                                              if (finished) [weakSelf setupCurrentPage:weakSelf.pageViewController];
                                          }];
     } else {
         // If the current page is the first page, auto previous chapter
         [self autoPreviousChapter];
-        //[[NSNotificationCenter defaultCenter] postNotificationName:autoPreviousChapterNotification object:self];
     }
 }
 
@@ -486,10 +482,12 @@
         __weak ChapterViewController *weakSelf = self;
         [self.pageViewController setViewControllers:viewControllers
                                           direction:UIPageViewControllerNavigationDirectionForward
-                                           animated:YES
-                                         completion:^(BOOL finished) {
-                                             if (finished) [weakSelf setupCurrentPage:weakSelf.pageViewController];
-                                         }];
+                                           animated:NO
+         completion:^(BOOL finished) {
+             if (finished) {
+                 [weakSelf setupCurrentPage:weakSelf.pageViewController];
+             }
+         }];
     } else {
         // If the current page is the last page, auto next chapter
         [self autoNextChapter];
@@ -529,7 +527,12 @@
     {
         [self performSelectorOnMainThread:@selector(nextButtonTap:) withObject:nil waitUntilDone:YES];
         [self notice:self.chapter.name];
-        [self trackEventWithLabel:@"Auto Next Chapter" andValue:nil];
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"View Manga Pages"
+                                                              action:@"Auto Next Chapter"
+                                                               label:self.pageSetting == SETTING_1_PAGE ? @"Single" : @"Double"
+                                                               value:nil] build]];
     }
 }
 
@@ -541,7 +544,12 @@
     if (self.previousChapter && [self autoSwitchChapterEnable]) {
         [self performSelectorOnMainThread:@selector(previousButtonTap:) withObject:nil waitUntilDone:YES];
         [self notice:self.chapter.name];
-        [self trackEventWithLabel:@"Auto Previous Chapter" andValue:nil];
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"View Manga Pages"
+                                                              action:@"Auto Previous Chapter"
+                                                               label:self.pageSetting == SETTING_1_PAGE ? @"Single" : @"Double"
+                                                               value:nil] build]];
     }
 }
 

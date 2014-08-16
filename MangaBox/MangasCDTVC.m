@@ -28,9 +28,9 @@
 {
     [super viewDidAppear:animated];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    id tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:@"Collections Screen"];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 #pragma mark - Properties

@@ -50,9 +50,9 @@
 {
     [super viewDidAppear:animated];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    id tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:@"Advanced Search Screen"];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (void)viewDidLoad
@@ -101,10 +101,17 @@
     [self.tableView reloadData];
 }
 
+#pragma mark - UITextFieldDelegate
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [Tracker trackAdvancedSearchWithAction:@"Series Name" label:textField.text];
 }
 
 #pragma mark - Properties
@@ -176,10 +183,12 @@
     switch (component) {
         case 0:
             self.sortText.text = [NSString stringWithFormat:@"%@ - %@", self.sortBy[row], self.sortOrder[[pickerView selectedRowInComponent:1]]];
+            [Tracker trackAdvancedSearchWithAction:@"Sort results" label:self.sortText.text];
             break;
             
         case 1:
             self.sortText.text = [NSString stringWithFormat:@"%@ - %@", self.sortBy[[pickerView selectedRowInComponent:0]], self.sortOrder[row]];
+            [Tracker trackAdvancedSearchWithAction:@"Sort results" label:self.sortText.text];
             break;
     }
 }
@@ -259,15 +268,20 @@
     if ([[self.genresDictionary objectForKey:genre] isEqualToString:@"0"]) {
         [self.genresDictionary setObject:@"1" forKey:genre];
         markImageView.image = [UIImage imageNamed:@"checkMark"];
+        
+        [Tracker trackAdvancedSearchWithAction:@"With Genres" label:genre];
     } else if ([[self.genresDictionary objectForKey:genre] isEqualToString:@"1"]) {
         [self.genresDictionary setObject:@"2" forKey:genre];
         markImageView.image = [UIImage imageNamed:@"crossMark"];
+        
+        [Tracker trackAdvancedSearchWithAction:@"Without Genres" label:genre];
     } else {
         [self.genresDictionary setObject:@"0" forKey:genre];
         markImageView.image = [UIImage imageNamed:@"emptyMark"];
+        
+        [Tracker trackAdvancedSearchWithAction:@"Deselect Genres" label:genre];
     }
 }
-
 
 #pragma mark - Navigation
 
@@ -350,6 +364,8 @@
         self.completedIndicatorLabel.text = STATUS_SELECTED;
         self.completedIndicatorLabel.textColor = [UIColor whiteColor];
     }
+    
+    [Tracker trackAdvancedSearchWithAction:@"Completed Toggle" label:self.completedIndicatorLabel.text];
 }
 
 - (IBAction)ongoingToggle:(UITapGestureRecognizer *)sender
@@ -371,6 +387,8 @@
         self.ongoingIndicatorLabel.text = STATUS_SELECTED;
         self.ongoingIndicatorLabel.textColor = [UIColor whiteColor];
     }
+    
+    [Tracker trackAdvancedSearchWithAction:@"Ongoing Toggle" label:self.ongoingIndicatorLabel.text];
 }
 
 

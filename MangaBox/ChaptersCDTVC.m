@@ -45,7 +45,7 @@
     return _downloadManager;
 }
 
-- (id<GAITracker>)tracker
+- (id)tracker
 {
     return [[GAI sharedInstance] defaultTracker];
 }
@@ -103,9 +103,11 @@
         if ([chapter.pages count] > 6) {
             pages.text = [NSString stringWithFormat:@"Tap here to start reading... %d/%@", (int)[chapter.pages count], chapter.pagesCount];
             pages.textColor = UIColorFromRGB(0x648f00);
+            progressBar.tintColor = UIColorFromRGB(0x648f00);
         } else {
             pages.text = [NSString stringWithFormat:@"Please wait for buffering... %d/%@", (int)[chapter.pages count], chapter.pagesCount];
             pages.textColor = UIColorFromRGB(0x64adf0);
+            progressBar.tintColor = UIColorFromRGB(0x64adf0);
         }
         
         // Add progress bar for downloading view
@@ -143,7 +145,10 @@
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     // if tap outside of actionsheet on ipad, actionsheet will automatically cancel
-    if (buttonIndex < 0) return;
+    if (buttonIndex < 0) {
+        [self trackChapterViewEventWithLabel:@"Cancel" andValue:nil];
+        return;
+    }
     
     NSString *choice = [actionSheet buttonTitleAtIndex:buttonIndex];
     NSIndexPath *indexPath = self.selectedIndexPath;
@@ -165,13 +170,13 @@
     }
     
     // Track the action sheet button
-    [self trackEventWithLabel:choice andValue:nil];
+    [self trackChapterViewEventWithLabel:choice andValue:nil];
 }
 
-- (void)trackEventWithLabel:(NSString *)label andValue:(NSNumber *)value
+- (void)trackChapterViewEventWithLabel:(NSString *)label andValue:(NSNumber *)value
 {
-    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"action_sheet"
-                                                               action:@"button_press"
+    [self.tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Chapter List View"
+                                                               action:@"Make a choice"
                                                                 label:label
                                                                 value:value] build]];
 }

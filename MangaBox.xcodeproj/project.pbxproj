@@ -53,7 +53,6 @@
 		BEA8395218C4D35800184150 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8395118C4D35800184150 /* NSString+Helper.m */; };
 		BEA87F731902D49400477D97 /* DownloadTasksTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA87F721902D49400477D97 /* DownloadTasksTVC.m */; };
 		BEA87F7D1906227800477D97 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA87F7C1906227800477D97 /* SystemConfiguration.framework */; };
-		BEA87F7F1906231500477D97 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA87F7E1906231500477D97 /* libGoogleAnalyticsServices.a */; };
 		BEA87F8219062BB300477D97 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA87F8119062BB300477D97 /* AdSupport.framework */; };
 		BEA87F8419062BBA00477D97 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA87F8319062BBA00477D97 /* libz.dylib */; };
 		BEA8CC6718CF0688000851E4 /* ChaptersByMangaCDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA8CC6618CF0688000851E4 /* ChaptersByMangaCDTVC.m */; };
@@ -77,6 +76,8 @@
 		BEC503BA18CB72100013B7D0 /* CoverImage+Create.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC503B918CB72100013B7D0 /* CoverImage+Create.m */; };
 		BEC503BD18CB83840013B7D0 /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC503BC18CB83840013B7D0 /* CoreDataTableViewController.m */; };
 		BEC503C018CB868F0013B7D0 /* MangasCDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC503BF18CB868F0013B7D0 /* MangasCDTVC.m */; };
+		BEDC9AAB199E22B900DAD00C /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BEDC9AAA199E22B900DAD00C /* libGoogleAnalyticsServices.a */; };
+		BEDC9AAE199FE66100DAD00C /* Tracker.m in Sources */ = {isa = PBXBuildFile; fileRef = BEDC9AAD199FE66100DAD00C /* Tracker.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,12 +166,6 @@
 		BEA8395118C4D35800184150 /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
 		BEA87F711902D49400477D97 /* DownloadTasksTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadTasksTVC.h; sourceTree = "<group>"; };
 		BEA87F721902D49400477D97 /* DownloadTasksTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadTasksTVC.m; sourceTree = "<group>"; };
-		BEA87F761906223B00477D97 /* GAI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
-		BEA87F771906223B00477D97 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
-		BEA87F781906223B00477D97 /* GAIFields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
-		BEA87F791906223B00477D97 /* GAILogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
-		BEA87F7A1906223B00477D97 /* GAITrackedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
-		BEA87F7B1906223B00477D97 /* GAITracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
 		BEA87F7C1906227800477D97 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BEA87F7E1906231500477D97 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = ../GoogleAnalyticsServicesiOS_3.06/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		BEA87F80190629F200477D97 /* GoogleAnalyticsConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleAnalyticsConstant.h; sourceTree = "<group>"; };
@@ -220,6 +215,21 @@
 		BEC503BC18CB83840013B7D0 /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		BEC503BE18CB868F0013B7D0 /* MangasCDTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MangasCDTVC.h; sourceTree = "<group>"; };
 		BEC503BF18CB868F0013B7D0 /* MangasCDTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MangasCDTVC.m; sourceTree = "<group>"; };
+		BEDC9A91199E16F700DAD00C /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = "../../Downloads/GoogleAnalyticsServicesiOS_3-2.09/libGoogleAnalyticsServices.a"; sourceTree = "<group>"; };
+		BEDC9A9E199E201900DAD00C /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = ../../Downloads/GoogleAnalyticsServicesiOS_3.09/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		BEDC9AA0199E20EC00DAD00C /* GAI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		BEDC9AA1199E20EC00DAD00C /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		BEDC9AA2199E20EC00DAD00C /* GAIEcommerceFields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		BEDC9AA3199E20EC00DAD00C /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		BEDC9AA4199E20EC00DAD00C /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		BEDC9AA5199E20EC00DAD00C /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		BEDC9AA6199E20EC00DAD00C /* GAIFields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		BEDC9AA7199E20EC00DAD00C /* GAILogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		BEDC9AA8199E20EC00DAD00C /* GAITrackedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		BEDC9AA9199E20EC00DAD00C /* GAITracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		BEDC9AAA199E22B900DAD00C /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = ../GoogleAnalyticsServicesiOS_3.09/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		BEDC9AAC199FE66100DAD00C /* Tracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tracker.h; sourceTree = "<group>"; };
+		BEDC9AAD199FE66100DAD00C /* Tracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tracker.m; sourceTree = "<group>"; };
 		BEDEE60A18CDBA4000BF16A2 /* MangaBoxNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MangaBoxNotification.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -228,9 +238,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEDC9AAB199E22B900DAD00C /* libGoogleAnalyticsServices.a in Frameworks */,
 				BEA87F8419062BBA00477D97 /* libz.dylib in Frameworks */,
 				BEA87F8219062BB300477D97 /* AdSupport.framework in Frameworks */,
-				BEA87F7F1906231500477D97 /* libGoogleAnalyticsServices.a in Frameworks */,
 				BEA87F7D1906227800477D97 /* SystemConfiguration.framework in Frameworks */,
 				BE2B92BD18C243EB003EC6D7 /* libxml2.dylib in Frameworks */,
 				BE2B926118C2281E003EC6D7 /* CoreGraphics.framework in Frameworks */,
@@ -391,6 +401,9 @@
 		BE2B925D18C2281E003EC6D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BEDC9AAA199E22B900DAD00C /* libGoogleAnalyticsServices.a */,
+				BEDC9A9E199E201900DAD00C /* libGoogleAnalyticsServices.a */,
+				BEDC9A91199E16F700DAD00C /* libGoogleAnalyticsServices.a */,
 				BEA87F8319062BBA00477D97 /* libz.dylib */,
 				BEA87F8119062BB300477D97 /* AdSupport.framework */,
 				BEA87F7E1906231500477D97 /* libGoogleAnalyticsServices.a */,
@@ -434,6 +447,8 @@
 				BE2B926918C2281E003EC6D7 /* InfoPlist.strings */,
 				BE2B926C18C2281E003EC6D7 /* main.m */,
 				BE2B926E18C2281E003EC6D7 /* MangaBox-Prefix.pch */,
+				BEDC9AAC199FE66100DAD00C /* Tracker.h */,
+				BEDC9AAD199FE66100DAD00C /* Tracker.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -500,12 +515,16 @@
 		BEA87F75190621E200477D97 /* Google Analytics */ = {
 			isa = PBXGroup;
 			children = (
-				BEA87F761906223B00477D97 /* GAI.h */,
-				BEA87F771906223B00477D97 /* GAIDictionaryBuilder.h */,
-				BEA87F781906223B00477D97 /* GAIFields.h */,
-				BEA87F791906223B00477D97 /* GAILogger.h */,
-				BEA87F7A1906223B00477D97 /* GAITrackedViewController.h */,
-				BEA87F7B1906223B00477D97 /* GAITracker.h */,
+				BEDC9AA0199E20EC00DAD00C /* GAI.h */,
+				BEDC9AA1199E20EC00DAD00C /* GAIDictionaryBuilder.h */,
+				BEDC9AA2199E20EC00DAD00C /* GAIEcommerceFields.h */,
+				BEDC9AA3199E20EC00DAD00C /* GAIEcommerceProduct.h */,
+				BEDC9AA4199E20EC00DAD00C /* GAIEcommerceProductAction.h */,
+				BEDC9AA5199E20EC00DAD00C /* GAIEcommercePromotion.h */,
+				BEDC9AA6199E20EC00DAD00C /* GAIFields.h */,
+				BEDC9AA7199E20EC00DAD00C /* GAILogger.h */,
+				BEDC9AA8199E20EC00DAD00C /* GAITrackedViewController.h */,
+				BEDC9AA9199E20EC00DAD00C /* GAITracker.h */,
 			);
 			name = "Google Analytics";
 			sourceTree = "<group>";
@@ -661,6 +680,7 @@
 				BEA8394D18C4759900184150 /* TFHpple.m in Sources */,
 				BEADD7B318F42D4B000C5440 /* DownloadManager.m in Sources */,
 				BE2B92C618C31DFA003EC6D7 /* ParsedMangasTVC.m in Sources */,
+				BEDC9AAE199FE66100DAD00C /* Tracker.m in Sources */,
 				BE2B926D18C2281E003EC6D7 /* main.m in Sources */,
 				BE2B927118C2281E003EC6D7 /* MangaBoxAppDelegate.m in Sources */,
 				BEB0424D1968F9E40021ECA0 /* CoverImage.m in Sources */,
@@ -840,7 +860,7 @@
 				INFOPLIST_FILE = "MangaBox/MangaBox-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/ken/Developer/GoogleAnalyticsServicesiOS_3.06,
+					/Users/ken/Developer/GoogleAnalyticsServicesiOS_3.09,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3bedec02-679e-42f4-934d-acdb9bf0006b";
@@ -860,7 +880,7 @@
 				INFOPLIST_FILE = "MangaBox/MangaBox-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/Users/ken/Developer/GoogleAnalyticsServicesiOS_3.06,
+					/Users/ken/Developer/GoogleAnalyticsServicesiOS_3.09,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3bedec02-679e-42f4-934d-acdb9bf0006b";

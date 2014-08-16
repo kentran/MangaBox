@@ -18,13 +18,15 @@
     /* Set up Google Analytics */
     // Optional: automatically send uncaught exceptions to Google Analytics.
     [GAI sharedInstance].trackUncaughtExceptions = YES;
+    
     // Optional: set Google Analytics dispatch interval to e.g. 20 seconds.
-    //[GAI sharedInstance].dispatchInterval = 20;
+    [GAI sharedInstance].dispatchInterval = 20;
+    
     // Optional: set Logger to VERBOSE for debug information.
     //[[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
     
-    // Create tracker instance.
-    id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:TRACKING_ID];
+    // Initialize tracker. Replace with your tracking ID.
+    [[GAI sharedInstance] trackerWithTrackingId:TRACKING_ID];
     
     /* Create UIManaged Document */
     NSURL *url = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"MangaBox"];

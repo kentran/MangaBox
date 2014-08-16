@@ -46,9 +46,17 @@
 {
     [super viewDidAppear:animated];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    id tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:@"Add Manga Confirm Screen"];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    self.spinner.center = self.tableView.center;
+    NSLog(@"%f, %f", self.tableView.center.x, self.tableView.center.y);
 }
 
 #pragma mark - Properties

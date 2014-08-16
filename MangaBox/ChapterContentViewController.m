@@ -13,6 +13,9 @@
 
 @property (nonatomic) NSInteger childViewsCount;
 
+@property (nonatomic, strong) UIView *previousTapArea;
+@property (nonatomic, strong) UIView *nextTapArea;
+
 @end
 
 @implementation ChapterContentViewController
@@ -30,6 +33,11 @@
      */
     [self loadSwipeLeft];
     [self loadSwipeRight];
+}
+
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
     
     /**
      * Tap on the left and right side of the screen should go to the next and previous page
@@ -41,24 +49,34 @@
 
 - (void)loadNextPageTap
 {
+    if ([self.nextTapArea respondsToSelector:@selector(removeFromSuperview)]) {
+        [self.nextTapArea removeFromSuperview];
+        self.nextTapArea = nil;
+    }
+    
     UITapGestureRecognizer *nextTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                      action:@selector(nextPageTap:)];
     CGFloat switchPageAreaWidth = self.view.frame.size.width / 5;
     CGRect nextTapAreaFrame = CGRectMake(self.view.frame.size.width - switchPageAreaWidth, 0, switchPageAreaWidth, self.view.frame.size.height);
-    UIView *nextTapArea = [[UIView alloc] initWithFrame:nextTapAreaFrame];
-    [nextTapArea addGestureRecognizer:nextTapGesture];
-    [self.view addSubview:nextTapArea];
+    self.nextTapArea = [[UIView alloc] initWithFrame:nextTapAreaFrame];
+    [self.nextTapArea addGestureRecognizer:nextTapGesture];
+    [self.view addSubview:self.nextTapArea];
 }
 
 - (void)loadPreviousPageTap
 {
+    if ([self.previousTapArea respondsToSelector:@selector(removeFromSuperview)]) {
+        [self.previousTapArea removeFromSuperview];
+        self.previousTapArea = nil;
+    }
+    
     UITapGestureRecognizer *previousTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                          action:@selector(previousPageTap:)];
     CGFloat switchPageAreaWidth = self.view.frame.size.width / 5;
     CGRect previousTapAreaFrame = CGRectMake(0, 0, switchPageAreaWidth, self.view.frame.size.height);
-    UIView *previousTapArea = [[UIView alloc] initWithFrame:previousTapAreaFrame];
-    [previousTapArea addGestureRecognizer:previousTapGesture];
-    [self.view addSubview:previousTapArea];
+    self.previousTapArea = [[UIView alloc] initWithFrame:previousTapAreaFrame];
+    [self.previousTapArea addGestureRecognizer:previousTapGesture];
+    [self.view addSubview:self.previousTapArea];
 }
 
 - (void)loadSwipeLeft
@@ -83,26 +101,47 @@
 - (void)previousPageTap:(UIGestureRecognizer *)gestureRecognizer
 {
     [self.delegate previousPage];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"View Manga Pages"
+                                                          action:@"Previous Page by Tapping"
+                                                           label:self.pageSetting == SETTING_1_PAGE ? @"Single" : @"Double"
+                                                           value:nil] build]];
 }
 
 - (void)nextPageTap:(UIGestureRecognizer *)gestureRecognizer
 {
     [self.delegate nextPage];
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"View Manga Pages"
+                                                          action:@"Next Page by Tapping"
+                                                           label:self.pageSetting == SETTING_1_PAGE ? @"Single" : @"Double"
+                                                           value:nil] build]];
 }
 
 - (void)swipeLeft:(UIGestureRecognizer *)gestureRecognizer
 {
-    NSLog(@"Swipe left");
     if (self.index >= self.childViewsCount - 1) {
         [self.delegate autoNextChapter];
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"View Manga Pages"
+                                                              action:@"Swipe Left on last page"
+                                                               label:self.pageSetting == SETTING_1_PAGE ? @"Single" : @"Double"
+                                                               value:nil] build]];
     }
 }
 
 - (void)swipeRight:(UIGestureRecognizer *)gestureRecognizer
 {
-    NSLog(@"Swipe right");
     if (self.index == 0) {
         [self.delegate autoPreviousChapter];
+        
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"View Manga Pages"
+                                                              action:@"Swipe Right on first page"
+                                                               label:self.pageSetting == SETTING_1_PAGE ? @"Single" : @"Double"
+                                                               value:nil] build]];
     }
 }
 

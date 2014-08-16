@@ -30,9 +30,9 @@
 {
     [super viewDidAppear:animated];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    id tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:@"Settings Screen"];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
     
     [self loadBackgroundColorForAllCells]; // for disclosure indicator on ipad
 }
@@ -83,12 +83,33 @@
     // Auto Switch Chapter
     NSString *autoSwitchChapter = (self.autoSwitchChapter.on) ? AUTO_SWITCH_CHAPTER_ON : AUTO_SWITCH_CHAPTER_OFF;
     [defaults setObject:autoSwitchChapter forKey:AUTO_SWITCH_CHAPTER];
+    
+    [Tracker trackUserSettingsWithAction:AUTO_SWITCH_CHAPTER label:autoSwitchChapter];
+    [Tracker trackUserSettingsWithAction:DEVICE_AWAKE label:deviceAwake];
 }
 
 - (IBAction)valueChanged:(UISwitch *)sender
 {
     [self saveUserSettings];
     [self loadUserSettings];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if ([cell.textLabel.text isEqualToString:@"Like MangaBox on Facebook"]) {
+        NSURL *fbAppURL = [NSURL URLWithString:FACEBOOK_APP_URL];
+        NSURL *fbSafariURL = [NSURL URLWithString:FACEBOOK_SAFARI_URL];
+        if ([[UIApplication sharedApplication] canOpenURL:fbAppURL]) {
+            [[UIApplication sharedApplication] openURL:fbAppURL];
+        } else if ([[UIApplication sharedApplication] canOpenURL:fbSafariURL]) {
+            [[UIApplication sharedApplication] openURL:fbSafariURL];
+        }
+    } else if ([cell.textLabel.text isEqualToString:@"Report a Problem"]) {
+        NSString *mail = @"mangaboxdev@gmail.com";
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"mailto:?to=%@", [mail stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]];
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 @end

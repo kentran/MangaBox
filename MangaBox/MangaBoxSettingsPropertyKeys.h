@@ -20,4 +20,7 @@
 #define DEVICE_AWAKE_ON @"YES"
 #define DEVICE_AWAKE_OFF @"NO"
 
+#define FACEBOOK_APP_URL @"fb://profile/851038468247998"
+#define FACEBOOK_SAFARI_URL @"http://www.facebook.com/mangabox.ios"
+
 #endif

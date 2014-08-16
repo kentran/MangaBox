@@ -296,6 +296,7 @@
                                              ofChapter:chapter
                                 inManagedObjectContext:chapter.managedObjectContext];
                     
+                    [((MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate]) saveDocument];
                 }
                 [[NSNotificationCenter defaultCenter] postNotificationName:finishDownloadChapterPage
                                                                     object:self
@@ -392,6 +393,7 @@
                                delegate:nil
                       cancelButtonTitle:nil
                       otherButtonTitles:@"OK", nil] show];
+    [Tracker trackDownloadTaskWithAction:@"Alert" label:msg];
 }
 
 - (void)notice:(NSString *)msg
@@ -401,6 +403,7 @@
                                delegate:nil
                       cancelButtonTitle:nil
                       otherButtonTitles:@"OK", nil] show];
+    [Tracker trackDownloadTaskWithAction:@"Notice" label:msg];
 }
 
 @end

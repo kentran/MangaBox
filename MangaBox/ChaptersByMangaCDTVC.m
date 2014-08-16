@@ -34,9 +34,9 @@
 {
     [super viewDidAppear:animated];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    id tracker = [[GAI sharedInstance] defaultTracker];
     [tracker set:kGAIScreenName value:@"Chapters By Manga Screen"];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (void)viewDidLoad
@@ -133,12 +133,25 @@
     
     actionSheet.destructiveButtonIndex = 2;
     [actionSheet showFromBarButtonItem:sender animated:YES];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Chapter List View"
+                                                          action:@"Show General Action Sheet"
+                                                           label:nil
+                                                           value:nil] build]];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     // if tap outside of actionsheet on ipad, actionsheet will automatically cancel
-    if (buttonIndex < 0) return;
+    if (buttonIndex < 0) {
+        id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+        [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Chapter List View"
+                                                              action:@"General Action Sheet - make a choice"
+                                                               label:@"Cancel"
+                                                               value:nil] build]];
+        return;
+    }
     
     // calling super since ChaptersCDTVC also implement actionSheetDelegate
     // this method only add on to the code
@@ -155,6 +168,12 @@
     } else if ([choice isEqualToString:@"Update chapter list"]) {
         [self.downloadManager updateChapterListForManga:self.manga];
     }
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Chapter List View"
+                                                          action:@"General Action Sheet - make a choice"
+                                                           label:choice
+                                                           value:nil] build]];
 }
 
 #pragma mark - Continue Reading
@@ -163,6 +182,12 @@
 {
     Chapter *lastReadingChapter = [Chapter lastReadChapterOfManga:self.manga];
     [self performSegueWithIdentifier:@"Show Pages" sender:lastReadingChapter];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker send:[[GAIDictionaryBuilder createEventWithCategory:@"Chapter List View"
+                                                          action:@"Continue Reading"
+                                                           label:nil
+                                                           value:nil] build]];
 }
 
 

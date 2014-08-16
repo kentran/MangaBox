@@ -22,9 +22,9 @@
 {
     [super viewDidAppear:animated];
     
-    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:@"Parsed Manga List Screen"];
-    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+    id tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:@"Advanced Search Manga List Screen"];
+    [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (NSMutableArray *)searchedMangas
@@ -94,6 +94,7 @@
             if (!result) {
                 // if the result can't be found, alert the user
                 [self fatalAlert:@"No result is availabel for your search. Please note that some website does not allow you to search continuously within 5s. You can change the criteria and try again later"];
+                [Tracker trackAdvancedSearchWithAction:@"Error 5s limit" label:nil];
                 return;
             } else {
                 [self.searchedMangas addObjectsFromArray:result];   // add result to current list of mangas
@@ -119,6 +120,9 @@
     // load more data if the last row is displayed and next page param is not 0
     if (indexPath.row == ([self.mangas count] - 1) && [[self.nextPageCriteria objectForKey:@"page"] intValue]) {
         [self fetchMangas]; // fetch next page, criteria is already updated
+        
+        [Tracker trackAdvancedSearchWithAction:@"Load Next Result Page"
+                                         label:[self.nextPageCriteria objectForKey:@"page"]];
     }
 }
 

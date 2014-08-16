@@ -66,8 +66,8 @@
                         <rect key="frame" x="0.0" y="64" width="768" height="911"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <activityIndicatorView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fam-bh-D8s">
-                                <rect key="frame" x="365" y="437" width="37" height="37"/>
+                            <activityIndicatorView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="fam-bh-D8s">
+                                <rect key="frame" x="374" y="446" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                             <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" indicatorStyle="white" translatesAutoresizingMaskIntoConstraints="NO" id="pPN-t0-QFs">
@@ -249,16 +249,16 @@
                             <rect key="frame" x="0.0" y="64" width="768" height="402"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Ff-oe-P3m">
-                                    <rect key="frame" x="20" y="20" width="419" height="150"/>
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Ff-oe-P3m">
+                                    <rect key="frame" x="20" y="20" width="100" height="150"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="150" id="4la-sw-1nm"/>
                                         <constraint firstAttribute="width" constant="100" id="g46-an-kos"/>
                                     </constraints>
                                 </imageView>
-                                <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" editable="NO" text="genresText" translatesAutoresizingMaskIntoConstraints="NO" id="i5j-u6-jhE">
-                                    <rect key="frame" x="20" y="244" width="409" height="138"/>
+                                <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" text="genresText" translatesAutoresizingMaskIntoConstraints="NO" id="i5j-u6-jhE">
+                                    <rect key="frame" x="20" y="244" width="728" height="138"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -328,8 +328,8 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="unf-58-PcG">
-                                    <rect key="frame" x="215" y="191" width="20" height="20"/>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="unf-58-PcG">
+                                    <rect key="frame" x="374" y="191" width="20" height="20"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
                                 <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="36G-NR-4Y7">
@@ -339,8 +339,8 @@
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="titleText" translatesAutoresizingMaskIntoConstraints="NO" id="Zg3-aw-7d1">
-                                    <rect key="frame" x="128" y="38" width="301" height="32"/>
+                                <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" text="titleText" translatesAutoresizingMaskIntoConstraints="NO" id="Zg3-aw-7d1">
+                                    <rect key="frame" x="128" y="38" width="620" height="32"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -360,7 +360,6 @@
                                 <constraint firstItem="crD-LL-iX2" firstAttribute="leading" secondItem="LLi-Pp-dtV" secondAttribute="trailing" constant="13" id="Dcl-WN-qFc"/>
                                 <constraint firstItem="36G-NR-4Y7" firstAttribute="leading" secondItem="1Ff-oe-P3m" secondAttribute="trailing" constant="8" id="DyP-WQ-Uur"/>
                                 <constraint firstItem="1Ff-oe-P3m" firstAttribute="leading" secondItem="TBx-pC-ZOU" secondAttribute="leading" constant="20" id="ELo-4m-2ri"/>
-                                <constraint firstAttribute="centerX" secondItem="unf-58-PcG" secondAttribute="centerX" id="Hgj-F9-ty9"/>
                                 <constraint firstItem="36G-NR-4Y7" firstAttribute="top" secondItem="TBx-pC-ZOU" secondAttribute="top" constant="20" id="HvV-oq-1Qn"/>
                                 <constraint firstItem="1Ff-oe-P3m" firstAttribute="leading" secondItem="LLi-Pp-dtV" secondAttribute="leading" id="KFe-Iv-lWD"/>
                                 <constraint firstAttribute="bottom" secondItem="i5j-u6-jhE" secondAttribute="bottom" constant="20" symbolic="YES" id="L5L-lu-VWh"/>
@@ -376,7 +375,6 @@
                                 <constraint firstAttribute="trailing" secondItem="i5j-u6-jhE" secondAttribute="trailing" constant="20" symbolic="YES" id="jdH-4C-hbL"/>
                                 <constraint firstItem="izp-8l-h3g" firstAttribute="leading" secondItem="aeL-cx-eIW" secondAttribute="leading" id="lFD-Bd-IXO"/>
                                 <constraint firstItem="Atz-m6-sju" firstAttribute="leading" secondItem="aeL-cx-eIW" secondAttribute="leading" id="lju-dl-mqG"/>
-                                <constraint firstAttribute="centerY" secondItem="unf-58-PcG" secondAttribute="centerY" id="naA-sW-ctJ"/>
                                 <constraint firstItem="i5j-u6-jhE" firstAttribute="leading" secondItem="lJG-IG-GZo" secondAttribute="leading" id="q1u-tW-SVR"/>
                                 <constraint firstItem="Atz-m6-sju" firstAttribute="leading" secondItem="1Ff-oe-P3m" secondAttribute="trailing" constant="8" id="qtZ-IP-QkR"/>
                                 <constraint firstItem="7JH-IU-UDX" firstAttribute="leading" secondItem="LLi-Pp-dtV" secondAttribute="leading" id="qy7-v7-cpO"/>
@@ -1594,7 +1592,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="735" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Report a Problem" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="48q-HY-lqD">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Like MangaBox on Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="48q-HY-lqD">
                                                     <rect key="frame" x="15" y="0.0" width="718" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -1605,9 +1603,25 @@
                                             <color key="backgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <segue destination="qLe-Pa-1du" kind="push" identifier="Report Problems" id="X89-Se-Vkn"/>
-                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="1cz-9C-EoW" style="IBUITableViewCellStyleDefault" id="1H1-Va-gbh">
+                                        <rect key="frame" x="0.0" y="523" width="768" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1H1-Va-gbh" id="gWx-dB-Znd">
+                                            <rect key="frame" x="0.0" y="0.0" width="735" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Report a Problem" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1cz-9C-EoW">
+                                                    <rect key="frame" x="15" y="0.0" width="718" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1919,38 +1933,6 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MOP-SZ-cVg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3064" y="-6493"/>
-        </scene>
-        <!--View Controller - Report a Problem-->
-        <scene sceneID="NJg-eg-59C">
-            <objects>
-                <viewController id="qLe-Pa-1du" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="461-qY-eRp"/>
-                        <viewControllerLayoutGuide type="bottom" id="Yk7-y8-0DM"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="mt2-WM-pq9">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJk-3n-rfG">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="700"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <string key="text">Please send an email to mangaboxdev@gmail.com or post your comment on MangaBox Facebook page at https://www.facebook.com/mangabox.ios  Thank you very much for supporting MangaBox.</string>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="Report a Problem" id="QpD-UI-R81"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="wml-ar-Xj3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2578" y="-3971"/>
         </scene>
         <!--Static Scroll View Controller - Help - Search-->
         <scene sceneID="TDa-TZ-lTJ">
@@ -2411,7 +2393,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
         <image name="dragonball-screenshot" width="320" height="568"/>
         <image name="earth-icon" width="30" height="30"/>
         <image name="emptyMark" width="208" height="208"/>
-        <image name="emptyStar" width="40" height="40"/>
+        <image name="emptyStar" width="209" height="209"/>
         <image name="icon-more" width="30" height="30"/>
         <image name="mangabox-icon" width="512" height="512"/>
         <image name="search-screenshot" width="320" height="568"/>
