@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UISwitch *deviceAwakeSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *deviceAwakeStatus;
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *readingDirectionControl;
+
 @end
 
 @implementation SettingsTVC
@@ -69,6 +71,13 @@
         self.autoSwitchChapter.on = NO;
         self.autoSwitchChapterStatus.text = @"Off";
     }
+    
+    // Reading Direction
+    if ([[defaults valueForKey:READING_DIRECTION] isEqualToString:READING_DIRECTION_L2R]) {
+        self.readingDirectionControl.selectedSegmentIndex = 0;
+    } else {
+        self.readingDirectionControl.selectedSegmentIndex = 1;
+    }
 }
 
 - (void)saveUserSettings
@@ -84,11 +93,16 @@
     NSString *autoSwitchChapter = (self.autoSwitchChapter.on) ? AUTO_SWITCH_CHAPTER_ON : AUTO_SWITCH_CHAPTER_OFF;
     [defaults setObject:autoSwitchChapter forKey:AUTO_SWITCH_CHAPTER];
     
+    // Reading Direction
+    NSString *readingDirection = (self.readingDirectionControl.selectedSegmentIndex == 0) ? READING_DIRECTION_L2R : READING_DIRECTION_R2L;
+    [defaults setObject:readingDirection forKey:READING_DIRECTION];
+    
     [Tracker trackUserSettingsWithAction:AUTO_SWITCH_CHAPTER label:autoSwitchChapter];
     [Tracker trackUserSettingsWithAction:DEVICE_AWAKE label:deviceAwake];
+    [Tracker trackUserSettingsWithAction:READING_DIRECTION label:readingDirection];
 }
 
-- (IBAction)valueChanged:(UISwitch *)sender
+- (IBAction)valueChanged:(id)sender
 {
     [self saveUserSettings];
     [self loadUserSettings];

@@ -16,6 +16,8 @@
 @property (nonatomic, strong) UIView *previousTapArea;
 @property (nonatomic, strong) UIView *nextTapArea;
 
+@property (nonatomic) NSInteger readingDirection;
+
 @end
 
 @implementation ChapterContentViewController
@@ -100,6 +102,41 @@
 
 - (void)previousPageTap:(UIGestureRecognizer *)gestureRecognizer
 {
+    if (self.readingDirection == UIPageViewControllerNavigationDirectionForward) {
+        [self loadPreviousPage];
+    } else {
+        [self loadNextPage];
+    }
+}
+
+- (void)nextPageTap:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (self.readingDirection == UIPageViewControllerNavigationDirectionForward) {
+        [self loadNextPage];
+    } else {
+        [self loadPreviousPage];
+    }}
+
+- (void)swipeLeft:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (self.readingDirection == UIPageViewControllerNavigationDirectionForward) {
+        [self loadNextChapter];
+    } else {
+        [self loadPreviousChapter];
+    }
+}
+
+- (void)swipeRight:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (self.readingDirection == UIPageViewControllerNavigationDirectionForward) {
+        [self loadPreviousChapter];
+    } else {
+        [self loadNextChapter];
+    }
+}
+
+- (void)loadPreviousPage
+{
     [self.delegate previousPage];
     
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
@@ -109,7 +146,7 @@
                                                            value:nil] build]];
 }
 
-- (void)nextPageTap:(UIGestureRecognizer *)gestureRecognizer
+- (void)loadNextPage
 {
     [self.delegate nextPage];
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
@@ -119,7 +156,7 @@
                                                            value:nil] build]];
 }
 
-- (void)swipeLeft:(UIGestureRecognizer *)gestureRecognizer
+- (void)loadNextChapter
 {
     if (self.index >= self.childViewsCount - 1) {
         [self.delegate autoNextChapter];
@@ -132,7 +169,7 @@
     }
 }
 
-- (void)swipeRight:(UIGestureRecognizer *)gestureRecognizer
+- (void)loadPreviousChapter
 {
     if (self.index == 0) {
         [self.delegate autoPreviousChapter];
@@ -158,6 +195,16 @@
         return ceil((double)[self.chapter.pagesCount intValue] / 2);
     } else {
         return [self.chapter.pagesCount intValue];
+    }
+}
+
+- (NSInteger)readingDirection
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([[defaults objectForKey:READING_DIRECTION] isEqualToString:READING_DIRECTION_L2R]) {
+        return UIPageViewControllerNavigationDirectionForward;
+    } else {
+        return UIPageViewControllerNavigationDirectionReverse;
     }
 }
 

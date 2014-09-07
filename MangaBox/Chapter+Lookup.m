@@ -17,7 +17,7 @@
     
     if ([chapters count]) {
         NSInteger currentIndex = [chapters indexOfObject:self];
-        if (currentIndex <= [chapters count] - 2) {
+        if (currentIndex <= (int)[chapters count] - 2) {
             nextChapter = chapters[currentIndex + 1];
         }
     }

@@ -36,6 +36,8 @@
 @property (nonatomic, strong) UIPageViewController *pageViewController;
 @property (nonatomic) NSInteger currentChildIndex;
 
+@property (nonatomic) NSInteger readingDirection;
+
 @end
 
 @implementation ChapterViewController
@@ -156,6 +158,16 @@
 - (id)tracker
 {
     return [[GAI sharedInstance] defaultTracker];
+}
+
+- (NSInteger)readingDirection
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([[defaults objectForKey:READING_DIRECTION] isEqualToString:READING_DIRECTION_L2R]) {
+        return UIPageViewControllerNavigationDirectionForward;
+    } else {
+        return UIPageViewControllerNavigationDirectionReverse;
+    }
 }
 
 - (NSInteger)pageSetting
@@ -338,19 +350,11 @@
     self.pageViewController = nil;
     
     // Create a PageViewController
-    if (self.pageSetting == SETTING_2_PAGES) {
-        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:UIPageViewControllerSpineLocationMid], UIPageViewControllerOptionSpineLocationKey, @40, UIPageViewControllerOptionInterPageSpacingKey, nil];
-        self.pageViewController = [[UIPageViewController alloc]
-                                   initWithTransitionStyle: UIPageViewControllerTransitionStyleScroll
-                                   navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
-                                   options:options];
-    } else {
-        NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:@40, UIPageViewControllerOptionInterPageSpacingKey, nil];
-        self.pageViewController = [[UIPageViewController alloc]
-                                   initWithTransitionStyle: UIPageViewControllerTransitionStyleScroll
-                                   navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
-                                   options:options];
-    }
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:@40, UIPageViewControllerOptionInterPageSpacingKey, nil];
+    self.pageViewController = [[UIPageViewController alloc]
+                               initWithTransitionStyle: UIPageViewControllerTransitionStyleScroll
+                               navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal
+                               options:options];
     
     
     self.pageViewController.dataSource = self;
@@ -362,7 +366,7 @@
     viewControllers = @[startingViewController1];
     
     [self.pageViewController setViewControllers:viewControllers
-                                      direction:UIPageViewControllerNavigationDirectionForward
+                                      direction:UIPageViewControllerNavigationDirectionReverse
                                        animated:NO
                                      completion:NULL];
     
@@ -420,16 +424,30 @@
     return childVC;
 }
 
+/*
+ * When page direction change, we also need to change how the datasource is retrieved
+ */
+
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController
       viewControllerBeforeViewController:(UIViewController *)viewController
 {
     NSInteger index = ((ChapterContentViewController *)viewController).index;
     
-    if ((index == 0) || (index == NSNotFound)) {
-        return nil;
-    }
     
-    index--;
+    if (self.readingDirection == UIPageViewControllerNavigationDirectionForward) {
+        if ((index == 0) || (index == NSNotFound)) {
+            return nil;
+        }
+        
+        index--;
+    } else {
+        if (index == NSNotFound || index >= (self.childViewsCount - 1)) {
+            return nil;
+        }
+        
+        index++;
+    }
+
     return [self viewControllerAtIndex:index];
 }
 
@@ -438,11 +456,20 @@
 {
     NSInteger index = ((ChapterContentViewController *)viewController).index;
     
-    if (index == NSNotFound || index >= (self.childViewsCount - 1)) {
-        return nil;
+    if (self.readingDirection == UIPageViewControllerNavigationDirectionForward) {
+        if (index == NSNotFound || index >= (self.childViewsCount - 1)) {
+            return nil;
+        }
+        
+        index++;
+    } else {
+        if ((index == 0) || (index == NSNotFound)) {
+            return nil;
+        }
+        
+        index--;
     }
     
-    index++;
     return [self viewControllerAtIndex:index];
 }
 
@@ -458,9 +485,16 @@
         UIViewController *startingViewController1 = [self viewControllerAtIndex:self.currentChildIndex];
         viewControllers = @[startingViewController1];
         
+        NSInteger previousDirection;
+        if (self.readingDirection == UIPageViewControllerNavigationDirectionForward) {
+            previousDirection = UIPageViewControllerNavigationDirectionReverse;
+        } else {
+            previousDirection = UIPageViewControllerNavigationDirectionForward;
+        }
+        
         __weak ChapterViewController *weakSelf = self;
         [self.pageViewController setViewControllers:viewControllers
-                                          direction:UIPageViewControllerNavigationDirectionReverse
+                                          direction:previousDirection
                                            animated:NO
                                          completion:^(BOOL finished) {
                                              if (finished) [weakSelf setupCurrentPage:weakSelf.pageViewController];
@@ -481,17 +515,16 @@
         
         __weak ChapterViewController *weakSelf = self;
         [self.pageViewController setViewControllers:viewControllers
-                                          direction:UIPageViewControllerNavigationDirectionForward
+                                          direction:self.readingDirection
                                            animated:NO
-         completion:^(BOOL finished) {
-             if (finished) {
-                 [weakSelf setupCurrentPage:weakSelf.pageViewController];
-             }
-         }];
+             completion:^(BOOL finished) {
+                 if (finished) {
+                     [weakSelf setupCurrentPage:weakSelf.pageViewController];
+                 }
+             }];
     } else {
         // If the current page is the last page, auto next chapter
         [self autoNextChapter];
-        //[[NSNotificationCenter defaultCenter] postNotificationName:autoNextChapterNotification object:self];
     }
 }
 

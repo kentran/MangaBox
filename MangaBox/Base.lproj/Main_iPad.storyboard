@@ -517,9 +517,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="965"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="9wO-fH-bmo">
+                            <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Bb2-uM-uYY">
+                                    <rect key="frame" x="15" y="8" width="738" height="29"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <segments>
+                                        <segment title="Title A-Z"/>
+                                        <segment title="Title Z-A"/>
+                                        <segment title="Recently Added"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="sort:" destination="IN2-9c-DFS" eventType="valueChanged" id="nLH-ns-lwN"/>
+                                    </connections>
+                                </segmentedControl>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="Bb2-uM-uYY" firstAttribute="centerY" secondItem="9wO-fH-bmo" secondAttribute="centerY" id="KlB-J1-VHV"/>
+                                <constraint firstItem="Bb2-uM-uYY" firstAttribute="centerX" secondItem="9wO-fH-bmo" secondAttribute="centerX" id="Znm-w7-5JS"/>
+                                <constraint firstItem="Bb2-uM-uYY" firstAttribute="leading" secondItem="9wO-fH-bmo" secondAttribute="leading" constant="15" id="kKL-ku-Emf"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Manga Collection Cell" id="hbI-Iz-c6C">
-                                <rect key="frame" x="0.0" y="22" width="768" height="90"/>
+                                <rect key="frame" x="0.0" y="66" width="768" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hbI-Iz-c6C" id="OEs-Y4-Onz">
                                     <rect key="frame" x="0.0" y="0.0" width="735" height="89"/>
@@ -605,6 +629,9 @@
                             <color key="tintColor" red="0.3921568627" green="0.56078431370000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </segmentedControl>
                     </navigationItem>
+                    <connections>
+                        <outlet property="segmentControl" destination="Bb2-uM-uYY" id="g0G-7J-LTp"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="20p-HM-aRC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1489,12 +1516,50 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="rUH-TD-YYV">
+                                        <rect key="frame" x="0.0" y="207" width="768" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rUH-TD-YYV" id="UmT-ix-HN0">
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reading Direction" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aba-Ru-z1K">
+                                                    <rect key="frame" x="20" y="14" width="123" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lov-PW-OQD">
+                                                    <rect key="frame" x="625" y="8" width="123" height="29"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="123" id="5he-HP-t56"/>
+                                                    </constraints>
+                                                    <segments>
+                                                        <segment title="L > R"/>
+                                                        <segment title="R > L"/>
+                                                    </segments>
+                                                    <connections>
+                                                        <action selector="valueChanged:" destination="sAJ-g2-DrC" eventType="valueChanged" id="dmg-ek-7IS"/>
+                                                    </connections>
+                                                </segmentedControl>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="aba-Ru-z1K" secondAttribute="bottom" constant="11" id="9tc-Dk-wsu"/>
+                                                <constraint firstItem="lov-PW-OQD" firstAttribute="top" secondItem="UmT-ix-HN0" secondAttribute="top" constant="8" id="CAZ-6X-fS7"/>
+                                                <constraint firstItem="aba-Ru-z1K" firstAttribute="leading" secondItem="UmT-ix-HN0" secondAttribute="leading" constant="20" symbolic="YES" id="b0m-zm-vSz"/>
+                                                <constraint firstAttribute="trailing" secondItem="lov-PW-OQD" secondAttribute="trailing" constant="20" symbolic="YES" id="rqp-pa-2Pf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Downloads" id="GEn-e3-ZKf">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="yEP-TG-ZRA" style="IBUITableViewCellStyleDefault" id="N9l-lB-j7E">
-                                        <rect key="frame" x="0.0" y="255" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="299" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="N9l-lB-j7E" id="2rI-ML-9yC">
                                             <rect key="frame" x="0.0" y="0.0" width="735" height="43"/>
@@ -1520,7 +1585,7 @@
                             <tableViewSection headerTitle="Help" id="6xS-Wa-tzE">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Gfm-Cl-ZJp" style="IBUITableViewCellStyleDefault" id="L32-Az-kz8">
-                                        <rect key="frame" x="0.0" y="347" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="391" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L32-Az-kz8" id="t3u-FM-wxJ">
                                             <rect key="frame" x="0.0" y="0.0" width="735" height="43"/>
@@ -1542,7 +1607,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="vKq-9U-LuE" style="IBUITableViewCellStyleDefault" id="7tg-o1-nKm">
-                                        <rect key="frame" x="0.0" y="391" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="435" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7tg-o1-nKm" id="CgD-UG-w9m">
                                             <rect key="frame" x="0.0" y="0.0" width="735" height="43"/>
@@ -1564,7 +1629,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="H2J-tZ-4oe" style="IBUITableViewCellStyleDefault" id="3g5-ob-6HW">
-                                        <rect key="frame" x="0.0" y="435" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="479" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3g5-ob-6HW" id="Gjh-Gf-4uJ">
                                             <rect key="frame" x="0.0" y="0.0" width="735" height="43"/>
@@ -1586,7 +1651,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="48q-HY-lqD" style="IBUITableViewCellStyleDefault" id="DEA-er-k8H">
-                                        <rect key="frame" x="0.0" y="479" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="523" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DEA-er-k8H" id="tTU-7Y-sOM">
                                             <rect key="frame" x="0.0" y="0.0" width="735" height="43"/>
@@ -1605,7 +1670,7 @@
                                         <color key="backgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="1cz-9C-EoW" style="IBUITableViewCellStyleDefault" id="1H1-Va-gbh">
-                                        <rect key="frame" x="0.0" y="523" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="567" width="768" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1H1-Va-gbh" id="gWx-dB-Znd">
                                             <rect key="frame" x="0.0" y="0.0" width="735" height="43"/>
@@ -1637,6 +1702,7 @@
                         <outlet property="autoSwitchChapterStatus" destination="i2Q-Jf-5EY" id="DlU-u1-LhU"/>
                         <outlet property="deviceAwakeStatus" destination="LhM-Yp-woH" id="e7Y-cr-GIT"/>
                         <outlet property="deviceAwakeSwitch" destination="s3r-pR-Zec" id="3W4-nJ-OdB"/>
+                        <outlet property="readingDirectionControl" destination="lov-PW-OQD" id="26k-sN-fpW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KMm-Z7-B5m" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2108,7 +2174,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                         <color key="sectionIndexBackgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexTrackingBackgroundColor" red="0.070588235289999995" green="0.074509803920000006" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="Tlw-eV-wOe">
-                            <rect key="frame" x="0.0" y="0.0" width="768" height="255"/>
+                            <rect key="frame" x="0.0" y="0.0" width="768" height="279"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cWm-3j-aln">
@@ -2186,7 +2252,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KLd-xt-ye2">
-                                    <rect key="frame" x="20" y="164" width="728" height="39"/>
+                                    <rect key="frame" x="20" y="194" width="728" height="38"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.3921568627" green="0.56078431370000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -2199,8 +2265,12 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                         <action selector="contReadingButtonTap:" destination="PAl-wW-oGU" eventType="touchUpInside" id="Zmb-qk-oW7"/>
                                     </connections>
                                 </button>
-                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mo3-eD-bSr">
-                                    <rect key="frame" x="0.0" y="227" width="768" height="29"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MangafoxLogo" translatesAutoresizingMaskIntoConstraints="NO" id="oZx-rK-TI0">
+                                    <rect key="frame" x="20" y="164" width="136" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </imageView>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mo3-eD-bSr">
+                                    <rect key="frame" x="0.0" y="252" width="768" height="29"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="28" id="pfU-qS-WHn"/>
@@ -2218,20 +2288,23 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                 <constraint firstItem="CXL-kF-2P4" firstAttribute="leading" secondItem="cWm-3j-aln" secondAttribute="trailing" constant="8" symbolic="YES" id="49k-aZ-kQF"/>
                                 <constraint firstItem="Jbu-LS-rAC" firstAttribute="leading" secondItem="cWm-3j-aln" secondAttribute="trailing" constant="8" symbolic="YES" id="4Ah-ld-UrN"/>
                                 <constraint firstItem="Jbu-LS-rAC" firstAttribute="top" secondItem="ymK-Lb-O6b" secondAttribute="bottom" constant="1" id="6da-vl-Fzo"/>
-                                <constraint firstItem="KLd-xt-ye2" firstAttribute="top" secondItem="cWm-3j-aln" secondAttribute="bottom" constant="8" symbolic="YES" id="BLI-K3-bqm"/>
+                                <constraint firstItem="KLd-xt-ye2" firstAttribute="top" secondItem="cWm-3j-aln" secondAttribute="bottom" constant="38" id="BLI-K3-bqm"/>
                                 <constraint firstItem="rps-03-FuF" firstAttribute="leading" secondItem="cWm-3j-aln" secondAttribute="trailing" constant="8" symbolic="YES" id="G5S-dG-08G"/>
                                 <constraint firstItem="cWm-3j-aln" firstAttribute="leading" secondItem="Tlw-eV-wOe" secondAttribute="leading" constant="20" symbolic="YES" id="IGH-8u-oTW"/>
                                 <constraint firstItem="3AA-gA-Ii6" firstAttribute="top" secondItem="ymK-Lb-O6b" secondAttribute="bottom" constant="14" id="JXj-mV-byz"/>
                                 <constraint firstItem="ymK-Lb-O6b" firstAttribute="leading" secondItem="cWm-3j-aln" secondAttribute="trailing" constant="8" symbolic="YES" id="KR3-Z4-zht"/>
-                                <constraint firstItem="Mo3-eD-bSr" firstAttribute="top" secondItem="KLd-xt-ye2" secondAttribute="bottom" constant="24" id="MLS-Gd-fgK"/>
+                                <constraint firstItem="Mo3-eD-bSr" firstAttribute="top" secondItem="KLd-xt-ye2" secondAttribute="bottom" constant="19" id="MLS-Gd-fgK"/>
                                 <constraint firstItem="rps-03-FuF" firstAttribute="top" secondItem="FeX-lV-YiL" secondAttribute="bottom" id="MNA-kA-jv1"/>
                                 <constraint firstItem="835-Db-JsI" firstAttribute="top" secondItem="3AA-gA-Ii6" secondAttribute="bottom" constant="18" id="NsK-kc-RH4"/>
                                 <constraint firstAttribute="trailing" secondItem="KLd-xt-ye2" secondAttribute="trailing" constant="20" symbolic="YES" id="Pcn-Dh-pGX"/>
                                 <constraint firstItem="Jbu-LS-rAC" firstAttribute="trailing" secondItem="CXL-kF-2P4" secondAttribute="trailing" id="QOl-Rr-h2V"/>
                                 <constraint firstItem="835-Db-JsI" firstAttribute="leading" secondItem="cWm-3j-aln" secondAttribute="trailing" constant="8" symbolic="YES" id="TGj-mk-TdK"/>
                                 <constraint firstItem="KLd-xt-ye2" firstAttribute="leading" secondItem="cWm-3j-aln" secondAttribute="leading" id="XH2-SB-Ylu"/>
+                                <constraint firstItem="KLd-xt-ye2" firstAttribute="top" secondItem="oZx-rK-TI0" secondAttribute="bottom" constant="8" symbolic="YES" id="Z2S-Sg-izK"/>
                                 <constraint firstItem="3AA-gA-Ii6" firstAttribute="leading" secondItem="cWm-3j-aln" secondAttribute="trailing" constant="8" symbolic="YES" id="Zjh-jU-mLU"/>
+                                <constraint firstItem="oZx-rK-TI0" firstAttribute="leading" secondItem="KLd-xt-ye2" secondAttribute="leading" id="b5d-FE-cRr"/>
                                 <constraint firstItem="ymK-Lb-O6b" firstAttribute="top" secondItem="Tlw-eV-wOe" secondAttribute="top" constant="27" id="bB0-rl-YJU"/>
+                                <constraint firstItem="oZx-rK-TI0" firstAttribute="trailing" secondItem="a4i-9V-YR8" secondAttribute="trailing" id="dLt-M8-Lix"/>
                                 <constraint firstItem="cWm-3j-aln" firstAttribute="top" secondItem="Tlw-eV-wOe" secondAttribute="top" constant="10" id="gPZ-kD-vbX"/>
                                 <constraint firstItem="cWm-3j-aln" firstAttribute="top" secondItem="a4i-9V-YR8" secondAttribute="top" id="j3i-Y6-Le4"/>
                                 <constraint firstItem="FeX-lV-YiL" firstAttribute="leading" secondItem="cWm-3j-aln" secondAttribute="trailing" constant="8" id="jFS-wd-02V"/>
@@ -2239,15 +2312,16 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                 <constraint firstItem="CXL-kF-2P4" firstAttribute="top" secondItem="Jbu-LS-rAC" secondAttribute="bottom" constant="15" id="lBO-Of-XHV"/>
                                 <constraint firstItem="a4i-9V-YR8" firstAttribute="leading" secondItem="cWm-3j-aln" secondAttribute="trailing" constant="8" symbolic="YES" id="qa2-c3-gnt"/>
                                 <constraint firstAttribute="bottom" secondItem="Mo3-eD-bSr" secondAttribute="bottom" id="rwl-AP-Ewf"/>
-                                <constraint firstItem="KLd-xt-ye2" firstAttribute="top" secondItem="rps-03-FuF" secondAttribute="bottom" constant="8" symbolic="YES" id="u5f-is-3iD"/>
+                                <constraint firstItem="KLd-xt-ye2" firstAttribute="top" secondItem="rps-03-FuF" secondAttribute="bottom" constant="38" id="u5f-is-3iD"/>
                                 <constraint firstItem="CXL-kF-2P4" firstAttribute="top" secondItem="3AA-gA-Ii6" secondAttribute="bottom" constant="2" id="w2a-WZ-hW7"/>
                                 <constraint firstItem="Jbu-LS-rAC" firstAttribute="top" secondItem="a4i-9V-YR8" secondAttribute="bottom" constant="18" id="wFs-fM-gg4"/>
+                                <constraint firstItem="oZx-rK-TI0" firstAttribute="top" secondItem="cWm-3j-aln" secondAttribute="bottom" constant="8" symbolic="YES" id="xta-yG-75f"/>
                                 <constraint firstItem="KLd-xt-ye2" firstAttribute="trailing" secondItem="Mo3-eD-bSr" secondAttribute="trailing" constant="-20" id="zCw-3t-VSX"/>
                             </constraints>
                         </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Chapter Cell" id="PvB-da-cvU">
-                                <rect key="frame" x="0.0" y="277" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="301" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PvB-da-cvU" id="oA7-7u-3Rc">
                                     <rect key="frame" x="0.0" y="0.0" width="735" height="43"/>
@@ -2320,6 +2394,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                         <outlet property="chapterOrderButton" destination="Mo3-eD-bSr" id="Z4M-gk-eHK"/>
                         <outlet property="continueReadingButton" destination="KLd-xt-ye2" id="N78-ta-AJM"/>
                         <outlet property="coverImageView" destination="cWm-3j-aln" id="6Y1-ow-Ttj"/>
+                        <outlet property="sourceLogoImageView" destination="oZx-rK-TI0" id="oae-bp-udl"/>
                         <outlet property="statusTextLabel" destination="rps-03-FuF" id="n8M-kN-ZDM"/>
                         <outlet property="titleTextLabel" destination="ymK-Lb-O6b" id="mg8-ep-zZL"/>
                         <segue destination="QSl-eH-tqD" kind="push" identifier="Show Pages" id="M50-kc-3SH"/>
@@ -2388,6 +2463,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
         </scene>
     </scenes>
     <resources>
+        <image name="MangafoxLogo" width="184" height="35"/>
         <image name="browser-screenshot" width="320" height="568"/>
         <image name="collection-icon" width="30" height="30"/>
         <image name="dragonball-screenshot" width="320" height="568"/>

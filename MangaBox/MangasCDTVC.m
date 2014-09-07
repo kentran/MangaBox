@@ -20,6 +20,11 @@
 
 @property (nonatomic, strong) NSIndexPath *indexPathForDeletedManga;
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *segmentControl;
+@property (nonatomic, strong) NSString *sortType; // title-asc, title-desc, date
+@property (nonatomic, strong) NSString *sortKey; // title, created
+@property BOOL sortOrder;
+
 @end
 
 @implementation MangasCDTVC
@@ -33,25 +38,86 @@
     [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    if ([self.sortType isEqualToString:COLLECTION_SORT_TYPE_TITLE_ASC]) {
+        [self.segmentControl setSelectedSegmentIndex:0];
+    } else if ([self.sortType isEqualToString:COLLECTION_SORT_TYPE_TITLE_DESC]) {
+        [self.segmentControl setSelectedSegmentIndex:1];
+    } else if ([self.sortType isEqualToString:COLLECTION_SORT_TYPE_DATE]) {
+        [self.segmentControl setSelectedSegmentIndex:2];
+    }
+}
+
 #pragma mark - Properties
+
+- (NSString *)sortType
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults objectForKey:COLLECTION_SORT_TYPE];
+}
+
+- (void)setSortType:(NSString *)sortType
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:sortType forKey:COLLECTION_SORT_TYPE];
+}
 
 - (void)setManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
 {
     _managedObjectContext = managedObjectContext;
-    
+    [self setupFetchResultController];
+}
+
+- (void)setupFetchResultController
+{
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Manga"];
     request.predicate = nil;
-    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"created"
-                                                              ascending:NO
+    
+    if ([self.sortType isEqualToString:COLLECTION_SORT_TYPE_TITLE_ASC]) {
+        self.sortKey = @"title";
+        self.sortOrder = YES;
+    } else if ([self.sortType isEqualToString:COLLECTION_SORT_TYPE_TITLE_DESC]) {
+        self.sortKey = @"title";
+        self.sortOrder = NO;
+    } else if ([self.sortType isEqualToString:COLLECTION_SORT_TYPE_DATE]) {
+        self.sortKey = @"created";
+        self.sortOrder = NO;
+    }
+    
+    request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:(self.sortKey) ? self.sortKey : @"title"
+                                                              ascending:self.sortOrder
                                                                selector:@selector(compare:)]];
     
-
+    
     
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                                        managedObjectContext:managedObjectContext
+                                                                        managedObjectContext:self.managedObjectContext
                                                                           sectionNameKeyPath:nil
                                                                                    cacheName:nil];
 }
+
+#pragma mark - IBAction
+
+- (IBAction)sort:(UISegmentedControl *)sender
+{
+    switch (self.segmentControl.selectedSegmentIndex) {
+        case 0:
+            self.sortType = COLLECTION_SORT_TYPE_TITLE_ASC;
+            break;
+        case 1:
+            self.sortType = COLLECTION_SORT_TYPE_TITLE_DESC;
+            break;
+        case 2:
+            self.sortType = COLLECTION_SORT_TYPE_DATE;
+            break;
+        default: break;
+    }
+    [self setupFetchResultController];
+}
+
 
 #pragma mark - UITableViewDataSource
 

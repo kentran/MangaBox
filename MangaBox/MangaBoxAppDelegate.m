@@ -110,6 +110,14 @@
     if (![defaults valueForKey:AUTO_SWITCH_CHAPTER]) {
         [defaults setObject:AUTO_SWITCH_CHAPTER_ON forKey:AUTO_SWITCH_CHAPTER];
     }
+    
+    if (![defaults valueForKey:COLLECTION_SORT_TYPE]) {
+        [defaults setObject:COLLECTION_SORT_TYPE_TITLE_ASC forKey:COLLECTION_SORT_TYPE];
+    }
+    
+    if (![defaults valueForKey:READING_DIRECTION]) {
+        [defaults setObject:READING_DIRECTION_L2R forKey:READING_DIRECTION];
+    }
 }
 
 // Reset the Keep awake status for the app based on the current settings

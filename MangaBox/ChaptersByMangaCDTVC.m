@@ -10,6 +10,7 @@
 #import "Manga+Clear.h"
 #import "CoverImage.h"
 #import "Chapter+Lookup.h"
+#import "MangaFetcher.h"
 
 @interface ChaptersByMangaCDTVC () <UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
@@ -18,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *artistTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusTextLabel;
 @property (weak, nonatomic) IBOutlet UIButton *continueReadingButton;
+@property (weak, nonatomic) IBOutlet UIImageView *sourceLogoImageView;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *chapterOrderButton;
 
@@ -46,7 +48,9 @@
     self.authorTextLabel.text = self.manga.author;
     self.artistTextLabel.text = self.manga.artist;
     self.statusTextLabel.text = self.manga.completionStatus;
-    
+    UIImage *logo = [MangaFetcher logoForSource:self.manga.source];
+    self.sourceLogoImageView.image = logo;
+    self.sourceLogoImageView.contentMode = UIViewContentModeLeft;
     
     
     /* Background Image */

@@ -9,6 +9,6 @@
 #ifndef MangaBox_GoogleAnalyticsConstant_h
 #define MangaBox_GoogleAnalyticsConstant_h
 
-#define TRACKING_ID @"UA-50248726-2"
+#define TRACKING_ID @"UA-50248726-3"
 
 #endif
