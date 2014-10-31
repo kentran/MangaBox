@@ -50,7 +50,7 @@
 #define CHAPTER_HTML_FETCH @"chapterHtmlFetch"
 #define CHAPTER_IMAGE_FETCH @"chapterImageFetch"
 
-#define DOWNLOAD_ERROR @"Error downloading pages. Pages may not be available at the moment. Please try again later"
+#define DOWNLOAD_ERROR @"Error downloading pages. Pages may not be available at the moment or the manga is blocked in your country. Please make sure you can view the pages on the browser and try again later"
 #define PARSE_MANGA_ERROR @"Unable to download manga. Please check if the URL is correct and the website is still running"
 
 // Page Setting

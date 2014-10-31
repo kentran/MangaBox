@@ -8,7 +8,6 @@
 
 #import "MangareaderFetcher.h"
 #import "TFHpple.h"
-#import "MangaDictionaryDefinition.h"
 
 @implementation MangareaderFetcher
 

@@ -2265,10 +2265,6 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                         <action selector="contReadingButtonTap:" destination="PAl-wW-oGU" eventType="touchUpInside" id="Zmb-qk-oW7"/>
                                     </connections>
                                 </button>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MangafoxLogo" translatesAutoresizingMaskIntoConstraints="NO" id="oZx-rK-TI0">
-                                    <rect key="frame" x="20" y="164" width="136" height="22"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </imageView>
                                 <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mo3-eD-bSr">
                                     <rect key="frame" x="0.0" y="252" width="768" height="29"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2281,6 +2277,13 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                     </segments>
                                     <color key="tintColor" red="0.3921568627" green="0.56078431370000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </segmentedControl>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Source" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmT-KR-2R4">
+                                    <rect key="frame" x="20" y="164" width="40" height="15"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -2289,6 +2292,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                 <constraint firstItem="Jbu-LS-rAC" firstAttribute="leading" secondItem="cWm-3j-aln" secondAttribute="trailing" constant="8" symbolic="YES" id="4Ah-ld-UrN"/>
                                 <constraint firstItem="Jbu-LS-rAC" firstAttribute="top" secondItem="ymK-Lb-O6b" secondAttribute="bottom" constant="1" id="6da-vl-Fzo"/>
                                 <constraint firstItem="KLd-xt-ye2" firstAttribute="top" secondItem="cWm-3j-aln" secondAttribute="bottom" constant="38" id="BLI-K3-bqm"/>
+                                <constraint firstItem="lmT-KR-2R4" firstAttribute="leading" secondItem="Tlw-eV-wOe" secondAttribute="leading" constant="20" id="DiO-Zp-aTI"/>
                                 <constraint firstItem="rps-03-FuF" firstAttribute="leading" secondItem="cWm-3j-aln" secondAttribute="trailing" constant="8" symbolic="YES" id="G5S-dG-08G"/>
                                 <constraint firstItem="cWm-3j-aln" firstAttribute="leading" secondItem="Tlw-eV-wOe" secondAttribute="leading" constant="20" symbolic="YES" id="IGH-8u-oTW"/>
                                 <constraint firstItem="3AA-gA-Ii6" firstAttribute="top" secondItem="ymK-Lb-O6b" secondAttribute="bottom" constant="14" id="JXj-mV-byz"/>
@@ -2300,11 +2304,9 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                 <constraint firstItem="Jbu-LS-rAC" firstAttribute="trailing" secondItem="CXL-kF-2P4" secondAttribute="trailing" id="QOl-Rr-h2V"/>
                                 <constraint firstItem="835-Db-JsI" firstAttribute="leading" secondItem="cWm-3j-aln" secondAttribute="trailing" constant="8" symbolic="YES" id="TGj-mk-TdK"/>
                                 <constraint firstItem="KLd-xt-ye2" firstAttribute="leading" secondItem="cWm-3j-aln" secondAttribute="leading" id="XH2-SB-Ylu"/>
-                                <constraint firstItem="KLd-xt-ye2" firstAttribute="top" secondItem="oZx-rK-TI0" secondAttribute="bottom" constant="8" symbolic="YES" id="Z2S-Sg-izK"/>
+                                <constraint firstItem="lmT-KR-2R4" firstAttribute="top" secondItem="cWm-3j-aln" secondAttribute="bottom" constant="8" id="YRA-a9-xNd"/>
                                 <constraint firstItem="3AA-gA-Ii6" firstAttribute="leading" secondItem="cWm-3j-aln" secondAttribute="trailing" constant="8" symbolic="YES" id="Zjh-jU-mLU"/>
-                                <constraint firstItem="oZx-rK-TI0" firstAttribute="leading" secondItem="KLd-xt-ye2" secondAttribute="leading" id="b5d-FE-cRr"/>
                                 <constraint firstItem="ymK-Lb-O6b" firstAttribute="top" secondItem="Tlw-eV-wOe" secondAttribute="top" constant="27" id="bB0-rl-YJU"/>
-                                <constraint firstItem="oZx-rK-TI0" firstAttribute="trailing" secondItem="a4i-9V-YR8" secondAttribute="trailing" id="dLt-M8-Lix"/>
                                 <constraint firstItem="cWm-3j-aln" firstAttribute="top" secondItem="Tlw-eV-wOe" secondAttribute="top" constant="10" id="gPZ-kD-vbX"/>
                                 <constraint firstItem="cWm-3j-aln" firstAttribute="top" secondItem="a4i-9V-YR8" secondAttribute="top" id="j3i-Y6-Le4"/>
                                 <constraint firstItem="FeX-lV-YiL" firstAttribute="leading" secondItem="cWm-3j-aln" secondAttribute="trailing" constant="8" id="jFS-wd-02V"/>
@@ -2315,7 +2317,6 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                 <constraint firstItem="KLd-xt-ye2" firstAttribute="top" secondItem="rps-03-FuF" secondAttribute="bottom" constant="38" id="u5f-is-3iD"/>
                                 <constraint firstItem="CXL-kF-2P4" firstAttribute="top" secondItem="3AA-gA-Ii6" secondAttribute="bottom" constant="2" id="w2a-WZ-hW7"/>
                                 <constraint firstItem="Jbu-LS-rAC" firstAttribute="top" secondItem="a4i-9V-YR8" secondAttribute="bottom" constant="18" id="wFs-fM-gg4"/>
-                                <constraint firstItem="oZx-rK-TI0" firstAttribute="top" secondItem="cWm-3j-aln" secondAttribute="bottom" constant="8" symbolic="YES" id="xta-yG-75f"/>
                                 <constraint firstItem="KLd-xt-ye2" firstAttribute="trailing" secondItem="Mo3-eD-bSr" secondAttribute="trailing" constant="-20" id="zCw-3t-VSX"/>
                             </constraints>
                         </view>
@@ -2394,7 +2395,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                         <outlet property="chapterOrderButton" destination="Mo3-eD-bSr" id="Z4M-gk-eHK"/>
                         <outlet property="continueReadingButton" destination="KLd-xt-ye2" id="N78-ta-AJM"/>
                         <outlet property="coverImageView" destination="cWm-3j-aln" id="6Y1-ow-Ttj"/>
-                        <outlet property="sourceLogoImageView" destination="oZx-rK-TI0" id="oae-bp-udl"/>
+                        <outlet property="sourceLabel" destination="lmT-KR-2R4" id="jK8-b1-6ce"/>
                         <outlet property="statusTextLabel" destination="rps-03-FuF" id="n8M-kN-ZDM"/>
                         <outlet property="titleTextLabel" destination="ymK-Lb-O6b" id="mg8-ep-zZL"/>
                         <segue destination="QSl-eH-tqD" kind="push" identifier="Show Pages" id="M50-kc-3SH"/>
@@ -2463,7 +2464,6 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
         </scene>
     </scenes>
     <resources>
-        <image name="MangafoxLogo" width="184" height="35"/>
         <image name="browser-screenshot" width="320" height="568"/>
         <image name="collection-icon" width="30" height="30"/>
         <image name="dragonball-screenshot" width="320" height="568"/>

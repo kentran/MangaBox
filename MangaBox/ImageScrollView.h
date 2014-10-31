@@ -13,4 +13,6 @@
 // Model for this MVC ... an image to display
 @property (nonatomic, strong) UIImage *image;
 
+@property BOOL fitWidth;
+
 @end

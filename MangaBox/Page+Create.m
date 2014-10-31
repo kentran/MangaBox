@@ -21,7 +21,7 @@ inManagedObjectContext:(NSManagedObjectContext *)context
     NSLog(@"Checking existed page for chapter: %@", chapter.name);
 #endif
     for (Page *existedPage in [chapter.pages allObjects]) {
-        if ([page.url isEqualToString:[pageDictionary objectForKey:PAGE_IMAGE_URL]]) {
+        if ([existedPage.url isEqualToString:[pageDictionary objectForKey:PAGE_URL]]) {
             // Page exist, return it
 #if DEBUG
             NSLog(@"Page existed for chapter: %@", chapter.name);

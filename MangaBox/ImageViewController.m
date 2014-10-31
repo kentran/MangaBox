@@ -55,7 +55,9 @@
     } else {
         self.scrollView.image = [UIImage imageNamed:@"blank"];
         self.view = self.scrollView;
-        [self showSpinner];
+        if (self.pageIndex < [self.chapter.pagesCount intValue]) {
+            [self showSpinner];
+        }
     }
 }
 

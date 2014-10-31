@@ -295,8 +295,6 @@
                     Page *newPage = [Page pageWithInfo:pageDictionary
                                              ofChapter:chapter
                                 inManagedObjectContext:chapter.managedObjectContext];
-                    
-                    [((MangaBoxAppDelegate *)[[UIApplication sharedApplication] delegate]) saveDocument];
                 }
                 [[NSNotificationCenter defaultCenter] postNotificationName:finishDownloadChapterPage
                                                                     object:self

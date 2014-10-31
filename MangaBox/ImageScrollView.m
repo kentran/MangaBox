@@ -127,7 +127,7 @@
     CGFloat yScale = boundsSize.height / self.imageSize.height;   // the scale needed to perfectly fit the image height-wise
     
     // Fill the smaller scale
-    CGFloat minScale = MIN(xScale, yScale);
+    CGFloat minScale = self.fitWidth ? xScale : MIN(xScale, yScale);
     
     CGFloat maxScale = 2.0;
     
@@ -182,7 +182,7 @@
     realMaxOffset = MIN(maxOffset.y, offset.y);
     offset.y = MAX(minOffset.y, realMaxOffset);
     
-    self.contentOffset = offset;
+    self.contentOffset = self.fitWidth ? CGPointMake(0, 0) : offset;
 }
 
 - (CGPoint)maximumContentOffset

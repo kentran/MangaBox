@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>B14B53D9-3BAD-4C1A-AD73-A6DEC4392D93</string>
+	<string>654ED1B9-FA34-4CA1-A70B-9E2D4FD7741C</string>
 	<key>IDESourceControlProjectName</key>
 	<string>MangaBox</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>C9DDD8BD-6FFB-4DFC-A623-B0054C39C681</key>
+		<key>603F88BA3049B0CA62157C555619F3673C23AF64</key>
 		<string>https://github.com/kentran/MangaBox.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>MangaBox.xcodeproj/project.xcworkspace</string>
+	<string>MangaBox.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>C9DDD8BD-6FFB-4DFC-A623-B0054C39C681</key>
+		<key>603F88BA3049B0CA62157C555619F3673C23AF64</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/kentran/MangaBox.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>C9DDD8BD-6FFB-4DFC-A623-B0054C39C681</string>
+	<string>603F88BA3049B0CA62157C555619F3673C23AF64</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>C9DDD8BD-6FFB-4DFC-A623-B0054C39C681</string>
+			<string>603F88BA3049B0CA62157C555619F3673C23AF64</string>
 			<key>IDESourceControlWCCName</key>
 			<string>MangaBox</string>
 		</dict>

@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusTextLabel;
 @property (weak, nonatomic) IBOutlet UIButton *continueReadingButton;
 @property (weak, nonatomic) IBOutlet UIImageView *sourceLogoImageView;
+@property (weak, nonatomic) IBOutlet UILabel *sourceLabel;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *chapterOrderButton;
 
@@ -51,6 +52,7 @@
     UIImage *logo = [MangaFetcher logoForSource:self.manga.source];
     self.sourceLogoImageView.image = logo;
     self.sourceLogoImageView.contentMode = UIViewContentModeLeft;
+    self.sourceLabel.text = [NSString stringWithFormat:@"From %@", self.manga.source];
     
     
     /* Background Image */
