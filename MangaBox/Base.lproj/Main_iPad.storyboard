@@ -641,7 +641,7 @@
                         <nil key="title"/>
                         <barButtonItem key="backBarButtonItem" title=" " id="hrw-Id-Z8g"/>
                         <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="KR6-lh-N2q">
-                            <rect key="frame" x="301" y="6" width="167" height="32"/>
+                            <rect key="frame" x="300.5" y="6" width="167" height="32"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <segments>
                                 <segment title="Collections"/>
@@ -2082,8 +2082,8 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                             <rect key="frame" x="0.0" y="0.0" width="768" height="279"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cWm-3j-aln">
-                                    <rect key="frame" x="20" y="10" width="100" height="146"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cWm-3j-aln">
+                                    <rect key="frame" x="20" y="10" width="100" height="144.5"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="100" id="27C-zw-n1d"/>
                                     </constraints>
@@ -2109,7 +2109,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="titleText" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymK-Lb-O6b">
-                                    <rect key="frame" x="128" y="27" width="45" height="21"/>
+                                    <rect key="frame" x="128" y="27" width="44.5" height="21"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -2121,7 +2121,7 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="artistText" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="835-Db-JsI">
-                                    <rect key="frame" x="128" y="101" width="53" height="15"/>
+                                    <rect key="frame" x="128" y="101" width="52.5" height="14.5"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -2136,19 +2136,19 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FeX-lV-YiL">
-                                    <rect key="frame" x="128" y="126" width="36" height="15"/>
+                                    <rect key="frame" x="128" y="125.5" width="36" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.53333333329999999" green="0.53725490200000003" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="statusText" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rps-03-FuF">
-                                    <rect key="frame" x="128" y="141" width="59" height="15"/>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="statusText" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rps-03-FuF">
+                                    <rect key="frame" x="128" y="140" width="58.5" height="14.5"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KLd-xt-ye2">
-                                    <rect key="frame" x="20" y="194" width="728" height="38"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KLd-xt-ye2">
+                                    <rect key="frame" x="20" y="192.5" width="728" height="39.5"/>
                                     <color key="backgroundColor" red="0.3921568627" green="0.56078431370000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <color key="tintColor" red="0.3921568627" green="0.56078431370000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2160,8 +2160,8 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                         <action selector="contReadingButtonTap:" destination="PAl-wW-oGU" eventType="touchUpInside" id="Zmb-qk-oW7"/>
                                     </connections>
                                 </button>
-                                <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mo3-eD-bSr">
-                                    <rect key="frame" x="0.0" y="252" width="768" height="29"/>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Mo3-eD-bSr">
+                                    <rect key="frame" x="0.0" y="251" width="768" height="29"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="28" id="pfU-qS-WHn"/>
                                     </constraints>
@@ -2171,8 +2171,8 @@ For instance, we will try to add Naruto on mangareader.net to MangaBox. The full
                                     </segments>
                                     <color key="tintColor" red="0.3921568627" green="0.56078431370000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 </segmentedControl>
-                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Source" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmT-KR-2R4">
-                                    <rect key="frame" x="20" y="164" width="40" height="15"/>
+                                <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Source" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmT-KR-2R4">
+                                    <rect key="frame" x="20" y="162.5" width="40" height="14.5"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
